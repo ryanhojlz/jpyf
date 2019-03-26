@@ -38,6 +38,7 @@ public class ControllerPlayer : MonoBehaviour
     void Update()
     {
         Controls();
+        UpdateSpirit();
     }
 
     void Controls()
@@ -176,4 +177,18 @@ public class ControllerPlayer : MonoBehaviour
             PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
         }
     }
+
+    void UpdateSpirit()
+    {
+        if (Spirit)
+        {
+            if (PlayerControllerObject.GetComponent<BasicGameOBJ>().healthValue <= 0)
+            {
+                Spirit.SetActive(true);
+                PlayerControllerObject = Spirit;
+                Spirit = null;
+            }
+        }
+    }
+
 }

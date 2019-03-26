@@ -30,7 +30,13 @@ public class Possesor : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        for (int i = 0; i < nearbyObjects.Count; i++)
+        {
+            if (nearbyObjects[i] == null || nearbyObjects[i].activeSelf == false)
+            {
+                nearbyObjects.Remove(nearbyObjects[i]);
+            }
+        }
         
 
         if (startPossesing)
@@ -139,6 +145,7 @@ public class Possesor : MonoBehaviour
         var localpos = newtext.GetComponent<Transform>().localPosition;
         localpos.y += 1.5f;
         newtext.GetComponent<Transform>().localPosition = localpos;
+
         
         //newtext.transform.parent = nearbyObjects[0].transform;
         //newtext.transform.localPosition = Vector3.zero;

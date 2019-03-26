@@ -5,9 +5,9 @@ using UnityEngine;
 public class DonScript : MonoBehaviour
 {
     public GameObject textprefab;
-
     public int effect_counter = 0;
     public bool hitto = false;
+    
 
     /// Made public so can debug from inspector
     public List<GameObject> HitMarkerList;

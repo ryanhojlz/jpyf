@@ -13,4 +13,9 @@ public class Attack_Unit : Minion
     {
 
     }
+
+    public virtual void PlayerAutoAttack()
+    {
+        
+    }
 }

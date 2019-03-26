@@ -108,11 +108,17 @@ public class ControllerPlayer : MonoBehaviour
 
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")) && !buffer_o)
         {
-
+            // Special Attack
+            if (Spirit)
+            {
+                Debug.Log("attacked");
+                PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
+            }
+            buffer_o = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")) && buffer_o)
         {
-
+            buffer_o = false;
         }
 
         //======================================================================================================
@@ -120,10 +126,13 @@ public class ControllerPlayer : MonoBehaviour
         //======================================================================================================
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")) && !buffer_square)
         {
-
+            // Normal Attack
+            
+            buffer_square = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")) && buffer_square)
         {
+            buffer_square = false;
 
         }
 
@@ -133,10 +142,19 @@ public class ControllerPlayer : MonoBehaviour
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")) && !buffer_triangle)
         {
 
+            if (Spirit)
+            {
+                
+                Debug.Log("attacked");
+                PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
+                PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
+            }
+            buffer_triangle = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_triangle)
         {
 
+            buffer_triangle = false;
         }
     }
 
@@ -171,11 +189,7 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
 
-        if (Spirit)
-        {
-            Debug.Log("attacked");
-            PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
-        }
+
     }
 
     void UpdateSpirit()

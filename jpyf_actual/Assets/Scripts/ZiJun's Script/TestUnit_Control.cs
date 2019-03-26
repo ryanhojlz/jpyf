@@ -39,9 +39,10 @@ public class TestUnit_Control : MonoBehaviour
         //Debug.Log(pathIndex);
         if (this.gameObject.GetComponent<Minion>().GetTarget())
             return;
-
+        if (this.gameObject.GetComponent<BasicGameOBJ>().isPossessed)
+            return;
         //Debug.Log(this.name + " : " + pathIndex);
-
+        
         if (!GetComponent<Minion>().GetIsActive())
         {
             agent.isStopped = true;

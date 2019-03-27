@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_PS4
 using UnityEngine.PS4;
+#endif 
 using System;
 
 public class ControllerPlayer : MonoBehaviour

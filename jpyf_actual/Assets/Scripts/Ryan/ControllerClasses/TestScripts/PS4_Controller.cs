@@ -14,8 +14,10 @@ public class PS4_Controller : MonoBehaviour
     public int stickID;
     private bool hasSetupGamepad = false;
     private Color lightbarColour;
+#if UNITY_PS4
     private PS4Input.LoggedInUser loggedInUser;
     private PS4Input.ConnectionType connectionType;
+#endif
     public GameObject _Player;
    // public GameObject Zijun_Alter;
     public GameObject cardReference;
@@ -61,8 +63,10 @@ public class PS4_Controller : MonoBehaviour
             // Set the lightbar colour to the start/default value
             //lightbarColour = GetPlayerColor(PS4Input.GetUsersDetails(playerId).color);
 
-            // Set 3D Text to whoever's using the pad
+// Set 3D Text to whoever's using the pad
+#if UNITY_PS4
             loggedInUser = PS4Input.RefreshUsersDetails(playerId);
+#endif
             hasSetupGamepad = true;
         }
         else

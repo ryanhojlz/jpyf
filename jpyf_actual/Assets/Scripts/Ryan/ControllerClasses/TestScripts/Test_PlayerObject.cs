@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_PS4
 using UnityEngine.PS4;
+#endif
 using System;
 
 public class Test_PlayerObject : MonoBehaviour
@@ -132,8 +134,8 @@ public class Test_PlayerObject : MonoBehaviour
                 _color = new Vector3(255, 0, 255);
                 break;
         }
-
+#if UNITY_PS4
         PS4Input.PadSetLightBar(d_playerid, (int)_color.x, (int)_color.y, (int)_color.z);
-        
+#endif
     }
 }

@@ -20,6 +20,7 @@ public class ControllerManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+#if UNITY_PS4
         // Search of user to detect
         for (int i = 0; i < numUsers; i++)
         {
@@ -34,6 +35,7 @@ public class ControllerManager : MonoBehaviour
                 //m_list_of_playerobj[i].GetComponent<Test_PlayerObject>().ChangePadColor(i);
             }
         }
+#endif
     }
 
     // Using Awake here because Manager needs to be turn on first

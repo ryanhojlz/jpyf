@@ -158,6 +158,16 @@ public class BasicGameOBJ : MonoBehaviour
                 RemoveUnitFromList(minionWithinRange[i]);
             }
 
+            // if object is false
+            if (minionWithinRange[i].activeSelf == false)
+            {
+                if (target == minionWithinRange[i])
+                {
+                    target = null;
+                }
+                minionWithinRange.Remove(minionWithinRange[i]);
+            }
+
         }
         //Debug.Log(this.name + " : " + minionWithinRange.Count);
     }

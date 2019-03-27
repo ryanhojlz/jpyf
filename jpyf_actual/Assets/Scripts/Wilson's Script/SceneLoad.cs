@@ -13,6 +13,7 @@ public class SceneLoad : MonoBehaviour
     private int scene;
     [SerializeField]
     private Text loadingText;
+    //public GameObject loadImage;
 
     // Updates once per frame
     void Update()
@@ -25,7 +26,8 @@ public class SceneLoad : MonoBehaviour
 
             // ...change the instruction text to read "Loading..."
             loadingText.text = "Loading...";
-
+            //loadImage = gameObject.GetComponent<GameObject>();
+            //loadImage.SetActive(true);
             // ...and start a coroutine that will load the desired scene.
             StartCoroutine(LoadNewScene());
         }

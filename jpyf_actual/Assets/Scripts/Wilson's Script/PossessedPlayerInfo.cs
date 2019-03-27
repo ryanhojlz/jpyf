@@ -28,13 +28,17 @@ public class PossessedPlayerInfo : MonoBehaviour
         {
             playerStartHealth = playerReference.gameObject.GetComponent<Minion>().startHealthvalue;
             playerHealth = playerReference.gameObject.GetComponent<Minion>().healthValue;
+            playerMana = playerReference.GetComponent<PlayerScript>().Mana;
         }
         else
         {
             playerStartHealth = 1;
             playerHealth = 0;
+            playerMaxMana = 1;
+            playerMana = 0;
         }
 
         healthBar.fillAmount = playerHealth / playerStartHealth;
+        manaBar.fillAmount = playerMana / playerMaxMana;
     }
 }

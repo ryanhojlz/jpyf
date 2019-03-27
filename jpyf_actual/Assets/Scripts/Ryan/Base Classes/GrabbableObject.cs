@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
-
+    // test
     public virtual bool hideControllerOnGrab { get { return false; } }
 
     public virtual bool centerMeshOnGrab { get { return false; } }

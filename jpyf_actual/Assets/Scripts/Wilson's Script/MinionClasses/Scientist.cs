@@ -32,6 +32,7 @@ public class Scientist : Healer_Unit
             this.stateMachine.ChangeState(new HealState(this, minionWithinRange, Ally_Tag));
         }
 
+
        GetComponent<NavMeshAgent>().baseOffset = 5;
     }
 

@@ -6,13 +6,28 @@ public class Card_ZiJun : GrabbableObject
 {
     public bool onfloor = false;
     public bool pickedup = false;
+    public bool lookedAt = false;
+    
+    public int ManaCost = 0;
     float summonTimer = 2.0f;
     public GameObject summonedUnit;
-    
+    private Shader Mat;
+
+    private void Awake()
+    {
+        Mat = GetComponent<Renderer>().material.shader;
+    }
 
     public override void OnGrab(MoveController currentController)
     {
+        GameObject playerReference = GameObject.Find("Player");
+        if (playerReference.GetComponent<PlayerScript>().Mana == 0)
+            return;
+        if (playerReference.GetComponent<PlayerScript>().Mana < this.ManaCost)
+            return;
+
         base.OnGrab(currentController);
+        playerReference.GetComponent<PlayerScript>().Mana -= 1;
         pickedup = true;
     }
 
@@ -25,6 +40,9 @@ public class Card_ZiJun : GrabbableObject
     // Update is called once per frame
     void Update()
     {
+        float[] debugArray = new float[4];
+        debugArray = transform.GetComponent<Renderer>().material.GetFloatArray("_OutlineColor");
+        Debug.Log("ArrayColor  " + debugArray);
         if (pickedup)
         {
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -38,6 +56,7 @@ public class Card_ZiJun : GrabbableObject
 
         if (onfloor)
         {
+
             summonTimer -= 1.0f * Time.deltaTime;
 
             var tempcolor = this.GetComponent<MeshRenderer>().material.color;
@@ -54,10 +73,10 @@ public class Card_ZiJun : GrabbableObject
             go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
             Destroy(gameObject);
         }
-
-
-
+        
     }
+
+   
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -67,6 +86,7 @@ public class Card_ZiJun : GrabbableObject
         //}
         if (collision.gameObject.name == "enivronment_test 1")
         {
+            //playerReference.GetComponent<PlayerScript>().Mana -= this.ManaCost;
             onfloor = true;
         }
     }

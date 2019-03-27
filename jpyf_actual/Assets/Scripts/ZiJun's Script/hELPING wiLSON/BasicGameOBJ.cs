@@ -83,18 +83,14 @@ public class BasicGameOBJ : MonoBehaviour
     {
        
         UpdateHealth();
-
-        stateMachine.ExecuteStateUpdate();
-
-        ClassUpdate();
-
         UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
         CheckTargetActive();//Check if your target is active. If not active target becomes null
 
+        stateMachine.ExecuteStateUpdate();
+        ClassUpdate();
         if (healthValue <= 0)
         {
             target = null;
-
             this.stateMachine.ChangeState(new DeadState(this));//state machine
         }
 

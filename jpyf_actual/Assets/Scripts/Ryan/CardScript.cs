@@ -21,7 +21,7 @@ public class CardScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("addawdnakdnawkd");
+        //Debug.Log("addawdnakdnawkd");
         if (Input.GetKeyDown(KeyCode.V))
         {
             SpawnCard("Tank_Card");
@@ -51,7 +51,6 @@ public class CardScript : MonoBehaviour
 
     public void SpawnCard(string cardname)
     {
-        
         if (card_list.Count > 0)
         {
             for (int i = 0; i < card_list.Count; i++)

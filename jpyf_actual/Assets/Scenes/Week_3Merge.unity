@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 297187735}
   - component: {fileID: 297187734}
   - component: {fileID: 297187733}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: wall
   m_TagString: Ally_Unit
   m_Icon: {fileID: 0}
@@ -1360,7 +1360,7 @@ GameObject:
   - component: {fileID: 305621680}
   - component: {fileID: 305621682}
   - component: {fileID: 305621681}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2038,7 +2038,7 @@ GameObject:
   - component: {fileID: 517183180}
   - component: {fileID: 517183179}
   - component: {fileID: 517183178}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3178,9 +3178,9 @@ GameObject:
   - component: {fileID: 966699830}
   - component: {fileID: 966699829}
   - component: {fileID: 966699828}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: enemyWall
-  m_TagString: Ally_Unit
+  m_TagString: Enemy_Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3428,6 +3428,22 @@ Prefab:
     - target: {fileID: 54143597012906698, guid: c2c50034f6b3c8f40bca128ba3962920,
         type: 2}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193094726105062, guid: c2c50034f6b3c8f40bca128ba3962920, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817859773754826, guid: c2c50034f6b3c8f40bca128ba3962920, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612897794912018, guid: c2c50034f6b3c8f40bca128ba3962920, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193094726105062, guid: c2c50034f6b3c8f40bca128ba3962920, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4579,7 +4595,7 @@ GameObject:
   - component: {fileID: 1360039019}
   - component: {fileID: 1360039021}
   - component: {fileID: 1360039020}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10522,7 +10538,7 @@ GameObject:
   - component: {fileID: 1833991003}
   - component: {fileID: 1833991002}
   - component: {fileID: 1833991001}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10945,6 +10961,18 @@ Prefab:
         type: 2}
       propertyPath: attackValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415629349663164, guid: 8f7e4a800fcb58a4aa9a5f360ae31a9d, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566700459435534, guid: 8f7e4a800fcb58a4aa9a5f360ae31a9d, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319849446672466, guid: 8f7e4a800fcb58a4aa9a5f360ae31a9d, type: 2}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f7e4a800fcb58a4aa9a5f360ae31a9d, type: 2}

@@ -11,6 +11,19 @@ public class TestUnit_Control : MonoBehaviour
 
     //private StateMachine sm = new StateMachine();
     private GameObject tempPathManager;
+
+    private void Awake()
+    {
+        if (this.gameObject.tag == "Ally_Unit")
+        {
+            Physics.IgnoreLayerCollision(10, 12);
+        }
+        else if (this.gameObject.tag == "Enemy_Unit")
+        {
+            Physics.IgnoreLayerCollision(11, 13);
+        }
+    }
+
     private void Start()
     {
         //this.sm.ChangeState(new State_Moving(agent, pathIndex));
@@ -20,10 +33,7 @@ public class TestUnit_Control : MonoBehaviour
         agent.enabled = true;
         this.GetComponent<Rigidbody>().freezeRotation = true;
         this.GetComponent<Rigidbody>().isKinematic = false;
-        //if (this.gameObject.tag == "Ally_Unit")
-        //{
-        //    Physics.IgnoreLayerCollision(0, 10);
-        //}
+        
     }
 
     public int GetpathIndex()

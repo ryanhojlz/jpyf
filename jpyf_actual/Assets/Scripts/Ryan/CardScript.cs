@@ -67,4 +67,13 @@ public class CardScript : MonoBehaviour
             }
         }
     }
+
+    public void ReturnToHand(GameObject card)
+    {
+        card.transform.parent = GameObject.Find("armthing").transform;
+        card.transform.localPosition = Vector3.zero;
+        card.transform.GetComponent<Rigidbody>().isKinematic = true;
+        card.transform.GetComponent<Rigidbody>().useGravity = false;
+        this.current_hand.Add(card);
+    }
 }

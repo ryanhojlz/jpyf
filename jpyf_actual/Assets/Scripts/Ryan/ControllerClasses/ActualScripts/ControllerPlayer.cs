@@ -9,6 +9,7 @@ using System;
 
 public class ControllerPlayer : MonoBehaviour
 {
+
     public int playerId = -1;
     public int stickID;
 
@@ -196,6 +197,7 @@ public class ControllerPlayer : MonoBehaviour
 
     void UpdateSpirit()
     {
+        // Normal Check
         if (Spirit)
         {
             if (PlayerControllerObject.GetComponent<BasicGameOBJ>().healthValue <= 0)
@@ -204,6 +206,13 @@ public class ControllerPlayer : MonoBehaviour
                 PlayerControllerObject = Spirit;
                 Spirit = null;
             }
+        }
+        // Fail Safe Check
+        if (PlayerControllerObject == null && Spirit)
+        {
+            Spirit.SetActive(true);
+            PlayerControllerObject = Spirit;
+            Spirit = null;
         }
     }
 

@@ -21,13 +21,12 @@ public class Card_ZiJun : GrabbableObject
     public override void OnGrab(MoveController currentController)
     {
         GameObject playerReference = GameObject.Find("Player");
-        if (playerReference.GetComponent<PlayerScript>().Mana == 0)
-            return;
-        if (playerReference.GetComponent<PlayerScript>().Mana < this.ManaCost)
-            return;
+        //if (playerReference.GetComponent<PlayerScript>().Mana == 0)
+        //    return;
+        //if (playerReference.GetComponent<PlayerScript>().Mana < this.ManaCost)
+        //    return;
 
         base.OnGrab(currentController);
-        playerReference.GetComponent<PlayerScript>().Mana -= 1;
         pickedup = true;
     }
 
@@ -56,7 +55,6 @@ public class Card_ZiJun : GrabbableObject
 
         if (onfloor)
         {
-
             summonTimer -= 1.0f * Time.deltaTime;
 
             var tempcolor = this.GetComponent<MeshRenderer>().material.color;
@@ -70,6 +68,28 @@ public class Card_ZiJun : GrabbableObject
             GameObject go = Instantiate(summonedUnit) as GameObject;
             //Vector3 spawnPoint = new Vector3(250, 7, -55);
             Vector3 spawnPoint = this.transform.position;
+
+            if (this.transform.position.x < -3)
+            {
+                // Left
+                spawnPoint.x = GameObject.Find("SpawnReference3").transform.position.x;
+                spawnPoint.z = GameObject.Find("SpawnReference3").transform.position.z;
+
+            }
+            else if (this.transform.position.x < 3)
+            {
+                // Middle
+                spawnPoint.x = GameObject.Find("SpawnReference2").transform.position.x;
+                spawnPoint.z = GameObject.Find("SpawnReference2").transform.position.z;
+            }
+            else
+            {
+                // Right
+                spawnPoint.x = GameObject.Find("SpawnReference1").transform.position.x;
+                spawnPoint.z = GameObject.Find("SpawnReference1").transform.position.z;
+
+            }
+
             go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
             Destroy(gameObject);
         }
@@ -86,8 +106,18 @@ public class Card_ZiJun : GrabbableObject
         //}
         if (collision.gameObject.name == "enivronment_test 1")
         {
-            //playerReference.GetComponent<PlayerScript>().Mana -= this.ManaCost;
-            onfloor = true;
+            if (this.transform.position.y > 0)
+            {
+                GameObject.Find("armthing").GetComponent<CardScript>().ReturnToHand(this.gameObject);
+                pickedup = false;
+            }
+            else
+            {
+                //playerReference.GetComponent<PlayerScript>().Mana -= this.ManaCost;
+                onfloor = true;
+                GameObject playerReference = GameObject.Find("Player");
+                playerReference.GetComponent<PlayerScript>().Mana -= 1;
+            }
         }
     }
 }

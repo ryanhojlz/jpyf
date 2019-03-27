@@ -65,6 +65,7 @@ public class Possesor : MonoBehaviour
                 var kleur = GetComponent<Renderer>().material;
                 kleur.color = Color.blue;
                 GetComponent<Renderer>().material = kleur;
+
                 startPossesing = false;
                 playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
                 playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().isPossessed = true;
@@ -129,9 +130,19 @@ public class Possesor : MonoBehaviour
     {
         //if (other.gameObject.name == "Control Unit")
         //    nearbyObjects.Remove(other.gameObject);
-
-        if (other.gameObject.tag == "Ally_Unit")
-            nearbyObjects.Remove(other.gameObject);
+        if (startPossesing)
+        {
+            if (other.gameObject == nearbyObjects[0])
+            {
+                
+            }
+        }
+        else
+        {
+            if (other.gameObject.tag == "Ally_Unit")
+                nearbyObjects.Remove(other.gameObject);
+        }
+        
     }
 
     public void Text_Instantiate()

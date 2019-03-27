@@ -7,7 +7,7 @@ public class Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
     public AudioSource attackSound;
-
+    float target_distance;
     public override void Attack()
     {
         //target = FindNearestUnit(transform.position);
@@ -54,7 +54,7 @@ public class Tank : Attack_Unit
 
     public override void SpecialAttack()
     {
-        Debug.Log("SPECIAL ATTACK");
+        //Debug.Log("SPECIAL ATTACK");
         //this.gameObject.GetComponent<Rigidbody>().AddForce(0, 20, 0);
 
         for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
@@ -77,7 +77,12 @@ public class Tank : Attack_Unit
         GameObject closestGO = null;
         for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
         {
-           float target_distance = Vector3.SqrMagnitude(GetComponent<BasicGameOBJ>().minionWithinRange[i].transform.position - this.gameObject.transform.position);
+            if (GetComponent<BasicGameOBJ>().minionWithinRange[i].tag == "Ally_Unit" && this.gameObject.tag == "Ally_Unit")
+                continue;
+            if (GetComponent<BasicGameOBJ>().minionWithinRange[i].tag == "Enemy_Unit" && this.gameObject.tag == "Enemy_Unit")
+                continue;
+
+            target_distance = Vector3.SqrMagnitude(GetComponent<BasicGameOBJ>().minionWithinRange[i].transform.position - this.gameObject.transform.position);
             if (distance > target_distance)
             {
                 target_distance = distance;
@@ -87,6 +92,7 @@ public class Tank : Attack_Unit
         target = closestGO;
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
+        
         if (bullet != null)
         {
             bullet.Seek(target.transform);

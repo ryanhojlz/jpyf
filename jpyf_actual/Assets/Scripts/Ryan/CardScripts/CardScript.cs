@@ -33,7 +33,7 @@ public class CardScript : MonoBehaviour
             {
                 var adjustPos = current_hand[i].transform.localPosition;
                 float size = current_hand[i].GetComponent<MeshFilter>().mesh.bounds.size.x;
-                adjustPos.z = (0.17f) * i;
+                adjustPos.z = (0.20f) * i;
                 current_hand[i].transform.localPosition = adjustPos;
 
             }

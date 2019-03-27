@@ -303,8 +303,7 @@ public class BasicGameOBJ : MonoBehaviour
 
     public void SetStateMachine(IState state)
     {
-        this.stateMachine.ChangeState(state);
-        
+        this.stateMachine.ChangeState(state);  
     }
 
     

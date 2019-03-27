@@ -104,7 +104,7 @@ public class Card_ZiJun : GrabbableObject
         //{
         //    onfloor = true;
         //}
-        if (collision.gameObject.name == "enivronment_test 1")
+        if (collision.gameObject.name == "enivronment_test_1")
         {
             if (this.transform.position.y > 0)
             {

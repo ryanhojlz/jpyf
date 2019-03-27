@@ -19,6 +19,9 @@ public class ControllerPlayer : MonoBehaviour
     private bool buffer_square = false;
     private bool buffer_triangle = false;
 
+    private bool buffer_R1 = false;
+    private bool buffer_L1 = false;
+
 
     public GameObject PlayerControllerObject = null;
     public GameObject Spirit = null;
@@ -28,7 +31,7 @@ public class ControllerPlayer : MonoBehaviour
     public float x_input, y_input;
     public Vector3 direction;
 
-
+    Vector3 lastpos;
     
     // Use this for initialization
     void Start()
@@ -42,12 +45,14 @@ public class ControllerPlayer : MonoBehaviour
     {
         Controls();
         UpdateSpirit();
+        
     }
 
     void Controls()
     {
         ThumbSticks();
         Buttons();
+        ShoulderButtons();
         DPad();
     }
 
@@ -84,13 +89,10 @@ public class ControllerPlayer : MonoBehaviour
 
     void Buttons()
     {
-
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             IfSpirit();
         }
-
         //======================================================================================================
         // X Button
         //======================================================================================================
@@ -147,7 +149,6 @@ public class ControllerPlayer : MonoBehaviour
 
             if (Spirit)
             {
-                
                 Debug.Log("attacked");
                 PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
                 PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
@@ -161,7 +162,30 @@ public class ControllerPlayer : MonoBehaviour
         }
     }
 
+    void ShoulderButtons()
+    {
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_R1)
+        {
 
+            buffer_R1 = true;
+        }
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_R1)
+        {
+            buffer_R1 = false;
+        }
+
+
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
+        {
+
+            buffer_L1 = true;
+        }
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_L1)
+        {
+            buffer_L1 = false;
+        }
+
+    }
 
     void DPad()
     {
@@ -197,11 +221,13 @@ public class ControllerPlayer : MonoBehaviour
 
     void UpdateSpirit()
     {
+        lastpos = this.PlayerControllerObject.transform.position;
         // Normal Check
         if (Spirit)
         {
             if (PlayerControllerObject.GetComponent<BasicGameOBJ>().healthValue <= 0)
             {
+                Spirit.transform.position = lastpos;
                 Spirit.SetActive(true);
                 PlayerControllerObject = Spirit;
                 Spirit = null;
@@ -210,6 +236,7 @@ public class ControllerPlayer : MonoBehaviour
         // Fail Safe Check
         if (PlayerControllerObject == null && Spirit)
         {
+            Spirit.transform.position = lastpos;
             Spirit.SetActive(true);
             PlayerControllerObject = Spirit;
             Spirit = null;

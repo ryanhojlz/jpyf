@@ -134,7 +134,10 @@ public class Possesor : MonoBehaviour
         {
             if (other.gameObject == nearbyObjects[0])
             {
-                
+                possesTime = 8;
+                startPossesing = false;
+                possesionProgress = 2;
+                nearbyObjects.Remove(nearbyObjects[0]);
             }
         }
         else

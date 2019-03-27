@@ -34,6 +34,8 @@ public class HealState : IState
                 if (targetList[i].tag != Ally_Tag)//If is not enemy skip as well
                     continue;
 
+                if (!targetList[i].GetComponent<Minion>())//Make sure it is minions
+                    continue;
                 //Debug.Log("Find target le ah");
 
                 bool targetable = false;

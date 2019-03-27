@@ -37,18 +37,44 @@ public class Tank : Attack_Unit
         {
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ShootFront();
+        }
     }
 
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
-        MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
+        CProjectile bullet = bulletGO.GetComponent<CProjectile>();
         //attackSound.Play();
 
         if (bullet != null)
         {
             bullet.Seek(target.transform);
             bullet.SetBase(this);
+        }
+    }
+
+    void ShootFront()
+    {
+        GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
+        CProjectile bullet = bulletGO.GetComponent<CProjectile>();
+
+        if (bullet != null)
+        {
+            Transform FrontTransform = new GameObject().transform;// = this.transform;
+
+            FrontTransform.position = this.transform.position + (this.transform.forward * this.rangeValue);
+
+            Debug.Log("Front Position" + FrontTransform.position);
+            Debug.Log("It's Position" + this.transform.position);
+
+            bullet.Seek(FrontTransform);
+            bullet.SetBase(this);
+
+            Destroy(FrontTransform.gameObject);
         }
     }
 

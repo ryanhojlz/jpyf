@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeProjectile : MonoBehaviour
 {
     private Transform target;
+    private Vector3 TargetPosition;
     private Transform UnitThatShoots;
     public float AnimationSpeed;
     float speed = 0f;
@@ -14,7 +15,7 @@ public class MeleeProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        TargetPosition = target.position;
         //AttackSpeed = this.gameObject.GetComponent<Minion>().attackSpeedValue;
     }
 
@@ -42,11 +43,11 @@ public class MeleeProjectile : MonoBehaviour
         //    Destroy(this.gameObject);
         //    return;//Stop updating after deleting
         //}
-        float dist_between = (UnitThatShoots.position - target.position).magnitude;
+        float dist_between = (UnitThatShoots.position - TargetPosition).magnitude;
 
         speed = (dist_between / AnimationSpeed);
 
-        if (target == null)
+        if (TargetPosition == null)
         {
             Destroy(gameObject);
             return;
@@ -60,6 +61,12 @@ public class MeleeProjectile : MonoBehaviour
             HitTarget();
             return;
         }
+
+        //if (lifeTime <= 0f)
+        //{
+        //    HitTarget();
+        //    return;
+        //}
 
         lifeTime -= Time.deltaTime;
 

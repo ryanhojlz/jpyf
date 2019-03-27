@@ -15,7 +15,7 @@ public class Building : BasicGameOBJ
 
         if (target == null && isActive)
         {
-            Debug.Log(name);
+            //Debug.Log(name);
         }
 
     }

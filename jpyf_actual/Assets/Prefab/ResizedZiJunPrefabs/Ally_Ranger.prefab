@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 223248536026885512}
   - component: {fileID: 114819957115776182}
   - component: {fileID: 114216297460009248}
+  - component: {fileID: 114385846404055804}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -266,6 +267,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195285630775042064}
+--- !u!114 &114385846404055804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468806482951124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc7c36a07388144fa9e71871e580a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114748410326131098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,6 +306,7 @@ MonoBehaviour:
     type: 2}
   Enemy_Tag: 
   Ally_Tag: 
+  isPossessed: 0
   MinionType: 1
   targetableType: 000000000100000002000000
   bulletPrefab: {fileID: 1365045185677860, guid: 4c8cfc89d4c587647a5f048c7b5c7aa2,

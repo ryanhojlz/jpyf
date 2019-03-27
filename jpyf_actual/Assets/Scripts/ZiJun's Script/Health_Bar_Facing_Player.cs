@@ -15,7 +15,8 @@ public class Health_Bar_Facing_Player : MonoBehaviour
     {
         foreach (Camera c in Camera.allCameras)
         {
-            this.transform.LookAt(c.transform.position);
+            if(c.name == "spec_cam")
+            this.transform.LookAt(transform.position + c.transform.rotation * Vector3.back, c.transform.rotation * Vector3.up);
         }
     }
 }

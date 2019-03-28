@@ -88,6 +88,7 @@ public class BasicGameOBJ : MonoBehaviour
 
         stateMachine.ExecuteStateUpdate();
         ClassUpdate();
+
         if (healthValue <= 0)
         {
             target = null;
@@ -152,6 +153,7 @@ public class BasicGameOBJ : MonoBehaviour
                 }
 
                 RemoveUnitFromList(minionWithinRange[i]);
+                continue;
             }
 
             // if object is false

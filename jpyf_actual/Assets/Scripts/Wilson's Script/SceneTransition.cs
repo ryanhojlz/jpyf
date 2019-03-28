@@ -9,27 +9,37 @@ public class SceneTransition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Titlescreen":
+                {
+                    if(Input.GetKeyDown(KeyCode.Space))
+                    {
+                        SceneManager.LoadScene("MainMenu");
+                    }
+                    break;
+                }
+        }
     }
 
-    public void ToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+    //public void ToMainMenu()
+    //{
+    //    SceneManager.LoadScene("MainMenu");
+    //}
 
-    public void ToGame()
-    {
-        SceneManager.LoadScene("test");
-    }
+    //public void ToGame()
+    //{
+    //    SceneManager.LoadScene("test");
+    //}
 
-    public void ToEndGame()
-    {
-        SceneManager.LoadScene(" ");
-    }
+    //public void ToEndGame()
+    //{
+    //    SceneManager.LoadScene(" ");
+    //}
 }

@@ -183,7 +183,12 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_R1)
         {
+            Debug.Log("press right");
 
+            if (Spirit)
+            {
+                Spirit.GetComponent<Possesor>().UpDownIndex(true);
+            }
             buffer_R1 = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_R1)
@@ -192,12 +197,18 @@ public class ControllerPlayer : MonoBehaviour
         }
 
 
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_L1)
         {
+            Debug.Log("press left");
+
+            if (Spirit)
+            {
+                Spirit.GetComponent<Possesor>().UpDownIndex(false);
+            }
 
             buffer_L1 = true;
         }
-        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_L1)
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && buffer_L1)
         {
             buffer_L1 = false;
         }
@@ -230,6 +241,18 @@ public class ControllerPlayer : MonoBehaviour
                     PlayerControllerObject.GetComponent<Renderer>().material = kleur;
                     PlayerControllerObject.GetComponent<Possesor>().Text_Instantiate();
                 }
+            }
+        }
+        else if (Spirit)
+        {
+            if (Spirit.GetComponent<Possesor>().startPossesing)
+            {
+                Spirit.GetComponent<Possesor>().possesionProgress += 1;
+            }
+            else if (!Spirit.GetComponent<Possesor>().startPossesing)
+            {
+                Spirit.GetComponent<Possesor>().startPossesing = true;
+                Spirit.GetComponent<Possesor>().Text_Instantiate();
             }
         }
 

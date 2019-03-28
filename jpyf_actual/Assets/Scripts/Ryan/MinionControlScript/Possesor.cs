@@ -15,9 +15,10 @@ public class Possesor : MonoBehaviour
     public float possesionProgress = 2.0f;
     public float possesionProgressCap = 10;
 
+    public Shader ShaderInstance;
     private Material oldmat;
     public GameObject textprefab;
-
+    public int targetIndex = 0;
    
 	// Use this for initialization
 	void Start ()
@@ -38,13 +39,16 @@ public class Possesor : MonoBehaviour
             }
         }
 
+        // When possesing unit
         if (!playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<Possesor>())
         {
             if (GetComponent<MeshRenderer>().enabled == false)
             {
                 this.transform.position = playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.transform.position;
             }
+            Selection();
         }
+
 
         if (startPossesing)
         {
@@ -107,6 +111,10 @@ public class Possesor : MonoBehaviour
                 if (nearbyObjects[i].gameObject == other.gameObject)
                     return;
             }
+
+            other.GetComponent<Renderer>().material.shader = ShaderInstance;
+            other.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0.35f);
+            other.GetComponent<Renderer>().material.SetVector("_OutlineColor", new Vector4(255,0,0,255));
             nearbyObjects.Add(other.gameObject);
         }
 
@@ -116,6 +124,11 @@ public class Possesor : MonoBehaviour
     {
         //if (other.gameObject.name == "Control Unit")
         //    nearbyObjects.Remove(other.gameObject);
+        if (other.GetComponent<Renderer>().material.shader == ShaderInstance)
+        {
+            other.GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0.0f);
+            other.GetComponent<Renderer>().material.SetVector("_OutlineColor", new Vector4(0, 0, 0, 0));
+        }
         if (startPossesing)
         {
             if (other.gameObject == nearbyObjects[0])
@@ -139,7 +152,14 @@ public class Possesor : MonoBehaviour
         GameObject newtext = Instantiate(textprefab) as GameObject;
         newtext.GetComponent<TextEffectControl>().possesor = this.gameObject;
         // change ltr to closest object
-        newtext.GetComponent<TextEffectControl>().yokai = nearbyObjects[0];
+        if (playerReference.GetComponent<ControllerPlayer>().Spirit)
+        {
+            newtext.GetComponent<TextEffectControl>().yokai = nearbyObjects[targetIndex];
+        }
+        else
+        {
+            newtext.GetComponent<TextEffectControl>().yokai = nearbyObjects[0];
+        }
         newtext.GetComponent<Transform>().parent = newtext.GetComponent<TextEffectControl>().yokai.transform;
         newtext.GetComponent<Transform>().localPosition = Vector3.zero;
         var localpos = newtext.GetComponent<Transform>().localPosition;
@@ -167,9 +187,18 @@ public class Possesor : MonoBehaviour
 
             startPossesing = false;
 
-            playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
-            // Remove possesed objects
-            nearbyObjects.Remove(nearbyObjects[0]);
+            if (playerReference.GetComponent<ControllerPlayer>().Spirit)
+            {
+                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[targetIndex].gameObject;
+                nearbyObjects.Remove(nearbyObjects[targetIndex]);
+            }
+            else
+            {
+                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
+                // Remove possesed objects
+                nearbyObjects.Remove(nearbyObjects[0]);
+            }
+
 
             playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().isPossessed = true;
             // Prevent other zijun state from running
@@ -200,7 +229,86 @@ public class Possesor : MonoBehaviour
 
     void Selection()
     {
+        if (gameObject.GetComponent<MeshRenderer>().enabled)
+            return;
+        if (nearbyObjects.Count <= 0)
+        {
+            targetIndex = 0;
+            return;
+        }
 
+        for (int select = 0; select < nearbyObjects.Count; select++)
+        {
+            if (targetIndex == select)
+            {
+                nearbyObjects[targetIndex].GetComponent<Renderer>().material.SetVector("_OutlineColor", new Vector4(0, 128, 255, 0));
+            }
+            else
+            {
+                nearbyObjects[select].GetComponent<Renderer>().material.SetVector("_OutlineColor", new Vector4(0, 255, 0, 0));
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            --targetIndex;
+            if (targetIndex < 0)
+                targetIndex = 0;
+            else if (targetIndex > nearbyObjects.Count)
+            {
+                targetIndex = nearbyObjects.Count - 1;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ++targetIndex;
+            if (targetIndex < 0)
+                targetIndex = 0;
+            else if (targetIndex > nearbyObjects.Count)
+            {
+                targetIndex = nearbyObjects.Count - 1;
+            }
+        }
     }
 
+    public void UpDownIndex(bool bol)
+    {
+        //if (nearbyObjects.Count > 0)
+        //{
+        //    if (bol)
+        //        ++targetIndex;
+        //    else if (!bol)
+        //        --targetIndex;
+
+        //    if (targetIndex < 0)
+        //        targetIndex = 0;
+        //    else if (targetIndex > nearbyObjects.Count)
+        //    {
+        //        targetIndex = nearbyObjects.Count - 1;
+        //    }
+        //}
+        if (bol)
+        {
+            ++targetIndex;
+            if (targetIndex < 0)
+                targetIndex = 0;
+            else if (targetIndex > nearbyObjects.Count)
+            {
+                targetIndex = nearbyObjects.Count - 1;
+            }
+        }
+        else if (!bol)
+        {
+            --targetIndex;
+            if (targetIndex < 0)
+                targetIndex = 0;
+            else if (targetIndex > nearbyObjects.Count)
+            {
+                targetIndex = nearbyObjects.Count - 1;
+            }
+        }
+
+        
+    }
 }

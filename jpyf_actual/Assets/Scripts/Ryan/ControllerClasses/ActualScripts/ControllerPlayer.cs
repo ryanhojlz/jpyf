@@ -43,9 +43,18 @@ public class ControllerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //UpdateSpirit();
+        if (PlayerControllerObject == null && Spirit)
+        {
+            PlayerControllerObject = Spirit;
+            Spirit.GetComponent<MeshRenderer>().enabled = true;
+            Spirit.GetComponent<BoxCollider>().enabled = true;
+            Spirit.GetComponent<Rigidbody>().isKinematic = false;
+            Spirit = null;
+        }
+
         Controls();
-        UpdateSpirit();
-        
+       
     }
 
     void Controls()
@@ -73,18 +82,26 @@ public class ControllerPlayer : MonoBehaviour
 
         GameObject.Find("DebugText").GetComponent<Text>().text = "Xinput " + x_input;
         GameObject.Find("DebugText3").GetComponent<Text>().text = "Yinput " + y_input;
-        
+
+        float gravity = PlayerControllerObject.GetComponent<Rigidbody>().velocity.y;
         direction = new Vector3(x_input, 0, -y_input);
         if (direction == Vector3.zero)
         {
-            this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            direction.y = gravity;
+            direction.x = 0;
+            direction.z = 0;
+            //this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = direction;
         }
         else
         {
-            this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = direction * move_speed;
+            direction.y = gravity;
+            direction.x *= move_speed;
+            direction.z *= move_speed;
+            this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = direction;
         }
 
-        //PlayerControllerObject.transform.position += direction * move_speed * Time.deltaTime;
+        PlayerControllerObject.transform.position += direction * Time.deltaTime;/** move_speed*/
     }
 
     void Buttons()
@@ -221,14 +238,20 @@ public class ControllerPlayer : MonoBehaviour
 
     void UpdateSpirit()
     {
-        lastpos = this.PlayerControllerObject.transform.position;
+        //lastpos = this.PlayerControllerObject.transform.position;
         // Normal Check
         if (Spirit)
         {
             if (PlayerControllerObject.GetComponent<BasicGameOBJ>().healthValue <= 0)
             {
-                Spirit.transform.position = lastpos;
-                Spirit.SetActive(true);
+                //Spirit.transform.position = lastpos;
+                //Spirit.SetActive(true);
+
+                Spirit.GetComponent<MeshRenderer>().enabled = true;
+                Spirit.GetComponent<BoxCollider>().enabled = true;
+                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<Rigidbody>().useGravity = true;
+
                 PlayerControllerObject = Spirit;
                 Spirit = null;
             }
@@ -236,8 +259,11 @@ public class ControllerPlayer : MonoBehaviour
         // Fail Safe Check
         if (PlayerControllerObject == null && Spirit)
         {
-            Spirit.transform.position = lastpos;
-            Spirit.SetActive(true);
+            //Spirit.transform.position = lastpos;
+            //Spirit.SetActive(true);
+
+            Spirit.GetComponent<MeshRenderer>().enabled = true;
+            Spirit.GetComponent<BoxCollider>().enabled = true;
             PlayerControllerObject = Spirit;
             Spirit = null;
         }

@@ -41,7 +41,7 @@ public class Card_ZiJun : GrabbableObject
     {
         float[] debugArray = new float[4];
         debugArray = transform.GetComponent<Renderer>().material.GetFloatArray("_OutlineColor");
-        Debug.Log("ArrayColor  " + debugArray);
+        //Debug.Log("ArrayColor  " + debugArray);
         if (pickedup)
         {
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;

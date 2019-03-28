@@ -37,7 +37,14 @@ public class Possesor : MonoBehaviour
                 nearbyObjects.Remove(nearbyObjects[i]);
             }
         }
-        
+
+        if (!playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<Possesor>())
+        {
+            if (GetComponent<MeshRenderer>().enabled == false)
+            {
+                this.transform.position = playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.transform.position;
+            }
+        }
 
         if (startPossesing)
         {
@@ -55,28 +62,7 @@ public class Possesor : MonoBehaviour
                 startPossesing = false;
 
             }
-
-
-            // Sucess Condition
-            if (possesionProgress >= possesionProgressCap)
-            {
-                possesTime = 8;
-                possesionProgress = 2.0f;
-                var kleur = GetComponent<Renderer>().material;
-                kleur.color = Color.blue;
-                GetComponent<Renderer>().material = kleur;
-
-                startPossesing = false;
-                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
-                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().isPossessed = true;
-                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().SetStateMachine(new PossessState());
-                playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<NavMeshAgent>().enabled = false;
-                playerReference.GetComponent<ControllerPlayer>().Spirit = this.gameObject;
-
-                this.gameObject.SetActive(false);
-                //GameObject.FindObjectOfType<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
-
-            }
+            SucessCondition();
 
             if (Input.GetKeyDown(KeyCode.G))
             {
@@ -168,7 +154,53 @@ public class Possesor : MonoBehaviour
         //transform.localPosition = localpos;
     }
 
+    void SucessCondition()
+    {
+        // Sucess Condition
+        if (possesionProgress >= possesionProgressCap)
+        {
+            possesTime = 8;
+            possesionProgress = 2.0f;
+            var kleur = GetComponent<Renderer>().material;
+            kleur.color = Color.blue;
+            GetComponent<Renderer>().material = kleur;
 
-    
-    
+            startPossesing = false;
+
+            playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
+            // Remove possesed objects
+            nearbyObjects.Remove(nearbyObjects[0]);
+
+            playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().isPossessed = true;
+            // Prevent other zijun state from running
+            playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<BasicGameOBJ>().SetStateMachine(new PossessState());
+            // Turn of the nav mesh shit
+            playerReference.GetComponent<ControllerPlayer>().PlayerControllerObject.GetComponent<NavMeshAgent>().enabled = false;
+            // Keep a copy reference of object
+            playerReference.GetComponent<ControllerPlayer>().Spirit = this.gameObject;
+            
+            GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
+
+
+            //this.gameObject.SetActive(false);
+            //GameObject.FindObjectOfType<ControllerPlayer>().PlayerControllerObject = nearbyObjects[0].gameObject;
+
+        }
+    }
+
+
+    public void ChangeShaderProperty(float lineSize, Vector4 vector)
+    {
+        
+    }
+
+
+    void Selection()
+    {
+
+    }
+
 }

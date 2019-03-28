@@ -121,7 +121,7 @@ public class CProjectile : MonoBehaviour {
                 if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
                 {
                     //Debug.Log(other.gameObject.name);
-                    Debug.Log(lifeTime + "HIT");
+                    //Debug.Log(lifeTime + "HIT");
                     Damage(UnitThatShoots, other.transform);
                     Destroy(this.gameObject);
                 }

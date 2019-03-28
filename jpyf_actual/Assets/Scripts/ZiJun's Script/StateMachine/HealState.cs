@@ -89,7 +89,7 @@ public class HealState : IState
 
         //unit.gameObject.transform.LookAt(unit.GetTarget().transform.position);
 
-        
+
 
         //if (unit.GetTarget().GetComponent<Minion>().healthValue >= unit.GetTarget().GetComponent<Minion>().startHealthvalue)
         //{
@@ -102,6 +102,7 @@ public class HealState : IState
         //    return;
         //}
 
+        //unit.gameObject.transform.LookAt(unit.GetTarget().transform.position);
 
         if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {

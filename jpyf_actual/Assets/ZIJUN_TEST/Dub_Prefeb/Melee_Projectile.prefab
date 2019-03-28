@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114470898639757690}
   - component: {fileID: 54469783222104776}
   m_Layer: 0
-  m_Name: Heal_Projectile
+  m_Name: Melee_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9482f2fd8eece40910729601be427c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile_type: 0
   AnimationSpeed: 0
   prefabtext: {fileID: 1306221944417296, guid: dcc5ce4d20dba9342aa387ce5b735387, type: 2}
 --- !u!135 &135267362798175484

@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 114153508999762620}
   m_Layer: 0
   m_Name: Dup_Tank_Enemy
-  m_TagString: Ally_Unit
+  m_TagString: Enemy_Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +185,8 @@ MonoBehaviour:
   isPossessed: 0
   MinionType: 0
   targetableType: 0000000001000000
-  meleeProjectile: {fileID: 0}
+  meleeProjectile: {fileID: 1038919709963554, guid: 3fa089d11b543084a8351ac6439ff87f,
+    type: 2}
   attackSound: {fileID: 0}
 --- !u!114 &114153508999762620
 MonoBehaviour:

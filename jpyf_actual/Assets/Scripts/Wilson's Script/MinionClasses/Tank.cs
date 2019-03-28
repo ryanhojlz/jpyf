@@ -35,6 +35,7 @@ public class Tank : Attack_Unit
             return;
         if (minionWithinRange.Count > 0)
         {
+            //Debug.Log(this.stateMachine.ToString());
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
 

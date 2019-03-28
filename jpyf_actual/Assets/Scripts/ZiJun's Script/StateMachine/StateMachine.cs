@@ -8,6 +8,14 @@ public class StateMachine
     private IState previousState;
     public void ChangeState(IState newState)
     {
+        if ("" + this.currentlyRunningState == "" + newState)//Do not change state if it is the same state
+        {
+            //Debug.Log(newState.ToString() + ", Prev : " + currentlyRunningState.ToString());
+            return;
+        }
+
+        Debug.Log(newState + ", Prev : " + currentlyRunningState);
+
         if (this.currentlyRunningState != null)
         {
             this.currentlyRunningState.Exit();
@@ -33,5 +41,15 @@ public class StateMachine
         this.currentlyRunningState.Exit();
         this.currentlyRunningState = this.previousState;
         this.currentlyRunningState.Enter();
+    }
+
+    public IState GetCurrentState()
+    {
+        return currentlyRunningState;
+    }
+
+    public IState GetPreviousState()
+    {
+        return previousState;
     }
 }

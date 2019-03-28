@@ -16,6 +16,7 @@ public class AttackState : IState
         //target = _target;
         targetList = _Enemy;
         Enemy_Tag = _Enemy_Tag;
+        //_unit.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
     }
 
     private float CheckDist(Vector3 pos1, Vector3 pos2)//Does not metter which is first
@@ -72,12 +73,17 @@ public class AttackState : IState
                 unit.SetTarget(targetList[i]);// = targetList[i];
             }
         }
+
+
+        if (unit.GetTarget())
+        {
+            unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        }
+        //unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
     }
 
     public void Execute()
     {
-       
-
         if (!unit.GetTarget())
         {
             return;
@@ -106,12 +112,19 @@ public class AttackState : IState
                 unit.Attack();
             }
         }
+
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        //    Debug.Log("KnockBack");
+        //    unit.GetComponent<Rigidbody>().AddForce((unit.gameObject.transform.forward * -1000));
+        //}
             //unit.SetTarget(null);
     }
 
     public void Exit()
     {
-
+        //Debug.Log("Exit");
     }
 
 }

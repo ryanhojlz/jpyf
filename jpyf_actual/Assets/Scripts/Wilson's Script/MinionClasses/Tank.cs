@@ -7,6 +7,8 @@ public class Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
     public AudioSource attackSound;
+    public GameObject encounterImage;
+
     float target_distance;
     public override void Attack()
     {
@@ -35,6 +37,7 @@ public class Tank : Attack_Unit
             return;
         if (minionWithinRange.Count > 0)
         {
+            gameObject.SetActive(encounterImage);
             //Debug.Log(this.stateMachine.ToString());
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
@@ -49,13 +52,13 @@ public class Tank : Attack_Unit
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         CProjectile bullet = bulletGO.GetComponent<CProjectile>();
-        //attackSound.Play();
 
         if (bullet != null)
         {
             bullet.Seek(target.transform);
             bullet.SetBase(this);
         }
+        //attackSound.Play();
     }
 
     void ShootFront()
@@ -77,6 +80,7 @@ public class Tank : Attack_Unit
 
             Destroy(FrontTransform.gameObject);
         }
+        //attackSound.Play();
     }
 
     public override void SpecialAttack()
@@ -90,8 +94,7 @@ public class Tank : Attack_Unit
             Vector3 direction = Vector3.zero;
             direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
             GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
-        }
-        
+        }       
     }
 
 

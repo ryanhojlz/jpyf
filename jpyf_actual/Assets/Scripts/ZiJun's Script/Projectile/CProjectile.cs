@@ -17,10 +17,11 @@ public class CProjectile : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        //off setting the projectile shoot
         this.transform.position = new Vector3(
-            this.transform.position.x + (UnitThatShoots.transform.forward.x + UnitThatShoots.transform.localScale.x) * (this.GetComponent<SphereCollider>().radius),
-            this.transform.position.y + (UnitThatShoots.transform.forward.y + UnitThatShoots.transform.localScale.y) * (this.GetComponent<SphereCollider>().radius),
-            this.transform.position.z + (UnitThatShoots.transform.forward.z + UnitThatShoots.transform.localScale.z) * (this.GetComponent<SphereCollider>().radius)
+            this.transform.position.x + (UnitThatShoots.transform.forward.x * (UnitThatShoots.transform.localScale.x * 2)) * (this.GetComponent<SphereCollider>().radius),
+            this.transform.position.y + (UnitThatShoots.transform.forward.y * (UnitThatShoots.transform.localScale.y * 2)) * (this.GetComponent<SphereCollider>().radius),
+            this.transform.position.z + (UnitThatShoots.transform.forward.z * (UnitThatShoots.transform.localScale.z * 2)) * (this.GetComponent<SphereCollider>().radius)
             );	
 	}
 	
@@ -64,6 +65,20 @@ public class CProjectile : MonoBehaviour {
         UnitThatShootsPosition = GO.transform.position;
         UnitThatShoots = GO.transform;
         lifeTime = AnimationSpeed;
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<BasicGameOBJ>())
+        {
+            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+            {
+                Debug.Log(lifeTime + "HIT");
+                Damage(UnitThatShoots, other.transform);
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     private void OnCollisionStay(Collision other)

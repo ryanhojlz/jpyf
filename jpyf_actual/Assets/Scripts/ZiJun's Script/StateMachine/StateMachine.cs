@@ -14,7 +14,7 @@ public class StateMachine
             return;
         }
 
-        Debug.Log(newState + ", Prev : " + currentlyRunningState);
+        //Debug.Log(newState + ", Prev : " + currentlyRunningState);
 
         if (this.currentlyRunningState != null)
         {

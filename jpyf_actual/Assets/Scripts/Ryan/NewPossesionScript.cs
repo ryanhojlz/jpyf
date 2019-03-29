@@ -60,6 +60,15 @@ public class NewPossesionScript : MonoBehaviour
             //Debug.Log("Pressed");
             PossesUp();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            TargetIndex(false);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            TargetIndex(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,7 +105,7 @@ public class NewPossesionScript : MonoBehaviour
             if (i == targetIndex)
             {
                 unit2Posses = objList[i].gameObject;
-                ChangeShader(unit2Posses, 0.1f, new Vector4(255, 0, 255, 0));
+                //ChangeShader(unit2Posses, 0.1f, new Vector4(255, 0, 255, 0));
             }
         }
     }
@@ -177,14 +186,15 @@ public class NewPossesionScript : MonoBehaviour
     // For selecting Target
     public void TargetIndex(bool updown)
     {
+        Debug.Log("Index as of now " + targetIndex);
         // If true +1 index
         if (updown)
         {
-            ++targetIndex;
+            targetIndex++;
         }
         else if (!updown) // If false -1 index
         {
-            --targetIndex;
+            targetIndex--;
         }
 
         if (targetIndex < 0)

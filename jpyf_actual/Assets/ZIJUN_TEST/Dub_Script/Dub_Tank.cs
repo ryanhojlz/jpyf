@@ -69,8 +69,8 @@ public class Dub_Tank : Attack_Unit
 
             FrontTransform.position = this.transform.position + (this.transform.forward * this.rangeValue);
 
-            Debug.Log("Front Position" + FrontTransform.position);
-            Debug.Log("It's Position" + this.transform.position);
+            //Debug.Log("Front Position" + FrontTransform.position);
+            //Debug.Log("It's Position" + this.transform.position);
 
             bullet.Seek(FrontTransform);
             bullet.SetBase(this);

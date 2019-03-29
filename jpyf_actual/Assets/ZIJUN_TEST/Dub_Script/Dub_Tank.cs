@@ -41,7 +41,9 @@ public class Dub_Tank : Attack_Unit
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            ShootFront();
+            //ShootFront();
+            Invoke("SpecialAttack", 0.5f);
+            //SpecialAttack();
         }
     }
 
@@ -69,8 +71,8 @@ public class Dub_Tank : Attack_Unit
 
             FrontTransform.position = this.transform.position + (this.transform.forward * this.rangeValue);
 
-            //Debug.Log("Front Position" + FrontTransform.position);
-            //Debug.Log("It's Position" + this.transform.position);
+            Debug.Log("Front Position" + FrontTransform.position);
+            Debug.Log("It's Position" + this.transform.position);
 
             bullet.Seek(FrontTransform);
             bullet.SetBase(this);
@@ -84,14 +86,26 @@ public class Dub_Tank : Attack_Unit
         //Debug.Log("SPECIAL ATTACK");
         //this.gameObject.GetComponent<Rigidbody>().AddForce(0, 20, 0);
 
-        for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
+        //for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
+        //{
+        //    //GetComponent<BasicGameOBJ>().minionWithinRange[i].SetActive(false);
+        //    Vector3 direction = Vector3.zero;
+        //    direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
+        //    GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
+        //}
+
+        for (int i = 0; i < minionWithinRange.Count; i++)
         {
-            //GetComponent<BasicGameOBJ>().minionWithinRange[i].SetActive(false);
-            Vector3 direction = Vector3.zero;
-            direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
-            GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
+            if (!minionWithinRange[i].GetComponent<Minion>())//If is not a minion type, Proceed to the next one
+                continue;
+            if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
+                continue;
+
+            minionWithinRange[i].GetComponent<BasicGameOBJ>().SetTarget(this.gameObject);//Get aggroed switching target to caster
+            minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);//Dealing damage
+
         }
-        
+
     }
 
 
@@ -119,7 +133,7 @@ public class Dub_Tank : Attack_Unit
         target = closestGO;
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         CProjectile bullet = bulletGO.GetComponent<CProjectile>();
-        
+
         if (bullet != null)
         {
             bullet.Seek(target.transform);

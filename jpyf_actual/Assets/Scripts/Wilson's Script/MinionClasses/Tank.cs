@@ -44,7 +44,8 @@ public class Tank : Attack_Unit
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            ShootFront();
+            //ShootFront();
+            SpecialAttack();
         }
     }
 
@@ -87,13 +88,18 @@ public class Tank : Attack_Unit
     {
         //Debug.Log("SPECIAL ATTACK");
         //this.gameObject.GetComponent<Rigidbody>().AddForce(0, 20, 0);
-
-        for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
+        for (int i = 0; i < minionWithinRange.Count; i++)
         {
+            if (!minionWithinRange[i].GetComponent<Minion>())//If is not a minion type, Proceed to the next one
+                continue;
+            if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
+                continue;
+
+            minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);
             //GetComponent<BasicGameOBJ>().minionWithinRange[i].SetActive(false);
-            Vector3 direction = Vector3.zero;
-            direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
-            GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
+            //Vector3 direction = Vector3.zero;
+            //direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
+            //GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
         }       
     }
 

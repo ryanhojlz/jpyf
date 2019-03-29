@@ -221,19 +221,19 @@ public class PS4_Controller : MonoBehaviour
         //    _Player.transform.position = _pos;
         //}
 
-        if (Input.GetAxis("joystick" + stickID + "_right_trigger") != 0)
-        {
-            Vector3 _pos = _Player.transform.position;
-            _pos.y -= 30 * Time.deltaTime;
-            _Player.transform.position = _pos;
-        }
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5", true)))
-        {
+        //if (Input.GetAxis("joystick" + stickID + "_right_trigger") != 0)
+        //{
+        //    Vector3 _pos = _Player.transform.position;
+        //    _pos.y -= 30 * Time.deltaTime;
+        //    _Player.transform.position = _pos;
+        //}
+        //if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5", true)))
+        //{
 
-            Vector3 _pos = _Player.transform.position;
-            _pos.y += 30 * Time.deltaTime;
-            _Player.transform.position = _pos;
-        }
+        //    Vector3 _pos = _Player.transform.position;
+        //    _pos.y += 30 * Time.deltaTime;
+        //    _Player.transform.position = _pos;
+        //}
 
         if (Input.GetAxis("joystick" + stickID + "_left_trigger") != 0)
         {

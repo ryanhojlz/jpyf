@@ -37,6 +37,35 @@ public class Dub_Sniper : Attack_Unit
         }
     }
 
+    public override void SpecialAttack()
+    {
+        //Debug.Log("SPECIAL ATTACK");
+        //this.gameObject.GetComponent<Rigidbody>().AddForce(0, 20, 0);
+
+        //for (int i = 0; i < GetComponent<BasicGameOBJ>().minionWithinRange.Count; i++)
+        //{
+        //    //GetComponent<BasicGameOBJ>().minionWithinRange[i].SetActive(false);
+        //    Vector3 direction = Vector3.zero;
+        //    direction = GetComponent<BasicGameOBJ>().minionWithinRange[i].gameObject.transform.position - this.gameObject.transform.position;
+        //    GetComponent<BasicGameOBJ>().minionWithinRange[i].GetComponent<Rigidbody>().AddForce(direction * 100);
+        //}
+
+        //HYPERBEAM!!!
+
+        for (int i = 0; i < minionWithinRange.Count; i++)
+        {
+            if (!minionWithinRange[i].GetComponent<Minion>())//If is not a minion type, Proceed to the next one
+                continue;
+            if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
+                continue;
+
+            minionWithinRange[i].GetComponent<BasicGameOBJ>().SetTarget(this.gameObject);//Get aggroed switching target to caster
+            minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);//Dealing damage
+
+        }
+
+    }
+
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);

@@ -22,6 +22,8 @@ public class ControllerPlayer : MonoBehaviour
     private bool buffer_R1 = false;
     private bool buffer_L1 = false;
 
+    public GameObject CurrentUnit = null;
+    public GameObject SpiritUnit = null;
 
     public GameObject PlayerControllerObject = null;
     public GameObject Spirit = null;
@@ -44,14 +46,14 @@ public class ControllerPlayer : MonoBehaviour
     void Update()
     {
         //UpdateSpirit();
-        if (PlayerControllerObject == null && Spirit)
-        {
-            PlayerControllerObject = Spirit;
-            Spirit.GetComponent<MeshRenderer>().enabled = true;
-            Spirit.GetComponent<BoxCollider>().enabled = true;
-            Spirit.GetComponent<Rigidbody>().isKinematic = false;
-            Spirit = null;
-        }
+        //if (PlayerControllerObject == null && Spirit)
+        //{
+        //    PlayerControllerObject = Spirit;
+        //    Spirit.GetComponent<MeshRenderer>().enabled = true;
+        //    Spirit.GetComponent<BoxCollider>().enabled = true;
+        //    Spirit.GetComponent<Rigidbody>().isKinematic = false;
+        //    Spirit = null;
+        //}
 
         Controls();
        
@@ -83,7 +85,7 @@ public class ControllerPlayer : MonoBehaviour
         GameObject.Find("DebugText").GetComponent<Text>().text = "Xinput " + x_input;
         GameObject.Find("DebugText3").GetComponent<Text>().text = "Yinput " + y_input;
 
-        float gravity = PlayerControllerObject.GetComponent<Rigidbody>().velocity.y;
+        float gravity = CurrentUnit.GetComponent<Rigidbody>().velocity.y;
         direction = new Vector3(x_input, 0, -y_input);
         if (direction == Vector3.zero)
         {
@@ -98,25 +100,33 @@ public class ControllerPlayer : MonoBehaviour
             direction.y = gravity;
             direction.x *= move_speed;
             direction.z *= move_speed;
-            this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = direction;
+            this.CurrentUnit.GetComponent<Rigidbody>().velocity = direction;
         }
 
-        PlayerControllerObject.transform.position += direction * Time.deltaTime;/** move_speed*/
+        CurrentUnit.transform.position += direction * Time.deltaTime;/** move_speed*/
     }
 
     void Buttons()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            IfSpirit();
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    IfSpirit();
+        //}
         //======================================================================================================
         // X Button
         //======================================================================================================
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")) && !buffer_x)
         {
-            IfSpirit();
-            // hi
+            //IfSpirit();
+            if (CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                CurrentUnit.GetComponent<NewPossesionScript>().PossesUp();
+            }
+            else
+            {
+                SpiritUnit.GetComponent<NewPossesionScript>().PossesUp();
+            }
+            
             buffer_x = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")) && buffer_x)
@@ -164,15 +174,15 @@ public class ControllerPlayer : MonoBehaviour
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")) && !buffer_triangle)
         {
 
-            if (Spirit)
-            {
-                Debug.Log("attacked");
-                PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
-                PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
-            }
+            //if (Spirit)
+            //{
+            //    Debug.Log("attacked");
+            //    PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
+            //    PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
+            //}
             buffer_triangle = true;
         }
-        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_triangle)
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")) && buffer_triangle)
         {
 
             buffer_triangle = false;
@@ -185,10 +195,16 @@ public class ControllerPlayer : MonoBehaviour
         {
             Debug.Log("press right");
 
-            if (Spirit)
-            {
-                Spirit.GetComponent<Possesor>().UpDownIndex(true);
-            }
+            //if (Spirit)
+            //{
+            //    Spirit.GetComponent<Possesor>().UpDownIndex(true);
+            //}
+            //else
+            //{
+            //    PlayerControllerObject.GetComponent<Possesor>().UpDownIndex(true);
+            //}
+
+            //Spirit.GetComponent<Possesor>().UpDownIndex(true);
             buffer_R1 = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_R1)
@@ -201,11 +217,16 @@ public class ControllerPlayer : MonoBehaviour
         {
             Debug.Log("press left");
 
-            if (Spirit)
-            {
-                Spirit.GetComponent<Possesor>().UpDownIndex(false);
-            }
+            //if (Spirit)
+            //{
+            //    Spirit.GetComponent<Possesor>().UpDownIndex(false);
+            //}
+            //else
+            //{
+            //    PlayerControllerObject.GetComponent<Possesor>().UpDownIndex(false);
+            //}
 
+            //Spirit.GetComponent<Possesor>().UpDownIndex(false);
             buffer_L1 = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && buffer_L1)
@@ -236,9 +257,6 @@ public class ControllerPlayer : MonoBehaviour
                 if (PlayerControllerObject.GetComponent<Possesor>().canPosses)
                 {
                     PlayerControllerObject.GetComponent<Possesor>().startPossesing = true;
-                    var kleur = PlayerControllerObject.GetComponent<Renderer>().material;
-                    kleur.color = Color.green;
-                    PlayerControllerObject.GetComponent<Renderer>().material = kleur;
                     PlayerControllerObject.GetComponent<Possesor>().Text_Instantiate();
                 }
             }
@@ -251,8 +269,11 @@ public class ControllerPlayer : MonoBehaviour
             }
             else if (!Spirit.GetComponent<Possesor>().startPossesing)
             {
-                Spirit.GetComponent<Possesor>().startPossesing = true;
-                Spirit.GetComponent<Possesor>().Text_Instantiate();
+                if (Spirit.GetComponent<Possesor>().canPosses)
+                {
+                    Spirit.GetComponent<Possesor>().startPossesing = true;
+                    Spirit.GetComponent<Possesor>().Text_Instantiate();
+                }
             }
         }
 

@@ -18,6 +18,12 @@ public class PossessedPlayerInfo : MonoBehaviour
     void Start()
     {
         playerReference = GameObject.Find("Player_object");
+
+        playerStartHealth = 10;
+        playerHealth = 10;
+        playerMaxMana = 10;
+        playerMana = 10;
+
     }
 
     // Update is called once per frame
@@ -32,10 +38,15 @@ public class PossessedPlayerInfo : MonoBehaviour
         }
         else
         {
-            playerStartHealth = 1;
-            playerHealth = 0;
-            playerMaxMana = 1;
-            playerMana = 0;
+            //playerStartHealth = 1;
+            //playerHealth = 1;
+            //playerMaxMana = 1;
+            //playerMana = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            playerHealth -= 1;
         }
 
         healthBar.fillAmount = playerHealth / playerStartHealth;

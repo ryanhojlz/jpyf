@@ -12,7 +12,7 @@ public class BasicGameOBJ : MonoBehaviour
     }
 
     public OBJType OBJ_TYPE;
-   
+
     //base attributes of the enemies
     public float startHealthvalue;
     public float healthValue;
@@ -81,7 +81,7 @@ public class BasicGameOBJ : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         UpdateHealth();
         UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
         CheckTargetActive();//Check if your target is active. If not active target becomes null
@@ -289,6 +289,20 @@ public class BasicGameOBJ : MonoBehaviour
             minionWithinRange.Add(other.gameObject);
         }
     }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<CHyperBeam>())
+        {
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+        }
+    }
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.GetComponent<CHyperBeam>())
+        {
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+        }
+    }
     void OnTriggerExit(Collider other)
     {
         for (int i = 0; i < minionWithinRange.Count; ++i)
@@ -305,8 +319,8 @@ public class BasicGameOBJ : MonoBehaviour
 
     public void SetStateMachine(IState state)
     {
-        this.stateMachine.ChangeState(state);  
+        this.stateMachine.ChangeState(state);
     }
 
-    
+
 }

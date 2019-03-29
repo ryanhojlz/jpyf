@@ -35,6 +35,7 @@ public class BasicGameOBJ : MonoBehaviour
     protected GameObject target;
 
     protected StateMachine stateMachine = new StateMachine();
+    public string statename = "";
     //public StateMachine stateMachine = new StateMachine();
 
     public GameObject ParticleExplosion;
@@ -81,7 +82,7 @@ public class BasicGameOBJ : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        statename = "" + this.stateMachine.GetCurrentState();
         UpdateHealth();
         UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
         CheckTargetActive();//Check if your target is active. If not active target becomes null

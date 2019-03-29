@@ -32,6 +32,12 @@ public class TextEffectControl : MonoBehaviour
             (possesor.GetComponent<Possesor>().possesionProgress / 
             possesor.GetComponent<Possesor>().possesionProgressCap);
 
+        transform.position = yokai.transform.position;
+        var changepos = transform.position;
+        changepos.y += 1;
+        transform.position = changepos;
         transform.LookAt(GameObject.Find("spec_cam").transform);
+        transform.eulerAngles = new Vector3(90, 0, 0);
+        
     }
 }

@@ -1849,8 +1849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e177eff443ed6c4595de89caf49f963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 347119888}
-  manaBar: {fileID: 0}
+  healthBar: {fileID: 0}
+  manaBar: {fileID: 347119888}
   minions: []
 --- !u!114 &347119888
 MonoBehaviour:
@@ -2148,7 +2148,9 @@ MonoBehaviour:
   possesTime: 8
   possesionProgress: 0
   possesionProgressCap: 10
+  ShaderInstance: {fileID: 0}
   textprefab: {fileID: 1418327499060494, guid: 03d2e8329ca9018418a439e05e6fe24e, type: 2}
+  targetIndex: 0
 --- !u!54 &408039080
 Rigidbody:
   m_ObjectHideFlags: 0

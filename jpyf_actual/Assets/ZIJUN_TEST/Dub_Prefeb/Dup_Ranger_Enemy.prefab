@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114369992945783228}
   - component: {fileID: 114847414948869402}
   - component: {fileID: 114492748719320802}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 224839484694749640}
   - component: {fileID: 222806704701846558}
   - component: {fileID: 114494355900633808}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 135365959146478546}
   - component: {fileID: 114563981541708752}
   - component: {fileID: 54248682277192672}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dup_Ranger_Enemy
   m_TagString: Enemy_Unit
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 33998073315976334}
   - component: {fileID: 23837540666716868}
   - component: {fileID: 65748615816269602}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ally_Ranger_Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,8 @@ MonoBehaviour:
   isPossessed: 0
   MinionType: 1
   targetableType: 000000000100000002000000
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1038919709963554, guid: b5ac546586259e24fb512021070e985f,
+    type: 2}
 --- !u!114 &114847414948869402
 MonoBehaviour:
   m_ObjectHideFlags: 1

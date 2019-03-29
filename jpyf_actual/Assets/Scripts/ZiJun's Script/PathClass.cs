@@ -29,7 +29,9 @@ public class PathClass : MonoBehaviour
 
         //If is the last one, return the last point
         return waypointList[waypointList.Count - 1];
-        
+
+        //return null;
+
     }
 
     public int GetSizeOfList()

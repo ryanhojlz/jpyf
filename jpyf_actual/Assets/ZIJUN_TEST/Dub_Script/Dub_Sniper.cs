@@ -43,6 +43,8 @@ public class Dub_Sniper : Attack_Unit
         CProjectile bullet = bulletGO.GetComponent<CProjectile>();
         //attackSound.Play();
 
+        //Debug.Log("Sniper_Shoots");
+
         if (bullet != null)
         {
             //Debug.Log(CountDownTimer);

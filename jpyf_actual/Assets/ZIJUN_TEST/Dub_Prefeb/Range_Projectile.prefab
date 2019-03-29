@@ -93,9 +93,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038919709963554}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9482f2fd8eece40910729601be427c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile_type: 1
   AnimationSpeed: 0
   prefabtext: {fileID: 1306221944417296, guid: dcc5ce4d20dba9342aa387ce5b735387, type: 2}
 --- !u!135 &135267362798175484

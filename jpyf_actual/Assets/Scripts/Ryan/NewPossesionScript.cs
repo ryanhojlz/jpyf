@@ -278,6 +278,8 @@ public class NewPossesionScript : MonoBehaviour
                 new AttackState(existingObj.GetComponent<Attack_Unit>(), 
                 existingObj.GetComponent<BasicGameOBJ>().minionWithinRange,
                 existingObj.GetComponent<BasicGameOBJ>().Enemy_Tag));
+
+            objList.Add(existingObj);
         }
 
         // Change Unit

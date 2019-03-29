@@ -19105,6 +19105,75 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &2086961762
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.313
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -5.294425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360548024853596, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1988217338435450, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827913336090166, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890669665717298, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114507125106378868, guid: 6bb141619199d36408ce7926148938d7,
+        type: 2}
+      propertyPath: meleeProjectile
+      value: 
+      objectReference: {fileID: 1038919709963554, guid: 3fa089d11b543084a8351ac6439ff87f,
+        type: 2}
+    - target: {fileID: 114507125106378868, guid: 6bb141619199d36408ce7926148938d7,
+        type: 2}
+      propertyPath: moveSpeedValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1988217338435450, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+      propertyPath: m_Name
+      value: Dup_Tank_Ally (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6bb141619199d36408ce7926148938d7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2120576198
 GameObject:
   m_ObjectHideFlags: 0

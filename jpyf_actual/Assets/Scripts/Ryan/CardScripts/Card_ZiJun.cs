@@ -10,8 +10,8 @@ public class Card_ZiJun : GrabbableObject
     
     public int ManaCost = 0;
     float summonTimer = 2.0f;
-    public GameObject summonedUnit;
-    private Shader Mat;
+    public GameObject summonedUnit = null;
+    private Shader Mat = null;
 
     private void Awake()
     {

@@ -1812,7 +1812,6 @@ GameObject:
   - component: {fileID: 347119886}
   - component: {fileID: 347119889}
   - component: {fileID: 347119888}
-  - component: {fileID: 347119887}
   m_Layer: 0
   m_Name: ManaBar
   m_TagString: Untagged
@@ -1838,20 +1837,6 @@ RectTransform:
   m_AnchoredPosition: {x: -323.1002, y: -395}
   m_SizeDelta: {x: 164.1, y: 19.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &347119887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 347119885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e177eff443ed6c4595de89caf49f963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 347119888}
-  manaBar: {fileID: 0}
-  minions: []
 --- !u!114 &347119888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2049,7 +2034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &408039074
 Transform:
   m_ObjectHideFlags: 0
@@ -2148,7 +2133,9 @@ MonoBehaviour:
   possesTime: 8
   possesionProgress: 0
   possesionProgressCap: 10
+  ShaderInstance: {fileID: 0}
   textprefab: {fileID: 1418327499060494, guid: 03d2e8329ca9018418a439e05e6fe24e, type: 2}
+  targetIndex: 0
 --- !u!54 &408039080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2663,6 +2650,7 @@ GameObject:
   - component: {fileID: 564951973}
   - component: {fileID: 564951975}
   - component: {fileID: 564951974}
+  - component: {fileID: 564951976}
   m_Layer: 0
   m_Name: RawImage
   m_TagString: Untagged
@@ -2722,6 +2710,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 564951972}
+--- !u!114 &564951976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 564951972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e177eff443ed6c4595de89caf49f963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1002938904}
+  manaBar: {fileID: 347119888}
+  minions: []
 --- !u!1 &567136698
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,10 +2939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b16a836c5f662d4ba7cd38660b2212e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  play_minigame: 0
-  countdown_timer: 3
-  actual_play_boolean: 0
-  minigame_length: 3
+  donStart: 0
 --- !u!114 &601114402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,7 +3644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &858182275
 Transform:
   m_ObjectHideFlags: 0
@@ -3674,6 +3673,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 0
   stickID: 0
+  CurrentUnit: {fileID: 0}
+  SpiritUnit: {fileID: 0}
   PlayerControllerObject: {fileID: 408039073}
   Spirit: {fileID: 0}
   move_speed: 10
@@ -4390,7 +4391,6 @@ GameObject:
   - component: {fileID: 1002938903}
   - component: {fileID: 1002938905}
   - component: {fileID: 1002938904}
-  - component: {fileID: 1002938906}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -4449,20 +4449,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1002938902}
---- !u!114 &1002938906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1002938902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e177eff443ed6c4595de89caf49f963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 1002938904}
-  manaBar: {fileID: 0}
-  minions: []
 --- !u!1 &1014994637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,68 +4977,6 @@ Transform:
   - {fileID: 641119254}
   m_Father: {fileID: 707828652}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1087938245
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1087938248}
-  - component: {fileID: 1087938247}
-  - component: {fileID: 1087938246}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1087938246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1087938245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1087938247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1087938245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1087938248
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1087938245}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102656072
 GameObject:

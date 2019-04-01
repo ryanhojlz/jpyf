@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Ally_Auto_Spawner : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] spawningPosition;
@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
 
         //Debug.Log("Spawn_Position = " + IndexSpawnPos + " ," + "Spawn_Unit = " + IndexUnitToSpawn);
 
-        if (timer <= 0f && GameObject.FindGameObjectsWithTag("Enemy_Unit").Length < SpawnLimit)
+        if (timer <= 0f && GameObject.FindGameObjectsWithTag("Ally_Unit").Length < SpawnLimit)
         {
 //            int IndexSpawnPos = Random.Range(0, 3);
             int IndexSpawnPos = Random.Range(0, spawningPosition.Length);
@@ -106,7 +106,6 @@ public class Spawner : MonoBehaviour
 
             GameObject newObj = Instantiate(spawnMonster[IndexUnitToSpawn],hit.point, this.transform.rotation) as GameObject;
             newObj.transform.position = spawningPosition[IndexSpawnPos].transform.position;
-
 
             if (number_of_unit <= 0)
                 return;

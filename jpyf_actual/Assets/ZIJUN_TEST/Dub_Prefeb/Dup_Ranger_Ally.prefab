@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 135364589324116046}
   - component: {fileID: 114573308596099102}
   - component: {fileID: 54880040572345620}
+  - component: {fileID: 114688084376021692}
   m_Layer: 10
   m_Name: Dup_Ranger_Ally
   m_TagString: Ally_Unit
@@ -315,6 +316,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195522941118333938}
+--- !u!114 &114688084376021692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701779497117034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a04611f54444de48aa242a5e3591786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitToSpawn: {fileID: 0}
+  Unit_Type: 1
 --- !u!114 &114914007649941310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -350,6 +364,7 @@ MonoBehaviour:
   healthBar: {fileID: 114558341736027174}
   minionWithinRange: []
   TriggerRange: {fileID: 135364589324116046}
+  target: {fileID: 0}
   ParticleExplosion: {fileID: 1563345159446472, guid: cf258203f40ac5c459eba20a2760bfcc,
     type: 2}
   Enemy_Tag: 

@@ -27,6 +27,8 @@ public class CProjectile : MonoBehaviour {
     void Start ()
     {
         //off setting the projectile shoot
+        //if (!this.transform || !UnitThatShoots.transform || !this.GetComponent<SphereCollider>())
+        //    return;
         this.transform.position = new Vector3(
             this.transform.position.x + (UnitThatShoots.transform.forward.x * (UnitThatShoots.transform.localScale.x + this.transform.localScale.x)) * (this.GetComponent<SphereCollider>().radius),
             this.transform.position.y + (UnitThatShoots.transform.forward.y * (UnitThatShoots.transform.localScale.y + this.transform.localScale.y)) * (this.GetComponent<SphereCollider>().radius),
@@ -88,7 +90,7 @@ public class CProjectile : MonoBehaviour {
     {
         //if (this.projectile_type == PT.HEALING)
         //{
-            
+
         //    //if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
         //    //{
         //    //Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
@@ -110,6 +112,8 @@ public class CProjectile : MonoBehaviour {
         //}
         //else
         //{
+        if (!UnitThatShoots)
+            return;
             //For non ally hiting projectiles
         if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
         {

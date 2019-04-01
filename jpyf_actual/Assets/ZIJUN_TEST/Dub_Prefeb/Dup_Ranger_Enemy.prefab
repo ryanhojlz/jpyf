@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 135365959146478546}
   - component: {fileID: 114563981541708752}
   - component: {fileID: 54248682277192672}
+  - component: {fileID: 114805526979326156}
   m_Layer: 11
   m_Name: Dup_Ranger_Enemy
   m_TagString: Enemy_Unit
@@ -334,6 +335,7 @@ MonoBehaviour:
   healthBar: {fileID: 114494355900633808}
   minionWithinRange: []
   TriggerRange: {fileID: 135365959146478546}
+  target: {fileID: 0}
   ParticleExplosion: {fileID: 1563345159446472, guid: cf258203f40ac5c459eba20a2760bfcc,
     type: 2}
   Enemy_Tag: 
@@ -343,6 +345,19 @@ MonoBehaviour:
   targetableType: 000000000100000002000000
   bulletPrefab: {fileID: 1038919709963554, guid: b5ac546586259e24fb512021070e985f,
     type: 2}
+--- !u!114 &114805526979326156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873276404513188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a04611f54444de48aa242a5e3591786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitToSpawn: {fileID: 0}
+  Unit_Type: 1
 --- !u!114 &114847414948869402
 MonoBehaviour:
   m_ObjectHideFlags: 1

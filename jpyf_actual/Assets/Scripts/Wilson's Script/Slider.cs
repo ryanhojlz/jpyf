@@ -116,7 +116,7 @@ public class Slider : MonoBehaviour
         {
             SuccessImage.SetActive(true);
             timer += Time.deltaTime;
-            if (timer > 0.5f)
+            if (timer > 2f)
             {
                 Debug.Log("success enter");
                 SuccessTrue = false;
@@ -128,7 +128,7 @@ public class Slider : MonoBehaviour
         {
             FailureImage.SetActive(true);
             timer += Time.deltaTime;
-            if (timer > 0.5f)
+            if (timer > 2f)
             {
                 Debug.Log("failure enter");
                 FailureTrue = false;

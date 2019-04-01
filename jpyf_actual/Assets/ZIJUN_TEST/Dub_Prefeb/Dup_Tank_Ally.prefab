@@ -228,6 +228,7 @@ MonoBehaviour:
   healthBar: {fileID: 114613882947476800}
   minionWithinRange: []
   TriggerRange: {fileID: 135912788898439890}
+  target: {fileID: 0}
   ParticleExplosion: {fileID: 1563345159446472, guid: cf258203f40ac5c459eba20a2760bfcc,
     type: 2}
   Enemy_Tag: 
@@ -235,7 +236,8 @@ MonoBehaviour:
   isPossessed: 0
   MinionType: 0
   targetableType: 0000000001000000
-  meleeProjectile: {fileID: 0}
+  meleeProjectile: {fileID: 1038919709963554, guid: 3fa089d11b543084a8351ac6439ff87f,
+    type: 2}
   attackSound: {fileID: 0}
 --- !u!114 &114613882947476800
 MonoBehaviour:

@@ -26,9 +26,8 @@ public class CProjectile : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //off setting the projectile shoot
-        //if (!this.transform || !UnitThatShoots.transform || !this.GetComponent<SphereCollider>())
-        //    return;
+        //Debug.Log(this);
+       
         this.transform.position = new Vector3(
             this.transform.position.x + (UnitThatShoots.transform.forward.x * (UnitThatShoots.transform.localScale.x + this.transform.localScale.x)) * (this.GetComponent<SphereCollider>().radius),
             this.transform.position.y + (UnitThatShoots.transform.forward.y * (UnitThatShoots.transform.localScale.y + this.transform.localScale.y)) * (this.GetComponent<SphereCollider>().radius),

@@ -78,7 +78,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1290260293877218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.07554501, y: -4.533405, z: 8.52968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224630456012211268}
@@ -264,10 +264,11 @@ MonoBehaviour:
   rangeValue: 10
   isActive: 0
   targetList: []
-  healthBar: {fileID: 1400482511, guid: fe1fbc6941fe40e4395cc630e4cc5248, type: 2}
+  healthBar: {fileID: 114248114483950320}
   minionWithinRange: []
   TriggerRange: {fileID: 135267362798175484, guid: b5ac546586259e24fb512021070e985f,
     type: 2}
+  target: {fileID: 0}
   ParticleExplosion: {fileID: 1563345159446472, guid: cf258203f40ac5c459eba20a2760bfcc,
     type: 2}
   Enemy_Tag: 

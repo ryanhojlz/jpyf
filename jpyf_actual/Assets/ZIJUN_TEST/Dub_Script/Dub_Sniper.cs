@@ -5,6 +5,9 @@ using UnityEngine;
 public class Dub_Sniper : Attack_Unit
 {
     public GameObject bulletPrefab;
+    public GameObject laserPrefeb;
+    Dub_Lazer_Projectile laser;
+    bool isLazer;
     //public AudioSource attackSound;
 
     public override void Attack()
@@ -35,6 +38,13 @@ public class Dub_Sniper : Attack_Unit
         {
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
+
+        if (Input.GetKeyDown(KeyCode.M) || isLazer)
+        {
+            //ShootFront();
+            isLazer = true;
+            SpecialAttack();
+        }
     }
 
     public override void SpecialAttack()
@@ -52,16 +62,30 @@ public class Dub_Sniper : Attack_Unit
 
         //HYPERBEAM!!!
 
-        for (int i = 0; i < minionWithinRange.Count; i++)
+        //for (int i = 0; i < minionWithinRange.Count; i++)
+        //{
+        //    if (!minionWithinRange[i].GetComponent<Minion>())//If is not a minion type, Proceed to the next one
+        //        continue;
+        //    if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
+        //        continue;
+
+        //    minionWithinRange[i].GetComponent<BasicGameOBJ>().SetTarget(this.gameObject);//Get aggroed switching target to caster
+        //    minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);//Dealing damage
+
+        //}
+        if (!laser)
         {
-            if (!minionWithinRange[i].GetComponent<Minion>())//If is not a minion type, Proceed to the next one
-                continue;
-            if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
-                continue;
-
-            minionWithinRange[i].GetComponent<BasicGameOBJ>().SetTarget(this.gameObject);//Get aggroed switching target to caster
-            minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);//Dealing damage
-
+            
+            GameObject bulletGO = (GameObject)Instantiate(laserPrefeb) as GameObject;
+            laser = bulletGO.GetComponent<Dub_Lazer_Projectile>();
+        }
+        else
+        {
+            if (!laser.gameObject.activeSelf)
+            {
+                laser.gameObject.SetActive(true);
+            }
+            laser.SeekUser(this.transform);//Follow the user
         }
 
     }

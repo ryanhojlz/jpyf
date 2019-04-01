@@ -20,6 +20,7 @@ public class CProjectile : MonoBehaviour {
     public float AnimationSpeed;
     float speed = 0f;
     float lifeTime = 0f;
+    public bool moving = false;
 
     public GameObject prefabtext;
 
@@ -57,9 +58,9 @@ public class CProjectile : MonoBehaviour {
         //{
         //    speed = 1;// (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
         //}
-
         Vector3 dir = TargetPosition - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
+
 
         lifeTime -= Time.deltaTime;
 

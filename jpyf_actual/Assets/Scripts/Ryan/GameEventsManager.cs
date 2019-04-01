@@ -17,9 +17,7 @@ public class GameEventsManager : MonoBehaviour
     //GameObjects
     public GameObject ally_nexus = null;
     public GameObject enemy_nexus = null;
-
     public GameObject SpawnManager = null;
-
 
     // Data for main nexus tower
     int Ally_NexusHP = 100;

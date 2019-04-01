@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 public class NewPossesionScript : MonoBehaviour
@@ -28,6 +29,8 @@ public class NewPossesionScript : MonoBehaviour
 
     public int targetIndex = 0;
     public GameObject unit2Posses;
+
+    public Image UIEffect = null;
 
     // Use this for initialization
     private void Awake()
@@ -98,17 +101,27 @@ public class NewPossesionScript : MonoBehaviour
         for (int i = 0; i < objList.Count; i++)
         {
             // If null || not active remove
-            if (objList[i].activeSelf == false || objList[i] == null)
+            if (objList[i].activeSelf == false)
             {
                 objList.Remove(objList[i]);
+            }
+            if (objList[i] == null)
+            {
+                continue;
+            }
+            if (objList[i] != player.GetComponent<ControllerPlayer>().CurrentUnit)
+            {
+                ChangeShader(objList[i], 0.08f, new Vector4(0, 255, 0, 255));
             }
             if (i == targetIndex)
             {
                 unit2Posses = objList[i].gameObject;
-                //ChangeShader(unit2Posses, 0.1f, new Vector4(255, 0, 255, 0));
+                ChangeShader(unit2Posses, 0.1f, new Vector4(0, 128, 255, 255));
             }
         }
     }
+
+    
 
     // Changes the bool if can posses
     void UpdatePosses()
@@ -130,7 +143,12 @@ public class NewPossesionScript : MonoBehaviour
         //Debug.Log("Ran here2");
 
         if (canPosses)
+        {
             isPossesing = true;
+            // init text
+            //GameObject.Find("PossesUI").GetComponent<PossesionEffectScript>().SetRender(true);
+            
+        }
     }
 
     // Actual Possesion Interaction
@@ -172,6 +190,7 @@ public class NewPossesionScript : MonoBehaviour
         if (!isPossesing)
         {
             PossesUpdate();
+            GameObject.Find("PossesUI").SetActive(true);
         }
     }
 
@@ -281,15 +300,20 @@ public class NewPossesionScript : MonoBehaviour
         // If alr possesing unit
         if (nowPossesing)
         {
+            // Replaced currently possesing unit
             var existingObj = player.GetComponent<ControllerPlayer>().CurrentUnit;
+
+            // Re enable the guy to walk again
             existingObj.GetComponent<NavMeshAgent>().enabled = true;
             existingObj.GetComponent<BasicGameOBJ>().isPossessed = false;
             
+            // ZiJun State machine call
             existingObj.GetComponent<BasicGameOBJ>().SetStateMachine(
                 new AttackState(existingObj.GetComponent<Attack_Unit>(), 
                 existingObj.GetComponent<BasicGameOBJ>().minionWithinRange,
                 existingObj.GetComponent<BasicGameOBJ>().Enemy_Tag));
 
+            // Add back to existing list
             objList.Add(existingObj);
         }
 
@@ -330,7 +354,7 @@ public class NewPossesionScript : MonoBehaviour
         }
         // Update position
         this.transform.position = player.GetComponent<ControllerPlayer>().CurrentUnit.transform.position;
+        
     }
     
-
 }

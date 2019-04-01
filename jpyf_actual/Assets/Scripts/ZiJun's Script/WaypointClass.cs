@@ -9,11 +9,8 @@ public class WaypointClass : MonoBehaviour
     private Vector3 position;
     private Vector3 RayCastPosition;
 
-    void Start()
+    private void Awake()
     {
-        //AddWaypoint();
-        //Destroy(this.GetComponent<MeshFilter>());
-
         Ray CastToGround = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
         if (Physics.Raycast(CastToGround, out hit))
@@ -25,17 +22,33 @@ public class WaypointClass : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        //AddWaypoint();
+        //Destroy(this.GetComponent<MeshFilter>());
+
+        //Ray CastToGround = new Ray(transform.position, Vector3.down);
+        //RaycastHit hit;
+        //if (Physics.Raycast(CastToGround, out hit))
+        //{
+        //    this.position = transform.position;
+        //    this.RayCastPosition = hit.point;
+
+        //    //Debug.Log(position);
+        //}
+    }
+
     void Update()
     {
-        Ray CastToGround = new Ray(transform.position, Vector3.down);
-        RaycastHit hit;
-        if (Physics.Raycast(CastToGround, out hit))
-        {
-            this.position = transform.position;
-            this.RayCastPosition = hit.point;
+        //Ray CastToGround = new Ray(transform.position, Vector3.down);
+        //RaycastHit hit;
+        //if (Physics.Raycast(CastToGround, out hit))
+        //{
+        //    this.position = transform.position;
+        //    this.RayCastPosition = hit.point;
 
-            //Debug.Log(position);
-        }
+        //    //Debug.Log(position);
+        //}
     }
 
     public Vector3 GetPos()

@@ -32,7 +32,7 @@ public class BasicGameOBJ : MonoBehaviour
 
     protected float CountDownTimer;
     protected float OriginalTimer;
-    protected GameObject target;
+    public GameObject target;
 
     protected StateMachine stateMachine = new StateMachine();
     //public StateMachine stateMachine = new StateMachine();

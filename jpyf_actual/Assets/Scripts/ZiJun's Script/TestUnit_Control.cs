@@ -33,7 +33,7 @@ public class TestUnit_Control : MonoBehaviour
         agent.enabled = true;
         this.GetComponent<Rigidbody>().freezeRotation = true;
         this.GetComponent<Rigidbody>().isKinematic = false;
-        
+        pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
     }
 
     public int GetpathIndex()

@@ -284,6 +284,7 @@ public class NewPossesionScript : MonoBehaviour
             var existingObj = player.GetComponent<ControllerPlayer>().CurrentUnit;
             existingObj.GetComponent<NavMeshAgent>().enabled = true;
             existingObj.GetComponent<BasicGameOBJ>().isPossessed = false;
+            
             existingObj.GetComponent<BasicGameOBJ>().SetStateMachine(
                 new AttackState(existingObj.GetComponent<Attack_Unit>(), 
                 existingObj.GetComponent<BasicGameOBJ>().minionWithinRange,

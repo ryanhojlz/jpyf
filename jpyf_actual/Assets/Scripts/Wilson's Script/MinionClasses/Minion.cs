@@ -22,6 +22,8 @@ public class Minion : BasicGameOBJ
     {
         OBJ_TYPE = OBJType.MINION;
         ChangeToMoveState();
+
+        
     }
 
     protected void ChangeToMoveState()

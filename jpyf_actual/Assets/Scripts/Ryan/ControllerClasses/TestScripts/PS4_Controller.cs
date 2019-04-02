@@ -27,7 +27,7 @@ public class PS4_Controller : MonoBehaviour
     private bool buttonbuffer_x = false;
     private bool buttonbuffer_square = false;
 
-    public bool freecam = false;
+    public bool freecam = true;
     // Use this for initialization
     void Start ()
     {

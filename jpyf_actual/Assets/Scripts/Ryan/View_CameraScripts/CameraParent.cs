@@ -5,18 +5,18 @@ using UnityEngine;
 public class CameraParent : MonoBehaviour
 {
     public GameObject playerRef = null;
-    public GameObject camera = null;
+    public GameObject _camera = null;
 
     public Vector3 rotation;
 	// Use this for initialization
 	void Start ()
     {
-        camera = transform.GetChild(0).gameObject;
+        _camera = transform.GetChild(0).gameObject;
         playerRef = GameObject.Find("Player_object");
 
-        var pos = camera.transform.localPosition;
+        var pos = _camera.transform.localPosition;
         pos.z -= 3.0f;
-        camera.transform.localPosition = pos;
+        _camera.transform.localPosition = pos;
 
         rotation = new Vector3(0, 0, 0);
         rotation.x += 35;

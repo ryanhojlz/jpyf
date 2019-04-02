@@ -92,33 +92,34 @@ public class NewPossesionScript : MonoBehaviour
     void UpdateListObj()
     {
         // Return if there is nothing in the list
-        if (objList.Count <= 0)
+        if (objList.Count < 1)
         {
             // No unit to posses
             unit2Posses = null;
             return;
         }
-        for (int i = 0; i < objList.Count; i++)
+        else
         {
-            // If null || not active remove
-            if (objList[i].activeSelf == false)
+            for (int i = 0; i < objList.Count; i++)
             {
-                objList.Remove(objList[i]);
-            }
-            if (objList[i] == null)
-            {
-                continue;
-            }
-            if (objList[i] != player.GetComponent<ControllerPlayer>().CurrentUnit)
-            {
-                ChangeShader(objList[i], 0.08f, new Vector4(0, 255, 0, 255));
-            }
-            if (i == targetIndex)
-            {
-                unit2Posses = objList[i].gameObject;
-                ChangeShader(unit2Posses, 0.1f, new Vector4(0, 128, 255, 255));
+                // If null || not active remove
+                if (objList[i] == null)
+                {
+                    objList.RemoveAt(i);
+                    //objList.Remove(objList[i]);
+                }
+                if (objList[i] != player.GetComponent<ControllerPlayer>().CurrentUnit)
+                {
+                    ChangeShader(objList[i], 0.08f, new Vector4(0, 255, 0, 255));
+                }
+                if (i == targetIndex)
+                {
+                    unit2Posses = objList[i].gameObject;
+                    ChangeShader(unit2Posses, 0.1f, new Vector4(0, 128, 255, 255));
+                }
             }
         }
+        
     }
 
     
@@ -224,6 +225,10 @@ public class NewPossesionScript : MonoBehaviour
         {
             // Because Array start from 0
             targetIndex = objList.Count - 1;
+        }
+        else if (objList.Count == 0)
+        {
+            targetIndex = 0;
         }
     }
 

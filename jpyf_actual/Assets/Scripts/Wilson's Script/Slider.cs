@@ -85,8 +85,6 @@ public class Slider : MonoBehaviour
         {
             Debug.Log("Success Hit");
             speedMultiplier += 0.5f;
-            //Render the texture here
-            //SuccessImage.SetActive(true);
             SuccessTrue = true;
             QTEsuccessCounter++;
             FullReset();
@@ -94,8 +92,6 @@ public class Slider : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Fail Hit");
-            //Render the texture here
-            //FailureImage.SetActive(true);
             QTEfailure();
             this.gameObject.SetActive(false);
             FailureTrue = true;
@@ -143,7 +139,7 @@ public class Slider : MonoBehaviour
 
         if (QTEsuccessCounter == 3)
         {
-            ArrowSpeed = 0;
+            //ArrowSpeed = 0;
             this.gameObject.SetActive(false);
             QTEsuccess();
         }
@@ -187,6 +183,19 @@ public class Slider : MonoBehaviour
         RandSpawnhitArea();
         ResetArrow();
         Started = false;
+    }
+
+    void ValueToReset()
+    {
+        speedMultiplier = 1f;
+        QTEsuccessCounter = 0;
+    }
+
+    public void QTEStart()
+    {
+        this.gameObject.SetActive(true);
+        FullReset();
+        ValueToReset();
     }
 
     void QTEsuccess()

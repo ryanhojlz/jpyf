@@ -291,17 +291,17 @@ public class BasicGameOBJ : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetComponent<CHyperBeam>())
-        {
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
+        //if (other.gameObject.GetComponent<CHyperBeam>())
+        //{
+        //    Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+        //}
     }
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.GetComponent<CHyperBeam>())
-        {
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
+        //if (other.gameObject.GetComponent<CHyperBeam>())
+        //{
+        //    Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+        //}
     }
     void OnTriggerExit(Collider other)
     {

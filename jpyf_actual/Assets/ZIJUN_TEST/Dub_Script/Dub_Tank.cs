@@ -7,6 +7,7 @@ public class Dub_Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
     public AudioSource attackSound;
+
     float target_distance;
     public override void Attack()
     {
@@ -31,11 +32,13 @@ public class Dub_Tank : Attack_Unit
 
     public override void Unit_Self_Update()
     {
+        //AlertImage.SetActive(false);
         if (GetComponent<BasicGameOBJ>().isPossessed)
             return;
         if (minionWithinRange.Count > 0)
         {
             //Debug.Log(this.stateMachine.ToString());
+            
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
 

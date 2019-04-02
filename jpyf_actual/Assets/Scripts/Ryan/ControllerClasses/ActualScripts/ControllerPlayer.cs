@@ -410,23 +410,19 @@ public class ControllerPlayer : MonoBehaviour
 #if UNITY_PS4
         movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
         movedir = camRef.GetComponent<Camera>().transform.TransformDirection(movedir);
-        if (movedir == Vector3.zero)
+        if (movedir != Vector3.zero)
         {
-            // Old rotation
-            prevRot = CurrentUnit.transform.rotation;
-        }
-        else
-        {
-            //// Apply new rotation
             CurrentUnit.transform.LookAt(movedir, Vector3.up);
             Quaternion rot = Quaternion.LookRotation(movedir, Vector3.up);
+            rot.x = 0;
+            rot.z = 0;
             CurrentUnit.transform.rotation = rot;
             prevRot = CurrentUnit.transform.rotation;
-
+            // Old rotation
+            //prevRot = CurrentUnit.transform.rotation;
         }
+
 #endif
-
-
         //movedir.y = -1;
         CurrentUnit.transform.position += movedir * Time.deltaTime;
         

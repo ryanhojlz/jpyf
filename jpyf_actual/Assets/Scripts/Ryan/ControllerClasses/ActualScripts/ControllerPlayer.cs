@@ -73,7 +73,7 @@ public class ControllerPlayer : MonoBehaviour
         //}
 
         Controls();
-       
+        ObjectFailSafe();
     }
 
     void Controls()
@@ -389,9 +389,9 @@ public class ControllerPlayer : MonoBehaviour
             y_input = 0;
 
         if (Input.GetKey(KeyCode.A))
-            x_input = input;
-        else if (Input.GetKey(KeyCode.D))
             x_input = -input;
+        else if (Input.GetKey(KeyCode.D))
+            x_input = input;
         else
             x_input = 0;
 
@@ -426,6 +426,21 @@ public class ControllerPlayer : MonoBehaviour
         //movedir.y = -1;
         CurrentUnit.transform.position += movedir * Time.deltaTime;
         
+    }
+
+    void ObjectFailSafe()
+    {
+        
+
+        if (CurrentUnit)
+        {
+            if (CurrentUnit.transform.position.y <= -20)
+            {
+                var pos = new Vector3(0, 10, 0);
+                CurrentUnit.transform.position = pos;
+            }
+        }
+
     }
 
 

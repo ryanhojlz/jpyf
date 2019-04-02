@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33059968810416504}
   - component: {fileID: 23353448524189302}
   - component: {fileID: 136755224645925248}
-  - component: {fileID: 114959721418440108}
   - component: {fileID: 54805590653871702}
   - component: {fileID: 114006388254550164}
   m_Layer: 11
@@ -40,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1395426934556522}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,17 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c3ecc00ced21b4ebed2e09b0eb1715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114959721418440108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1395426934556522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e9bbd0d0626724498e67a9c1a4d360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  AttackperSecond: 10
+  DamageperSecond: 0
+  LifeTime: 3
+  prefabtext: {fileID: 1306221944417296, guid: dcc5ce4d20dba9342aa387ce5b735387, type: 2}
 --- !u!136 &136755224645925248
 CapsuleCollider:
   m_ObjectHideFlags: 1

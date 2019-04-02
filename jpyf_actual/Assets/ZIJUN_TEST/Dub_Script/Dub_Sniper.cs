@@ -90,6 +90,15 @@ public class Dub_Sniper : Attack_Unit
 
     }
 
+    public void SetLaser(bool toLaser)
+    {
+        isLazer = toLaser;
+        if (laser && !isLazer)
+        {
+            Destroy(laser);
+        }
+    }
+
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);

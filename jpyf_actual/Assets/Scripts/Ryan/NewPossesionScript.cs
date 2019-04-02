@@ -281,8 +281,10 @@ public class NewPossesionScript : MonoBehaviour
             // If its the unit that player is trying to access
             if (go == unit2Posses)
             {
-                isPossesing = false;
                 ReInitPossesInteraction();
+                objList.Remove(go);
+                ChangeShader(go, 0, new Vector4(0, 0, 0, 0));
+                isPossesing = false;
             }
         }
         else
@@ -354,6 +356,11 @@ public class NewPossesionScript : MonoBehaviour
             GetComponent<BoxCollider>().enabled = true;
             player.GetComponent<ControllerPlayer>().CurrentUnit = player.GetComponent<ControllerPlayer>().SpiritUnit;
             player.GetComponent<ControllerPlayer>().SpiritUnit = null;
+
+            var offset = transform.position;
+            offset.y += 0.6f;
+            transform.position = offset;
+
 
             nowPossesing = false;
         }

@@ -256,6 +256,9 @@ public class BasicGameOBJ : MonoBehaviour
         if (!other.gameObject.GetComponent<Rigidbody>())
             return;
 
+        if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+            Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
+
         //For Making sure if the object is already added, don't add again
         for (int i = 0; i < minionWithinRange.Count; ++i)
         {
@@ -274,6 +277,9 @@ public class BasicGameOBJ : MonoBehaviour
     {
         if (!other.gameObject.GetComponent<Rigidbody>())
             return;
+
+        if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+            Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
 
         //For Making sure if the object is already added, don't add again
         for (int i = 0; i < minionWithinRange.Count; ++i)

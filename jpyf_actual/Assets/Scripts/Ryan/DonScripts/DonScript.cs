@@ -38,7 +38,8 @@ public class DonScript : MonoBehaviour
         if (other.gameObject.name == "DonStick")
         {
             //effect_counter++;
-            hitto = true;
+            //hitto = true;
+            ++GameObject.Find("DonDon").GetComponent<DonMiniGame>().don_progress;
         }
 
         /// Pushes hittable objects into the list

@@ -60,11 +60,7 @@ public class NewPossesionScript : MonoBehaviour
         // Interactions
         PossesInteraction();
         // Check if in range
-        //CheckForObjectRange();
-
-
-
-
+        CheckForObjectRange();
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //Debug.Log("Pressed");
@@ -81,15 +77,11 @@ public class NewPossesionScript : MonoBehaviour
         }
 
         // Update ObjectCount
-       // ObjectCount = objList.Count;
+        // ObjectCount = objList.Count;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // Assign to list
-    //    AssignToList(other.gameObject);
-    //}
 
+    /*
     // ryan im writing this to you
     // cause you too tired to write
     // but change this ontrigger exit
@@ -98,28 +90,44 @@ public class NewPossesionScript : MonoBehaviour
     // then distance check to decide whetehr to remove from the list
     // dank
     // meme
-    private void OnTriggerExit(Collider other)
-    {
-        // Exit to List
-        //ExitList(other.gameObject);
-        ExitList_V2(other.gameObject);
-        //Debug.Log(other.gameObject.name + " Left ");
-    }
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    // Exit to List
+    //    //ExitList(other.gameObject);
+    //    ExitList_V2(other.gameObject);
+    //    //Debug.Log(other.gameObject.name + " Left ");
+    //}
 
     //private void OnTriggerEnter(Collider other)
     //{
     //    AssignToList(other.gameObject);
+    //    if (other.tag == "Ally_Unit")
+    //    {
+    //        Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
+    //    }
     //}
+    */
 
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         AssignToList(other.gameObject);
         if (other.tag == "Ally_Unit")
         {
-            Physics.IgnoreCollision(other.GetComponent<SphereCollider>(),this.GetComponent<SphereCollider>());
+            Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
         }
-        // Debug.Log("Enter");
     }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    AssignToList(other.gameObject);
+    //    if (other.tag == "Ally_Unit")
+    //    {
+    //        Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
+    //    }
+    //    //Debug.Log("Enter");
+    //}
 
     void CheckForObjectRange()
     {
@@ -146,23 +154,29 @@ public class NewPossesionScript : MonoBehaviour
         }
     }
 
+   
+
     // List Update Function of Selected Object
     void UpdateListObj()
     {
-        Debug.Log("Target index  " + targetIndex);
+        //Debug.Log("Target index  " + targetIndex);
         // Return if there is nothing in the list
         if (objList.Count < 1)
         {
             // No unit to posses
             unit2Posses = null;
             targetIndex = 0;
+            objList.Clear();
             return;
         }
         else
         {
             for (int i = 0; i < objList.Count; ++i)
             {
-                
+                if (objList[i] == null)
+                {
+                    continue;
+                }
                 if (objList[i] != player.GetComponent<ControllerPlayer>().CurrentUnit)
                 {
                     ChangeShader(objList[i], 0.08f, new Vector4(0, 255, 0, 255));
@@ -170,13 +184,13 @@ public class NewPossesionScript : MonoBehaviour
                 if (i == targetIndex)
                 {
                     unit2Posses = objList[i].gameObject;
-                    ChangeShader(unit2Posses, 0.1f, new Vector4(0, 128, 255, 255));
+                    ChangeShader(objList[targetIndex], 0.1f, new Vector4(0, 128, 255, 255));
                 }
                 // If null || not active remove
                 if (objList[i] == null)
                 {
-                    //objList.RemoveAt(i);
-                    objList.Remove(objList[i]);
+                    objList.RemoveAt(i);
+                    //objList.Remove(objList[i]);
                 }
             }
         }
@@ -187,27 +201,51 @@ public class NewPossesionScript : MonoBehaviour
     // Changes the bool if can posses
     void UpdatePosses()
     {
+        //if (objList.Count <= 0)
+        //    return;
+        //if (objList[targetIndex])
+        //    canPosses = true;
+        //else if (!objList[targetIndex])
+        //    canPosses = false;
+
         if (objList.Count <= 0)
-            return;
-        if (unit2Posses)
-            canPosses = true;
-        else if (!unit2Posses)
+        {
             canPosses = false;
+            ReInitPossesInteraction();
+        }
+        else
+        {
+            canPosses = true;
+
+        }
     }
 
     // Actual Possesion Interaction
     void PossesInteraction()
     {
-        if (unit2Posses == null)
+        // If object == null isposseing = false
+        if (objList.Count <= 0)
+        {
+            canPosses = false;
+            isPossesing = false;
+            ReInitPossesInteraction();
+            return;
+        }
+
+        if (objList[targetIndex] == null)
         {
             ReInitPossesInteraction();
+            objList.Remove(objList[targetIndex]);
             isPossesing = false;
             return;
         }
         if (isPossesing)
-        {
+        {            
             timeToPosses -= 1 * Time.deltaTime;
             possesProgression -= 1 * Time.deltaTime;
+
+            
+
             if (possesProgression >= possesProgressionCap)
             {
                 // Update unit
@@ -237,17 +275,10 @@ public class NewPossesionScript : MonoBehaviour
     // Interaction to start possesion
     public void PossesUpdate()
     {
-        //// Can only run when not possesing 
-        //if (isPossesing)
-        //    return;
-        //Debug.Log("Ran here2");
-
         if (canPosses)
         {
             isPossesing = true;
-            // init text
-            //GameObject.Find("PossesUI").GetComponent<PossesionEffectScript>().SetRender(true);
-            ChangeShader(unit2Posses, 0.1f, new Vector4(255, 255, 0, 255));
+            //ChangeShader(objList[targetIndex], 0.1f, new Vector4(255, 255, 0, 255));
         }
     }
 
@@ -274,13 +305,14 @@ public class NewPossesionScript : MonoBehaviour
         
         timeToPosses = timeToPossesReference;
         possesProgression = 2.0f;
-        //canPosses = false;
+        canPosses = false;
     }
 
     // For selecting Target
     public void ChangeTargetIndex(bool updown)
     {
-       
+        if (isPossesing)
+            return;
         // If true +1 index
         if (updown)
         {
@@ -360,10 +392,10 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {
             // If its the unit that player is trying to access
-            if (go == unit2Posses)
+            if (go == objList[targetIndex])
             {
                 ReInitPossesInteraction();
-                objList.Remove(unit2Posses);
+                objList.Remove(objList[targetIndex]);
                 unit2Posses = null;
                 ChangeShader(go, 0, new Vector4(0, 0, 0, 0));
                 isPossesing = false;
@@ -423,25 +455,38 @@ public class NewPossesionScript : MonoBehaviour
         if (go.GetComponent<Building>())
             return;
         if (objList.Count <= 0)
+        {
+            canPosses = false;
+            isPossesing = false; ;
+            ReInitPossesInteraction();
             return;
+        }
+            
         for (int obj = 0; obj < objList.Count; obj++)
         {
-            if (objList[obj] == unit2Posses)
+            if (objList[obj] == objList[targetIndex])
             {
                 if (isPossesing)
                 {
-                    isPossesing = false;
                     ReInitPossesInteraction();
+                    canPosses = false;
+                    isPossesing = false;
                 }
                 ChangeShader(objList[obj], 0, new Vector4(0, 0, 0, 0));
                 objList.Remove(objList[obj]);
             }
-            else if (objList[obj] != unit2Posses)
+            else if (objList[obj] != objList[targetIndex])
             {
                 ChangeShader(objList[obj], 0, new Vector4(0, 0, 0, 0));
                 objList.Remove(objList[obj]);
             }
         }
+        //if (objList.Count <= 0)
+        //{
+        //    canPosses = false;
+        //    isPossesing = false; ;
+        //    ReInitPossesInteraction();
+        //}
     }
     
     // Succes Possesion
@@ -466,16 +511,17 @@ public class NewPossesionScript : MonoBehaviour
             // Add back to existing list
             objList.Add(existingObj);
         }
+        GetComponent<Rigidbody>().isKinematic = true;
 
         // Change Unit
-        player.GetComponent<ControllerPlayer>().CurrentUnit = unit2Posses;
+        player.GetComponent<ControllerPlayer>().CurrentUnit = objList[targetIndex];
         // Hide this Object
         GetComponent<MeshRenderer>().enabled = false;
         nowPossesing = true;
         // Send to another state
-        unit2Posses.GetComponent<NavMeshAgent>().enabled = false;
-        unit2Posses.GetComponent<BasicGameOBJ>().isPossessed = true;
-        unit2Posses.GetComponent<BasicGameOBJ>().SetStateMachine(new PossessState());
+        objList[targetIndex].GetComponent<NavMeshAgent>().enabled = false;
+        objList[targetIndex].GetComponent<BasicGameOBJ>().isPossessed = true;
+        objList[targetIndex].GetComponent<BasicGameOBJ>().SetStateMachine(new PossessState());
 
         
         
@@ -483,7 +529,9 @@ public class NewPossesionScript : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         player.GetComponent<ControllerPlayer>().SpiritUnit = this.gameObject;
         // Remove object from list
-        objList.Remove(unit2Posses);
+        objList.Remove(objList[targetIndex]);
+        //
+        targetIndex = 0;
         // Change so current unit is red
         ChangeShader(player.GetComponent<ControllerPlayer>().CurrentUnit, 0.35f, new Vector4(255, 0, 0, 255));
     }
@@ -497,12 +545,14 @@ public class NewPossesionScript : MonoBehaviour
         {
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<BoxCollider>().enabled = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+
             player.GetComponent<ControllerPlayer>().CurrentUnit = player.GetComponent<ControllerPlayer>().SpiritUnit;
             player.GetComponent<ControllerPlayer>().SpiritUnit = null;
 
-            var offset = transform.position;
-            offset.y += 0.6f;
-            transform.position = offset;
+            //var offset = transform.position;
+            //offset.y += 0.6f;
+            //transform.position = offset;
 
 
             nowPossesing = false;

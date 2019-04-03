@@ -178,6 +178,7 @@ MonoBehaviour:
   healthBar: {fileID: 114270328734656028}
   minionWithinRange: []
   TriggerRange: {fileID: 135464828058183152}
+  target: {fileID: 0}
   ParticleExplosion: {fileID: 1563345159446472, guid: cf258203f40ac5c459eba20a2760bfcc,
     type: 2}
   Enemy_Tag: 
@@ -309,11 +310,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 100
-  m_StoppingDistance: 5
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

@@ -7,12 +7,14 @@ public class PlayerScript : MonoBehaviour
 {
     public int Mana = 0;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         GameObject.Find("DebugMana").GetComponent<Text>().text = "Mana cost " + Mana;
 	}
 }

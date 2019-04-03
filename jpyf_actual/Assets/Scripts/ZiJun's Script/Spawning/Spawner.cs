@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
 
         //Debug.Log("Spawn_Position = " + IndexSpawnPos + " ," + "Spawn_Unit = " + IndexUnitToSpawn);
 
-        if (timer <= 0f && GameObject.FindGameObjectsWithTag("Enemy_Unit").Length < SpawnLimit)
+        if (timer <= 0f && GameObject.FindGameObjectsWithTag("Enemy_Unit").Length <= SpawnLimit)
         {
 //            int IndexSpawnPos = Random.Range(0, 3);
             int IndexSpawnPos = Random.Range(0, spawningPosition.Length);

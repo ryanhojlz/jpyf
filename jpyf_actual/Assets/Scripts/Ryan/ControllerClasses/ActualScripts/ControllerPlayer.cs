@@ -126,10 +126,15 @@ public class ControllerPlayer : MonoBehaviour
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")) && !buffer_o)
         {
             // Special Attack
-            if (Spirit)
+            //if (Spirit)
+            //{
+            //    Debug.Log("attacked");
+            //    PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
+            //}
+
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
             {
-                Debug.Log("attacked");
-                PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
+                CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
             }
             buffer_o = true;
         }
@@ -165,6 +170,13 @@ public class ControllerPlayer : MonoBehaviour
             //    PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
             //    PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
             //}
+
+            // If unit is a actual minion
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                // Minion attack // Basic
+                CurrentUnit.GetComponent<Attack_Unit>().PlayerAutoAttack();
+            }
             buffer_triangle = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")) && buffer_triangle)
@@ -178,16 +190,15 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_R1)
         {
-            Debug.Log("press right");
-
-            //if (Spirit)
-            //{
-            //    Spirit.GetComponent<Possesor>().UpDownIndex(true);
-            //}
-            //else
-            //{
-            //    PlayerControllerObject.GetComponent<Possesor>().UpDownIndex(true);
-            //}
+            //Debug.Log("press right");
+            if (SpiritUnit)
+            {
+                SpiritUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(true);
+            }
+            else
+            {
+                CurrentUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(true);
+            }
 
             //Spirit.GetComponent<Possesor>().UpDownIndex(true);
             buffer_R1 = true;
@@ -200,16 +211,15 @@ public class ControllerPlayer : MonoBehaviour
 
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_L1)
         {
-            Debug.Log("press left");
-
-            //if (Spirit)
-            //{
-            //    Spirit.GetComponent<Possesor>().UpDownIndex(false);
-            //}
-            //else
-            //{
-            //    PlayerControllerObject.GetComponent<Possesor>().UpDownIndex(false);
-            //}
+            //Debug.Log("press left");
+            if (SpiritUnit)
+            {
+                SpiritUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(false);
+            }
+            else
+            {
+                CurrentUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(false);
+            }
 
             //Spirit.GetComponent<Possesor>().UpDownIndex(false);
             buffer_L1 = true;

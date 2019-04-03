@@ -103,7 +103,7 @@ public class NewPossesionScript : MonoBehaviour
         // Exit to List
         //ExitList(other.gameObject);
         ExitList_V2(other.gameObject);
-        Debug.Log(other.gameObject.name + " Left ");
+        //Debug.Log(other.gameObject.name + " Left ");
     }
 
     //private void OnTriggerEnter(Collider other)

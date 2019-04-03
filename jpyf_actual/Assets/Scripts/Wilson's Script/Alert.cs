@@ -5,7 +5,7 @@ using UnityEngine;
 public class Alert : MonoBehaviour
 {
     public GameObject TargetObject;//The object that is using this prompt
-    public float despawnTimer;
+    public float despawnTimer = 4;
     float timer;
 
     private void Start()
@@ -25,7 +25,15 @@ public class Alert : MonoBehaviour
 
     private void Update()
     {
-        this.gameObject.transform.position = TargetObject.gameObject.transform.position  + TargetObject.gameObject.transform.up * (this.gameObject.transform.localScale.y + TargetObject.gameObject.transform.localScale.y);
+        if (TargetObject)
+        {
+            this.gameObject.transform.position = TargetObject.gameObject.transform.position + TargetObject.gameObject.transform.up * (this.gameObject.transform.localScale.y + TargetObject.gameObject.transform.localScale.y);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         timer -= Time.deltaTime;
         if (timer < 0)
         {

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DonMiniGame : MonoBehaviour
 {
@@ -11,15 +13,19 @@ public class DonMiniGame : MonoBehaviour
     public GameObject vr_player = null;
     public GameObject ps4_player = null;
     public GameObject ps4_Unit = null;
+    public GameObject donUI = null;
 
     // Time for interaction
     public float time2don = 0;
-    public float time2donCap = 3;
+    public float time2donCap = 8;
 
 
     // Interaction meter / interactions
     public float don_progress = 0;
-    public float don_progresscap = 20;
+    public float don_progresscap = 30;
+
+    // Don UI graphics
+    public GameObject controller_ui;
 
     private void Awake()
     {
@@ -33,7 +39,9 @@ public class DonMiniGame : MonoBehaviour
         ps4_player = GameObject.Find("Player_object");
         ps4_Unit = ps4_player.GetComponent<ControllerPlayer>().CurrentUnit;
         time2don = time2donCap;
-	}
+        donUI = transform.Find("DonUI").gameObject;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -47,13 +55,10 @@ public class DonMiniGame : MonoBehaviour
     public void SetMiniGame(bool boolean)
     {
         donStart = boolean;
+        // Render the objects 
+        SetChildRender(donStart);
     }
 
-    // Update player spirit
-    void UpdatePlayerSpirit()
-    {
-        
-    }
 
 
     // Set mini game via playr reference
@@ -66,8 +71,7 @@ public class DonMiniGame : MonoBehaviour
         }
         else if (!ps4_Unit.GetComponent<NewPossesionScript>().isPossesing)
         {
-            if (donStart)
-                SetMiniGame(false);
+            SetMiniGame(false);
         }
     }
 
@@ -76,12 +80,15 @@ public class DonMiniGame : MonoBehaviour
         // If interaction start
         if (donStart)
         {
+            // Condition to win
             InteractionSuccess();
+            // Condition to lose
             InteractionToFail();
         }
-        SetChildRender(donStart);
 
-       
+        // Update don ui
+        UpdateDonUI();
+        
             
     }
 
@@ -121,9 +128,27 @@ public class DonMiniGame : MonoBehaviour
 
     void SetChildRender(bool render)
     {
+        // If render false
+        if (render == false)
+        {
+            if (transform.Find("DonHandle").transform.gameObject.activeSelf == true)
+            {
+                transform.Find("DonHandle").GetComponent<DonHandle>().ResetPos();
+                transform.Find("DonHandle_1").GetComponent<DonHandle>().ResetPos();
+                donUI.GetComponent<Image>().fillAmount = 0;
+            }
+
+        }
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(render);
         }
     }
+
+    void UpdateDonUI()
+    {
+        donUI.GetComponent<Image>().fillAmount = 1 * (don_progress / don_progresscap);
+    }
+
+    
 }

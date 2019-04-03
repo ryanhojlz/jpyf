@@ -45,7 +45,7 @@ public class PS4_Controller : MonoBehaviour
             if (!hasSetupGamepad)
                 ToggleGamePad(true);
             //Debug.Log("\n I am running \n");
-            Thumbsticks();
+            //Thumbsticks();
             InputButtons();
             //DPadButtons();
             TriggerShoulderButtons();
@@ -235,14 +235,14 @@ public class PS4_Controller : MonoBehaviour
         //    _Player.transform.position = _pos;
         //}
 
-        if (Input.GetAxis("joystick" + stickID + "_left_trigger") != 0)
-        {
-            GameObject.Find("ViewManager").GetComponent<ViewScript>().SetDeviceView(true);
-        }
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4", true)))
-        {
-            GameObject.Find("ViewManager").GetComponent<ViewScript>().SetDeviceView(false);
-        }
+        //if (Input.GetAxis("joystick" + stickID + "_left_trigger") != 0)
+        //{
+        //    GameObject.Find("ViewManager").GetComponent<ViewScript>().SetDeviceView(true);
+        //}
+        //if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4", true)))
+        //{
+        //    GameObject.Find("ViewManager").GetComponent<ViewScript>().SetDeviceView(false);
+        //}
     }
 
 }

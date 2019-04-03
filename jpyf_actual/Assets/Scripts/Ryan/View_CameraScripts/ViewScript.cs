@@ -24,7 +24,7 @@ public class ViewScript : MonoBehaviour
             //UnityEngine.PS4.RenderSettings.
             //UnityEngine.XR.XRSettings.enabled = false;
 
-            spectator_cam = GameObject.Find("spec_cam").GetComponent<Camera>();
+            spectator_cam = GameObject.Find("_FollowCam").GetComponent<Camera>();
             player_cam = GameObject.Find("Camera_player").GetComponent<Camera>();
             //UnityEngine.XR.XRSettings.eyeTextureResolutionScale = 1.1f;
 

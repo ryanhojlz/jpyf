@@ -32,9 +32,11 @@ public class NewPossesionScript : MonoBehaviour
 
     public Image UIEffect = null;
 
+
     // Use this for initialization
     private void Awake()
     {
+   
         player = GameObject.Find("Player_object");
         timeToPosses = timeToPossesReference;
     }
@@ -216,7 +218,6 @@ public class NewPossesionScript : MonoBehaviour
         else
         {
             canPosses = true;
-
         }
     }
 
@@ -243,8 +244,6 @@ public class NewPossesionScript : MonoBehaviour
         {            
             timeToPosses -= 1 * Time.deltaTime;
             possesProgression -= 1 * Time.deltaTime;
-
-            
 
             if (possesProgression >= possesProgressionCap)
             {
@@ -290,7 +289,7 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {
             //Debug.Log("Ran here");
-            possesProgression += 2;
+            possesProgression += 0.2f;
         }
         if (!isPossesing)
         {

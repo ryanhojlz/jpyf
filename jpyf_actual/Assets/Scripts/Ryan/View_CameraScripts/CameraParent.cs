@@ -15,9 +15,9 @@ public class CameraParent : MonoBehaviour
         playerRef = GameObject.Find("Player_object");
 
         var pos = _camera.transform.localPosition;
-        pos.x += 0.8f;
-        pos.y -= 0.4f;
-        pos.z -= 2.0f;
+        pos.x += 0.75f;
+        pos.y += 0.8f;
+        pos.z -= 1.8f;
 
         _camera.transform.localPosition = pos;
 

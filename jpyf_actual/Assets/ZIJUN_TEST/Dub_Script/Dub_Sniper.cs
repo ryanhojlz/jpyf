@@ -23,6 +23,7 @@ public class Dub_Sniper : Attack_Unit
         {
            
             CountDownTimer = OriginalTimer;
+            if(!isLazer)
             Shoot();
             //target.GetComponent<Minion>().TakeDamage(attackValue);
         }
@@ -76,8 +77,14 @@ public class Dub_Sniper : Attack_Unit
         if (!laser)
         {
             
-            GameObject bulletGO = (GameObject)Instantiate(laserPrefeb) as GameObject;
+            GameObject bulletGO = (GameObject)Instantiate(laserPrefeb, transform.position + (transform.forward * ((laserPrefeb.transform.localScale.z * 0.5f) + (transform.localScale.z * 0.5f))), laserPrefeb.transform.rotation) as GameObject;
             laser = bulletGO.GetComponent<Dub_Lazer_Projectile>();
+
+            if (!laser.gameObject.activeSelf)
+            {
+                laser.gameObject.SetActive(true);
+            }
+            laser.SeekUser(this.transform);//Follow the user
         }
         else
         {

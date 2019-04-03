@@ -92,8 +92,12 @@ public class AttackState : IState
         }
 
         unit.gameObject.transform.LookAt(unit.GetTarget().transform.position);
-
+        
         NavMeshAgent agent = unit.gameObject.GetComponent<NavMeshAgent>();
+
+        //var q = Quaternion.LookRotation((unit.GetTarget().transform.position) - unit.transform.position);
+        //unit.transform.rotation = Quaternion.RotateTowards(unit.transform.rotation, q, agent.angularSpeed * Time.deltaTime);
+
 
         if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {

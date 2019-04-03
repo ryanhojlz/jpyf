@@ -41,6 +41,15 @@ public class TestUnit_Control : MonoBehaviour
         return pathIndex;
     }
 
+    private void Update()
+    {
+        if (agent.velocity != Vector3.zero)
+        {
+            var q = Quaternion.LookRotation((agent.velocity.normalized + this.transform.position) - transform.position);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, agent.angularSpeed * Time.deltaTime);
+        }
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {

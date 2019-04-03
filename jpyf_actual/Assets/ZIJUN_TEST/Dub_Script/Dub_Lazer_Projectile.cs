@@ -168,7 +168,7 @@ public class Dub_Lazer_Projectile : MonoBehaviour {
 
         //}
 
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
 
         if (other.gameObject.GetComponent<BasicGameOBJ>())
         {

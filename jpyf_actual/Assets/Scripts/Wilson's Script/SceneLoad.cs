@@ -12,8 +12,13 @@ public class SceneLoad : MonoBehaviour
     [SerializeField]
     private int scene;
     [SerializeField]
-    private Text loadingText;
-    //public GameObject loadImage;
+    //private Text loadingText;
+    public Image loadImage;
+
+    private void Start()
+    {
+        loadImage.enabled = false;
+    }
 
     // Updates once per frame
     void Update()
@@ -25,9 +30,8 @@ public class SceneLoad : MonoBehaviour
             loadScene = true;
 
             // ...change the instruction text to read "Loading..."
-            loadingText.text = "Loading...";
-            //loadImage = gameObject.GetComponent<GameObject>();
-            //loadImage.SetActive(true);
+            //loadingText.text = "Loading...";
+            loadImage.enabled = true;
             // ...and start a coroutine that will load the desired scene.
             StartCoroutine(LoadNewScene());
         }
@@ -36,7 +40,8 @@ public class SceneLoad : MonoBehaviour
         if (loadScene == true)
         {
             // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
-            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+            //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+            loadImage.color = new Color(loadImage.color.r, loadImage.color.g, loadImage.color.b, Mathf.PingPong(Time.time, 1));
         }
     }
 

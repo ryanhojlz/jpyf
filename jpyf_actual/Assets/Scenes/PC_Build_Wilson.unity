@@ -561,7 +561,7 @@ RectTransform:
   - {fileID: 721843970}
   - {fileID: 1848857787}
   m_Father: {fileID: 1740053529}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2879,7 +2879,7 @@ RectTransform:
   - {fileID: 1002938903}
   - {fileID: 347119886}
   m_Father: {fileID: 1740053529}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3148,6 +3148,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   donStart: 0
+  vr_player: {fileID: 0}
+  ps4_player: {fileID: 0}
+  ps4_Unit: {fileID: 0}
+  time2don: 0
+  time2donCap: 3
+  don_progress: 0
+  don_progresscap: 20
 --- !u!114 &601114402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3889,6 +3896,12 @@ MonoBehaviour:
   x_input: 0
   y_input: 0
   direction: {x: 0, y: 0, z: 0}
+  camRef: {fileID: 0}
+  camPivot: {fileID: 0}
+  x_inputR: 0
+  y_inputR: 0
+  camRot: {x: 0, y: 0, z: 0}
+  prevRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &860242660
 GameObject:
   m_ObjectHideFlags: 0
@@ -4297,7 +4310,7 @@ RectTransform:
   - {fileID: 1851439300}
   - {fileID: 290427293}
   m_Father: {fileID: 1740053529}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5443,7 +5456,7 @@ RectTransform:
   m_Children:
   - {fileID: 794164604}
   m_Father: {fileID: 1740053529}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5919,7 +5932,7 @@ RectTransform:
   m_LocalScale: {x: 2.6939855, y: 2.6939836, z: 2.6939836}
   m_Children: []
   m_Father: {fileID: 1740053529}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6549,6 +6562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: 3
   loadingText: {fileID: 1287467570}
+  loadImage: {fileID: 1756592550}
 --- !u!4 &1491672108
 Transform:
   m_ObjectHideFlags: 0
@@ -12071,6 +12085,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1756592551}
   - {fileID: 1287467572}
   - {fileID: 564951973}
   - {fileID: 90016041}
@@ -12141,6 +12156,74 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1756592550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1756592551}
+  - component: {fileID: 1756592553}
+  - component: {fileID: 1756592552}
+  m_Layer: 0
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1756592551
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1756592550}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 12.135894}
+  m_LocalScale: {x: 0.23633678, y: 0.23633678, z: 0.23633678}
+  m_Children: []
+  m_Father: {fileID: 1740053529}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3.2136, y: -0.00071502}
+  m_SizeDelta: {x: 3412.2, y: 1905}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1756592552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1756592550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: df83a95d8eb00464680f3905563ab689, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1756592553
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1756592550}
 --- !u!1 &1761727760
 GameObject:
   m_ObjectHideFlags: 0
@@ -13872,7 +13955,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2057409713}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 3
+  simulationSpeed: 1
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -14428,7 +14511,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -14635,7 +14718,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 1000
       minScalar: 10
       maxCurve:
         serializedVersion: 2

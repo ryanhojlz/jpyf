@@ -14,4 +14,9 @@ public class Healer_Unit : Minion
     {
 
     }
+
+    public virtual void SpecialHealing()
+    {
+
+    }
 }

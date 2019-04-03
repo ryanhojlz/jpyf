@@ -15,6 +15,10 @@ public class MainMenuButton : MonoBehaviour
 
     public GameObject highlighted;
 
+    GameObject titleScreen;
+
+    bool TitlescreenDisplay = true;
+
     int indexX = 0;
     int indexY = 0;
 
@@ -26,6 +30,7 @@ public class MainMenuButton : MonoBehaviour
         buttons[0, 1] = x0y1;
         buttons[1, 0] = x1y0;
         buttons[1, 1] = x1y1;
+        titleScreen = GameObject.Find("Titlescreen");
     }
 
     // Update is called once per frame
@@ -52,11 +57,20 @@ public class MainMenuButton : MonoBehaviour
             MoveRight();
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            EnterSelected();
+            titleScreen.SetActive(false);
+            TitlescreenDisplay = false;
+        }
+        if (TitlescreenDisplay == false)
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                EnterSelected();
+            }
         }
 
+        Debug.Log(TitlescreenDisplay);
     }
 
     void MoveUp()

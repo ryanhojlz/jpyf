@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Dub_Scientist : Healer_Unit
 {
     public GameObject rangeProjectile;
+    float immunityTimer = 30f;
 
     public override void Healing()
     {
@@ -32,8 +33,12 @@ public class Dub_Scientist : Healer_Unit
             this.stateMachine.ChangeState(new HealState(this, minionWithinRange, Ally_Tag));
         }
 
-
        GetComponent<NavMeshAgent>().baseOffset = 5;
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            SpecialHealing();
+        }
     }
 
     void Shoot()
@@ -46,5 +51,38 @@ public class Dub_Scientist : Healer_Unit
             bullet.Seek(target.transform);
             bullet.SetBase(this);
         }
+    }
+
+    void SpecialShoot()
+    {
+        GameObject bulletGO = (GameObject)Instantiate(rangeProjectile, this.transform.position, this.transform.rotation);
+        FullHealProjectile bullet = bulletGO.GetComponent<FullHealProjectile>();
+
+        if (bullet != null)
+        {
+            bullet.Seek(target.transform);
+            bullet.SetBase(this);
+        }
+    }
+
+    public override void SpecialHealing()
+    {
+        //Heal the selected target to full health and let the full health persists for 30 seconds
+        if (CountDownTimer <= 0)
+        {
+            CountDownTimer = OriginalTimer;
+            SpecialShoot();
+        }
+        else
+        {
+            CountDownTimer -= Time.deltaTime;
+        }
+
+        if(healthValue == startHealthvalue)
+        {
+            immunityTimer -= Time.deltaTime;
+
+        }
+
     }
 }

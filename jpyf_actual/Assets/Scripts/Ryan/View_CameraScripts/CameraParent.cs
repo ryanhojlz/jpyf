@@ -6,7 +6,7 @@ public class CameraParent : MonoBehaviour
 {
     public GameObject playerRef = null;
     public GameObject _camera = null;
-
+    public GameObject _unit2Follow = null;
     public Vector3 rotation;
 	// Use this for initialization
 	void Start ()
@@ -15,12 +15,17 @@ public class CameraParent : MonoBehaviour
         playerRef = GameObject.Find("Player_object");
 
         var pos = _camera.transform.localPosition;
-        pos.z -= 3.0f;
+        pos.x += 0.8f;
+        pos.y -= 0.4f;
+        pos.z -= 2.0f;
+
         _camera.transform.localPosition = pos;
 
         rotation = new Vector3(0, 0, 0);
-        rotation.x += 35;
+        rotation.x += 5;
         transform.eulerAngles = rotation;
+
+       // _camera.transform.localEulerAngles = new Vector3(0, -10, 0);
     }
 
     // Update is called once per frame
@@ -32,7 +37,12 @@ public class CameraParent : MonoBehaviour
 
     void UpdateObjects()
     {
-        transform.position = playerRef.GetComponent<ControllerPlayer>().CurrentUnit.transform.position;
+        _unit2Follow = playerRef.GetComponent<ControllerPlayer>().CurrentUnit;
+        if (!_unit2Follow)
+            _unit2Follow = playerRef.GetComponent<ControllerPlayer>().SpiritUnit;
+        var pos_offset = _unit2Follow.transform.position;
+        //pos_offset.x += 2;
+        this.transform.position = pos_offset;
     }
 
     void UpdateCamera()

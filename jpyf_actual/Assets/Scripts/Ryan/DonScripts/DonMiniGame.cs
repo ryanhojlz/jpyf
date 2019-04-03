@@ -79,6 +79,10 @@ public class DonMiniGame : MonoBehaviour
             InteractionSuccess();
             InteractionToFail();
         }
+        SetChildRender(donStart);
+
+       
+            
     }
 
     // Public call function to don the object
@@ -111,6 +115,15 @@ public class DonMiniGame : MonoBehaviour
             time2don = time2donCap;
             don_progress = 0;
             SetMiniGame(false);
+        }
+    }
+
+
+    void SetChildRender(bool render)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(render);
         }
     }
 }

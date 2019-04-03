@@ -78,6 +78,8 @@ public class AttackState : IState
         if (unit.GetTarget())
         {
             //unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+            GameObject thisone = GameObject.Find("AlertManager");
+            thisone.GetComponent<AlertManager>().CreateAlert(unit.gameObject);
         }
         //unit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
     }

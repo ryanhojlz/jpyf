@@ -101,8 +101,11 @@ public class AttackState : IState
 
         if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {
-            agent.isStopped = false;
-            agent.SetDestination(unit.GetTarget().gameObject.transform.position);
+            if (agent.isActiveAndEnabled)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(unit.GetTarget().gameObject.transform.position);
+            }
 
             //if (unit.tag == "Ally_Unit" && unit.GetTarget())
             //    Debug.Log(unit.tag + " : " + unit.GetTarget().name);

@@ -31,6 +31,8 @@ public class Sniper : Attack_Unit
 
     public override void Unit_Self_Update()
     {
+        if (GetComponent<BasicGameOBJ>().isPossessed)
+            return;
         if (minionWithinRange.Count > 0)
         {
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));

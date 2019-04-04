@@ -19,18 +19,31 @@ public class NewPossesionScript : MonoBehaviour
     // When actively possesing unit
     public bool nowPossesing = false;
 
+    // Possesing interaction
     public float timeToPosses = 0;
     public float timeToPossesReference = 8;
     public float possesProgression = 2;
     public float possesProgressionCap = 6;
+
+    // Object count
     public int ObjectCount;
+
+    // A shader instance requires u to drag n drop shader
     public Shader ShaderInstance = null;
+
+    // possesion effect
     public GameObject effectPossesion = null;
 
+    // Possesion Stuff
     public int targetIndex = 0;
     public GameObject unit2Posses;
 
+    // UI effect
     public Image UIEffect = null;
+
+    // Enhance effect when the vr player enhance u
+    public float EffectEnhances = 0;
+
 
 
     // Use this for initialization
@@ -53,16 +66,20 @@ public class NewPossesionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Object count is " + objList.Count);
         // Update Objects in the list
         UpdateListObj();
         // Update player possesion
         UpdatePossesion();
-        // Update Posses
+        // Update If its possible to Posses
         UpdatePosses();
         // Interactions
         PossesInteraction();
         // Check if in range
         CheckForObjectRange();
+        
+
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //Debug.Log("Pressed");
@@ -117,7 +134,14 @@ public class NewPossesionScript : MonoBehaviour
         AssignToList(other.gameObject);
         if (other.tag == "Ally_Unit")
         {
-            Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
+            if (other.GetComponent<SphereCollider>())
+                Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
+        }
+
+        if (other.name != "enivronment_test_1")
+        {
+            if (other.GetComponent<BoxCollider>())
+                Physics.IgnoreCollision(other.GetComponent<BoxCollider>(), this.GetComponent<BoxCollider>());
         }
     }
 
@@ -141,11 +165,10 @@ public class NewPossesionScript : MonoBehaviour
 
         for(int i = 0; i < objList.Count; ++i)
         {
-            // i love javascript
+            if (objList[i] == null)
+                continue;
             var currentObject = objList[i].gameObject;
-
             var distance = Vector3.Distance(currentObject.transform.position, this.transform.position);
-
             // if the distance is more than 6
             // it'll be out of range
             if (distance > 6.0f)
@@ -232,7 +255,14 @@ public class NewPossesionScript : MonoBehaviour
             ReInitPossesInteraction();
             return;
         }
-
+        if (targetIndex > objList.Count)
+        {
+            targetIndex = objList.Count - 1;
+            if (targetIndex < 0)
+            {
+                targetIndex = 0;
+            }
+        }
         if (objList[targetIndex] == null)
         {
             ReInitPossesInteraction();
@@ -289,7 +319,7 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {
             //Debug.Log("Ran here");
-            possesProgression += 0.2f;
+            possesProgression += 0.6f + EffectEnhances;
         }
         if (!isPossesing)
         {
@@ -304,6 +334,7 @@ public class NewPossesionScript : MonoBehaviour
         
         timeToPosses = timeToPossesReference;
         possesProgression = 2.0f;
+        EffectEnhances = 0;
         canPosses = false;
     }
 
@@ -354,11 +385,10 @@ public class NewPossesionScript : MonoBehaviour
     void AssignToList(GameObject go)
     {
         // Not taking in buildings and enemy units
-        if (go.GetComponent<Building>())
-            return;
         if (go.tag != "Ally_Unit")
             return;
-        
+        if (go.GetComponent<Building>())
+            return;
         // Check if its in the list alr
         foreach (GameObject _go in objList)
         {
@@ -532,7 +562,7 @@ public class NewPossesionScript : MonoBehaviour
         //
         targetIndex = 0;
         // Change so current unit is red
-        ChangeShader(player.GetComponent<ControllerPlayer>().CurrentUnit, 0.35f, new Vector4(255, 0, 0, 255));
+        ChangeShader(player.GetComponent<ControllerPlayer>().CurrentUnit, 0.15f, new Vector4(255, 0, 0, 255));
     }
 
     void UpdatePossesion()

@@ -523,8 +523,9 @@ public class MoveController : MonoBehaviour
 
         if (GetButtonDown(MoveControllerHotkeys.buttonSquare))
         {
-            GameObject.Find("DonHandle_1").gameObject.GetComponent<DonHandle>().ResetPos();
-            GameObject.Find("DonHandle").gameObject.GetComponent<DonHandle>().ResetPos();
+            
+            //GameObject.Find("DonHandle_1").gameObject.GetComponent<DonHandle>().ResetPos();
+            //GameObject.Find("DonHandle").gameObject.GetComponent<DonHandle>().ResetPos();
             
         }
 

@@ -39,7 +39,7 @@ public class Dub_Lazer_Projectile : MonoBehaviour {
         this.transform.localRotation = UnitThatShoots.localRotation;
 
         this.tag = UnitThatShoots.tag;
-        this.gameObject.layer = UnitThatShoots.gameObject.layer;
+       // this.gameObject.layer = UnitThatShoots.gameObject.layer;
     }
 	
 	// Update is called once per frame
@@ -123,8 +123,8 @@ public class Dub_Lazer_Projectile : MonoBehaviour {
         //ONCE REGISTERED ONLY THEN START DAMAGE (WRITE IN SEPERATE FUNCTION)
 
         #region Collider checks
-        //if (!other.gameObject || !UnitThatShoots.gameObject)
-        //    return;
+        if (!other.gameObject || !UnitThatShoots.gameObject)
+            return;
 
         if (UnitThatShoots.tag == other.tag)//If ally dont attack
             return;
@@ -176,7 +176,7 @@ public class Dub_Lazer_Projectile : MonoBehaviour {
             //{
            
 
-                other.gameObject.GetComponent<BasicGameOBJ>().TakeDamage(DamageperSecond);
+                other.gameObject.GetComponent<BasicGameOBJ>().TakeDamage((int)DamageperSecond * Time.deltaTime);
                 DisplayText(DamageperSecond, other.transform.position);
                 CountDownTimer = AttackInterval;
             //}

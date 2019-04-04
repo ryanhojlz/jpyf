@@ -29,17 +29,7 @@ public class MovingState : IState
         Vector3 front = new Vector3(agent.velocity.x, agent.velocity.y, agent.velocity.z);
         front.Normalize();
         front += agent.transform.position;
-
-
-
-        //new Vector3(agent.velocity.x, agent.velocity.y, agent.velocity.z) + agent.transform.position).normalized()
-        //if(!(agent.velocity.magnitude <= 0))
-        //agent.transform.LookAt(front);
-
-        //agent.gameObject.transform.Rotate(0, Mathf.Atan2(agent.velocity.x, agent.velocity.z), 0);
-
-        //agent.gameObject.transform.rotation = Quaternion.RotateTowards(agent.gameObject.transform.rotation, Quaternion.LookRotation(front), 360).y;
-    }
+ }
 
     public void Exit()
     {

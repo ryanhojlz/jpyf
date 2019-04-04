@@ -25,6 +25,7 @@ public class BasicGameOBJ : MonoBehaviour
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
 
+
     public List<GameObject> minionWithinRange;//Keep track of which unit is within range
 
     public SphereCollider TriggerRange;

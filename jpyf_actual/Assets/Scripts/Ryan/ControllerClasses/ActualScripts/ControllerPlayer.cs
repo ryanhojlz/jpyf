@@ -13,6 +13,8 @@ public class ControllerPlayer : MonoBehaviour
     public int playerId = -1;
     public int stickID;
 
+
+    // TBH i think u can use getkeydown but i had to put out something fast atm so i used the old buffers
     // ButtonBuffer
     private bool buffer_o = false;
     private bool buffer_x = false;
@@ -21,6 +23,11 @@ public class ControllerPlayer : MonoBehaviour
 
     private bool buffer_R1 = false;
     private bool buffer_L1 = false;
+
+    private bool buffer_R2 = false;
+    private bool buffer_L2 = false;
+
+    
 
     // Current
     public GameObject CurrentUnit = null;
@@ -46,6 +53,12 @@ public class ControllerPlayer : MonoBehaviour
     // prev rotation
     public Quaternion prevRot;
 
+    // Test
+    int Buttonpress;
+
+    // Bool sprinting
+    bool Sprinting = false;
+
     // Some bs    
     Vector3 lastpos;
  
@@ -53,10 +66,11 @@ public class ControllerPlayer : MonoBehaviour
     void Start()
     {
         prevRot = CurrentUnit.transform.rotation;
-      
         stickID = playerId + 1;
         camRef = GameObject.Find("_FollowCam");
         camPivot = GameObject.Find("FollowCam");
+
+        //SpiritUnit = CurrentUnit;
     }
 
     // Update is called once per frame
@@ -103,15 +117,19 @@ public class ControllerPlayer : MonoBehaviour
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")) && !buffer_x)
         {
             //IfSpirit();
-            if (CurrentUnit.GetComponent<NewPossesionScript>())
-            {
-                CurrentUnit.GetComponent<NewPossesionScript>().PossesUp();
-            }
-            else
-            {
-                SpiritUnit.GetComponent<NewPossesionScript>().PossesUp();
-            }
-            
+            //if (CurrentUnit.GetComponent<NewPossesionScript>())
+            //{
+            //    CurrentUnit.GetComponent<NewPossesionScript>().PossesUp();
+
+            //}
+            //else
+            //{
+            //    SpiritUnit.GetComponent<NewPossesionScript>().PossesUp();
+            //}
+
+            CurrentUnit.GetComponent<Rigidbody>().AddForce(Vector3.up * 200);
+
+
             buffer_x = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")) && buffer_x)
@@ -123,15 +141,18 @@ public class ControllerPlayer : MonoBehaviour
         // O Button
         //======================================================================================================
 
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
+            }
+        }
+
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")) && !buffer_o)
         {
             // Special Attack
-            //if (Spirit)
-            //{
-            //    Debug.Log("attacked");
-            //    PlayerControllerObject.GetComponent<Attack_Unit>().SpecialAttack();
-            //}
-
             if (!CurrentUnit.GetComponent<NewPossesionScript>())
             {
                 CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
@@ -148,8 +169,16 @@ public class ControllerPlayer : MonoBehaviour
         //======================================================================================================
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")) && !buffer_square)
         {
-            // Normal Attack
-            
+            // Posses
+            if (CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                CurrentUnit.GetComponent<NewPossesionScript>().PossesUp();
+
+            }
+            else
+            {
+                SpiritUnit.GetComponent<NewPossesionScript>().PossesUp();
+            }
             buffer_square = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")) && buffer_square)
@@ -163,14 +192,6 @@ public class ControllerPlayer : MonoBehaviour
         //======================================================================================================
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")) && !buffer_triangle)
         {
-
-            //if (Spirit)
-            //{
-            //    Debug.Log("attacked");
-            //    PlayerControllerObject.GetComponent<BasicGameOBJ>().attackValue = 1;
-            //    PlayerControllerObject.GetComponent<Attack_Unit>().PlayerAutoAttack();
-            //}
-
             // If unit is a actual minion
             if (!CurrentUnit.GetComponent<NewPossesionScript>())
             {
@@ -186,49 +207,73 @@ public class ControllerPlayer : MonoBehaviour
         }
     }
 
+    void SwapUnit(bool updown)
+    {
+        if (SpiritUnit)
+        {
+            SpiritUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(updown);
+        }
+        else
+        {
+            CurrentUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(updown);
+        }
+    }
+
+
     void ShoulderButtons()
     {
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_R1)
+        // L1
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
         {
-            //Debug.Log("press right");
-            if (SpiritUnit)
-            {
-                SpiritUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(true);
-            }
-            else
-            {
-                CurrentUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(true);
-            }
-
-            //Spirit.GetComponent<Possesor>().UpDownIndex(true);
-            buffer_R1 = true;
-        }
-        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_R1)
-        {
-            buffer_R1 = false;
-        }
-
-
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_L1)
-        {
-            //Debug.Log("press left");
-            if (SpiritUnit)
-            {
-                SpiritUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(false);
-            }
-            else
-            {
-                CurrentUnit.GetComponent<NewPossesionScript>().ChangeTargetIndex(false);
-            }
-
-            //Spirit.GetComponent<Possesor>().UpDownIndex(false);
+            SwapUnit(false);
             buffer_L1 = true;
         }
-        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && buffer_L1)
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && buffer_L1)
         {
             buffer_L1 = false;
         }
 
+        // R1 // Buffered input
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_R1)
+        {
+            SwapUnit(true);
+            buffer_R1 = true;
+        }
+        else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && buffer_R1)
+        {
+            buffer_R1 = false;
+        }
+
+        
+        // L2
+        if (Input.GetAxis("joystick" + stickID + "_left_trigger") > 0 && !buffer_L2)
+        {
+            buffer_L2 = true;
+        }
+        else if (Input.GetAxis("joystick" + stickID + "_left_trigger") <= 0 && buffer_L2)
+        {
+            buffer_L2 = false;
+        }
+
+
+        if (Input.GetAxis("joystick" + stickID + "_left_trigger") > 0)
+        {
+            Sprinting = true;
+        }
+        else
+        {
+            Sprinting = false;
+        }
+
+        // R2
+        if (Input.GetAxis("joystick" + stickID + "_right_trigger") > 0 && !buffer_R2)
+        {
+            buffer_R2 = true;
+        }
+        else if (Input.GetAxis("joystick" + stickID + "_right_trigger") <= 0 && buffer_R2)
+        {
+            buffer_R2 = false;
+        }
     }
 
     void DPad()
@@ -308,16 +353,15 @@ public class ControllerPlayer : MonoBehaviour
         }
     }
 
-
     void OldMovement()
     {
         if (!Spirit)
         {
-            move_speed = 4;
+            move_speed = 2;
         }
         else
         {
-            move_speed = 5;
+            move_speed = 2.3f;
         }
         x_input = Input.GetAxis("leftstick" + stickID + "horizontal");
         y_input = Input.GetAxis("leftstick" + stickID + "vertical");
@@ -347,7 +391,6 @@ public class ControllerPlayer : MonoBehaviour
 
         CurrentUnit.transform.position += direction * Time.deltaTime;/** move_speed*/
     }
-
 
     void UpdateAxis()
     {
@@ -410,12 +453,14 @@ public class ControllerPlayer : MonoBehaviour
 
     }
 
-
     void NewMovement()
     {
         CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
-        move_speed = 4;
+        if (Sprinting)
+            move_speed = 5;
+        else
+            move_speed = 2;
 
 #if UNITY_PS4
         movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
@@ -440,8 +485,6 @@ public class ControllerPlayer : MonoBehaviour
 
     void ObjectFailSafe()
     {
-        
-
         if (CurrentUnit)
         {
             if (CurrentUnit.transform.position.y <= -20)
@@ -452,7 +495,6 @@ public class ControllerPlayer : MonoBehaviour
         }
 
     }
-
 
     void CameraMovement()
     {

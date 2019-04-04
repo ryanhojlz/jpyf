@@ -33,9 +33,9 @@ public class Dub_Scientist : Healer_Unit
             this.stateMachine.ChangeState(new HealState(this, minionWithinRange, Ally_Tag));
         }
 
-       GetComponent<NavMeshAgent>().baseOffset = 5;
+        GetComponent<NavMeshAgent>().baseOffset = 5;
 
-        if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             SpecialHealing();
         }
@@ -68,6 +68,9 @@ public class Dub_Scientist : Healer_Unit
     public override void SpecialHealing()
     {
         //Heal the selected target to full health and let the full health persists for 30 seconds
+        if (target == null)
+            return;
+
         if (CountDownTimer <= 0)
         {
             CountDownTimer = OriginalTimer;
@@ -78,11 +81,14 @@ public class Dub_Scientist : Healer_Unit
             CountDownTimer -= Time.deltaTime;
         }
 
-        if(healthValue == startHealthvalue)
+        if (healthValue == startHealthvalue)
         {
             immunityTimer -= Time.deltaTime;
-
+            TakeDamage(0);
+            if (immunityTimer < 0)
+            {
+                //TakeDamage(this.attackValue);
+            }
         }
-
     }
 }

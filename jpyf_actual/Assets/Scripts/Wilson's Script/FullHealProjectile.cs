@@ -123,9 +123,7 @@ public class FullHealProjectile : MonoBehaviour
                 unit.TakeDamage(-healAmount);
 
                 DisplayText(healAmount);
-
             }
-
         }
     }
 }

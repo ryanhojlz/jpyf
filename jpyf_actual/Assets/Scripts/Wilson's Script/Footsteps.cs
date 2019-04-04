@@ -17,27 +17,39 @@ public class Footsteps : MonoBehaviour
 
     public float footprintOffset = 0.05f;
 
-    void LeftFootstep()
+
+    void Update()
     {
-        leftFootAudioSource.Play();
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+            LeftFootstep();
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            RightFootstep();
+    }
+
+    public void LeftFootstep()
+    {
+        //leftFootAudioSource.Play();
 
         //Raycast out and create footprint
         RaycastHit hit;
 
-        if(Physics.Raycast(leftFootLocation.position,leftFootLocation.forward,out hit))
+        //if(Physics.Raycast(leftFootLocation.position,leftFootLocation.forward,out hit))
+        if (Physics.Raycast(leftFootLocation.position,-leftFootLocation.up,out hit))
         {
             Instantiate(leftFootprint, hit.point + hit.normal * footprintOffset, Quaternion.LookRotation(hit.normal, leftFootLocation.up));
         }
     }
 
-    void RightFootstep()
+    public void RightFootstep()
     {
-        rightFootAudioSource.Play();
+        //rightFootAudioSource.Play();
 
         //Raycast out and create footprint
         RaycastHit hit;
 
-        if (Physics.Raycast(rightFootLocation.position, rightFootLocation.forward, out hit))
+        //if(Physics.Raycast(rightFootLocation.position,rightFootLocation.forward,out hit))
+        if (Physics.Raycast(rightFootLocation.position, -rightFootLocation.up, out hit))
         {
             Instantiate(rightFootprint, hit.point + hit.normal * footprintOffset, Quaternion.LookRotation(hit.normal,rightFootLocation.up));
         }

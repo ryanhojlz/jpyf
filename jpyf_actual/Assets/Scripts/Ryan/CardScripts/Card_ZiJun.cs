@@ -7,9 +7,10 @@ public class Card_ZiJun : GrabbableObject
     public bool onfloor = false;
     public bool pickedup = false;
     public bool lookedAt = false;
+    public bool isthrown = false;
     
     public int ManaCost = 0;
-    float summonTimer = 2.0f;
+    public float summonTimer = 2.0f;
     public GameObject summonedUnit = null;
     private Shader Mat = null;
 
@@ -33,14 +34,15 @@ public class Card_ZiJun : GrabbableObject
     public override void OnGrabReleased(MoveController currentController)
     {
         base.OnGrabReleased(currentController);
-        
+        if (pickedup)
+            isthrown = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float[] debugArray = new float[4];
-        debugArray = transform.GetComponent<Renderer>().material.GetFloatArray("_OutlineColor");
+        //float[] debugArray = new float[4];
+        //debugArray = transform.GetComponent<Renderer>().material.GetFloatArray("_OutlineColor");
         //Debug.Log("ArrayColor  " + debugArray);
         if (pickedup)
         {
@@ -52,6 +54,7 @@ public class Card_ZiJun : GrabbableObject
         //    this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         //    this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         //}
+        
 
         if (onfloor)
         {
@@ -63,7 +66,14 @@ public class Card_ZiJun : GrabbableObject
             tempcolor.b = 255;
             this.GetComponent<MeshRenderer>().material.color = tempcolor;
         }
-        if (summonTimer < 0)
+        if (isthrown)
+        {
+            if (transform.position.z > -17)
+            {
+                summonTimer = 0;
+            }
+        }
+        if (summonTimer <= 0)
         {
             GameObject go = Instantiate(summonedUnit) as GameObject;
             //Vector3 spawnPoint = new Vector3(250, 7, -55);

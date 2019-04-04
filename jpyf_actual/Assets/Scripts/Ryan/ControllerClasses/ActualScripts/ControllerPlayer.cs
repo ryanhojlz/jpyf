@@ -421,9 +421,9 @@ public class ControllerPlayer : MonoBehaviour
         // Debug for PC
         float input = 0.8f;
         if (Input.GetKey(KeyCode.LeftArrow))
-            x_inputR = input;
-        else if (Input.GetKey(KeyCode.RightArrow))
             x_inputR = -input;
+        else if (Input.GetKey(KeyCode.RightArrow))
+            x_inputR = input;
         else
             x_inputR = 0;
 

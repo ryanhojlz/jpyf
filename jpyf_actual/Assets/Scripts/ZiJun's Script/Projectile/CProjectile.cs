@@ -8,6 +8,8 @@ public class CProjectile : MonoBehaviour {
     private Vector3 UnitThatShootsPosition;
     private Transform UnitThatShoots;
 
+    float entered = 0;
+
     public enum PT
     {
         MELEE,
@@ -36,45 +38,15 @@ public class CProjectile : MonoBehaviour {
             this.transform.position.y + (UnitThatShoots.transform.forward.y * (UnitThatShoots.transform.localScale.y + this.transform.localScale.y)) * (this.GetComponent<SphereCollider>().radius),
             this.transform.position.z + (UnitThatShoots.transform.forward.z * (UnitThatShoots.transform.localScale.z + this.transform.localScale.z)) * (this.GetComponent<SphereCollider>().radius)
             );
+
+        for (int i = 0; i < UnitThatShoots.GetComponent<Minion>().minionWithinRange.Count; ++i)
+        {
+            Physics.IgnoreCollision(UnitThatShoots.GetComponent<Minion>().minionWithinRange[i].GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+        }
+        
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!UnitThatShoots)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        if (projectile_type == PT.MELEE)
-        {
-            float dist_between = (UnitThatShootsPosition - TargetPosition).magnitude;
-            speed = (dist_between / AnimationSpeed);
-        }
-        else if (projectile_type == PT.RANGE)
-        {
-            speed = (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
-            //Debug.Log("cAME HERE");
-        }
-        //else if (projectile_type == PT.HEALING)
-        //{
-        //    speed = 1;// (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
-        //}
-        Vector3 dir = TargetPosition - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-
-        lifeTime -= Time.deltaTime;
-
-        this.gameObject.GetComponent<Rigidbody>().velocity = dir.normalized * speed;
-
-        if (lifeTime < 0f)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
     //void Update()
     //{
     //    if (!UnitThatShoots)
@@ -103,15 +75,51 @@ public class CProjectile : MonoBehaviour {
 
     //    lifeTime -= Time.deltaTime;
 
-    //    //this.gameObject.GetComponent<Rigidbody>().velocity = dir.normalized * speed;
-
-    //    transform.Translate(dir.normalized * (speed * Time.deltaTime), Space.World);
+    //    this.gameObject.GetComponent<Rigidbody>().velocity = dir.normalized * speed;
 
     //    if (lifeTime < 0f)
     //    {
     //        Destroy(this.gameObject);
     //    }
     //}
+
+    void Update()
+    {
+        if (!UnitThatShoots)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (projectile_type == PT.MELEE)
+        {
+            float dist_between = (UnitThatShootsPosition - TargetPosition).magnitude;
+            speed = (dist_between / AnimationSpeed);
+        }
+        else if (projectile_type == PT.RANGE)
+        {
+            speed = (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
+            //Debug.Log("cAME HERE");
+        }
+        //else if (projectile_type == PT.HEALING)
+        //{
+        //    speed = 1;// (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
+        //}
+        Vector3 dir = TargetPosition - transform.position;
+        float distanceThisFrame = speed * Time.deltaTime;
+
+
+        lifeTime -= Time.deltaTime;
+
+        //this.gameObject.GetComponent<Rigidbody>().velocity = dir.normalized * speed;
+
+        transform.Translate(dir.normalized * (speed * Time.deltaTime), Space.World);
+
+        if (lifeTime < 0f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     public void Seek(Transform _target)
     {
@@ -165,17 +173,81 @@ public class CProjectile : MonoBehaviour {
     //    }
     //}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+        //{
+        //    Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>(), true);
+        //}
+        if (other.gameObject.GetComponent<BasicGameOBJ>())
+        {
+            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+            {
+                Damage(UnitThatShoots, other.transform);
+                //Debug.Break();
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     //private void OnTriggerStay(Collider other)
     //{
+    //    //if (!UnitThatShoots)
+    //    //    return;
+
+    //    Debug.Log(other);
+
+    //    //if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+    //    //{
+    //    //    Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>(),true);
+    //    //    //entered += 1;
+    //    //}
+        
+    //    if (other.gameObject.GetComponent<BasicGameOBJ>())
+    //    {
+    //        if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+    //        {
+    //            Damage(UnitThatShoots, other.transform);
+    //            //Debug.Break();
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //}
+
+    #region Collider checks
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    //if (this.projectile_type == PT.HEALING)
+    //    //{
+
+    //    //    //if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
+    //    //    //{
+    //    //    //Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+    //    //    //}
+
+    //    //    //if (other.gameObject.GetComponent<BasicGameOBJ>())
+    //    //    //{
+    //    //    //    if (UnitThatShoots.GetComponent<BasicGameOBJ>().Ally_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+    //    //    //    {
+    //    //    //        //Debug.Log(other.gameObject.name);
+    //    //    //        //Debug.Log(lifeTime + "HIT");
+    //    //    //        if (other.gameObject == UnitThatShoots.gameObject)
+    //    //    //        {
+    //    //    //            Damage(UnitThatShoots, other.transform);
+    //    //    //            Destroy(this.gameObject);
+    //    //    //        }
+    //    //    //    }
+    //    //    //}
+    //    //}
+    //    //else
+    //    //{
     //    if (!UnitThatShoots)
     //        return;
-      
-    //    if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+    //    //For non ally hiting projectiles
+    //    if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.GetComponent<Dub_Lazer_Projectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
     //    {
-    //        Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
+    //        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
     //    }
-    //    //if (other.gameObject.GetComponent<SphereCollider>())
-    //    //    return;
 
     //    if (other.gameObject.GetComponent<BasicGameOBJ>())
     //    {
@@ -189,60 +261,15 @@ public class CProjectile : MonoBehaviour {
     //    }
     //}
 
-    private void OnCollisionEnter(Collision other)
-    {
-        //if (this.projectile_type == PT.HEALING)
-        //{
+    //private void OnCollisionStay(Collision other)
+    //{
+    //    if (other.gameObject.GetComponent<CHyperBeam>())
+    //    {
+    //        Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+    //    }
 
-        //    //if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
-        //    //{
-        //    //Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-        //    //}
-
-        //    //if (other.gameObject.GetComponent<BasicGameOBJ>())
-        //    //{
-        //    //    if (UnitThatShoots.GetComponent<BasicGameOBJ>().Ally_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
-        //    //    {
-        //    //        //Debug.Log(other.gameObject.name);
-        //    //        //Debug.Log(lifeTime + "HIT");
-        //    //        if (other.gameObject == UnitThatShoots.gameObject)
-        //    //        {
-        //    //            Damage(UnitThatShoots, other.transform);
-        //    //            Destroy(this.gameObject);
-        //    //        }
-        //    //    }
-        //    //}
-        //}
-        //else
-        //{
-        if (!UnitThatShoots)
-            return;
-        //For non ally hiting projectiles
-        if (other.gameObject.GetComponent<CProjectile>() || other.gameObject.GetComponent<Dub_Lazer_Projectile>() || other.gameObject.tag == UnitThatShoots.gameObject.tag)//Uses this line of if statement to ignore collision between ally && other projectiles
-        {
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
-
-        if (other.gameObject.GetComponent<BasicGameOBJ>())
-        {
-            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
-            {
-                //Debug.Log(other.gameObject.name);
-                //Debug.Log(lifeTime + "HIT");
-                Damage(UnitThatShoots, other.transform);
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.GetComponent<CHyperBeam>())
-        {
-            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
-
-    }
+    //}
+    #endregion
 
     void DisplayText(float DamageAmount)
     {

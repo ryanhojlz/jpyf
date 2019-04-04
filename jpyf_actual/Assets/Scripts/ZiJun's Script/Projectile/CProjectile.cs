@@ -43,21 +43,25 @@ public class CProjectile : MonoBehaviour {
         //{
         //    Physics.IgnoreCollision(UnitThatShoots.GetComponent<Minion>().minionWithinRange[i].GetComponent<SphereCollider>(), this.GetComponent<Collider>());
         //}
-
+        
         GameObject[] newObject = GameObject.FindGameObjectsWithTag(UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag);
         GameObject[] newObject_2 = GameObject.FindGameObjectsWithTag(UnitThatShoots.GetComponent<BasicGameOBJ>().Ally_Tag);
         //for(int i = 0)
 
         foreach (GameObject GO in newObject)
         {
+            if (!GO.GetComponent<BasicGameOBJ>())
+                continue;
             if (GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>())
-                Physics.IgnoreCollision(GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+                Physics.IgnoreCollision(GO.GetComponent<SphereCollider>(), this.GetComponent<Collider>());
         }
 
         foreach (GameObject GO in newObject_2)
         {
+            if (!GO.GetComponent<BasicGameOBJ>())
+                continue;
             if (GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>())
-                Physics.IgnoreCollision(GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+                Physics.IgnoreCollision(GO.GetComponent<SphereCollider>(), this.GetComponent<Collider>());
         }
 
     }

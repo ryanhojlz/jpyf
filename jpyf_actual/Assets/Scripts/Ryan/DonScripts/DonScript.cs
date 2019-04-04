@@ -39,7 +39,7 @@ public class DonScript : MonoBehaviour
         {
             //effect_counter++;
             hitto = true;
-            ++GameObject.Find("DonDon").GetComponent<DonMiniGame>().don_progress;
+            GameObject.Find("DonDon").GetComponent<DonMiniGame>().DonInteraction(1);
         }
 
         /// Pushes hittable objects into the list

@@ -35,6 +35,8 @@ public class Dub_Sniper : Attack_Unit
 
     public override void Unit_Self_Update()
     {
+        if (GetComponent<BasicGameOBJ>().isPossessed)
+            return;
         if (minionWithinRange.Count > 0)
         {
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
@@ -79,6 +81,7 @@ public class Dub_Sniper : Attack_Unit
             
             GameObject bulletGO = (GameObject)Instantiate(laserPrefeb, transform.position + (transform.forward * ((laserPrefeb.transform.localScale.z * 0.5f) + (transform.localScale.z * 0.5f))), laserPrefeb.transform.rotation) as GameObject;
             laser = bulletGO.GetComponent<Dub_Lazer_Projectile>();
+            laser.gameObject.layer = this.gameObject.layer;
 
             if (!laser.gameObject.activeSelf)
             {

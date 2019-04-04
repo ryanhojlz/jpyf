@@ -39,11 +39,27 @@ public class CProjectile : MonoBehaviour {
             this.transform.position.z + (UnitThatShoots.transform.forward.z * (UnitThatShoots.transform.localScale.z + this.transform.localScale.z)) * (this.GetComponent<SphereCollider>().radius)
             );
 
-        for (int i = 0; i < UnitThatShoots.GetComponent<Minion>().minionWithinRange.Count; ++i)
+        //for (int i = 0; i < UnitThatShoots.GetComponent<Minion>().minionWithinRange.Count; ++i)
+        //{
+        //    Physics.IgnoreCollision(UnitThatShoots.GetComponent<Minion>().minionWithinRange[i].GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+        //}
+
+        GameObject[] newObject = GameObject.FindGameObjectsWithTag(UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag);
+        GameObject[] newObject_2 = GameObject.FindGameObjectsWithTag(UnitThatShoots.GetComponent<BasicGameOBJ>().Ally_Tag);
+        //for(int i = 0)
+
+        foreach (GameObject GO in newObject)
         {
-            Physics.IgnoreCollision(UnitThatShoots.GetComponent<Minion>().minionWithinRange[i].GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+            if (GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>())
+                Physics.IgnoreCollision(GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>(), this.GetComponent<Collider>());
         }
-        
+
+        foreach (GameObject GO in newObject_2)
+        {
+            if (GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>())
+                Physics.IgnoreCollision(GO.GetComponent<BasicGameOBJ>().GetComponent<SphereCollider>(), this.GetComponent<Collider>());
+        }
+
     }
 
     // Update is called once per frame
@@ -179,6 +195,19 @@ public class CProjectile : MonoBehaviour {
         //{
         //    Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>(), true);
         //}
+        //if (other.gameObject.GetComponent<BasicGameOBJ>())
+        //{
+        //    if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+        //    {
+        //        Damage(UnitThatShoots, other.transform);
+        //        //Debug.Break();
+        //        Destroy(this.gameObject);
+        //    }
+        //}
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.GetComponent<BasicGameOBJ>())
         {
             if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
@@ -189,6 +218,7 @@ public class CProjectile : MonoBehaviour {
             }
         }
     }
+
 
     //private void OnTriggerStay(Collider other)
     //{
@@ -202,7 +232,7 @@ public class CProjectile : MonoBehaviour {
     //    //    Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>(),true);
     //    //    //entered += 1;
     //    //}
-        
+
     //    if (other.gameObject.GetComponent<BasicGameOBJ>())
     //    {
     //        if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)

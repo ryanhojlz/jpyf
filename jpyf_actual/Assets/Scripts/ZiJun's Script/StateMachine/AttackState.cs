@@ -112,7 +112,10 @@ public class AttackState : IState
         }
         else
         {
-            agent.isStopped = true;
+            if (agent.isActiveAndEnabled)
+            {
+                agent.isStopped = true;
+            }
             if (unit.GetTarget() != null)
             {
                 unit.Attack();

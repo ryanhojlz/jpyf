@@ -8,6 +8,8 @@ public class CProjectile : MonoBehaviour {
     private Vector3 UnitThatShootsPosition;
     private Transform UnitThatShoots;
 
+    Vector3 dir = Vector3.zero;
+
     float entered = 0;
 
     public enum PT
@@ -121,7 +123,7 @@ public class CProjectile : MonoBehaviour {
         //{
         //    speed = 1;// (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
         //}
-        Vector3 dir = TargetPosition - transform.position;
+        //Vector3 dir = TargetPosition - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
 
@@ -140,6 +142,7 @@ public class CProjectile : MonoBehaviour {
     public void Seek(Transform _target)
     {
         TargetPosition = _target.position;
+        dir = TargetPosition - transform.position;
     }
 
     public void SetBase(Minion GO)

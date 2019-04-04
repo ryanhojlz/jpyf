@@ -8,6 +8,7 @@ public class TestUnit_Control : MonoBehaviour
     private static List<WaypointClass> PlayerWaypointList = new List<WaypointClass>();
     private int pathIndex = 0;
     private int waypointIndex = 0;
+    Footsteps footsteps;
 
     //private StateMachine sm = new StateMachine();
     private GameObject tempPathManager;
@@ -48,6 +49,8 @@ public class TestUnit_Control : MonoBehaviour
             var q = Quaternion.LookRotation((agent.velocity.normalized + this.transform.position) - transform.position);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, q, agent.angularSpeed * Time.deltaTime);
         }
+        //footsteps.LeftFootstep();
+        //footsteps.RightFootstep();
     }
 
     // Update is called once per frame

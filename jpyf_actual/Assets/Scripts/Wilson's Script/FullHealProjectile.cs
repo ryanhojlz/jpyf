@@ -60,6 +60,7 @@ public class FullHealProjectile : MonoBehaviour
         {
             // SpawnHealText(0f);
             HitTarget();
+            target.gameObject.AddComponent<Immunity>();
             return;
         }
 

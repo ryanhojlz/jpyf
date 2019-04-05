@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Dub_Scientist : Healer_Unit
 {
     public GameObject rangeProjectile;
+    public GameObject specialProjectile;
     float immunityTimer = 30f;
 
     public override void Healing()
@@ -55,7 +56,7 @@ public class Dub_Scientist : Healer_Unit
 
     void SpecialShoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(rangeProjectile, this.transform.position, this.transform.rotation);
+        GameObject bulletGO = (GameObject)Instantiate(specialProjectile, this.transform.position, this.transform.rotation);
         FullHealProjectile bullet = bulletGO.GetComponent<FullHealProjectile>();
 
         if (bullet != null)
@@ -67,19 +68,12 @@ public class Dub_Scientist : Healer_Unit
 
     public override void SpecialHealing()
     {
+        Debug.Log("Special healing enter");
         //Heal the selected target to full health and let the full health persists for 30 seconds
         if (target == null)
             return;
 
-        if (CountDownTimer <= 0)
-        {
-            CountDownTimer = OriginalTimer;
-            SpecialShoot();
-        }
-        else
-        {
-            CountDownTimer -= Time.deltaTime;
-        }
+        SpecialShoot();
 
         if (this.GetTarget().GetComponent<BasicGameOBJ>().healthValue == this.GetTarget().GetComponent<BasicGameOBJ>().startHealthvalue)
         {

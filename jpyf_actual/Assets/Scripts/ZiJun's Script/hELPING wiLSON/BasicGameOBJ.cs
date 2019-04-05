@@ -101,6 +101,10 @@ public class BasicGameOBJ : MonoBehaviour
     //Taking Damage
     public void TakeDamage(float dmgAmount)
     {
+
+        if (this.gameObject.GetComponent<Immunity>())
+            return;
+
         healthValue -= dmgAmount;
 
         //Have to multiply by defence value to reduce the damage taken

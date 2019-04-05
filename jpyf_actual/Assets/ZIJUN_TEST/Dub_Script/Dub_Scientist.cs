@@ -81,13 +81,13 @@ public class Dub_Scientist : Healer_Unit
             CountDownTimer -= Time.deltaTime;
         }
 
-        if (healthValue == startHealthvalue)
+        if (this.GetTarget().GetComponent<BasicGameOBJ>().healthValue == this.GetTarget().GetComponent<BasicGameOBJ>().startHealthvalue)
         {
             immunityTimer -= Time.deltaTime;
-            TakeDamage(0);
+            this.GetTarget().GetComponent<BasicGameOBJ>().TakeDamage(0);
             if (immunityTimer < 0)
             {
-                //TakeDamage(this.attackValue);
+                this.GetTarget().GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);
             }
         }
     }

@@ -215,7 +215,7 @@ public class CProjectile : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<BasicGameOBJ>())
+        if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
         {
             if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
             {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Daylight : MonoBehaviour
 {
+    float dayTimeTimer;
+    bool isDayTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +16,7 @@ public class Daylight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(Vector3.zero, Vector3.right, 10f * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.right, 20f * Time.deltaTime);
         transform.LookAt(Vector3.zero);
     }
 }

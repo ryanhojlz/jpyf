@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33463896996697880}
   - component: {fileID: 23073518646175826}
   - component: {fileID: 135724498351438458}
-  - component: {fileID: 114551412600704054}
+  - component: {fileID: 114436143293730608}
   m_Layer: 0
   m_Name: SpecialHealingProjectile
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989086066617664}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114551412600704054
+--- !u!114 &114436143293730608
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,11 +93,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989086066617664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be18a498f2048b140a34d9feb4a08a77, type: 3}
+  m_Script: {fileID: 11500000, guid: 94b70808049f9644d92c54e9853d86d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationSpeed: 0
-  prefabtext: {fileID: 1306221944417296, guid: dcc5ce4d20dba9342aa387ce5b735387, type: 2}
+  prefabtext: {fileID: 1306221944417296, guid: 1098f586617166c4f810c97e36240016, type: 2}
 --- !u!135 &135724498351438458
 SphereCollider:
   m_ObjectHideFlags: 1

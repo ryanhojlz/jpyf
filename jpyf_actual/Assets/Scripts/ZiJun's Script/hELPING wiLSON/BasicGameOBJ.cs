@@ -21,6 +21,7 @@ public class BasicGameOBJ : MonoBehaviour
     public float attackSpeedValue;
     public float moveSpeedValue;
     public float rangeValue;
+    public int possesionTier = 0;
     public bool isActive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
@@ -101,7 +102,6 @@ public class BasicGameOBJ : MonoBehaviour
     public void TakeDamage(float dmgAmount)
     {
         healthValue -= dmgAmount;
-
 
         //Have to multiply by defence value to reduce the damage taken
         if (healthValue <= 0)

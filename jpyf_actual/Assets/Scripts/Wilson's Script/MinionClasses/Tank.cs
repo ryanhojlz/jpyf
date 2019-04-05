@@ -62,7 +62,7 @@ public class Tank : Attack_Unit
         //attackSound.Play();
     }
 
-    void ShootFront()
+    public override void ShootFront()
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         CProjectile bullet = bulletGO.GetComponent<CProjectile>();

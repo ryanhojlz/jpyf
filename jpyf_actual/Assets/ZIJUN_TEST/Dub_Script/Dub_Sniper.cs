@@ -6,6 +6,7 @@ public class Dub_Sniper : Attack_Unit
 {
     public GameObject bulletPrefab;
     public GameObject laserPrefeb;
+
     Dub_Lazer_Projectile laser;
     bool isLazer;
     //public AudioSource attackSound;
@@ -121,6 +122,45 @@ public class Dub_Sniper : Attack_Unit
         {
             //Debug.Log(CountDownTimer);
             bullet.Seek(target.transform);
+            bullet.SetBase(this);
+        }
+    }
+
+    public override void ShootFront()
+    {
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        CProjectile bullet = bulletGO.GetComponent<CProjectile>();
+
+        if (bullet != null)
+        {
+            Transform FrontTransform = new GameObject().transform;// = this.transform;
+
+            FrontTransform.position = this.transform.position + (this.transform.forward * this.rangeValue);
+
+            //Debug.Log("Front Position" + FrontTransform.position);
+            //Debug.Log("It's Position" + this.transform.position);
+
+            bullet.Seek(FrontTransform);
+            bullet.SetBase(this);
+
+            Destroy(FrontTransform.gameObject);
+        }
+    }
+
+    public override void ShootTargetedPos(Vector3 pos)
+    {
+        //base.ShootTargetedPos(pos);
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        CProjectile bullet = bulletGO.GetComponent<CProjectile>();
+
+        if (bullet != null)
+        {
+            Transform TargetedPosTransform = new GameObject().transform;// = this.transform;
+
+            TargetedPosTransform.position = pos;
+
+            //Debug.Log(CountDownTimer);
+            bullet.Seek(TargetedPosTransform);
             bullet.SetBase(this);
         }
     }

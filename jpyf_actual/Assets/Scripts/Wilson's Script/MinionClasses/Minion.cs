@@ -54,4 +54,14 @@ public class Minion : BasicGameOBJ
     {
 
     }
+
+    public virtual void ShootFront()
+    {
+
+    }
+
+    public virtual void ShootTargetedPos(Vector3 pos)
+    {
+        
+    }
 }

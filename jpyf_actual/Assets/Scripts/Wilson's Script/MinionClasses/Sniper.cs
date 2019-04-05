@@ -52,4 +52,22 @@ public class Sniper : Attack_Unit
             bullet.SetBase(this);
         }
     }
+
+    public override void ShootTargetedPos(Vector3 pos)
+    {
+        //base.ShootTargetedPos(pos);
+        //GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        //RangeProjectile bullet = bulletGO.GetComponent<RangeProjectile>();
+
+        //if (bullet != null)
+        //{
+        //    Transform TargetedPosTransform = new GameObject().transform;// = this.transform;
+
+        //    TargetedPosTransform.position = pos;
+
+        //    //Debug.Log(CountDownTimer);
+        //    bullet.Seek(TargetedPosTransform);
+        //    bullet.SetBase(this);
+        //}
+    }
 }

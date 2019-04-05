@@ -16,9 +16,13 @@ public class Third_Person_Camera : MonoBehaviour {
 
     public float MaxRange = 0;
 
+    public LayerMask myLayerMask;
+
     Vector3 ForwardDirection = Vector3.zero;
     Vector3 UpDirection = Vector3.zero;
     Vector3 SideDirection = Vector3.zero;
+
+    GameObject Target = null;
 
 
 
@@ -44,6 +48,8 @@ public class Third_Person_Camera : MonoBehaviour {
         PrevPos = targetedObject.transform.position;
 
         MaxRange = (this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
+
+        //Target = Instantiate(Ball, GetRayCastHitPosition(), this.transform.rotation);
     }
 	
 	// Update is called once per frame
@@ -51,6 +57,8 @@ public class Third_Person_Camera : MonoBehaviour {
     {
         transform.position = transform.position + (targetedObject.transform.position - PrevPos);
         NavMeshAgent agent = targetedObject.GetComponent<NavMeshAgent>();
+
+        PositionShootFrom = new Vector2(Screen.width * 0.5f, Screen.height * 0.7f);
 
         if (agent)
         {
@@ -97,9 +105,19 @@ public class Third_Person_Camera : MonoBehaviour {
         //Debug.Log(Screen.width * 0.5);
         //Debug.Log(Screen.height * 0.5);
 
+        //Target.transform.position = GetRayCastHitPosition();
+
         PrevPos = targetedObject.transform.position;
 
-        Instantiate(Ball, GetRayCastHitPosition(), this.transform.rotation);
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    //targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+        //    if(targetedObject.GetComponent<Minion>())
+        //    targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+        //}
+
+
+        //Instantiate(Ball, GetRayCastHitPosition(), this.transform.rotation);
     }
 
     void Rotation(float x, float y)
@@ -119,16 +137,18 @@ public class Third_Person_Camera : MonoBehaviour {
 
         //this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);
 
-        Physics.Raycast(CrosshairHit, out hit, MaxRange);
+        Physics.Raycast(CrosshairHit, out hit);
 
         PointHit = hit.point;
 
         if (hit.point == Vector3.zero)
         {
             //Debug.Log("hehe");
-            PointHit = CrosshairHit.GetPoint(MaxRange);
+            //PointHit = CrosshairHit.GetPoint(MaxRange);
+            return CrosshairHit.GetPoint(MaxRange);
         }
         //this.transform.forward;
+        return hit.point;
 
         Ray ObjectRayCast = new Ray(targetedObject.transform.position, (PointHit - targetedObject.transform.position).normalized);
 

@@ -63,7 +63,7 @@ public class Dub_Tank : Attack_Unit
         }
     }
 
-    void ShootFront()
+    public override void ShootFront()
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         CProjectile bullet = bulletGO.GetComponent<CProjectile>();

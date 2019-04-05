@@ -15,7 +15,6 @@ public class PCDEBUGG : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Dont use unity things please fk la");
             GameObject go = Instantiate(wadoiawoid) as GameObject;
             go.gameObject.GetComponent<Transform>().position = new Vector3(250, 7, -55);
 

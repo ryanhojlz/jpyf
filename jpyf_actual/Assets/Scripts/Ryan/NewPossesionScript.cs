@@ -138,7 +138,7 @@ public class NewPossesionScript : MonoBehaviour
                 Physics.IgnoreCollision(other.GetComponent<SphereCollider>(), this.GetComponent<SphereCollider>());
         }
 
-        if (other.name != "enivronment_test_1")
+        if (other.name != "enivronment_test_1" || other.name != "Floor")
         {
             if (other.GetComponent<BoxCollider>())
                 Physics.IgnoreCollision(other.GetComponent<BoxCollider>(), this.GetComponent<BoxCollider>());

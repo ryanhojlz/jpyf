@@ -111,6 +111,13 @@ public class ControllerPlayer : MonoBehaviour
         //{
         //    IfSpirit();
         //}
+
+        // Debug
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CurrentUnit.GetComponent<Rigidbody>().AddForce(Vector3.up * 200);
+        }
+
         //======================================================================================================
         // X Button
         //======================================================================================================
@@ -126,10 +133,7 @@ public class ControllerPlayer : MonoBehaviour
             //{
             //    SpiritUnit.GetComponent<NewPossesionScript>().PossesUp();
             //}
-
             CurrentUnit.GetComponent<Rigidbody>().AddForce(Vector3.up * 200);
-
-
             buffer_x = true;
         }
         else if (!Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")) && buffer_x)
@@ -185,6 +189,16 @@ public class ControllerPlayer : MonoBehaviour
         {
             buffer_square = false;
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            // If unit is a actual minion
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                // Minion attack // Basic
+                CurrentUnit.GetComponent<Attack_Unit>().PlayerAutoAttack();
+            }
         }
 
         //======================================================================================================

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameEventsManager : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class GameEventsManager : MonoBehaviour
     public GameObject enemy_nexus = null;
     public GameObject SpawnManager = null;
 
+    // Demo Purposes
+    public GameObject ally_wall = null;
+    public GameObject enemy_wall = null;
+
     // Data for main nexus tower
     int Ally_NexusHP = 100;
     int Enemy_NexusHP = 100;
@@ -26,21 +32,31 @@ public class GameEventsManager : MonoBehaviour
     int Ally_NexusHPCap = 100;
     int Enemy_NexusHPCap = 100;
 
+    // Gold
     int PlayerGold = 100;
     float GoldTimer = 0;
     float GoldTrigger = 1.5f;
 
+    // Tier for upgrading each unit 
     int Tier1 = 150;
     int Tier2 = 300;
     int Tier3 = 500;
 
+    // UI win lose
+    public GameObject winlosetext;
 
     // Use this for initialization
 	void Start ()
     {
         if (!SpawnManager)
             GameObject.Find("SpawnManager");
-	}
+        
+        // Find walls and enemy walls
+        ally_wall = GameObject.Find("wall");
+        enemy_wall = GameObject.Find("enemyWall");
+        // UI text 
+        winlosetext = GameObject.Find("WinLoseText").gameObject;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -52,26 +68,55 @@ public class GameEventsManager : MonoBehaviour
     // Update Win Lose Condition
     void UpdateWinLose()
     {
+        //if (!EndGame)
+        //{
+        //    // If the same frame they somehow both have no health
+        //    if (Ally_NexusHP <= 0 && Enemy_NexusHP <= 0)
+        //    {
+        //        Draw = true;
+        //        EndGame = true;
+        //    }
+        //    // else if 
+        //    if (Ally_NexusHP <= 0)
+        //    {
+        //        WinLose = false;
+        //        EndGame = true;
+        //    }
+        //    else if (Enemy_NexusHP <= 0)
+        //    {
+        //        WinLose = true;
+        //        EndGame = true;
+        //    }
+        //}
+
+        // This is for the week 6 demo
+        // If the gamne ended 
         if (!EndGame)
         {
-            // If the same frame they somehow both have no health
-            if (Ally_NexusHP <= 0 && Enemy_NexusHP <= 0)
+            // If ally hp 0 lose
+            if (ally_wall.GetComponent<BasicGameOBJ>().healthValue <= 0)
             {
-                Draw = true;
                 EndGame = true;
-            }
-            // else if 
-            if (Ally_NexusHP <= 0)
-            {
                 WinLose = false;
-                EndGame = true;
+                // Change Text
+                winlosetext.GetComponent<TextMesh>().text = "PLAYER LOSE";
             }
-            else if (Enemy_NexusHP <= 0)
+            // If enemy hp 0 win
+            else if (enemy_wall.GetComponent<BasicGameOBJ>().healthValue <= 0)
             {
-                WinLose = true;
                 EndGame = true;
+                WinLose = true;
+                // Change Text
+                winlosetext.GetComponent<TextMesh>().text = "PLAYER WIN";
             }
-        }   
+            // If game ended render
+            winlosetext.SetActive(false);
+        }
+        else
+        {
+            // If game ended render
+            winlosetext.SetActive(true);
+        }
     }
 
     // Update Player Gold
@@ -82,10 +127,14 @@ public class GameEventsManager : MonoBehaviour
             GoldTimer = 0;
             PlayerGold++;
         }
+        // Gold tick timer
         GoldTimer += 0.5f * Time.deltaTime;
+        // Capacity
+        if (PlayerGold > 999)
+            PlayerGold = 999;
     }
-
-
+    
+    // These are planned when the nexus objects are in 
     // For readability instead of seeing hp -= damage;
     // Plus Minus function for damage
     void AffectAllyHp(int damage)
@@ -114,8 +163,5 @@ public class GameEventsManager : MonoBehaviour
             Enemy_NexusHP = Enemy_NexusHPCap;
         }
     }
-
-    
-    
     
 }

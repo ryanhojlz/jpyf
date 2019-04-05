@@ -45,7 +45,7 @@ public class DonMiniGame : MonoBehaviour
         // Value Assigning
         time2don = time2donCap;
 
-        donUI = transform.Find("DonUI").gameObject;
+        donUI = GameObject.Find("DonUI").gameObject;
         //donTeam_ui = transform.Find("")
     }
 	

@@ -16,5 +16,6 @@ public class PlayerScript : MonoBehaviour
 	void Update ()
     {
         GameObject.Find("DebugMana").GetComponent<Text>().text = "Mana cost " + Mana;
-	}
+        GameObject.Find("ManaText").GetComponent<TextMesh>().text = "Mana " + Mana;
+    }
 }

@@ -26,7 +26,7 @@ public class ViewScript : MonoBehaviour
 
             spectator_cam = GameObject.Find("_FollowCam").GetComponent<Camera>();
             player_cam = GameObject.Find("Camera_player").GetComponent<Camera>();
-            //UnityEngine.XR.XRSettings.eyeTextureResolutionScale = 1.1f;
+            //lUnityEngine.XR.XRSettings.eyeTextureResolutionScale = 1.3f;
 
             //float width = Screen.width;
             //float height = Screen.height;

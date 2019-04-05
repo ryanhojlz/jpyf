@@ -13,21 +13,28 @@ public class DonMiniGame : MonoBehaviour
     public GameObject vr_player = null;
     public GameObject ps4_player = null;
     public GameObject ps4_Unit = null;
-    public GameObject donUI = null;
+  
 
     // Time for interaction
     public float time2don = 0;
     public float time2donCap = 8;
 
+    // Don lvl
+    public int donLvl;
 
     // Interaction meter / interactions
     public float don_progress = 0;
     public float don_progresscap = 30;
-
-    // Don UI graphics
+    
+    // UI references
+    // Don UI for vr player
+    public GameObject donUI = null;
+    // Don UI graphics for controller from vr player to screenspace 
     public GameObject controller_ui = null;
-    // Don UI graphics
-    public GameObject donTeam_ui = null;
+    // Don UI graphics  text
+    public GameObject DonLvlController = null;
+    //
+   
 
     private void Awake()
     {
@@ -44,9 +51,12 @@ public class DonMiniGame : MonoBehaviour
         ps4_Unit = ps4_player.GetComponent<ControllerPlayer>().CurrentUnit;
         // Value Assigning
         time2don = time2donCap;
-
+        // PSVR
         donUI = GameObject.Find("DonUI").gameObject;
-        //donTeam_ui = transform.Find("")
+        // Controller Lvl Text
+        DonLvlController = GameObject.Find("LevelText");
+        // Controller Bar to see VR Progress
+        
     }
 	
 	// Update is called once per frame
@@ -79,6 +89,7 @@ public class DonMiniGame : MonoBehaviour
         if (!ps4_Unit.GetComponent<NewPossesionScript>().isPossesing)
         {
             SetMiniGame(false);
+            donLvl = 0;
         }
     }
 
@@ -116,7 +127,7 @@ public class DonMiniGame : MonoBehaviour
             // Fail Safe checking
             if (ps4_Unit.GetComponent<NewPossesionScript>())
             {
-
+                donLvl++;
                 ps4_Unit.GetComponent<NewPossesionScript>().EffectEnhances += 0.5f;
             }
             Debug.Log("Win");
@@ -155,7 +166,9 @@ public class DonMiniGame : MonoBehaviour
     // UI update
     void UpdateDonUI()
     {
+        DonLvlController.GetComponent<Text>().text = "Lvl" + donLvl;
         donUI.GetComponent<Image>().fillAmount = 1 * (don_progress / don_progresscap);
+        
     }
 
     

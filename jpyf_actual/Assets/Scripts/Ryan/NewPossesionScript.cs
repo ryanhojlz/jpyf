@@ -22,8 +22,8 @@ public class NewPossesionScript : MonoBehaviour
     // Possesing interaction
     public float timeToPosses = 0;
     public float timeToPossesReference = 8;
-    public float possesProgression = 2;
-    public float possesProgressionCap = 6;
+    public float possesProgression = 5;
+    public float possesProgressionCap = 10;
 
     // Object count
     public int ObjectCount;
@@ -273,7 +273,7 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {            
             timeToPosses -= 1 * Time.deltaTime;
-            possesProgression -= 1 * Time.deltaTime;
+            possesProgression -= (1 + objList[targetIndex].GetComponent<BasicGameOBJ>().possesionTier) * Time.deltaTime;
 
             if (possesProgression >= possesProgressionCap)
             {

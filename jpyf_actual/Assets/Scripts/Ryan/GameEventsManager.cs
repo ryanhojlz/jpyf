@@ -14,7 +14,7 @@ public class GameEventsManager : MonoBehaviour
     bool WinLose = false;
     bool Draw = false;
     // End Game Boolean // Allows for double K.O
-    bool EndGame= false;
+    bool EndGame = false;
 
     //GameObjects
     public GameObject ally_nexus = null;
@@ -45,25 +45,36 @@ public class GameEventsManager : MonoBehaviour
     // UI win lose
     public GameObject winlosetext;
 
+    // timer for turning on spawner
+    public float TimeToStartSpawning = 5.2f;
+    public bool StartSpawning = false;
+    
     // Use this for initialization
-	void Start ()
+    void Start()
     {
         if (!SpawnManager)
-            GameObject.Find("SpawnManager");
-        
+            SpawnManager = GameObject.Find("SpawnManager");
+
         // Find walls and enemy walls
         ally_wall = GameObject.Find("wall");
         enemy_wall = GameObject.Find("enemyWall");
         // UI text 
         winlosetext = GameObject.Find("WinLoseText").gameObject;
+        
+        // Spawner
+
+        // Set the spawn manager to false first
+        SpawnManager.SetActive(false);
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         UpdateWinLose();
+        SpawnerEvents();
         UpdatePlayerGold();
-	}
+    }
 
     // Update Win Lose Condition
     void UpdateWinLose()
@@ -133,7 +144,23 @@ public class GameEventsManager : MonoBehaviour
         if (PlayerGold > 999)
             PlayerGold = 999;
     }
-    
+
+
+    // Spawner Events
+    void SpawnerEvents()
+    {
+        TimeToStartSpawning -= 1 * Time.deltaTime;
+        if (TimeToStartSpawning <= 0)
+        {
+            SpawnManager.SetActive(true);
+            TimeToStartSpawning = 0;
+        }
+    }
+
+
+
+
+
     // These are planned when the nexus objects are in 
     // For readability instead of seeing hp -= damage;
     // Plus Minus function for damage

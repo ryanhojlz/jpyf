@@ -7,6 +7,7 @@ public class Alert : MonoBehaviour
     public GameObject TargetObject;//The object that is using this prompt
     public float despawnTimer = 4;
     float timer;
+    Vector3 _pos;
 
     private void Start()
     {

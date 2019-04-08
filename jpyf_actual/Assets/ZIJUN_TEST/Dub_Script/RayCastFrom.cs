@@ -83,9 +83,13 @@ public class RayCastFrom : MonoBehaviour {
 
         //this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);
 
+        Physics.queriesHitTriggers = false;
+
         Physics.Raycast(CrosshairHit, out hit, MaxRange);
 
         PointHit = hit.point;
+
+        Physics.queriesHitTriggers = true;
 
         if (hit.point == Vector3.zero)
         {

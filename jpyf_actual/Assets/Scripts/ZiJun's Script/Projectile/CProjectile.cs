@@ -214,7 +214,7 @@ public class CProjectile : MonoBehaviour {
         //        Destroy(this.gameObject);
         //    }
         //}
-        if (!other.transform)
+        if (!other.GetComponent<Transform>())
             return;
         if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
         {
@@ -229,7 +229,7 @@ public class CProjectile : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.transform)
+        if (!other.GetComponent<Transform>())
             return;
         if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
         {

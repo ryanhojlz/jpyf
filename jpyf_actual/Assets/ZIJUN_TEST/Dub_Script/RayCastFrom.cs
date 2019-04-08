@@ -38,7 +38,7 @@ public class RayCastFrom : MonoBehaviour {
                     targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
             }
 
-            Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
+            //Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
 
             Target.transform.position = GetRayCastHitPosition();
         }

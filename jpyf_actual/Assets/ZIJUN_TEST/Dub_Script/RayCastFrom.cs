@@ -22,24 +22,31 @@ public class RayCastFrom : MonoBehaviour {
     void Update ()
     {
         //this.forward;	
-
-        float ObjToRayObj = (this.transform.position - targetedObject.transform.position).magnitude;
-        float Range = targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
-
-        //MaxRange = Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range));//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
-
-        MaxRange = Mathf.Sqrt((Range * Range) - (ObjToRayObj * ObjToRayObj));
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (targetedObject.gameObject)
         {
-            //targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
-            if (targetedObject.GetComponent<Minion>())
-                targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+            float ObjToRayObj = (this.transform.position - targetedObject.transform.position).magnitude;
+            float Range = targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
+
+            //MaxRange = Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range));//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
+
+            MaxRange = Mathf.Sqrt((Range * Range) - (ObjToRayObj * ObjToRayObj));
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+                if (targetedObject.GetComponent<Minion>())
+                    targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+            }
+
+            Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
+
+            Target.transform.position = GetRayCastHitPosition();
         }
+    }
 
-        Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
-
-        Target.transform.position = GetRayCastHitPosition();
+    public void SetShooter(GameObject Shooter)//Use This function the set variable for unit that is shooting
+    {
+        targetedObject = Shooter;
     }
 
     public Vector3 GetRayCastHitPosition()

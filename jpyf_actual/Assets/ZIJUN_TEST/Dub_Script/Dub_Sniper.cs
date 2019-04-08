@@ -162,6 +162,8 @@ public class Dub_Sniper : Attack_Unit
             //Debug.Log(CountDownTimer);
             bullet.Seek(TargetedPosTransform);
             bullet.SetBase(this);
+
+            Destroy(TargetedPosTransform.gameObject);
         }
     }
 }

@@ -26,8 +26,9 @@ public class RayCastFrom : MonoBehaviour {
         float ObjToRayObj = (this.transform.position - targetedObject.transform.position).magnitude;
         float Range = targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
 
-        MaxRange = Mathf.Sqrt(ObjToRayObj * ObjToRayObj + Range * Range);//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
+        //MaxRange = Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range));//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
 
+        MaxRange = Mathf.Sqrt((Range * Range) - (ObjToRayObj * ObjToRayObj));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -35,6 +36,8 @@ public class RayCastFrom : MonoBehaviour {
             if (targetedObject.GetComponent<Minion>())
                 targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
         }
+
+        Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
 
         Target.transform.position = GetRayCastHitPosition();
     }
@@ -86,18 +89,23 @@ public class RayCastFrom : MonoBehaviour {
         Physics.queriesHitTriggers = false;
 
         Physics.Raycast(CrosshairHit, out hit, MaxRange);
-
+        Debug.DrawRay(this.transform.position, this.transform.forward, Color.red);
+        
         PointHit = hit.point;
 
         Physics.queriesHitTriggers = true;
+
+        
 
         if (hit.point == Vector3.zero)
         {
             //Debug.Log("hehe");
             //PointHit = CrosshairHit.GetPoint(MaxRange);
+            Debug.DrawLine(this.transform.position, CrosshairHit.GetPoint(MaxRange), Color.green);
             return CrosshairHit.GetPoint(MaxRange);
         }
         //this.transform.forward;
+        Debug.DrawLine(this.transform.position, hit.point, Color.green);
         return hit.point;
     }
 }

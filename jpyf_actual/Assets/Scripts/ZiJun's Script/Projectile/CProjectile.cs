@@ -26,6 +26,8 @@ public class CProjectile : MonoBehaviour {
     float lifeTime = 0f;
     public bool moving = false;
 
+    float initLifeTime = 0f;
+
     bool isHit = false;
 
     public GameObject prefabtext;
@@ -120,7 +122,7 @@ public class CProjectile : MonoBehaviour {
         }
         else if (projectile_type == PT.RANGE)
         {
-            speed = (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / AnimationSpeed);
+            speed = (UnitThatShoots.GetComponent<BasicGameOBJ>().rangeValue / initLifeTime);
             //Debug.Log("cAME HERE");
         }
         //else if (projectile_type == PT.HEALING)
@@ -155,6 +157,7 @@ public class CProjectile : MonoBehaviour {
         UnitThatShootsPosition = GO.transform.position;
         UnitThatShoots = GO.transform;
         lifeTime = AnimationSpeed;
+        initLifeTime = lifeTime;
     }
 
     //private void OnTriggerEnter(Collider other)

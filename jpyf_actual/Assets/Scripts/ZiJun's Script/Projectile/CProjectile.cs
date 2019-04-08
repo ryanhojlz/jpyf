@@ -214,29 +214,37 @@ public class CProjectile : MonoBehaviour {
         //        Destroy(this.gameObject);
         //    }
         //}
-        if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
+        if (other && UnitThatShoots)
         {
-            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+            if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
             {
-                Damage(UnitThatShoots, other.transform);
-                //Debug.Break();
-                Destroy(this.gameObject);
+                if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+                {
+                    Damage(UnitThatShoots, other.transform);
+                    //Debug.Break();
+                    Destroy(this.gameObject);
+                }
             }
         }
+        
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
-        {
-            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
-            {
-                Damage(UnitThatShoots, other.transform);
-                //Debug.Break();
-                Destroy(this.gameObject);
-            }
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.GetComponent<Transform>())
+    //    {
+    //        if (other.gameObject.GetComponent<BasicGameOBJ>() && UnitThatShoots.GetComponent<BasicGameOBJ>())
+    //        {
+    //            if (UnitThatShoots.GetComponent<BasicGameOBJ>().Enemy_Tag == other.gameObject.GetComponent<BasicGameOBJ>().tag)
+    //            {
+    //                Damage(UnitThatShoots, other.transform);
+    //                //Debug.Break();
+    //                Destroy(this.gameObject);
+    //            }
+    //        }
+    //    }
+        
+    //}
 
 
     //private void OnTriggerStay(Collider other)

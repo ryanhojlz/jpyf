@@ -166,4 +166,9 @@ public class Dub_Sniper : Attack_Unit
             Destroy(TargetedPosTransform.gameObject);
         }
     }
+
+    public override void PlayerAutoAttack()
+    {
+        ShootFront();
+    }
 }

@@ -2676,6 +2676,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114933651050800254, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5,
+        type: 2}
+      propertyPath: healthValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
   m_IsPrefabParent: 0
@@ -6449,7 +6454,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4754616309905582, guid: bf13078defd77ff4fbb3badde0396803, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.32
+      value: -13.21
       objectReference: {fileID: 0}
     - target: {fileID: 4754616309905582, guid: bf13078defd77ff4fbb3badde0396803, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6478,6 +6483,10 @@ Prefab:
     - target: {fileID: 114856929531440028, guid: bf13078defd77ff4fbb3badde0396803,
         type: 2}
       propertyPath: moveSpeedValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290260293877218, guid: bf13078defd77ff4fbb3badde0396803, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7439,6 +7448,49 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1323312592}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1328302844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1328302846}
+  - component: {fileID: 1328302845}
+  m_Layer: 0
+  m_Name: Hord_Spawner_Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1328302845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1328302844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f3bdb1f211e0343acd5abc2352b450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefebUnitToSpawn: {fileID: 1958599830109934, guid: 93d29d97360359848b287ac657edfa12,
+    type: 2}
+  numberToSpawn: 5
+--- !u!4 &1328302846
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1328302844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.33, y: -4.01, z: 14.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 46
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334827226
 GameObject:
   m_ObjectHideFlags: 0
@@ -14035,7 +14087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ca3e38b37594443a79231f928dc9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabType: {fileID: 1126053075647834, guid: 919540d1d4b1e9b48a1a273a026595a4, type: 2}
+  PrefabType: {fileID: 1810384151697664, guid: 7dd8e383021d6ee4cb6d2c5fd3034892, type: 2}
 --- !u!1 &1814739872
 GameObject:
   m_ObjectHideFlags: 0

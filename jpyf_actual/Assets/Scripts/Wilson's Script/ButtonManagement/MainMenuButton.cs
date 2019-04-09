@@ -15,6 +15,9 @@ public class MainMenuButton : MonoBehaviour
 
     public GameObject highlighted;
 
+    public Canvas Titlescreencanvas;
+    public Canvas Mainmenucanvas;
+
     GameObject titleScreen;
 
     bool TitlescreenDisplay = true;
@@ -57,20 +60,27 @@ public class MainMenuButton : MonoBehaviour
             MoveRight();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            titleScreen.SetActive(false);
+            //titleScreen.SetActive(false);
             TitlescreenDisplay = false;
+        }
+        if (TitlescreenDisplay == true)
+        {
+            Titlescreencanvas.enabled = true;
+            Mainmenucanvas.enabled = false;
         }
         if (TitlescreenDisplay == false)
         {
+            Mainmenucanvas.enabled = true;
+            Titlescreencanvas.enabled = false;
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 EnterSelected();
             }
         }
 
-        Debug.Log(TitlescreenDisplay);
+        //Debug.Log(TitlescreenDisplay);
     }
 
     void MoveUp()

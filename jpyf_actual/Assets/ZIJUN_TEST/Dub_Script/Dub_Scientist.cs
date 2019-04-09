@@ -9,6 +9,11 @@ public class Dub_Scientist : Healer_Unit
     public GameObject specialProjectile;
     float immunityTimer = 30f;
 
+    private void Start()
+    {
+        GetComponent<NavMeshAgent>().baseOffset = 5;
+    }
+
     public override void Healing()
     {
         if (target == null)
@@ -33,8 +38,6 @@ public class Dub_Scientist : Healer_Unit
         {
             this.stateMachine.ChangeState(new HealState(this, minionWithinRange, Ally_Tag));
         }
-
-        GetComponent<NavMeshAgent>().baseOffset = 5;
 
         if (Input.GetKeyDown(KeyCode.M))
         {

@@ -14,7 +14,7 @@ public class CastleBase : Building
             Die();
             //end game here
             temp = new EndGameState();
-            temp.EndGame();
+            temp.EndGame(this.GetComponent<BasicGameOBJ>().Enemy_Tag);
         }
     }
 

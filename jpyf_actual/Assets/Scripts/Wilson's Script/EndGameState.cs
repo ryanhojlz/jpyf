@@ -34,14 +34,15 @@ public class EndGameState
     //    SceneManager.LoadScene("test");
     //}
 
-    public void EndGame()
+    public void EndGame(string enemytag)
     {
         //what to do when lose game?
         //what to trigger?
         //change scene?
         //this is for if win or lose screen uses same scene but different text
         Debug.Log("Game over");
-        SceneManager.LoadScene("EndGame");
+        Debug.Log(enemytag + " wins");
+        //SceneManager.LoadScene("EndGame");
     }
 
 }

@@ -35,6 +35,7 @@ public class RayCastFrom : MonoBehaviour {
         }
 
         // Target object render
+        if(ifRyan)
         targetedObject =  GameObject.Find("Player_object").GetComponent<ControllerPlayer>().CurrentUnit;
 
        

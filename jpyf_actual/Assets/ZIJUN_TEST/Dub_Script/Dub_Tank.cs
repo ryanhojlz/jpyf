@@ -111,6 +111,26 @@ public class Dub_Tank : Attack_Unit
 
     }
 
+    public override void ShootTargetedPos(Vector3 pos)
+    {
+        //base.ShootTargetedPos(pos);
+        GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
+        CProjectile bullet = bulletGO.GetComponent<CProjectile>();
+
+        if (bullet != null)
+        {
+            Transform TargetedPosTransform = new GameObject().transform;// = this.transform;
+
+            TargetedPosTransform.position = pos;
+
+            //Debug.Log(CountDownTimer);
+            bullet.Seek(TargetedPosTransform);
+            bullet.SetBase(this);
+
+            Destroy(TargetedPosTransform.gameObject);
+        }
+    }
+
 
     public override void PlayerAutoAttack()
     {
@@ -143,6 +163,7 @@ public class Dub_Tank : Attack_Unit
         //    bullet.SetBase(this);
         //}
 
-        ShootFront();
+        //ShootFront();
+        ShootTargetedPos(GameObject.Find("crosshair").GetComponent<RayCastFrom>().ReturnTargetPos());
     }
 }

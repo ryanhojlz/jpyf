@@ -2962,6 +2962,11 @@ Prefab:
       propertyPath: healthValue
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114933651050800254, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5,
+        type: 2}
+      propertyPath: attackSpeedValue
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
   m_IsPrefabParent: 0
@@ -7200,7 +7205,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1290260293877218, guid: bf13078defd77ff4fbb3badde0396803, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf13078defd77ff4fbb3badde0396803, type: 2}
@@ -16251,6 +16256,10 @@ Prefab:
     - target: {fileID: 4317737960847388, guid: 5ae7bb4e2919e394a91f898d3c7ca418, type: 2}
       propertyPath: m_LocalScale.z
       value: 0.59999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855400979801296, guid: 5ae7bb4e2919e394a91f898d3c7ca418, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ae7bb4e2919e394a91f898d3c7ca418, type: 2}

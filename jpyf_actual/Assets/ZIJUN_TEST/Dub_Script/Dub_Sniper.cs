@@ -169,6 +169,9 @@ public class Dub_Sniper : Attack_Unit
 
     public override void PlayerAutoAttack()
     {
-        ShootFront();
+        //ShootFront();
+        Debug.Log("RandomSphere");
+        //ShootTargetedPos(GameObject.Find("RandomSphere").transform.position);
+        ShootTargetedPos(GameObject.Find("crosshair").GetComponent<RayCastFrom>().ReturnTargetPos());
     }
 }

@@ -41,6 +41,7 @@ public class MainMenuController : MonoBehaviour
         if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")))
         {
             menuManager.TitlescreenDisplay = false;
+            menuManager.EnterSelected();
             Debug.Log("This is working and so are you");
         }
 

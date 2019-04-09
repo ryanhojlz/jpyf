@@ -6,6 +6,11 @@ public class DeletedAfter : MonoBehaviour
 {
     float timer = 0.1f;
 
+    private void Start()
+    {
+        gameObject.name = "RandomSphere";
+    }
+
     // Update is called once per frame
     void Update()
     {

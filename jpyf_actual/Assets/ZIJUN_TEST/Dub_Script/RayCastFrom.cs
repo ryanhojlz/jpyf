@@ -10,6 +10,9 @@ public class RayCastFrom : MonoBehaviour {
     public GameObject Ball;
 
     GameObject Target = null;
+    public bool renderball = true;
+
+    public bool ifRyan = false;
 
     // Update is called once per frame
 
@@ -19,8 +22,23 @@ public class RayCastFrom : MonoBehaviour {
         Target = Instantiate(Ball, GetRayCastHitPosition(), this.transform.rotation);
     }
 
-    void Update ()
+    void Update()
     {
+        // Render ball for debugging 
+        if (renderball)
+        {
+            Target.GetComponent<Renderer>().enabled = true;
+        }
+        else
+        {
+            Target.GetComponent<Renderer>().enabled = false;
+        }
+
+        // Target object render
+        targetedObject =  GameObject.Find("Player_object").GetComponent<ControllerPlayer>().CurrentUnit;
+
+       
+
         //this.forward;	
         if (targetedObject.gameObject)
         {
@@ -29,15 +47,19 @@ public class RayCastFrom : MonoBehaviour {
 
             //MaxRange = Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range));//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
 
+            Debug.Log(this.transform.position);
+
             MaxRange = Mathf.Sqrt((Range * Range) - (ObjToRayObj * ObjToRayObj));
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!ifRyan)
             {
-                //targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
-                if (targetedObject.GetComponent<Minion>())
-                    targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    //targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+                    if (targetedObject.GetComponent<Minion>())
+                        targetedObject.GetComponent<Minion>().ShootTargetedPos(GetRayCastHitPosition());
+                }
             }
-
             //Debug.Log(Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range)));
 
             Target.transform.position = GetRayCastHitPosition();
@@ -52,38 +74,42 @@ public class RayCastFrom : MonoBehaviour {
     public Vector3 GetRayCastHitPosition()
     {
 
-        //RaycastHit hit = new RaycastHit();
+        {
 
-        //Vector3 PointHit = Vector3.zero;
+            //RaycastHit hit = new RaycastHit();
 
-        //Debug.Log(this.transform.forward);
+            //Vector3 PointHit = Vector3.zero;
 
-        //Ray CrosshairHit = this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);//new Ray(this.transform.position, this.transform.forward);
-        //Ray CrosshairHit = new Ray(this.transform.position, this.transform.forward);
-        //this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);
+            //Debug.Log(this.transform.forward);
 
-        //Physics.Raycast(CrosshairHit, out hit);
+            //Ray CrosshairHit = this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);//new Ray(this.transform.position, this.transform.forward);
+            //Ray CrosshairHit = new Ray(this.transform.position, this.transform.forward);
+            //this.GetComponent<Camera>().ScreenPointToRay(PositionShootFrom);
 
-        //PointHit = hit.point;
+            //Physics.Raycast(CrosshairHit, out hit);
 
-        //if (hit.point == Vector3.zero)
-        //{
-        //    return CrosshairHit.GetPoint(MaxRange);
-        //}
-        //this.transform.forward;
-        //return Vector3.zero;
+            //PointHit = hit.point;
 
-        //Ray ObjectRayCast = new Ray(targetedObject.transform.position, (PointHit - targetedObject.transform.position).normalized);
+            //if (hit.point == Vector3.zero)
+            //{
+            //    return CrosshairHit.GetPoint(MaxRange);
+            //}
+            //this.transform.forward;
+            //return Vector3.zero;
 
-        //Physics.Raycast(ObjectRayCast, out hit, targetedObject.GetComponent<BasicGameOBJ>().rangeValue);
+            //Ray ObjectRayCast = new Ray(targetedObject.transform.position, (PointHit - targetedObject.transform.position).normalized);
 
-        //if (hit.point == Vector3.zero)
-        //{
-        //    //Debug.Log("hehe");
-        //    return ObjectRayCast.GetPoint(targetedObject.GetComponent<BasicGameOBJ>().rangeValue);
-        //}
+            //Physics.Raycast(ObjectRayCast, out hit, targetedObject.GetComponent<BasicGameOBJ>().rangeValue);
 
-        //return hit.point;
+            //if (hit.point == Vector3.zero)
+            //{
+            //    //Debug.Log("hehe");
+            //    return ObjectRayCast.GetPoint(targetedObject.GetComponent<BasicGameOBJ>().rangeValue);
+            //}
+
+            //return hit.point;
+
+        }
 
         RaycastHit hit = new RaycastHit();
 
@@ -114,5 +140,10 @@ public class RayCastFrom : MonoBehaviour {
         //this.transform.forward;
         Debug.DrawLine(this.transform.position, hit.point, Color.green);
         return hit.point;
+    }
+
+    public Vector3 ReturnTargetPos()
+    {
+        return Target.transform.position;
     }
 }

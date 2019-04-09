@@ -24,7 +24,7 @@ public class Third_Person_Camera : MonoBehaviour {
 
     GameObject Target = null;
 
-
+    
 
 
     Vector2 PositionShootFrom = new Vector2(Screen.width * 0.5f, Screen.height * 0.7f);

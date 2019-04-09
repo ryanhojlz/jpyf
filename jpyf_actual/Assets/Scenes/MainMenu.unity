@@ -565,20 +565,23 @@ MonoBehaviour:
   menuManager: {fileID: 0}
   playerID: 0
   stickID: 0
-  buffer_axis_horizontal: 0
-  buffer_axis_vertical: 0
+  buffer_axis_horizontal_L: 0
+  buffer_axis_horizontal_R: 0
+  buffer_axis_vertical_U: 0
+  buffer_axis_vertical_D: 0
 --- !u!4 &952628729
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 952628727}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0300336, y: 4.6336517, z: 9.038539}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.030033, y: 4.6336517, z: 9.038536}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2136296055}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156811359
 GameObject:
@@ -1174,18 +1177,19 @@ MonoBehaviour:
   highlighted: {fileID: 20978143}
   Titlescreencanvas: {fileID: 1252216448}
   Mainmenucanvas: {fileID: 405121371}
+  TitlescreenDisplay: 1
 --- !u!4 &2136296055
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2136296053}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.28843, y: 25.654232, z: 90}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 67.31847, y: 21.02058, z: 80.961464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 952628729}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2136296056
 MonoBehaviour:

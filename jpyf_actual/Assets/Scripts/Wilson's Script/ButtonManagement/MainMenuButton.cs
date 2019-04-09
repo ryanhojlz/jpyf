@@ -131,14 +131,16 @@ public class MainMenuButton : MonoBehaviour
         }
     }
 
-    void EnterSelected()
+    public void EnterSelected()
     {
+        if (TitlescreenDisplay)
+            return;
         switch (buttons[indexX, indexY].gameObject.name)
         {
             case "coopvsai":
                 {
                     Debug.Log("Loading game scene");
-                    SceneManager.LoadScene("PC_Build_Wilson");
+                    SceneManager.LoadScene("Week_3Merge");
                     //SceneManager.LoadScene("PC_Build_Wilson");
 
                 }
@@ -165,4 +167,7 @@ public class MainMenuButton : MonoBehaviour
         }
 
     }
+
+
+
 }

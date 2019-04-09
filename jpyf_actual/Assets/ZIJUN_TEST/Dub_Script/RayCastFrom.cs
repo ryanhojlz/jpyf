@@ -50,7 +50,7 @@ public class RayCastFrom : MonoBehaviour {
 
             //MaxRange = Mathf.Sqrt((ObjToRayObj * ObjToRayObj) + (Range * Range));//(this.transform.position - targetedObject.transform.position).magnitude + targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
 
-            Debug.Log(this.transform.position);
+            //Debug.Log(this.transform.position);
 
             MaxRange = Mathf.Sqrt((Range * Range) - (ObjToRayObj * ObjToRayObj));
 

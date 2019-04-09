@@ -3428,7 +3428,7 @@ Transform:
   m_Children:
   - {fileID: 414375168}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &599716469
 GameObject:
@@ -3686,7 +3686,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1478206296627350, guid: b2440ee7ba25e91418f5dcdcb4ab12a7, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2440ee7ba25e91418f5dcdcb4ab12a7, type: 2}
@@ -8267,7 +8267,7 @@ GameObject:
   - component: {fileID: 1507915963}
   - component: {fileID: 1507915966}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8445,7 +8445,7 @@ Transform:
   - {fileID: 2133664277}
   - {fileID: 377502212}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1562717890
 Transform:
@@ -14891,7 +14891,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4428523416277894, guid: e6e7630b05ba99d46aa9c55a43afd464, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.12
+      value: 1.572
       objectReference: {fileID: 0}
     - target: {fileID: 4428523416277894, guid: e6e7630b05ba99d46aa9c55a43afd464, type: 2}
       propertyPath: m_LocalPosition.y
@@ -14899,7 +14899,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4428523416277894, guid: e6e7630b05ba99d46aa9c55a43afd464, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12.52
+      value: -17.138
       objectReference: {fileID: 0}
     - target: {fileID: 4428523416277894, guid: e6e7630b05ba99d46aa9c55a43afd464, type: 2}
       propertyPath: m_LocalRotation.x
@@ -21145,7 +21145,7 @@ Transform:
   m_Children:
   - {fileID: 1943484596}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2083418420
 Rigidbody:

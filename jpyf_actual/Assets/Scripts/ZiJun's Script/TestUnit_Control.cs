@@ -6,8 +6,8 @@ public class TestUnit_Control : MonoBehaviour
 {
     public NavMeshAgent agent;
     private static List<WaypointClass> PlayerWaypointList = new List<WaypointClass>();
-    private int pathIndex = 0;
-    private int waypointIndex = 0;
+    public int pathIndex = 0;
+    public int waypointIndex = 0;
     Footsteps footsteps;
 
     //private StateMachine sm = new StateMachine();

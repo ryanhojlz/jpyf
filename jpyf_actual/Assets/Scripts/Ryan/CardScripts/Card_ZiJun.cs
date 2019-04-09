@@ -126,9 +126,9 @@ public class Card_ZiJun : GrabbableObject
 
         if (summon)
         {
-            GameObject go = Instantiate(summonedUnit) as GameObject;
             //Vector3 spawnPoint = new Vector3(250, 7, -55);
-            Vector3 spawnPoint = this.transform.position;
+            Vector3 spawnPoint = Vector3.zero;
+            spawnPoint.y = 1;
            
 
             if (this.transform.position.x < -0.8f)
@@ -152,7 +152,14 @@ public class Card_ZiJun : GrabbableObject
 
             }
 
-            go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
+            Ray CastToGround = new Ray(spawnPoint, Vector3.down);
+            RaycastHit hit;
+            Physics.Raycast(CastToGround, out hit);
+
+            GameObject go = Instantiate(summonedUnit,hit.point, summonedUnit.transform.rotation) as GameObject;
+            go.GetComponent<TestUnit_Control>().waypointIndex = 0;
+
+            //go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
             Destroy(gameObject);
         }
 

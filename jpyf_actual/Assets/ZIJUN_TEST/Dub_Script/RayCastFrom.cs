@@ -43,6 +43,8 @@ public class RayCastFrom : MonoBehaviour {
         //this.forward;	
         if (targetedObject.gameObject)
         {
+            if (!targetedObject.gameObject.GetComponent<BasicGameOBJ>())
+                return;
             float ObjToRayObj = (this.transform.position - targetedObject.transform.position).magnitude;
             float Range = targetedObject.GetComponent<BasicGameOBJ>().rangeValue;
 

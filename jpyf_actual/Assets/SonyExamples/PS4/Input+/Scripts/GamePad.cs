@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+#if UNITY_PS4
 using UnityEngine.PS4;
 using System;
+#endif
 using System.Collections;
 
 public class GamePad : MonoBehaviour

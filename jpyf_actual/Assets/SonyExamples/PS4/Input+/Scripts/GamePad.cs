@@ -5,8 +5,9 @@ using System.Collections;
 
 public class GamePad : MonoBehaviour
 {
-	// Custom class for holding all the gamepad sprites
-	[System.Serializable]
+#if UNITY_PS4
+    // Custom class for holding all the gamepad sprites
+    [System.Serializable]
 	public class PS4GamePad
 	{
 		public SpriteRenderer thumbstick_left;
@@ -407,4 +408,5 @@ public class GamePad : MonoBehaviour
 		else
 			rmsValue = 0f;
 	}
+#endif
 }

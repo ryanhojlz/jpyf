@@ -38,6 +38,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4284215534064330}
+  - component: {fileID: 114558965747246374}
   m_Layer: 0
   m_Name: Special Power Indicator
   m_TagString: Untagged
@@ -365,6 +366,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainObject: {fileID: 0}
   speed: 150
+--- !u!114 &114558965747246374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1190630371959172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28393720cfe25a940a8a13a09e605097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
 --- !u!114 &114585005443734994
 MonoBehaviour:
   m_ObjectHideFlags: 1

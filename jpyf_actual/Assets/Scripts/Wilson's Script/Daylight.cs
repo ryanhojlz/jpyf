@@ -20,7 +20,7 @@ public class Daylight : MonoBehaviour
         dayTimeTimer += Time.deltaTime;
         transform.RotateAround(Vector3.zero, Vector3.right, 0);
 
-        Debug.Log(dayTimeTimer);
+        //Debug.Log(dayTimeTimer);
         if (dayTimeTimer > 3f)
         {
             isChangingDayNight = true;
@@ -39,7 +39,7 @@ public class Daylight : MonoBehaviour
 
     void RotatingSun()
     {
-        transform.RotateAround(Vector3.zero, Vector3.right, 20f * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.forward, 2.0f * Time.deltaTime);
         transform.LookAt(Vector3.zero);
     }
 }

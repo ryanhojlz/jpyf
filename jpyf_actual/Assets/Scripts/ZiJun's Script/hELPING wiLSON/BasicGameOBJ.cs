@@ -17,6 +17,7 @@ public class BasicGameOBJ : MonoBehaviour
     public float startHealthvalue;
     public float healthValue;
     public float attackValue;
+    private float originalAtkValue = 0;
     public float defenceValue;
     public float attackSpeedValue;
     public float moveSpeedValue;
@@ -50,6 +51,7 @@ public class BasicGameOBJ : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        originalAtkValue = attackValue;
         if (this.tag == "Ally_Unit")
         {
             Enemy_Tag = "Enemy_Unit";
@@ -105,6 +107,12 @@ public class BasicGameOBJ : MonoBehaviour
 
         if (this.gameObject.GetComponent<Immunity>())
             return;
+
+        dmgAmount -= defenceValue;
+        if (dmgAmount < 1)
+        {
+            dmgAmount = 1;
+        }
 
         healthValue -= dmgAmount;
 

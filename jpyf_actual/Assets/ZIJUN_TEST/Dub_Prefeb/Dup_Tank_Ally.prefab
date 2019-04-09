@@ -320,8 +320,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1151953449723706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18, y: 18, z: 18}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4268259162026100}
   - {fileID: 4337436520282502}
@@ -748,6 +748,8 @@ MonoBehaviour:
   meleeProjectile: {fileID: 1038919709963554, guid: 3fa089d11b543084a8351ac6439ff87f,
     type: 2}
   attackSound: {fileID: 0}
+  specialEffect: {fileID: 1190630371959172, guid: d46f5b0f3154e804cb899640a207aaea,
+    type: 2}
 --- !u!114 &114613882947476800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -798,6 +800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195117916390943548}
+  pathIndex: 0
+  waypointIndex: 0
 --- !u!135 &135912788898439890
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -873,7 +877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.44}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 10, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224780859485216346

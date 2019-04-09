@@ -550,6 +550,10 @@ public class MoveController : MonoBehaviour
             //    GameObject.Find("DonDon").SetActive(false);
             //}
             GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Tank_Card");
+            GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Healer_Card");
+            GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Ranger_Card");
+
+
         }
     }
 

@@ -7,6 +7,7 @@ public class Dub_Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
     public AudioSource attackSound;
+    public GameObject specialEffect = null;
 
     float target_distance;
     public override void Attack()

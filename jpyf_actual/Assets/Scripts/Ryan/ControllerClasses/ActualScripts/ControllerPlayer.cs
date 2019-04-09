@@ -105,6 +105,7 @@ public class ControllerPlayer : MonoBehaviour
         UpdateAxis();
         CameraMovement();
         NewMovement();
+        ThumbStickButtons();
     }
 
     void Buttons()
@@ -244,7 +245,7 @@ public class ControllerPlayer : MonoBehaviour
         // L1
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
         {
-            UnityEngine.XR.XRSettings.showDeviceView = true;
+
 
             SwapUnit(false);
             buffer_L1 = true;
@@ -257,7 +258,7 @@ public class ControllerPlayer : MonoBehaviour
         // R1 // Buffered input
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_R1)
         {
-            UnityEngine.XR.XRSettings.showDeviceView = false;
+            //UnityEngine.XR.XRSettings.showDeviceView = false;
 
             SwapUnit(true);
             buffer_R1 = true;
@@ -269,12 +270,12 @@ public class ControllerPlayer : MonoBehaviour
 
        
         // L2
-        if (Input.GetAxis("joystick" + stickID + "_left_trigger") > 0 && !buffer_L2)
+        if (Input.GetAxis("joystick" + stickID + "_left_trigger") != 0 && !buffer_L2)
         {
-            
+            Debug.Log("L2 RAN HERE ");
             buffer_L2 = true;
         }
-        else if (Input.GetAxis("joystick" + stickID + "_left_trigger") <= 0 && buffer_L2)
+        else if (Input.GetAxis("joystick" + stickID + "_left_trigger") == 0 && buffer_L2)
         {
             buffer_L2 = false;
         }
@@ -289,12 +290,12 @@ public class ControllerPlayer : MonoBehaviour
         }
 
         // R2
-        if (Input.GetAxis("joystick" + stickID + "_right_trigger") > 0 && !buffer_R2)
+        if (Input.GetAxis("joystick" + stickID + "_right_trigger") != 0 && !buffer_R2)
         {
-            Debug.Log("Run ");
+            Debug.Log("R2 RAN HERE ");
             buffer_R2 = true;
         }
-        else if (Input.GetAxis("joystick" + stickID + "_right_trigger") <= 0 && buffer_R2)
+        else if (Input.GetAxis("joystick" + stickID + "_right_trigger") == 0 && buffer_R2)
         {
             buffer_R2 = false;
         }
@@ -476,6 +477,23 @@ public class ControllerPlayer : MonoBehaviour
 
 
     }
+
+    void ThumbStickButtons()
+    {
+
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button8", true)))
+        {
+            Debug.Log("Ples");
+            UnityEngine.XR.XRSettings.showDeviceView = true;
+        }
+
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button9", true)))
+        {
+            Debug.Log("Ples Ples");
+            UnityEngine.XR.XRSettings.showDeviceView = false;
+        }
+    }
+
 
     void NewMovement()
     {

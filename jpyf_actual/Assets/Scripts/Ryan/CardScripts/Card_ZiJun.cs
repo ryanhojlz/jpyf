@@ -116,7 +116,7 @@ public class Card_ZiJun : GrabbableObject
             if (transform.position.z > -17)
             {
                 var pos = transform.position;
-                pos.y = -3;
+                pos.y = -4.5f;
                 transform.position = pos;
                 summon = true;
             }
@@ -129,15 +129,16 @@ public class Card_ZiJun : GrabbableObject
             GameObject go = Instantiate(summonedUnit) as GameObject;
             //Vector3 spawnPoint = new Vector3(250, 7, -55);
             Vector3 spawnPoint = this.transform.position;
+           
 
-            if (this.transform.position.x < -3)
+            if (this.transform.position.x < -0.8f)
             {
                 // Left
                 spawnPoint.x = GameObject.Find("SpawnReference3").transform.position.x;
                 spawnPoint.z = GameObject.Find("SpawnReference3").transform.position.z;
 
             }
-            else if (this.transform.position.x < 3)
+            else if (this.transform.position.x < 0.8)
             {
                 // Middle
                 spawnPoint.x = GameObject.Find("SpawnReference2").transform.position.x;

@@ -20,7 +20,7 @@ public class MainMenuButton : MonoBehaviour
 
     GameObject titleScreen;
 
-    bool TitlescreenDisplay = true;
+    public bool TitlescreenDisplay = true;
 
     int indexX = 0;
     int indexY = 0;
@@ -39,7 +39,7 @@ public class MainMenuButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(buttons[indexX, indexY].gameObject.name);
+       // Debug.Log(buttons[indexX, indexY].gameObject.name);
 
         highlighted.gameObject.transform.position = buttons[indexX, indexY].gameObject.transform.position;
 
@@ -83,7 +83,7 @@ public class MainMenuButton : MonoBehaviour
         //Debug.Log(TitlescreenDisplay);
     }
 
-    void MoveUp()
+    public void MoveUp()
     {
         if (indexY > 0)
         {
@@ -95,7 +95,7 @@ public class MainMenuButton : MonoBehaviour
         }
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
         if (indexY <= 0)
         {
@@ -107,7 +107,7 @@ public class MainMenuButton : MonoBehaviour
         }
     }
 
-    void MoveLeft()
+    public void MoveLeft()
     {
         if (indexX <= 0)
         {
@@ -119,7 +119,7 @@ public class MainMenuButton : MonoBehaviour
         }
     }
 
-    void MoveRight()
+    public void MoveRight()
     {
         if (indexX > 0)
         {
@@ -139,6 +139,8 @@ public class MainMenuButton : MonoBehaviour
                 {
                     Debug.Log("Loading game scene");
                     SceneManager.LoadScene("PC_Build_Wilson");
+                    //SceneManager.LoadScene("PC_Build_Wilson");
+
                 }
                 break;
 

@@ -22,6 +22,7 @@ public class BasicGameOBJ : MonoBehaviour
     public float moveSpeedValue;
     public float rangeValue;
     public int possesionTier = 0;
+    
     public bool isActive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;

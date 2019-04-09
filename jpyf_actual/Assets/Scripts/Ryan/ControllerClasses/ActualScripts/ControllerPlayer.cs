@@ -14,7 +14,7 @@ public class ControllerPlayer : MonoBehaviour
     public int stickID;
 
 
-    // TBH i think u can use getkeydown but i had to put out something fast atm so i used the old buffers
+    // TBH i think u can use getkeydown but i had to push out something at the time of making this so i used the old buffers
     // ButtonBuffer
     private bool buffer_o = false;
     private bool buffer_x = false;
@@ -27,7 +27,6 @@ public class ControllerPlayer : MonoBehaviour
     private bool buffer_R2 = false;
     private bool buffer_L2 = false;
 
-    
 
     // Current
     public GameObject CurrentUnit = null;
@@ -58,10 +57,13 @@ public class ControllerPlayer : MonoBehaviour
 
     // Bool sprinting
     bool Sprinting = false;
-
+   
     // Some bs    
     Vector3 lastpos;
  
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -159,7 +161,10 @@ public class ControllerPlayer : MonoBehaviour
             // Special Attack
             if (!CurrentUnit.GetComponent<NewPossesionScript>())
             {
-                CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
+                //Start QTE
+                GameObject.Find("QTE_Manager").GetComponent<QTE_Manager>().StartQTE();
+                
+                //CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
             }
             buffer_o = true;
         }
@@ -239,6 +244,8 @@ public class ControllerPlayer : MonoBehaviour
         // L1
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
         {
+            UnityEngine.XR.XRSettings.showDeviceView = true;
+
             SwapUnit(false);
             buffer_L1 = true;
         }
@@ -250,6 +257,8 @@ public class ControllerPlayer : MonoBehaviour
         // R1 // Buffered input
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")) && !buffer_R1)
         {
+            UnityEngine.XR.XRSettings.showDeviceView = false;
+
             SwapUnit(true);
             buffer_R1 = true;
         }
@@ -258,17 +267,17 @@ public class ControllerPlayer : MonoBehaviour
             buffer_R1 = false;
         }
 
-        
+       
         // L2
         if (Input.GetAxis("joystick" + stickID + "_left_trigger") > 0 && !buffer_L2)
         {
+            
             buffer_L2 = true;
         }
         else if (Input.GetAxis("joystick" + stickID + "_left_trigger") <= 0 && buffer_L2)
         {
             buffer_L2 = false;
         }
-
 
         if (Input.GetAxis("joystick" + stickID + "_left_trigger") > 0)
         {
@@ -282,6 +291,7 @@ public class ControllerPlayer : MonoBehaviour
         // R2
         if (Input.GetAxis("joystick" + stickID + "_right_trigger") > 0 && !buffer_R2)
         {
+            Debug.Log("Run ");
             buffer_R2 = true;
         }
         else if (Input.GetAxis("joystick" + stickID + "_right_trigger") <= 0 && buffer_R2)

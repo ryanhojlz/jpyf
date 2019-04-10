@@ -289,7 +289,12 @@ public class ControllerPlayer : MonoBehaviour
         // R2
         if (Input.GetAxis("joystick" + stickID + "_right_trigger") != 0 && !buffer_R2)
         {
-            Debug.Log("R2 RAN HERE ");
+            // If unit is a actual minion
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                // Minion attack // Basic
+                CurrentUnit.GetComponent<Attack_Unit>().PlayerAutoAttack();
+            }
             buffer_R2 = true;
         }
         else if (Input.GetAxis("joystick" + stickID + "_right_trigger") == 0 && buffer_R2)

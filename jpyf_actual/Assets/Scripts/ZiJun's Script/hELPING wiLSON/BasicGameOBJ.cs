@@ -22,7 +22,7 @@ public class BasicGameOBJ : MonoBehaviour
     public float attackSpeedValue;
     public float moveSpeedValue;
     public float rangeValue;
-    public int possesionTier = 0;
+    public float possesionTier = 0;
     
     public bool isActive;
     public GameObject[] targetList; //enemy or ally also can
@@ -46,8 +46,9 @@ public class BasicGameOBJ : MonoBehaviour
     public string Enemy_Tag;
     public string Ally_Tag;
 
-
     public bool isPossessed = false;
+
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -141,6 +142,9 @@ public class BasicGameOBJ : MonoBehaviour
     {
 
     }
+
+
+
     protected void UpdateCheckList()
     {
         for (int i = 0; i < minionWithinRange.Count; ++i)

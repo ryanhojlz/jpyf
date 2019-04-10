@@ -39,7 +39,7 @@ public class Daylight : MonoBehaviour
 
     void RotatingSun()
     {
-        transform.RotateAround(Vector3.zero, Vector3.forward, 2.0f * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.forward, 40.0f * Time.deltaTime);
         transform.LookAt(Vector3.zero);
     }
 }

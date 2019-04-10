@@ -21,7 +21,7 @@ public class NewPossesionScript : MonoBehaviour
 
     // Possesing interaction
     public float timeToPosses = 0;
-    public float timeToPossesReference = 8;
+    public float timeToPossesReference = 15;
     public float possesProgression = 5;
     public float possesProgressionCap = 10;
 
@@ -354,7 +354,6 @@ public class NewPossesionScript : MonoBehaviour
     // ReInit
     void ReInitPossesInteraction()
     {
-        
         timeToPosses = timeToPossesReference;
         possesProgression = 2.0f;
         EffectEnhances = 0;

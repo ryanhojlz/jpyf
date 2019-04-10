@@ -26,7 +26,7 @@ public class PossesionEffectScript : MonoBehaviour
         if (Spirit.GetComponent<NewPossesionScript>().isPossesing)
         {
             Fill.GetComponent<Image>().fillAmount = 1 * (Spirit.GetComponent<NewPossesionScript>().possesProgression / Spirit.GetComponent<NewPossesionScript>().possesProgressionCap);
-            Text.GetComponent<Text>().text = "" + Spirit.GetComponent<NewPossesionScript>().timeToPosses;
+            Text.GetComponent<Text>().text = "" + (int)Spirit.GetComponent<NewPossesionScript>().timeToPosses;
             SetRender(true);
         }
         else if (!Spirit.GetComponent<NewPossesionScript>().isPossesing)

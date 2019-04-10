@@ -5,7 +5,11 @@ using UnityEngine;
 public class TankTimerScript : MonoBehaviour
 {
     public float lifetime = 2.0f;
-	// Use this for initialization
+    public GameObject owner = null;
+    Vector3 eulerankles = Vector3.zero;
+    float y_val = 0;
+    public float spinSpeed = 1;
+    // Use this for initialization
 	void Start ()
     {
 		
@@ -19,5 +23,14 @@ public class TankTimerScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-	}
+        if (owner != null)
+        {
+            this.transform.position = owner.transform.position;
+        }
+
+        y_val += 250 * Time.deltaTime;  
+        eulerankles.y = y_val;
+        this.transform.eulerAngles = eulerankles;
+
+    }
 }

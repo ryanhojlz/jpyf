@@ -10,7 +10,6 @@ public class Card_ZiJun : GrabbableObject
     public bool pickedup = false;
     public bool lookedAt = false;
     public bool isthrown = false;
-
     public bool summon = false;
     
     public int ManaCost = 0;
@@ -18,16 +17,32 @@ public class Card_ZiJun : GrabbableObject
     public GameObject summonedUnit = null;
     private Shader Mat = null;
 
+    public Shader shaderInstance = null;
+    Vector4 cantake = Vector4.zero;
+    Vector4 cannottake = Vector4.zero;
+
+    GameObject playerRef = null;
+
     private void Awake()
     {
         Mat = GetComponent<Renderer>().material.shader;
     }
 
+    private void Start()
+    {
+        playerRef = GameObject.Find("Player");
+        cantake.Set(0, 255, 0, 255);
+        cannottake.Set(255, 0, 0, 255);
+        GetComponent<Renderer>().material.shader = shaderInstance;
+        GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 0.08f);
+        //GetComponent <Renderer>().material.SetVector("_OutlineColor", new Vector4(0,0,0,0) );
+    }
+
     public override void OnGrab(MoveController currentController)
     {
-        GameObject playerReference = GameObject.Find("Player");
+        //GameObject playerReference = GameObject.Find("Player");
         // if current mana is lesser than this mana
-        if (playerReference.GetComponent<PlayerScript>().Mana < this.ManaCost)
+        if (playerRef.GetComponent<PlayerScript>().Mana < this.ManaCost)
             return;
 
         base.OnGrab(currentController);
@@ -55,60 +70,72 @@ public class Card_ZiJun : GrabbableObject
             this.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
 
-        //else
-        //{
-        //    this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        //    this.gameObject.GetComponent<Rigidbody>().useGravity = false;
-        //}
+        if (playerRef.GetComponent<PlayerScript>().Mana < ManaCost)
+        {
+            GetComponent<Renderer>().material.SetVector("_OutlineColor", cannottake);
+        }
+        else
+        {
+            GetComponent<Renderer>().material.SetVector("_OutlineColor", cantake);
+        }
+
+        {
+            //else
+            //{
+            //    this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            //    this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+            //}
 
 
-        //if (onfloor)
-        //{
-        //    summonTimer -= 1.0f * Time.deltaTime;
+            //if (onfloor)
+            //{
+            //    summonTimer -= 1.0f * Time.deltaTime;
 
-        //    var tempcolor = this.GetComponent<MeshRenderer>().material.color;
-        //    tempcolor.r = 255;
-        //    tempcolor.g = 0;
-        //    tempcolor.b = 255;
-        //    this.GetComponent<MeshRenderer>().material.color = tempcolor;
-        //}
-        //if (isthrown)
-        //{
-        //    if (transform.position.z > -17)
-        //    {
-        //        summonTimer = 0;
-        //    }
-        //}
-        //if (summonTimer <= 0)
-        //{
-        //    GameObject go = Instantiate(summonedUnit) as GameObject;
-        //    //Vector3 spawnPoint = new Vector3(250, 7, -55);
-        //    Vector3 spawnPoint = this.transform.position;
+            //    var tempcolor = this.GetComponent<MeshRenderer>().material.color;
+            //    tempcolor.r = 255;
+            //    tempcolor.g = 0;
+            //    tempcolor.b = 255;
+            //    this.GetComponent<MeshRenderer>().material.color = tempcolor;
+            //}
+            //if (isthrown)
+            //{
+            //    if (transform.position.z > -17)
+            //    {
+            //        summonTimer = 0;
+            //    }
+            //}
+            //if (summonTimer <= 0)
+            //{
+            //    GameObject go = Instantiate(summonedUnit) as GameObject;
+            //    //Vector3 spawnPoint = new Vector3(250, 7, -55);
+            //    Vector3 spawnPoint = this.transform.position;
 
-        //    if (this.transform.position.x < -3)
-        //    {
-        //        // Left
-        //        spawnPoint.x = GameObject.Find("SpawnReference3").transform.position.x;
-        //        spawnPoint.z = GameObject.Find("SpawnReference3").transform.position.z;
+            //    if (this.transform.position.x < -3)
+            //    {
+            //        // Left
+            //        spawnPoint.x = GameObject.Find("SpawnReference3").transform.position.x;
+            //        spawnPoint.z = GameObject.Find("SpawnReference3").transform.position.z;
 
-        //    }
-        //    else if (this.transform.position.x < 3)
-        //    {
-        //        // Middle
-        //        spawnPoint.x = GameObject.Find("SpawnReference2").transform.position.x;
-        //        spawnPoint.z = GameObject.Find("SpawnReference2").transform.position.z;
-        //    }
-        //    else
-        //    {
-        //        // Right
-        //        spawnPoint.x = GameObject.Find("SpawnReference1").transform.position.x;
-        //        spawnPoint.z = GameObject.Find("SpawnReference1").transform.position.z;
+            //    }
+            //    else if (this.transform.position.x < 3)
+            //    {
+            //        // Middle
+            //        spawnPoint.x = GameObject.Find("SpawnReference2").transform.position.x;
+            //        spawnPoint.z = GameObject.Find("SpawnReference2").transform.position.z;
+            //    }
+            //    else
+            //    {
+            //        // Right
+            //        spawnPoint.x = GameObject.Find("SpawnReference1").transform.position.x;
+            //        spawnPoint.z = GameObject.Find("SpawnReference1").transform.position.z;
 
-        //    }
+            //    }
 
-        //    go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
-        //    Destroy(gameObject);
-        //}
+            //    go.GetComponent<NavMeshAgent>().Warp(spawnPoint);
+            //    Destroy(gameObject);
+            //}
+        }
+
 
         if (isthrown)
         {
@@ -128,8 +155,9 @@ public class Card_ZiJun : GrabbableObject
         {
             //Vector3 spawnPoint = new Vector3(250, 7, -55);
             Vector3 spawnPoint = Vector3.zero;
+            //GameObject playerReference = GameObject.Find("Player");
             spawnPoint.y = 1;
-           
+            playerRef.GetComponent<PlayerScript>().Mana -= ManaCost;
 
             if (this.transform.position.x < -0.8f)
             {

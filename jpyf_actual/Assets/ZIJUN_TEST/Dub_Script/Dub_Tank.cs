@@ -75,8 +75,8 @@ public class Dub_Tank : Attack_Unit
 
             FrontTransform.position = this.transform.position + (this.transform.forward * this.rangeValue);
 
-            Debug.Log("Front Position" + FrontTransform.position);
-            Debug.Log("It's Position" + this.transform.position);
+            //Debug.Log("Front Position" + FrontTransform.position);
+            //Debug.Log("It's Position" + this.transform.position);
 
             bullet.Seek(FrontTransform);
             bullet.SetBase(this);
@@ -104,12 +104,12 @@ public class Dub_Tank : Attack_Unit
                 continue;
             if (minionWithinRange[i].tag == this.tag)//If is an ally, proceeds to the next one
                 continue;
-
             minionWithinRange[i].GetComponent<BasicGameOBJ>().SetTarget(this.gameObject);//Get aggroed switching target to caster
             minionWithinRange[i].GetComponent<BasicGameOBJ>().TakeDamage(this.attackValue);//Dealing damage
-
         }
 
+        GameObject effect = Instantiate(specialEffect);
+        effect.GetComponent<TankTimerScript>().owner = this.gameObject;
     }
 
     public override void ShootTargetedPos(Vector3 pos)
@@ -127,7 +127,6 @@ public class Dub_Tank : Attack_Unit
             //Debug.Log(CountDownTimer);
             bullet.Seek(TargetedPosTransform);
             bullet.SetBase(this);
-
             Destroy(TargetedPosTransform.gameObject);
         }
     }
@@ -166,5 +165,7 @@ public class Dub_Tank : Attack_Unit
 
         //ShootFront();
         ShootTargetedPos(GameObject.Find("crosshair").GetComponent<RayCastFrom>().ReturnTargetPos());
+
+        
     }
 }

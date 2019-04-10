@@ -44,7 +44,9 @@ public class NewPossesionScript : MonoBehaviour
     // Enhance effect when the vr player enhance u
     public float EffectEnhances = 0;
 
-
+    // Possesion Recovery
+    public bool isRecovering = false;
+    public float recoveryTimer = 5;
 
     // Use this for initialization
     private void Awake()
@@ -67,18 +69,32 @@ public class NewPossesionScript : MonoBehaviour
     void Update()
     {
         //Debug.Log("Object count is " + objList.Count);
+        
         // Update Objects in the list
         UpdateListObj();
+        
         // Update player possesion
         UpdatePossesion();
+        
         // Update If its possible to Posses
         UpdatePosses();
+        
         // Interactions
         PossesInteraction();
+        
         // Check if in range
         CheckForObjectRange();
-        
 
+        // Recovering
+        if (isRecovering)
+        {
+            recoveryTimer -= 1 * Time.deltaTime;
+            if (recoveryTimer <= 0)
+            {
+                recoveryTimer = 5;
+                isRecovering = false;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -131,6 +147,11 @@ public class NewPossesionScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Ally_Unit")
+            return;
+        if (other.GetComponent<Building>())
+            return;
+
         AssignToList(other.gameObject);
         if (other.tag == "Ally_Unit")
         {
@@ -232,6 +253,8 @@ public class NewPossesionScript : MonoBehaviour
         //    canPosses = true;
         //else if (!objList[targetIndex])
         //    canPosses = false;
+        if (isRecovering)
+            return;
 
         if (objList.Count <= 0)
         {
@@ -367,7 +390,7 @@ public class NewPossesionScript : MonoBehaviour
             targetIndex = 0;
         }
 
-        Debug.Log("Index as of now " + targetIndex);
+        //Debug.Log("Index as of now " + targetIndex);
     }
 
     // Change Shader value func
@@ -385,10 +408,10 @@ public class NewPossesionScript : MonoBehaviour
     void AssignToList(GameObject go)
     {
         // Not taking in buildings and enemy units
-        if (go.tag != "Ally_Unit")
-            return;
-        if (go.GetComponent<Building>())
-            return;
+        //if (go.tag != "Ally_Unit")
+        //    return;
+        //if (go.GetComponent<Building>())
+        //    return;
         // Check if its in the list alr
         foreach (GameObject _go in objList)
         {
@@ -402,8 +425,11 @@ public class NewPossesionScript : MonoBehaviour
                 return;
         }
         // Gives outline shader to object
-        go.GetComponent<Renderer>().material.shader = ShaderInstance;
-        ChangeShader(go, 0, new Vector4(0, 0, 0, 0));
+        if (go.GetComponent<Renderer>().material.shader != ShaderInstance)
+        {
+            go.GetComponent<Renderer>().material.shader = ShaderInstance;
+            ChangeShader(go, 0, new Vector4(0, 0, 0, 0));
+        }
         objList.Add(go);
     }
 
@@ -418,10 +444,11 @@ public class NewPossesionScript : MonoBehaviour
         // fix this shit
 
         // If possesion is in play stop possesion
-        if (isPossesing)
+
+        // If its the unit that player is trying to access
+        if (go == objList[targetIndex])
         {
-            // If its the unit that player is trying to access
-            if (go == objList[targetIndex])
+            if (isPossesing)
             {
                 ReInitPossesInteraction();
                 objList.Remove(objList[targetIndex]);
@@ -429,35 +456,34 @@ public class NewPossesionScript : MonoBehaviour
                 ChangeShader(go, 0, new Vector4(0, 0, 0, 0));
                 isPossesing = false;
             }
-            else
-            {
-                for (int i = 0; i < objList.Count; i++)
-                {
-                    if (go == unit2Posses)
-                        continue;
-                    if (go == objList[i])
-                    {
-                        Debug.Log("Will it crash here? find out in the next episode of dragonball Z");
-                        // Deactive outline
-                        ChangeShader(objList[i], 0, new Vector4(0, 0, 0, 0));
-                        objList.Remove(objList[i]);
-                    }
-                }
-            }
         }
         else
         {
             for (int i = 0; i < objList.Count; i++)
             {
+                if (go == unit2Posses)
+                    continue;
                 if (go == objList[i])
                 {
-                    Debug.Log("Will it crash here? find out in the next episode of dragonball Z");
                     // Deactive outline
                     ChangeShader(objList[i], 0, new Vector4(0, 0, 0, 0));
                     objList.Remove(objList[i]);
                 }
             }
         }
+        
+        //else
+        //{
+        //    for (int i = 0; i < objList.Count; i++)
+        //    {
+        //        if (go == objList[i])
+        //        {
+        //            // Deactive outline
+        //            ChangeShader(objList[i], 0, new Vector4(0, 0, 0, 0));
+        //            objList.Remove(objList[i]);
+        //        }
+        //    }
+        //}
 
 
 
@@ -546,6 +572,7 @@ public class NewPossesionScript : MonoBehaviour
         player.GetComponent<ControllerPlayer>().CurrentUnit = objList[targetIndex];
         // Hide this Object
         GetComponent<MeshRenderer>().enabled = false;
+        
         nowPossesing = true;
         // Send to another state
         objList[targetIndex].GetComponent<NavMeshAgent>().enabled = false;
@@ -563,6 +590,7 @@ public class NewPossesionScript : MonoBehaviour
         targetIndex = 0;
         // Change so current unit is red
         ChangeShader(player.GetComponent<ControllerPlayer>().CurrentUnit, 0.15f, new Vector4(255, 0, 0, 255));
+        isRecovering = true;
     }
 
     void UpdatePossesion()

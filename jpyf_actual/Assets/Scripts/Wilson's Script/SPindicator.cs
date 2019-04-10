@@ -10,7 +10,7 @@ public class SPindicator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        mainObject = transform.parent.gameObject;
     }
 
     // Update is called once per frame

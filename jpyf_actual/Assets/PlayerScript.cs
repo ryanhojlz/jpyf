@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Mana = 10;
             }
+            timer = 0;
         }
     }
 }

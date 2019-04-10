@@ -31,9 +31,7 @@ public class ControllerPlayer : MonoBehaviour
     // Current
     public GameObject CurrentUnit = null;
     public GameObject SpiritUnit = null;
-    // old
-    public GameObject PlayerControllerObject = null;
-    public GameObject Spirit = null;
+
 
     // Movement Stuff
     public float move_speed = 30;
@@ -46,7 +44,7 @@ public class ControllerPlayer : MonoBehaviour
     // Camera stuff
     public GameObject camRef = null;
     public GameObject camPivot = null;
-    public float x_inputR, y_inputR;
+    public float x_inputR, y_inputR = 0;
     public Vector3 camRot = Vector3.zero;
 
     // prev rotation
@@ -57,12 +55,9 @@ public class ControllerPlayer : MonoBehaviour
 
     // Bool sprinting
     bool Sprinting = false;
-   
-    // Some bs    
-    Vector3 lastpos;
- 
 
 
+    Vector3 directionVector = Vector3.zero;
 
     // Use this for initialization
     void Start()
@@ -97,16 +92,19 @@ public class ControllerPlayer : MonoBehaviour
         ThumbSticks();
         Buttons();
         ShoulderButtons();
-        DPad();
+        //DPad();
     }
 
     void ThumbSticks()
     {
         UpdateAxis();
+        ThumbStickButtons();
         CameraMovement();
         NewMovement();
-        ThumbStickButtons();
     }
+
+
+
 
     void Buttons()
     {
@@ -183,7 +181,6 @@ public class ControllerPlayer : MonoBehaviour
             if (CurrentUnit.GetComponent<NewPossesionScript>())
             {
                 CurrentUnit.GetComponent<NewPossesionScript>().PossesUp();
-
             }
             else
             {
@@ -245,8 +242,6 @@ public class ControllerPlayer : MonoBehaviour
         // L1
         if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")) && !buffer_L1)
         {
-
-
             SwapUnit(false);
             buffer_L1 = true;
         }
@@ -306,117 +301,7 @@ public class ControllerPlayer : MonoBehaviour
 
     }
 
-
-    void IfSpirit()
-    {
-        // Possesion
-        if (!Spirit)
-        {
-            //Debug.Log("\npreessseed\n");
-            if (PlayerControllerObject.GetComponent<Possesor>().startPossesing)
-            {
-                PlayerControllerObject.GetComponent<Possesor>().possesionProgress += 1;
-            }
-            else if (!PlayerControllerObject.GetComponent<Possesor>().startPossesing)
-            {
-                if (PlayerControllerObject.GetComponent<Possesor>().canPosses)
-                {
-                    PlayerControllerObject.GetComponent<Possesor>().startPossesing = true;
-                    PlayerControllerObject.GetComponent<Possesor>().Text_Instantiate();
-                }
-            }
-        }
-        else if (Spirit)
-        {
-            if (Spirit.GetComponent<Possesor>().startPossesing)
-            {
-                Spirit.GetComponent<Possesor>().possesionProgress += 1;
-            }
-            else if (!Spirit.GetComponent<Possesor>().startPossesing)
-            {
-                if (Spirit.GetComponent<Possesor>().canPosses)
-                {
-                    Spirit.GetComponent<Possesor>().startPossesing = true;
-                    Spirit.GetComponent<Possesor>().Text_Instantiate();
-                }
-            }
-        }
-
-
-    }
-
-    void UpdateSpirit()
-    {
-        //lastpos = this.PlayerControllerObject.transform.position;
-        // Normal Check
-        if (Spirit)
-        {
-            if (PlayerControllerObject.GetComponent<BasicGameOBJ>().healthValue <= 0)
-            {
-                //Spirit.transform.position = lastpos;
-                //Spirit.SetActive(true);
-
-                Spirit.GetComponent<MeshRenderer>().enabled = true;
-                Spirit.GetComponent<BoxCollider>().enabled = true;
-                GetComponent<Rigidbody>().isKinematic = false;
-                GetComponent<Rigidbody>().useGravity = true;
-
-                PlayerControllerObject = Spirit;
-                Spirit = null;
-            }
-        }
-        // Fail Safe Check
-        if (PlayerControllerObject == null && Spirit)
-        {
-            //Spirit.transform.position = lastpos;
-            //Spirit.SetActive(true);
-
-            Spirit.GetComponent<MeshRenderer>().enabled = true;
-            Spirit.GetComponent<BoxCollider>().enabled = true;
-            PlayerControllerObject = Spirit;
-            Spirit = null;
-        }
-    }
-
-    void OldMovement()
-    {
-        if (!Spirit)
-        {
-            move_speed = 2;
-        }
-        else
-        {
-            move_speed = 2.3f;
-        }
-        x_input = Input.GetAxis("leftstick" + stickID + "horizontal");
-        y_input = Input.GetAxis("leftstick" + stickID + "vertical");
-        x_input = Mathf.Clamp(x_input, -0.8f, 0.8f);
-        y_input = Mathf.Clamp(y_input, -0.8f, 0.8f);
-
-        GameObject.Find("DebugText").GetComponent<Text>().text = "Xinput " + x_input;
-        GameObject.Find("DebugText3").GetComponent<Text>().text = "Yinput " + y_input;
-
-        float gravity = CurrentUnit.GetComponent<Rigidbody>().velocity.y;
-        direction = new Vector3(x_input, 0, -y_input);
-        if (direction == Vector3.zero)
-        {
-            direction.y = gravity;
-            direction.x = 0;
-            direction.z = 0;
-            //this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //this.PlayerControllerObject.GetComponent<Rigidbody>().velocity = direction;
-        }
-        else
-        {
-            direction.y = gravity;
-            direction.x *= move_speed;
-            direction.z *= move_speed;
-            this.CurrentUnit.GetComponent<Rigidbody>().velocity = direction;
-        }
-
-        CurrentUnit.transform.position += direction * Time.deltaTime;/** move_speed*/
-    }
-
+ 
     void UpdateAxis()
     {
 
@@ -435,11 +320,11 @@ public class ControllerPlayer : MonoBehaviour
         y_inputR = Mathf.Clamp(y_inputR, -0.8f, 0.8f);
 
 
-        GameObject.Find("DebugText").GetComponent<Text>().text = "Xinput " + x_input;
-        GameObject.Find("DebugText2").GetComponent<Text>().text = "Yinput " + y_input;
+        //GameObject.Find("DebugText").GetComponent<Text>().text = "Xinput " + x_input;
+        //GameObject.Find("DebugText2").GetComponent<Text>().text = "Yinput " + y_input;
 
-        GameObject.Find("DebugText3").GetComponent<Text>().text = "Xinput 2 " + x_inputR;
-        GameObject.Find("DebugText4").GetComponent<Text>().text = "Yinput 2 " + y_inputR;
+        //GameObject.Find("DebugText3").GetComponent<Text>().text = "Xinput 2 " + x_inputR;
+        //GameObject.Find("DebugText4").GetComponent<Text>().text = "Yinput 2 " + y_inputR;
 #endif
 
 #if UNITY_EDITOR_WIN
@@ -453,9 +338,9 @@ public class ControllerPlayer : MonoBehaviour
             x_inputR = 0;
 
         if (Input.GetKey(KeyCode.UpArrow))
-            y_inputR = input;
-        else if (Input.GetKey(KeyCode.DownArrow))
             y_inputR = -input;
+        else if (Input.GetKey(KeyCode.DownArrow))
+            y_inputR = input;
         else
             y_inputR = 0;
 
@@ -474,7 +359,6 @@ public class ControllerPlayer : MonoBehaviour
             x_input = 0;
 
 #endif
-
 
     }
 
@@ -505,7 +389,8 @@ public class ControllerPlayer : MonoBehaviour
             move_speed = 2;
 
 #if UNITY_PS4
-        movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
+        movedir.Set(x_input * move_speed, 0, -y_input * move_speed);
+        //movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
         movedir = camRef.GetComponent<Camera>().transform.TransformDirection(movedir);
         if (movedir != Vector3.zero)
         {
@@ -527,14 +412,12 @@ public class ControllerPlayer : MonoBehaviour
 
     void ObjectFailSafe()
     {
-        if (CurrentUnit)
-        {
+
             if (CurrentUnit.transform.position.y <= -20)
             {
                 var pos = new Vector3(0, 10, 0);
                 CurrentUnit.transform.position = pos;
             }
-        }
 
     }
 
@@ -554,4 +437,7 @@ public class ControllerPlayer : MonoBehaviour
 
         camPivot.transform.rotation = Quaternion.Euler(camRot);
     }
+
+
+
 }

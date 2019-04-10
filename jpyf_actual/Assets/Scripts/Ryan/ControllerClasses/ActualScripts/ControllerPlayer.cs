@@ -55,9 +55,11 @@ public class ControllerPlayer : MonoBehaviour
 
     // Bool sprinting
     bool Sprinting = false;
-
-
+    
+    // Direction vector
     Vector3 directionVector = Vector3.zero;
+    // Quaternion for rotation
+    Quaternion newRotation;
 
     // Use this for initialization
     void Start()
@@ -394,14 +396,25 @@ public class ControllerPlayer : MonoBehaviour
         movedir = camRef.GetComponent<Camera>().transform.TransformDirection(movedir);
         if (movedir != Vector3.zero)
         {
-            CurrentUnit.transform.LookAt(movedir, Vector3.up);
-            Quaternion rot = Quaternion.LookRotation(movedir, Vector3.up);
-            rot.x = 0;
-            rot.z = 0;
-            CurrentUnit.transform.rotation = rot;
-            prevRot = CurrentUnit.transform.rotation;
-            // Old rotation
+            // Old rotation code
+            //CurrentUnit.transform.LookAt(movedir, Vector3.up);
+            //newRotation = Quaternion.LookRotation(movedir, Vector3.up);
+            //newRotation.x = 0;
+            //newRotation.z = 0;
+            //CurrentUnit.transform.rotation = newRotation;
             //prevRot = CurrentUnit.transform.rotation;
+
+
+            // Current experimental
+            prevRot = CurrentUnit.transform.rotation;
+            var testTransform = CurrentUnit.transform;
+            testTransform.LookAt(movedir, Vector3.up);
+            newRotation = Quaternion.LookRotation(movedir, Vector3.up);
+            newRotation.x = 0;
+            newRotation.z = 0;
+            CurrentUnit.transform.rotation = Quaternion.Lerp(prevRot, newRotation, 0.25f);
+            
+
         }
 
 #endif

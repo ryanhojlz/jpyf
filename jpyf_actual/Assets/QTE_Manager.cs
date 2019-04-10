@@ -17,6 +17,8 @@ public class QTE_Manager : MonoBehaviour
     public GameObject playerObj = null;
     public bool spAtk = false;
 
+    public bool cooldown = false;
+    public float cooldowntimer = 5;
     // Use this for initialization
     void Start()
     {
@@ -37,6 +39,7 @@ public class QTE_Manager : MonoBehaviour
         // Is currently possesing a unit 
         if (playerObj.GetComponent<NewPossesionScript>().nowPossesing)
         {
+            
             if (QTEStart)
             {
                 qte_obj.SetActive(true);
@@ -61,11 +64,22 @@ public class QTE_Manager : MonoBehaviour
             {
                 GameObject.Find("Player_object").
                     GetComponent<ControllerPlayer>().CurrentUnit.GetComponent<Attack_Unit>().SpecialAttack();
+               
             }
+            cooldown = true;
             //
             spAtk = false;
         }
 
+        if (cooldown)
+        {
+            cooldowntimer -= 1 * Time.deltaTime;
+            if (cooldowntimer <= 0)
+            {
+                cooldowntimer = 5;
+                cooldown = false;
+            }
+        }
 
         // Debug
         if (Input.GetKeyDown(KeyCode.U))
@@ -79,11 +93,19 @@ public class QTE_Manager : MonoBehaviour
     // Start QTE Function
     public void StartQTE()
     {
+        // if cooldown cannot start qte
+        if (cooldown)
+            return;
+
+        // for qte pressing
         if (qte_obj.activeSelf)
             qte_obj.GetComponent<Special>().QTE_Press();
-        
+       
+        // to start qte
         if (!QTEStart)
             QTEStart = true;
+
+        // i put them in the same function cos ps4 one button my reuse to do many things
     }
 
 

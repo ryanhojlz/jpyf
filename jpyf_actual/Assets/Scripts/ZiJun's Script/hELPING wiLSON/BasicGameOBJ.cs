@@ -273,42 +273,42 @@ public class BasicGameOBJ : MonoBehaviour
         if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
             Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
 
-        //For Making sure if the object is already added, don't add again
-        for (int i = 0; i < minionWithinRange.Count; ++i)
-        {
-            if (other.gameObject == minionWithinRange[i])
-            {
-                return;
-            }
-        }
+        ////For Making sure if the object is already added, don't add again
+        //for (int i = 0; i < minionWithinRange.Count; ++i)
+        //{
+        //    if (other.gameObject == minionWithinRange[i])
+        //    {
+        //        return;
+        //    }
+        //}
 
         if (other.tag == "Ally_Unit" || other.tag == "Enemy_Unit")
         {
             minionWithinRange.Add(other.gameObject);
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if (!other.gameObject.GetComponent<Rigidbody>())
-            return;
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (!other.gameObject.GetComponent<Rigidbody>())
+    //        return;
 
-        if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
-            Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
+    //    if (other.gameObject.GetComponent<SphereCollider>() && this.gameObject.GetComponent<SphereCollider>())
+    //        Physics.IgnoreCollision(other.gameObject.GetComponent<SphereCollider>(), this.gameObject.GetComponent<SphereCollider>());
 
-        //For Making sure if the object is already added, don't add again
-        for (int i = 0; i < minionWithinRange.Count; ++i)
-        {
-            if (other.gameObject == minionWithinRange[i])
-            {
-                return;
-            }
-        }
+    //    //For Making sure if the object is already added, don't add again
+    //    for (int i = 0; i < minionWithinRange.Count; ++i)
+    //    {
+    //        if (other.gameObject == minionWithinRange[i])
+    //        {
+    //            return;
+    //        }
+    //    }
 
-        if (other.tag == "Ally_Unit" || other.tag == "Enemy_Unit")
-        {
-            minionWithinRange.Add(other.gameObject);
-        }
-    }
+    //    if (other.tag == "Ally_Unit" || other.tag == "Enemy_Unit")
+    //    {
+    //        minionWithinRange.Add(other.gameObject);
+    //    }
+    //}
     private void OnCollisionEnter(Collision other)
     {
         //if (other.gameObject.GetComponent<CHyperBeam>())
@@ -325,11 +325,11 @@ public class BasicGameOBJ : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        for (int i = 0; i < minionWithinRange.Count; ++i)
-        {
-            if (minionWithinRange[i] == other.gameObject)
-                minionWithinRange.Remove(minionWithinRange[i]);
-        }
+        //for (int i = 0; i < minionWithinRange.Count; ++i)
+        //{
+        //    if (minionWithinRange[i] == other.gameObject)
+                minionWithinRange.Remove(other.gameObject);
+        //}
     }
     void OnDrawGizmosSelected()
     {

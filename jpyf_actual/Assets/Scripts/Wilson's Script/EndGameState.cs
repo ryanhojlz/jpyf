@@ -42,6 +42,9 @@ public class EndGameState
         //this is for if win or lose screen uses same scene but different text
         Debug.Log("Game over");
         Debug.Log(enemytag + " wins");
+
+        GameObject.Find("Stats").GetComponent<Statistics>().incrementWin();
+
         //SceneManager.LoadScene("EndGame");
     }
 

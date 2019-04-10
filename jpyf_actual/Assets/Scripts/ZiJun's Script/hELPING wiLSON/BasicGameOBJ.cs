@@ -131,7 +131,7 @@ public class BasicGameOBJ : MonoBehaviour
             //Destroy(gameObject);
             GameObject thisnew = Instantiate(ParticleExplosion) as GameObject;
             thisnew.transform.position = this.transform.position;
-            //gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

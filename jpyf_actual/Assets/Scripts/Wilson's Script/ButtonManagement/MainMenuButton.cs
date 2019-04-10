@@ -160,7 +160,8 @@ public class MainMenuButton : MonoBehaviour
 
             case "credits":
                 {
-
+                    Debug.Log("Loading game scene");
+                    SceneManager.LoadScene("PC_Build");
                 }
                 break;
 

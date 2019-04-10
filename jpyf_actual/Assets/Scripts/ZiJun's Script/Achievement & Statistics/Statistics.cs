@@ -11,6 +11,7 @@ public class Statistics : MonoBehaviour
     void Start()
     {
         //loading value
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // Update is called once per frame

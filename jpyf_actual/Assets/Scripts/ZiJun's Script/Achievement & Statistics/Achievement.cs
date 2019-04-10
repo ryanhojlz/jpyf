@@ -21,16 +21,23 @@ public class Achievement : MonoBehaviour
 
     public int index = 0;
 
-	// Use this for initialization
-	void Start ()
+    bool Added = false;
+
+    private void Awake()
     {
-		
-	}
+        DontDestroyOnLoad(transform.gameObject);
+    }
+    // Use this for initialization
+    void Start ()
+    {
+        //this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
+        this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+
 	}
 
     public void SaveAchievement()

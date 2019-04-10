@@ -91,7 +91,7 @@ public class Achievement_Slider : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(distanceBetween);
+        //Debug.Log(distanceBetween);
 
         LifeTime -= Time.deltaTime;
 
@@ -103,8 +103,8 @@ public class Achievement_Slider : MonoBehaviour
         {
             this.transform.position -= new Vector3(movespeed * Time.deltaTime, 0, 0);
         }
-        Debug.Log("Width of canvas : " + Canvas.GetComponent<RectTransform>().rect.width);
-        Debug.Log("Size of canvas : " + Canvas.GetComponent<RectTransform>().rect.size);
-        Debug.Log("Position of canvas : " + Canvas.transform.position);
+        //Debug.Log("Width of canvas : " + Canvas.GetComponent<RectTransform>().rect.width);
+        //Debug.Log("Size of canvas : " + Canvas.GetComponent<RectTransform>().rect.size);
+        //Debug.Log("Position of canvas : " + Canvas.transform.position);
     }
 }

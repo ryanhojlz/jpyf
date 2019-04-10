@@ -40,8 +40,8 @@ public class EndGameState
         //what to trigger?
         //change scene?
         //this is for if win or lose screen uses same scene but different text
-        Debug.Log("Game over");
-        Debug.Log(enemytag + " wins");
+       // Debug.Log("Game over");
+        //Debug.Log(enemytag + " wins");
 
         GameObject.Find("Stats").GetComponent<Statistics>().incrementWin();
 

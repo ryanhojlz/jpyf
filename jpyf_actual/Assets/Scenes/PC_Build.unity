@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2694729, g: 0.20670968, b: 0.15310454, a: 1}
+  m_IndirectSpecularColor: {r: 0.15521091, g: 0.11939902, b: 0.088747256, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4945,64 +4945,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 96259881}
   m_GameObject: {fileID: 799262423}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &805994120
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 805994121}
-  - component: {fileID: 805994122}
-  - component: {fileID: 805994123}
-  m_Layer: 0
-  m_Name: AchievementManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &805994121
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 805994120}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1557369873}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &805994122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 805994120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7921b2c8e2e69794d93fd34ba907f6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &805994123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 805994120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff52e69e0bff13e408a3343c3cbc680d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Achievement_name: First Win
-  Achievement_descriptions: Wining for the first time
-  Image: {fileID: 0}
-  Achievement_Panel: {fileID: 1992385709933490, guid: 8dc8ff0419c12cf4b91f194083fb7268,
-    type: 2}
-  index: 1
 --- !u!1 &832059779
 GameObject:
   m_ObjectHideFlags: 0
@@ -6097,46 +6039,6 @@ MonoBehaviour:
   Spawn_Range: 0
   Spawn_Healer: 0
   Spawn_Tank: 1
---- !u!1 &991082677
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 991082678}
-  - component: {fileID: 991082679}
-  m_Layer: 0
-  m_Name: StatsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &991082678
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 991082677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1557369873}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &991082679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 991082677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688482559c5a3d843943c8be98c869f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &991246589
 Transform:
   m_ObjectHideFlags: 0
@@ -9707,8 +9609,6 @@ Transform:
   - {fileID: 1798936263}
   - {fileID: 460159163}
   - {fileID: 983696725}
-  - {fileID: 991082678}
-  - {fileID: 805994121}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -390,7 +390,7 @@ public class ControllerPlayer : MonoBehaviour
         else
             move_speed = 2;
 
-#if UNITY_PS4
+
         movedir.Set(x_input * move_speed, 0, -y_input * move_speed);
         //movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
         movedir = camRef.GetComponent<Camera>().transform.TransformDirection(movedir);
@@ -417,7 +417,6 @@ public class ControllerPlayer : MonoBehaviour
 
         }
 
-#endif
         //movedir.y = -1;
         CurrentUnit.transform.position += movedir * Time.deltaTime;
         

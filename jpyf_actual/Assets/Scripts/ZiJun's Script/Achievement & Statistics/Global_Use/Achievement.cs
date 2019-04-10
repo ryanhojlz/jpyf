@@ -11,7 +11,7 @@ public class Achievement : MonoBehaviour
 
     //public GameObject Panel;
 
-    public GameObject Image;
+    public RawImage Image;
 
     //public GameObject Name;
 
@@ -32,6 +32,7 @@ public class Achievement : MonoBehaviour
     {
         //this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
         this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
+        LoadAchievement();
     }
 	
 	// Update is called once per frame
@@ -42,12 +43,19 @@ public class Achievement : MonoBehaviour
 
     public void SaveAchievement()
     {
-        //Saving Achievement
+        PlayerPrefs.SetInt(Achievement_name, hasDone ? 1 : 0);
     }
 
     public void LoadAchievement()
     {
         //Loading Achievement
+
+        hasDone = PlayerPrefs.GetInt(Achievement_name) == 1 ? true : false;
+    }
+
+    public void ResetAchievement()
+    {
+        PlayerPrefs.SetInt(Achievement_name, 0);
     }
 
     protected IEnumerator TriggerAchievement()
@@ -58,7 +66,7 @@ public class Achievement : MonoBehaviour
         TempAchievement.transform.Find("Achievement_Image");
         TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
         TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
-
+        SaveAchievement();
         //PlayerPrefs.SetInt(Achievement_name, index);
         //Image.SetActive(true);
         //Name.GetComponent<Text>().text = Achievement_name;
@@ -77,5 +85,11 @@ public class Achievement : MonoBehaviour
         //Description.GetComponent<Text>().text = "";
         //Panel.SetActive(false);
 
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Delete Here after wanting to save");
+        ResetAchievement();
     }
 }

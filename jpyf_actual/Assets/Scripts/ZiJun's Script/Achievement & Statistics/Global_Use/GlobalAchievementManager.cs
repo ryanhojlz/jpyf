@@ -11,16 +11,7 @@ public class GlobalAchievementManager : MonoBehaviour
     }
     private void Start()
     {
-        //Debug.Log("Parent : " + name);
-
-        //for (int i = 0; i < this.transform.childCount; ++i)
-        //{
-        //    Transform child = this.transform.GetChild(i);
-        //    if (child.GetComponent<Achievement>())//Checking if it has an achievement class
-        //    {
-        //        ListOfAchievements.Add(child.GetComponent<Achievement>());
-        //    }
-        //}
+        
     }
     // Update is called once per frame
     void Update ()

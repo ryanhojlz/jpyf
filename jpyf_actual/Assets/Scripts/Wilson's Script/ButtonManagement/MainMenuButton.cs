@@ -160,7 +160,8 @@ public class MainMenuButton : MonoBehaviour
 
             case "settings":
                 {
-
+                    Debug.Log("Loading game scene");
+                    SceneManager.LoadScene("Achievement_Scene");
                 }
                 break;
 

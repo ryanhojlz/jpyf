@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class EndGameState
+public class EndGameState : MonoBehaviour
 {
+    //public Image winImage;
+    //public Image loseImage;
+    public Text winText;
+    bool ifWin = true;
     //winlose conditions
     // Start is called before the first frame update
     void Start()
     {
-        
+        winText.text = "WINLOSE";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (ifWin == true)
+        {
+            winText.text = "YOU WIN";
+            //EndGame();
+        }
+        if (ifWin == false)
+        {
+            winText.text = "YOU LOSE";
+            //EndGame();
+        }
     }
 
     //public void WinGame()

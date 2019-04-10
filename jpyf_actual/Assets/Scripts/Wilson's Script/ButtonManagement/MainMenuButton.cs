@@ -22,8 +22,8 @@ public class MainMenuButton : MonoBehaviour
 
     public bool TitlescreenDisplay = true;
 
-    int indexX = 0;
-    int indexY = 0;
+    int indexX = 1;
+    int indexY = 1;
 
     // Use this for initialization
     void Start()
@@ -34,12 +34,14 @@ public class MainMenuButton : MonoBehaviour
         buttons[1, 0] = x1y0;
         buttons[1, 1] = x1y1;
         titleScreen = GameObject.Find("Titlescreen");
+
+        //highlighted.gameObject.transform.position = buttons[1, 1].gameObject.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log(buttons[indexX, indexY].gameObject.name);
+        //Debug.Log(buttons[indexX, indexY].gameObject.name);
 
         highlighted.gameObject.transform.position = buttons[indexX, indexY].gameObject.transform.position;
 
@@ -165,7 +167,6 @@ public class MainMenuButton : MonoBehaviour
                 break;
 
         }
-
     }
 
 

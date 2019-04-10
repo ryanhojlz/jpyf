@@ -9,12 +9,14 @@ public class CastleBase : Building
     // Update is called once per frame
     public override void Unit_Self_Update()
     {
-        if (healthValue <= 0)
+        if (healthValue <= 0 && this.gameObject.activeInHierarchy)
         {
-            Die();
+            //Debug.Log(this.name);
             //end game here
             temp = new EndGameState();
             temp.EndGame(this.GetComponent<BasicGameOBJ>().Enemy_Tag);
+            //this.gameObject.SetActive(false);
+            Die();
         }
     }
 

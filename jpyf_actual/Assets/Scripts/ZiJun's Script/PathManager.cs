@@ -32,6 +32,8 @@ public class PathManager : MonoBehaviour
         //}
 
         //Debug.Log("High");
+
+        
     }
 
     public int AssignPath(Vector3 playerpos, string UnitTag)

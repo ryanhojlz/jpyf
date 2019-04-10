@@ -14,7 +14,7 @@ public class FPS : MonoBehaviour
 	void Update ()
     {
         current = (int)(1f / Time.unscaledDeltaTime);
-        this.GetComponent<Text>().text = " FPS?? " + current.ToString() ;
+        this.GetComponent<Text>().text = " Overall FPS " + current.ToString();
     }
 
   

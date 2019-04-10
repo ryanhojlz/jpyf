@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class WinAchievement : Achievement
 {
+    public int numberofwins = 0;
+    // Use this for initialization
 
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
 	// Update is called once per frame
 	void Update ()
     {
         //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
-        if (GameObject.Find("Stats").GetComponent<Statistics>().GetWins() >= 1 && !hasDone)//&& TempIndex != index)
+        //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
+        if (!GameObject.Find("Stats"))
+            return;
+        if (!GameObject.Find("Stats").GetComponent<Statistics>())
+            return;
+
+        if (GameObject.Find("Stats").GetComponent<Statistics>().GetWins() >= numberofwins && !hasDone)//&& TempIndex != index)
         {
             hasDone = true;
             Debug.Log(Achievement_name + " : " + Achievement_descriptions);

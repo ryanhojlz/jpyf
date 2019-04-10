@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+#if UNITY_PS4
+using UnityEngine.PS4;
+using UnityEngine.XR;
+#endif
 
 public class MainMenuButton : MonoBehaviour
 {
@@ -34,6 +38,8 @@ public class MainMenuButton : MonoBehaviour
         buttons[1, 0] = x1y0;
         buttons[1, 1] = x1y1;
         titleScreen = GameObject.Find("Titlescreen");
+        UnityEngine.XR.XRSettings.showDeviceView = false;
+
     }
 
     // Update is called once per frame

@@ -58,6 +58,11 @@ public class Achievement : MonoBehaviour
         PlayerPrefs.SetInt(Achievement_name, 0);
     }
 
+    public bool GetCompletion()
+    {
+        return hasDone;
+    }
+
     protected IEnumerator TriggerAchievement()
     {
         hasDone = true;

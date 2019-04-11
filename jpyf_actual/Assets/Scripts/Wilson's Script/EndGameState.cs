@@ -57,7 +57,7 @@ public class EndGameState : MonoBehaviour
        // Debug.Log("Game over");
         //Debug.Log(enemytag + " wins");
 
-        GameObject.Find("Stats").GetComponent<Statistics>().incrementWin();
+        GameObject.Find("StatsManager").GetComponent<Statistics>().incrementWin();
 
         //SceneManager.LoadScene("EndGame");
     }

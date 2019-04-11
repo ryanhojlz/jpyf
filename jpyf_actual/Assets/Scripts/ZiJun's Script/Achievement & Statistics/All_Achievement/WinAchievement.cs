@@ -13,12 +13,12 @@ public class WinAchievement : Achievement
     {
         //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
         //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
-        if (!GameObject.Find("Stats"))
+        if (!GameObject.Find("StatsManager"))
             return;
-        if (!GameObject.Find("Stats").GetComponent<Statistics>())
+        if (!GameObject.Find("StatsManager").GetComponent<Statistics>())
             return;
 
-        if (GameObject.Find("Stats").GetComponent<Statistics>().GetWins() >= numberofwins && !hasDone)//&& TempIndex != index)
+        if (GameObject.Find("StatsManager").GetComponent<Statistics>().GetWins() >= numberofwins && !hasDone)//&& TempIndex != index)
         {
             hasDone = true;
             Debug.Log(Achievement_name + " : " + Achievement_descriptions);

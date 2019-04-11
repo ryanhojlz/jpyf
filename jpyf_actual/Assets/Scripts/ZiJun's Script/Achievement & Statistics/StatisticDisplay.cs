@@ -7,6 +7,7 @@ public class StatisticDisplay : MonoBehaviour
 {
     public Text numberWin;
     public Text numberLose;
+    //public Text totalPlayTime;
     
     // Use this for initialization
     void Start()

@@ -40,13 +40,13 @@ public class Statistics : MonoBehaviour
 
         //string json = JsonUtility.ToJson(Data);
         //File.WriteAllText(Application.dataPath + "saveFile.json", json);
-        string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
+        //string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
 
-        StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
+        //StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
         //Debug.Log(loadedStatisticsData.number_win);
         //Debug.Log(loadedStatisticsData.number_lose);
 
-        Data = loadedStatisticsData;
+        LoadStats();
 
         Debug.Log(Data.number_win);
     }
@@ -62,11 +62,16 @@ public class Statistics : MonoBehaviour
     public void SaveStats()
     {
         //Saving stats
+        string json = JsonUtility.ToJson(Data);
+        File.WriteAllText(Application.dataPath + "/saveFile.json", json);
     }
 
     public void LoadStats()
     {
         //Loading stats
+        string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
+        StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
+        Data = loadedStatisticsData;
     }
 
     public int GetWins()
@@ -82,11 +87,13 @@ public class Statistics : MonoBehaviour
     public void incrementWin()
     {
         Data.number_win++;
+        SaveStats();
     }
 
     public void incrementLose()
     {
         Data.number_lose++;
+        SaveStats();
     }
 
     public void SetWin(int value)
@@ -98,4 +105,6 @@ public class Statistics : MonoBehaviour
     {
         Data.number_lose = value;
     }
+
+
 }

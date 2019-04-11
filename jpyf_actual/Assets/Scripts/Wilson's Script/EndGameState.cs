@@ -10,6 +10,9 @@ public class EndGameState : MonoBehaviour
     //public Image loseImage;
     public Text winText;
     bool ifWin = true;
+    bool ifGameEnd = false;
+    public GameObject ally_wall = null;
+    public GameObject enemy_wall = null;
     //winlose conditions
     // Start is called before the first frame update
     void Start()
@@ -20,16 +23,44 @@ public class EndGameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ifWin == true)
+        if (!ifGameEnd)
         {
-            winText.text = "YOU WIN";
-            //EndGame();
+            // If ally hp 0 lose
+            if (ally_wall.GetComponent<BasicGameOBJ>().healthValue <= 0)
+            {
+                ifGameEnd = true;
+                ifWin = false;
+                // Change Text
+                //winlosetext.GetComponent<TextMesh>().text = "PLAYER LOSE";
+                winText.GetComponent<Text>().text = "YOU LOSE";
+            }
+            // If enemy hp 0 win
+            else if (enemy_wall.GetComponent<BasicGameOBJ>().healthValue <= 0)
+            {
+                ifGameEnd = true;
+                ifWin = true;
+                // Change Text
+                //winlosetext.GetComponent<TextMesh>().text = "PLAYER WIN";
+                winText.GetComponent<Text>().text = "YOU WIN";
+            }
+            // If game ended render
+            winText.enabled = false;
         }
-        if (ifWin == false)
+        else
         {
-            winText.text = "YOU LOSE";
-            //EndGame();
+            // If game ended render
+            winText.enabled = true;
         }
+        //if (ifWin == true)
+        //{
+        //    winText.text = "YOU WIN";
+        //    //EndGame();
+        //}
+        //if (ifWin == false)
+        //{
+        //    winText.text = "YOU LOSE";
+        //    //EndGame();
+        //}
     }
 
     //public void WinGame()

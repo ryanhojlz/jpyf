@@ -6,7 +6,7 @@ public class Card_ZiJun : GrabbableObject
 {
     // Theres alot of old code because the old way of summoning didnt really feel great
 
-    public bool onfloor = false;
+    //public bool onfloor = false;
     public bool pickedup = false;
     public bool lookedAt = false;
     public bool isthrown = false;
@@ -217,11 +217,11 @@ public class Card_ZiJun : GrabbableObject
         //    }
         //}
 
-        if (collision.gameObject.name == "enviroment_test1")
+        if (collision.gameObject.name == "enivronment_test_1")
         {
             if (isthrown)
             {
-                if (this.transform.position.y > 0)
+                if (this.transform.position.y <= 1.5)
                 {
                     GameObject.Find("armthing").GetComponent<CardScript>().ReturnToHand(this.gameObject);
                     pickedup = false;

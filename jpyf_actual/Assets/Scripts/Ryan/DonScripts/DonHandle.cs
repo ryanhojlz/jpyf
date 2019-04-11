@@ -26,6 +26,14 @@ public class DonHandle : GrabbableObject
         base.OnGrab(currentController);
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
-    
+
+    private void Update()
+    {
+        if (transform.localPosition.y < -0.7f)
+        {
+            ResetPos();
+        }
+    }
+
 
 }

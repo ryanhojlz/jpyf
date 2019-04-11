@@ -27,6 +27,7 @@ public class GoGoAction : MonoBehaviour
 
     bool stance = false;
 
+    int trigger = 0;
 
     // Use this for initialization
     void Start()
@@ -72,6 +73,7 @@ public class GoGoAction : MonoBehaviour
                 {
                     printText("AAAAA");
                     stance = false;
+                    ++trigger;
                 }
             }
             else if (!stance)
@@ -82,9 +84,9 @@ public class GoGoAction : MonoBehaviour
                 {
                     printText("BBB");
                     stance = true;
+                    ++trigger;
                 }
             }
-
 
 
             if (minigameLength < 0)
@@ -93,10 +95,17 @@ public class GoGoAction : MonoBehaviour
                 startMinigame = false;
                 firstrun = false;
                 stance = false;
-
             }
         }
 
+        if (trigger >= 2)
+        {
+            if (GameObject.Find("Player_Object").GetComponent<BasicGameOBJ>())
+            {
+                GameObject.Find("Player_Object").GetComponent<BasicGameOBJ>().healthValue += 2;
+            }
+            trigger = 0;
+        }
 
     }
 

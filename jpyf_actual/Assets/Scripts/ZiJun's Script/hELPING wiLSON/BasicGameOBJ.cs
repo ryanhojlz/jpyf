@@ -123,6 +123,7 @@ public class BasicGameOBJ : MonoBehaviour
             SetIsActive(false);
         }
     }
+
     public void Die()
     {
         //Can add timer and other stuff
@@ -142,8 +143,6 @@ public class BasicGameOBJ : MonoBehaviour
     {
 
     }
-
-
 
     protected void UpdateCheckList()
     {
@@ -187,6 +186,7 @@ public class BasicGameOBJ : MonoBehaviour
         }
         //Debug.Log(this.name + " : " + minionWithinRange.Count);
     }
+
     protected void UpdateHealth()
     {
         healthBar.fillAmount = healthValue / startHealthvalue;
@@ -204,10 +204,12 @@ public class BasicGameOBJ : MonoBehaviour
             target = null;
         }
     }
+
     public void RemoveUnitFromList(GameObject unit)
     {
         minionWithinRange.Remove(unit);
     }
+
     public bool CheckWithinRange(Transform unit)
     {
         if (this.gameObject == unit)//Unlikely happen but just in-case it detect itself in list somehow
@@ -229,6 +231,7 @@ public class BasicGameOBJ : MonoBehaviour
 
         return false;
     }
+
     public float CheckDist(Transform unit)//Does not matter which is first
     {
         Vector3 pos1 = this.gameObject.transform.position;

@@ -13,9 +13,9 @@ public class CardScript : MonoBehaviour
 	void Start ()
     {
         SpawnCard("Tank_Card");
-        SpawnCard("Healer_Card");
-        SpawnCard("Tank_Card");
-        SpawnCard("Healer_Card");
+        //SpawnCard("Healer_Card");
+        //SpawnCard("Tank_Card");
+        //SpawnCard("Healer_Card");
     }
 	
 	// Update is called once per frame

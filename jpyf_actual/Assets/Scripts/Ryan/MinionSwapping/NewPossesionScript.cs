@@ -21,9 +21,9 @@ public class NewPossesionScript : MonoBehaviour
 
     // Possesing interaction
     public float timeToPosses = 0;
-    public float timeToPossesReference = 15;
+    public float timeToPossesReference = 30;
     public float possesProgression = 5;
-    public float possesProgressionCap = 10;
+    public float possesProgressionCap = 30;
 
     // Object count
     public int ObjectCount;

@@ -16,8 +16,8 @@ public class Statistics : MonoBehaviour
     //int number_win;
     //int number_lose;
 
-    public Text numberWin;
-    public Text numberLose;
+    //public Text numberWin;
+    //public Text numberLose;
 
     public struct StatisticsData
     {
@@ -40,7 +40,7 @@ public class Statistics : MonoBehaviour
 
         //string json = JsonUtility.ToJson(Data);
         //File.WriteAllText(Application.dataPath + "saveFile.json", json);
-        string json = File.ReadAllText(Application.dataPath + "saveFile.json");
+        string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
 
         StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
         //Debug.Log(loadedStatisticsData.number_win);
@@ -55,8 +55,8 @@ public class Statistics : MonoBehaviour
     void Update()
     {
         //updating value
-        numberWin.text = "" + Data.number_win;
-        numberLose.text = "" + Data.number_lose;
+        //numberWin.text = "" + Data.number_win;
+        //numberLose.text = "" + Data.number_lose;
     }
 
     public void SaveStats()

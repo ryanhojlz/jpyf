@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1849335179479888}
+  m_RootGameObject: {fileID: 1977712567188170}
   m_IsPrefabParent: 1
---- !u!1 &1849335179479888
+--- !u!1 &1977712567188170
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4081916045772388}
-  - component: {fileID: 114560596360867514}
+  - component: {fileID: 4940855420658372}
+  - component: {fileID: 114025871455149574}
   m_Layer: 0
   m_Name: StatsManager
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4081916045772388
+--- !u!4 &4940855420658372
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849335179479888}
+  m_GameObject: {fileID: 1977712567188170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,16 +40,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114560596360867514
+--- !u!114 &114025871455149574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849335179479888}
+  m_GameObject: {fileID: 1977712567188170}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdce9ed996b52a34eb8c7b2d93c2bb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberWin: {fileID: 0}
-  numberLose: {fileID: 0}

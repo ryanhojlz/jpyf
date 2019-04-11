@@ -26,8 +26,8 @@ public class MainMenuButton : MonoBehaviour
 
     public bool TitlescreenDisplay = true;
 
-    int indexX = 0;
-    int indexY = 0;
+    int indexX = 1;
+    int indexY = 1;
 
     // Use this for initialization
     void Start()

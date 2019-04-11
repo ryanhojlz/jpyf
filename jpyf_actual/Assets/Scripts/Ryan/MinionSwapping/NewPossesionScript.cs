@@ -395,6 +395,8 @@ public class NewPossesionScript : MonoBehaviour
     // Change Shader value func
     void ChangeShader(GameObject targetObj,float width,Vector4 color)
     {
+        if (!targetObj.GetComponent<Renderer>().material)
+            return;
         if (targetObj.GetComponent<Renderer>().material.shader != ShaderInstance)
             targetObj.GetComponent<Renderer>().material.shader = ShaderInstance;
 

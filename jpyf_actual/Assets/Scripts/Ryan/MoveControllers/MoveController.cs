@@ -22,7 +22,7 @@ public class MoveController : MonoBehaviour
     // Debug Reference
    
 
-
+   
     [SerializeField]
     private GameObject m_HandModel;
 
@@ -48,6 +48,9 @@ public class MoveController : MonoBehaviour
     private static GameObject m_CurrentRightObject = null;
 
     private GameObject m_Player;
+
+    // 
+    public bool MainMenu; 
 
     public Vector3 moveDelta {
         get {
@@ -82,7 +85,10 @@ public class MoveController : MonoBehaviour
         {
             ProcessHandAnimation();
             ProcessGrabbing();
-            StartMiniGame();
+            if (!MainMenu)
+                StartMiniGame();
+            else
+                MainMenuController();
         }
     }
 
@@ -516,6 +522,7 @@ public class MoveController : MonoBehaviour
 
     void StartMiniGame()
     {
+        
         if (GetButtonDown(MoveControllerHotkeys.buttonConfirm))
         {
             GameObject.Find("MiniGame1").GetComponent<HandBuffMiniGame>().SetMiniGame(true);
@@ -552,9 +559,37 @@ public class MoveController : MonoBehaviour
             GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Tank_Card");
             GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Healer_Card");
             GameObject.Find("armthing").GetComponent<CardScript>().SpawnCard("Ranger_Card");
-
-
         }
     }
 
+
+    void MainMenuController()
+    {
+        GameObject menuManager = GameObject.Find("ButtonManager");
+        if (GetButtonDown(MoveControllerHotkeys.buttonUse))
+        {
+            Debug.Log("HAI DOMO, VARCHURUAL YEWTOOBER KEEZOONAH AEY DES");
+            menuManager.GetComponent<MainMenuButton>().EnterSelected();
+            menuManager.GetComponent<MainMenuButton>().TitlescreenDisplay = false;
+        }
+
+        if (GetButtonDown(MoveControllerHotkeys.buttonCross))
+        {
+            menuManager.GetComponent<MainMenuButton>().MoveDown();
+        }
+        if (GetButtonDown(MoveControllerHotkeys.buttonTriangle))
+        {
+            menuManager.GetComponent<MainMenuButton>().MoveLeft();
+        }
+        if (GetButtonDown(MoveControllerHotkeys.buttonSquare))
+        {
+            menuManager.GetComponent<MainMenuButton>().MoveUp();
+        }
+        if (GetButtonDown(MoveControllerHotkeys.buttonConfirm))
+        {
+            menuManager.GetComponent<MainMenuButton>().MoveRight();
+        }
+
+
+    }
 }

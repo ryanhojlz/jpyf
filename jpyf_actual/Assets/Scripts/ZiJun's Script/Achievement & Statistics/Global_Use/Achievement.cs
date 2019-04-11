@@ -66,24 +66,31 @@ public class Achievement : MonoBehaviour
     protected IEnumerator TriggerAchievement()
     {
         hasDone = true;
-        GameObject TempAchievement = Instantiate(Achievement_Panel);
-        TempAchievement.transform.SetParent(GameObject.Find("UI").transform.Find("Canvas").transform, false);
-        TempAchievement.transform.Find("Achievement_Image");
-        TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
-        TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
-        SaveAchievement();
-        //PlayerPrefs.SetInt(Achievement_name, index);
-        //Image.SetActive(true);
-        //Name.GetComponent<Text>().text = Achievement_name;
-        //Description.GetComponent<Text>().text = Achievement_descriptions;
-        //Panel.SetActive(true);
-        float time = 0;
-        if (TempAchievement.GetComponent<Achievement_Slider>())
+
+        if (GameObject.Find("UI"))
         {
-            time = TempAchievement.GetComponent<Achievement_Slider>().LifeTime;
+            if (GameObject.Find("UI").transform.Find("Canvas"))
+            {
+                GameObject TempAchievement = Instantiate(Achievement_Panel);
+                TempAchievement.transform.SetParent(GameObject.Find("UI").transform.Find("Canvas").transform, false);
+                TempAchievement.transform.Find("Achievement_Image");
+                TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
+                TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
+                SaveAchievement();
+                //PlayerPrefs.SetInt(Achievement_name, index);
+                //Image.SetActive(true);
+                //Name.GetComponent<Text>().text = Achievement_name;
+                //Description.GetComponent<Text>().text = Achievement_descriptions;
+                //Panel.SetActive(true);
+                float time = 0;
+                if (TempAchievement.GetComponent<Achievement_Slider>())
+                {
+                    time = TempAchievement.GetComponent<Achievement_Slider>().LifeTime;
+                }
+                yield return new WaitForSeconds(time);
+                Destroy(TempAchievement);
+            }
         }
-        yield return new WaitForSeconds(time);
-        Destroy(TempAchievement);
         
         //Image.SetActive(false);
         //Name.GetComponent<Text>().text = "";

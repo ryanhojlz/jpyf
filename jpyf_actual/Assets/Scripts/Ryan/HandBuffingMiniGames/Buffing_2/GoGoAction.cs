@@ -100,9 +100,9 @@ public class GoGoAction : MonoBehaviour
 
         if (trigger >= 2)
         {
-            if (GameObject.Find("Player_Object").GetComponent<BasicGameOBJ>())
+            if (GameObject.Find("Player_object").GetComponent<ControllerPlayer>().CurrentUnit.GetComponent<BasicGameOBJ>())
             {
-                GameObject.Find("Player_Object").GetComponent<BasicGameOBJ>().healthValue += 2;
+                GameObject.Find("Player_object").GetComponent<ControllerPlayer>().CurrentUnit.GetComponent<BasicGameOBJ>().healthValue += 2;
             }
             trigger = 0;
         }

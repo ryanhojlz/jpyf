@@ -54,11 +54,12 @@ public class NewPossesionScript : MonoBehaviour
    
         player = GameObject.Find("Player_object");
         timeToPosses = timeToPossesReference;
+        Physics.IgnoreLayerCollision(0, 12);
     }
 
     void Start()
     {
-
+        
     }
 
     private void LateUpdate()
@@ -102,11 +103,11 @@ public class NewPossesionScript : MonoBehaviour
             PossesUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             ChangeTargetIndex(false);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             ChangeTargetIndex(true);
         }
@@ -153,6 +154,8 @@ public class NewPossesionScript : MonoBehaviour
             return;
 
         AssignToList(other.gameObject);
+
+
         if (other.tag == "Ally_Unit")
         {
             if (other.GetComponent<SphereCollider>())
@@ -342,7 +345,7 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {
             //Debug.Log("Ran here");
-            possesProgression += 0.6f + EffectEnhances;
+            possesProgression += 0.6f + 10 + EffectEnhances;
         }
         if (!isPossesing)
         {
@@ -355,7 +358,7 @@ public class NewPossesionScript : MonoBehaviour
     void ReInitPossesInteraction()
     {
         timeToPosses = timeToPossesReference;
-        possesProgression = 2.0f;
+        possesProgression = 5.0f;
         EffectEnhances = 0;
         canPosses = false;
     }

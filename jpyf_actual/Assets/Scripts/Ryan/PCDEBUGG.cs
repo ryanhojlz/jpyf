@@ -10,6 +10,7 @@ public class PCDEBUGG : MonoBehaviour
 {
     public GameObject[] ally_waypoints;
     public GameObject[] enemy_waypoints;
+    public GameObject[] units;
     bool renderdis = false;
     
     // Use this for initialization
@@ -46,5 +47,11 @@ public class PCDEBUGG : MonoBehaviour
         {
             enemy_waypoints[i].GetComponent<Renderer>().enabled = render;
         }
+        //units = GameObject.FindGameObjectsWithTag("Ally_Unit");
+        //for (int i = 0; i < units.Length; ++i)
+        //{
+        //    if (units[i].GetComponent<Minion>())
+        //        units[i].GetComponent<MeshRenderer>().enabled = render;
+        //}
     }
 }

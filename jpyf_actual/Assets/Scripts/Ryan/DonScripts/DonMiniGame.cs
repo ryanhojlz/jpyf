@@ -128,7 +128,7 @@ public class DonMiniGame : MonoBehaviour
             if (ps4_Unit.GetComponent<NewPossesionScript>())
             {
                 donLvl++;
-                ps4_Unit.GetComponent<NewPossesionScript>().EffectEnhances += 0.5f;
+                ps4_Unit.GetComponent<NewPossesionScript>().EffectEnhances +=3.0f;
             }
             Debug.Log("Win");
         }

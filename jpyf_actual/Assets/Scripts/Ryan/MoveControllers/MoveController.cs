@@ -538,6 +538,7 @@ public class MoveController : MonoBehaviour
 
         if (GetButtonDown(MoveControllerHotkeys.buttonTriangle))
         {
+
             GameObject.Find("MiniGame1").gameObject.GetComponent<GoGoAction>().StartMiniGame();
         }
 

@@ -345,7 +345,7 @@ public class NewPossesionScript : MonoBehaviour
         if (isPossesing)
         {
             //Debug.Log("Ran here");
-            possesProgression += 0.6f + 10 + EffectEnhances;
+            possesProgression += 0.6f + EffectEnhances;
         }
         if (!isPossesing)
         {
@@ -596,6 +596,37 @@ public class NewPossesionScript : MonoBehaviour
         ChangeShader(player.GetComponent<ControllerPlayer>().CurrentUnit, 0.15f, new Vector4(255, 0, 0, 255));
         isRecovering = true;
     }
+
+    public void GetOutOfPossesion()
+    {
+        if (nowPossesing)
+        {
+            // Replaced currently possesing unit
+            var existingObj = player.GetComponent<ControllerPlayer>().CurrentUnit;
+
+            // Re enable the guy to walk again
+            existingObj.GetComponent<NavMeshAgent>().enabled = true;
+            existingObj.GetComponent<BasicGameOBJ>().isPossessed = false;
+
+            // ZiJun State machine call
+            existingObj.GetComponent<BasicGameOBJ>().SetStateMachine(
+                new AttackState(existingObj.GetComponent<Attack_Unit>(),
+                existingObj.GetComponent<BasicGameOBJ>().minionWithinRange,
+                existingObj.GetComponent<BasicGameOBJ>().Enemy_Tag));
+
+            // Add back to existing list
+            objList.Add(existingObj);
+            player.GetComponent<ControllerPlayer>().CurrentUnit = this.gameObject;
+            player.GetComponent<ControllerPlayer>().SpiritUnit = null;
+
+            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<BoxCollider>().enabled = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            nowPossesing = false;
+        }
+       
+    }
+
 
     void UpdatePossesion()
     {

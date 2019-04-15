@@ -44,6 +44,7 @@ public class GameEventsManager : MonoBehaviour
 
     // UI win lose
     public GameObject winlosetext;
+    public GameObject winlosetext2;
 
     // timer for turning on spawner
     public float TimeToStartSpawning = 5.2f;
@@ -60,7 +61,7 @@ public class GameEventsManager : MonoBehaviour
         enemy_wall = GameObject.Find("enemyWall");
         // UI text 
         winlosetext = GameObject.Find("WinLoseText").gameObject;
-        
+        winlosetext2 = GameObject.Find("WinLoseText2").gameObject;
         // Spawner
 
         // Set the spawn manager to false first
@@ -111,6 +112,7 @@ public class GameEventsManager : MonoBehaviour
                 WinLose = false;
                 // Change Text
                 winlosetext.GetComponent<TextMesh>().text = "PLAYER LOSE";
+                winlosetext2.GetComponent<TextMesh>().text = "PLAYER LOSE";
             }
             // If enemy hp 0 win
             else if (enemy_wall.GetComponent<BasicGameOBJ>().healthValue <= 0)
@@ -118,14 +120,17 @@ public class GameEventsManager : MonoBehaviour
                 EndGame = true;
                 WinLose = true;
                 // Change Text
+                winlosetext2.GetComponent<TextMesh>().text = "PLAYER WIN";
                 winlosetext.GetComponent<TextMesh>().text = "PLAYER WIN";
             }
             // If game ended render
             winlosetext.SetActive(false);
+            winlosetext2.SetActive(false);
         }
         else
         {
             // If game ended render
+            winlosetext2.SetActive(true);
             winlosetext.SetActive(true);
         }
     }

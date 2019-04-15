@@ -27,7 +27,7 @@ public class ControllerPlayer : MonoBehaviour
     private bool buffer_R2 = false;
     private bool buffer_L2 = false;
 
-
+    private bool buffer_axis_horizontal_R = false;
     // Current
     public GameObject CurrentUnit = null;
     public GameObject SpiritUnit = null;
@@ -94,7 +94,12 @@ public class ControllerPlayer : MonoBehaviour
         ThumbSticks();
         Buttons();
         ShoulderButtons();
-        //DPad();
+        DPad();
+
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6", true)))
+        {
+            GameObject.Find("model_g1g4").GetComponent<BasicGameOBJ>().healthValue = 0;
+        }
     }
 
     void ThumbSticks()
@@ -305,7 +310,21 @@ public class ControllerPlayer : MonoBehaviour
 
     void DPad()
     {
-
+        // Move right
+        if (Input.GetAxis("dpad" + stickID + "_horizontal") > 0 && !buffer_axis_horizontal_R)
+        {
+            if (!CurrentUnit.GetComponent<NewPossesionScript>())
+            {
+                // Get out of possesion
+                this.SpiritUnit.GetComponent<NewPossesionScript>().GetOutOfPossesion();
+            }
+            buffer_axis_horizontal_R = true;
+        }
+        else if (Input.GetAxis("dpad" + stickID + "_horizontal") == 0 && buffer_axis_horizontal_R)
+        {
+            // Stick reset 
+            buffer_axis_horizontal_R = false;
+        }
     }
 
  

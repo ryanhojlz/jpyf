@@ -47,11 +47,11 @@ public class PCDEBUGG : MonoBehaviour
         {
             enemy_waypoints[i].GetComponent<Renderer>().enabled = render;
         }
-        //units = GameObject.FindGameObjectsWithTag("Ally_Unit");
-        //for (int i = 0; i < units.Length; ++i)
-        //{
-        //    if (units[i].GetComponent<Minion>())
-        //        units[i].GetComponent<MeshRenderer>().enabled = render;
-        //}
+        units = GameObject.FindGameObjectsWithTag("Ally_Unit");
+        for (int i = 0; i < units.Length; ++i)
+        {
+            if (units[i].GetComponent<Minion>())
+                units[i].GetComponent<MeshRenderer>().enabled = render;
+        }
     }
 }

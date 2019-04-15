@@ -371,7 +371,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4992017590868680, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 1701779497117034, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_Name
@@ -1698,6 +1698,92 @@ MonoBehaviour:
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: fcd1ce3eb7328cc4dba6bb7a49515b9d, type: 2}
+--- !u!1 &240093109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 240093112}
+  - component: {fileID: 240093111}
+  - component: {fileID: 240093110}
+  m_Layer: 0
+  m_Name: WinLoseText2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &240093110
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240093109}
+  m_Text: WINLOSE
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 3
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4288980132
+--- !u!23 &240093111
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240093109}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!4 &240093112
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240093109}
+  m_LocalRotation: {x: -0, y: -0.31900823, z: -0, w: 0.947752}
+  m_LocalPosition: {x: -5.84, y: -3.4, z: 13.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: -37.206, z: 0}
 --- !u!4 &245117892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4401029449360988, guid: 7d4dabe0647a97b439a18622679c8d4b,
@@ -2901,7 +2987,7 @@ Transform:
   - {fileID: 878559425}
   - {fileID: 1998245122}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439155876
 GameObject:
@@ -3655,7 +3741,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4992017590868680, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1701779497117034, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_IsActive
@@ -4272,7 +4358,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4278321666
+    rgba: 4291809231
 --- !u!23 &679948692
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6642,7 +6728,7 @@ Transform:
   m_Children:
   - {fileID: 957854169}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &978047484
 Prefab:
@@ -12831,7 +12917,7 @@ Transform:
   m_Children:
   - {fileID: 1756207037}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1323312592
 GameObject:
@@ -14879,7 +14965,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4992017590868680, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1701779497117034, guid: 1f60fb5be4e0fa443aa73dad3a20c3f5, type: 2}
       propertyPath: m_Name
@@ -22734,6 +22820,7 @@ MonoBehaviour:
   ally_wall: {fileID: 0}
   enemy_wall: {fileID: 0}
   winlosetext: {fileID: 0}
+  winlosetext2: {fileID: 0}
   TimeToStartSpawning: 5.2
   StartSpawning: 0
 --- !u!1 &2138788115

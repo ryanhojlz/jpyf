@@ -35,6 +35,7 @@ public class AI_Movement : MonoBehaviour
         }
         else
         {
+            Debug.Log("No Target found");
             m_agent.SetDestination(this.transform.position);//If no target is found, go to itself position
         }
     }
@@ -62,7 +63,7 @@ public class AI_Movement : MonoBehaviour
         return false;
     }
 
-    void FindPayload()
+    void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
     {
         m_targetPos = GameObject.Find("PayLoad").transform;
     }

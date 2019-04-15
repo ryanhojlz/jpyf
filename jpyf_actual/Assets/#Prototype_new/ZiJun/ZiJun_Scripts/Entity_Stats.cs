@@ -5,6 +5,7 @@ using UnityEngine;
 public class Entity_Stats
 {
     float m_health;
+    float m_maxhealth;
     float m_defence;
     float m_attack_speed;
     float m_attack;
@@ -12,6 +13,7 @@ public class Entity_Stats
 
     // Getter
     public float GetHealth() { return m_health; }
+    public float GetMaxHealth() { return m_maxhealth; }
     public float GetDef() { return m_defence; }
     public float GetAtkS() { return m_attack_speed; }
     public float GetAtk() { return m_attack; }
@@ -19,6 +21,7 @@ public class Entity_Stats
 
     // Setter
     public void SetHealth(float _health) { m_health = _health; }
+    public void SetMaxHealth(float _maxhealth) { m_maxhealth = _maxhealth; }
     public void SetDef(float _defence) { m_defence = _defence; }
     public void SetAtkS(float _attack_speed) { m_attack_speed = _attack_speed; }
     public void SetAtk(float _attack) { m_attack = _attack; }

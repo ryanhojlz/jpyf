@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Object_ControlScript : MonoBehaviour
 {
-    public GameObject
+    public GameObject ll = null;
 
 	// Use this for initialization
 	void Start ()

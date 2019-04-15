@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Entity_Stats
 {
-    float health;
+    float m_health;
+    float m_defence;
+    float m_attack_speed;
+    float m_attack;
+    float m_range;
 
-    public float GetHealth()
-    {
-        return health;
-    }
+    // Getter
+    public float GetHealth() { return m_health; }
+    public float GetDef() { return m_defence; }
+    public float GetAtkS() { return m_attack_speed; }
+    public float GetAtk() { return m_attack; }
+    public float GetRange() { return m_range; }
 
-    public void SetHealth(float _health)
-    {
-        health = _health;
-    }
+    // Setter
+    public void SetHealth(float _health) { m_health = _health; }
+    public void SetDef(float _defence) { m_defence = _defence; }
+    public void SetAtkS(float _attack_speed) { m_attack_speed = _attack_speed; }
+    public void SetAtk(float _attack) { m_attack = _attack; }
+    public void SetRange(float _range) { m_range = _range; }
 
-    public void TakeDamage(float _damage)
-    {
-        health -= _damage;
-    }
+    //Other functions
+    public void TakeDamage(float _damage) { m_health -= _damage; }
 }

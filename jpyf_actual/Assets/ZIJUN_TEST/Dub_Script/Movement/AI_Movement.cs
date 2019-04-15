@@ -21,14 +21,22 @@ public class AI_Movement : MonoBehaviour
     void Start()
     {
         m_agent = this.GetComponent<NavMeshAgent>();
+        FindPayload();
     }
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         //CheckForRotation(); //Don't think this will work well with unit
 
         //Constantly changing target position
-        m_agent.SetDestination(m_targetPos.position);//Have to constantly changing he unit movement
+        if (m_targetPos)
+        {
+            m_agent.SetDestination(m_targetPos.position);//Have to constantly changing he unit movement
+        }
+        else
+        {
+            m_agent.SetDestination(this.transform.position);//If no target is found, go to itself position
+        }
     }
 
     void SetTarget(Transform _targetPos)
@@ -52,6 +60,11 @@ public class AI_Movement : MonoBehaviour
         }
 
         return false;
+    }
+
+    void FindPayload()
+    {
+        m_targetPos = GameObject.Find("PayLoad").transform;
     }
 
 }

@@ -236,6 +236,8 @@ public class MoveController : MonoBehaviour
         {
             grabbableObject.OnGrabStay(this);
         }
+
+        
     }
 
     protected void OnTriggerEnter(Collider other)

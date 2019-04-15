@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class Dub_Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
-    public AudioSource attackSound;
+    private AudioSource source;
+    public AudioClip attackSound;
     public GameObject specialEffect = null;
 
     float target_distance;
@@ -22,6 +23,9 @@ public class Dub_Tank : Attack_Unit
         {
             CountDownTimer = OriginalTimer;
             Shoot();
+
+            source.clip = attackSound;
+            source.Play();
             //target.GetComponent<Minion>().TakeDamage(attackValue);
         }
         else
@@ -33,13 +37,15 @@ public class Dub_Tank : Attack_Unit
 
     public override void Unit_Self_Update()
     {
+        source = gameObject.GetComponent<AudioSource>();
+
         //AlertImage.SetActive(false);
         if (GetComponent<BasicGameOBJ>().isPossessed)
             return;
         if (minionWithinRange.Count > 0)
         {
             //Debug.Log(this.stateMachine.ToString());
-            
+
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
 
@@ -166,7 +172,7 @@ public class Dub_Tank : Attack_Unit
         //ShootFront();
         ShootTargetedPos(GameObject.Find("crosshair").GetComponent<RayCastFrom>().ReturnTargetPos());
 
-        
+
     }
 
 

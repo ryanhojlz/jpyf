@@ -6,6 +6,7 @@ public class Rain : MonoBehaviour
 {
     public bool rainToggle = false;
     float humidityLevel = 0;
+    float humidityToRain = 50f;
     float prevTime = -1.0f;
     int random = Random.Range(1, 10);
 
@@ -47,17 +48,18 @@ public class Rain : MonoBehaviour
         }
         Debug.Log(humidityLevel);
         float currentTime = Time.time;
-       
+
 
         //if (humidityLevel > 100)
         //{
         //    humidityLevel = 100;
         //}
 
-        if (Random.Range(0.50f, 1.00f) < (humidityLevel / 100f) && !rainToggle && currentTime > (prevTime + 1.0f))
+        if (Random.Range(0.00f, 1.00f) < (humidityLevel / 100f) && !rainToggle && currentTime > (prevTime + 1.0f))
         {
             Debug.Log("Start raining");
-            rainToggle = true;
+            if (humidityLevel > humidityToRain)
+                rainToggle = true;
         }
         else if (rainToggle)
         {

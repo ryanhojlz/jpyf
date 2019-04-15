@@ -10,7 +10,7 @@ public class CProjectile : MonoBehaviour {
 
     Vector3 dir = Vector3.zero;
 
-    float entered = 0;
+    //float entered = 0;
 
     public enum PT
     {

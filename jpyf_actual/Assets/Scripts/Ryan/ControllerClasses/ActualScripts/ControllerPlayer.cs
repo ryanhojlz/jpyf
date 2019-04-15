@@ -383,7 +383,6 @@ public class ControllerPlayer : MonoBehaviour
             x_input = input;
         else
             x_input = 0;
-
 #endif
 
     }

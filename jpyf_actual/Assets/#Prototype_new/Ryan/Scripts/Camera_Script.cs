@@ -11,6 +11,9 @@ public class Camera_Script : MonoBehaviour
     // Camera
     public Transform m_Camera = null;
 
+    // Current Object 
+    public Transform ReferencePos;
+
     // Camera rotation vector3
     public Vector3 camRot = Vector3.zero;
 
@@ -21,31 +24,39 @@ public class Camera_Script : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        // Object Finding
         Controller = GameObject.Find("PS4_ControllerHandler").GetComponent<PS4_ControllerScript>();
         m_Camera = transform.GetChild(0);
-        // Camera offset
 
+        // 
+        ReferencePos = GameObject.Find("PS4_Player").transform;
+
+
+        // Camera offseting
         var newPos = m_Camera.transform.position;
         newPos.x += 0.55f;
         newPos.y += 1;
         newPos.z -= 4;
-
         m_Camera.transform.position = newPos;
-
     }
 
     // Update is called once per frame
     void Update ()
     {
         CameraMovement();
-	}
+        
+    }
 
     void CameraMovement()
     {
+        transform.position = ReferencePos.position;
+
         camRot = this.transform.rotation.eulerAngles;
         camRot.y += Controller.axisRight_x * sens;
         camRot.x += Controller.axisRight_y * sens;
         camRot.z = 0; // Prevent Cartwheels
         this.transform.rotation = Quaternion.Euler(camRot);
     }
+
+
 }

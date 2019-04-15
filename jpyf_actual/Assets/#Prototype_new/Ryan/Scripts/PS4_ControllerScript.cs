@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_PS4
 using UnityEngine.PS4;
+using System;
 #endif
+using UnityEngine.UI;
 public class PS4_ControllerScript : MonoBehaviour
 {
     // This script is for the new prototype;
@@ -20,7 +22,7 @@ public class PS4_ControllerScript : MonoBehaviour
 
 
     // PS4 OBJECTS
-    public GameObject PS4_OBJECT = null;
+    //public GameObject PS4_OBJECT = null;
     public Camera CAMERA = null;
 
     // Rotation Variables
@@ -29,6 +31,11 @@ public class PS4_ControllerScript : MonoBehaviour
 
     // Move Direction
     Vector3 movedir = Vector3.zero;
+
+    // Bool
+    public bool SquareDown = false;
+
+    
 
     // Use this for initialization
     void Start ()
@@ -40,15 +47,19 @@ public class PS4_ControllerScript : MonoBehaviour
 	void Update ()
     {
         AxisUpdate();
+        Buttons();
     }
 
     void AxisUpdate()
     {
+        // If running on ps4  
 #if UNITY_PS4
 
+        // Left stick
         axisLeft_x = Input.GetAxis("leftstick" + stickID + "horizontal");
         axisLeft_y = Input.GetAxis("leftstick" + stickID + "vertical");
 
+        // Right Stick
         axisRight_x = Input.GetAxis("rightstick" + stickID + "horizontal");
         axisRight_y = Input.GetAxis("rightstick" + stickID + "vertical");
 
@@ -58,38 +69,81 @@ public class PS4_ControllerScript : MonoBehaviour
 
         axisRight_x = Mathf.Clamp(axisRight_x, -0.8f, 0.8f);
         axisRight_y = Mathf.Clamp(axisRight_y, -0.8f, 0.8f);
+#endif
 
+        // If running on PC
+#if UNITY_EDITOR_WIN
+        // Debug for PC
+        float input = 0.8f;
+
+        // Right Stick
+        if (Input.GetKey(KeyCode.LeftArrow))
+            axisRight_x = -input;
+        else if (Input.GetKey(KeyCode.RightArrow))
+            axisRight_x = input;
+        else
+            axisRight_x = 0;
+
+        // Right Stick
+        if (Input.GetKey(KeyCode.UpArrow))
+            axisRight_y = -input;
+        else if (Input.GetKey(KeyCode.DownArrow))
+            axisRight_y = input;
+        else
+            axisRight_y = 0;
+
+        // Left Stick
+        if (Input.GetKey(KeyCode.W))
+            axisLeft_y = -input;
+        else if (Input.GetKey(KeyCode.S))
+            axisLeft_y = input;
+        else
+            axisLeft_y = 0;
+
+        // Left Stick
+        if (Input.GetKey(KeyCode.A))
+            axisLeft_x = -input;
+        else if (Input.GetKey(KeyCode.D))
+            axisLeft_x = input;
+        else
+            axisLeft_x = 0;
 #endif
     }
 
 
     void Buttons()
     {
-
-    }
-
-
-
-    void ObjectMovement()
-    {
-        PS4_OBJECT.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
-        //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
-
-        movedir.Set(axisLeft_x * 8, 0, -axisLeft_y * 8);
-        //movedir = new Vector3(x_input * move_speed, 0, -y_input * move_speed);
-        movedir = CAMERA.transform.TransformDirection(movedir);
-        if (movedir != Vector3.zero)
+#if UNITY_PS4
+        // If Square Button is held
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")))
         {
-            // Current experimental
-            prevRot = PS4_OBJECT.transform.rotation;
-            var testTransform = PS4_OBJECT.transform;
-            testTransform.LookAt(movedir, Vector3.up);
-            newRotation = Quaternion.LookRotation(movedir, Vector3.up);
-            newRotation.x = 0;
-            newRotation.z = 0;
-            PS4_OBJECT.transform.rotation = Quaternion.Lerp(prevRot, newRotation, 0.25f);
+            SquareDown = true;
         }
-        //movedir.y = -1;
-        PS4_OBJECT.transform.position += movedir * Time.deltaTime;
+        else
+        {
+            SquareDown = false;
+        }
+#endif
+
+#if UNITY_EDITOR_WIN
+        if (Input.GetKey(KeyCode.P))
+        {
+            SquareDown = true;
+        }
+        else
+        {
+            SquareDown = false;
+        }
+#endif
     }
+
+
+
+    public bool IsSquareDown()
+    {
+        return SquareDown;
+    }
+
+
+
 }

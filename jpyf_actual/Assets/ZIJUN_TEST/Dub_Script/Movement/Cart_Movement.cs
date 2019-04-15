@@ -146,5 +146,6 @@ public class Cart_Movement : MonoBehaviour
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, Moving_Range);
+        //Gizmos.DrawCube(transform.position, Moving_Range);
     }
 }

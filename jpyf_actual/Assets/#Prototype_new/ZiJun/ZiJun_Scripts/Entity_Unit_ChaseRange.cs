@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Unit_Range : MonoBehaviour
+public class Entity_Unit_ChaseRange : MonoBehaviour
 {
     [SerializeField]
     GameObject Unit;

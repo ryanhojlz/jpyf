@@ -29,7 +29,7 @@ public class Entity_Unit : MonoBehaviour
     float Attack_Speed_Stat = 0f;//Attack speed of unit
 
     [SerializeField]
-    float Range_Stat = 5f;//Attack speed of unit
+    float Range_Stat = 5f;//Attack Range of unit
 
     [SerializeField]
     bool isMelee = true;//Decides whether projectile follows the player

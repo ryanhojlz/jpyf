@@ -71,7 +71,7 @@ public class Entity_Unit : MonoBehaviour
     void Start ()
     {
         AddState();
-        ChangeState("attack");
+        ChangeState("chase_cart");
     }
 	
 	// Update is called once per frame
@@ -215,6 +215,7 @@ public class Entity_Unit : MonoBehaviour
     {
         sm.AddState("attack", new Unit_Attack_State(this));
         sm.AddState("chase", new Unit_Chase_State(this));
+        sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
     }
 
     public void ChangeState(string name)

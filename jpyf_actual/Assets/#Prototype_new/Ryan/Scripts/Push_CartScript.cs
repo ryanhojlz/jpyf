@@ -8,9 +8,15 @@ public class Push_CartScript : MonoBehaviour
     // The actual Cart
     public Transform m_CartParent = null;
     // Player 2
-    public Transform player2 = null;
+    public Transform m_Player2 = null;
     // Player Object Controller
-    public Object_ControlScript objControl = null;
+    public Object_ControlScript m_ObjControl = null;
+
+    // Cart MoveDir 
+    public Vector3 m_CartMoveDirection = Vector3.zero;
+
+    // Cart Move Speed Multiplier
+    public float m_CartFriction;
 
     // Use this for initialization
     void Start()
@@ -18,28 +24,30 @@ public class Push_CartScript : MonoBehaviour
         // Parent finding
         m_CartParent = transform.parent.transform.parent;
         // Object Controller
-        objControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
+        m_ObjControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // If player 2 in range
-        if (player2)
+        if (m_Player2)
         {
             // Debug
-            if (objControl.pushCart)
+            if (m_ObjControl.pushCart)
             {
-                objControl.isPushingCart = true;
+                m_ObjControl.isPushingCart = true;
             }
             else
             {
-                objControl.isPushingCart = false;
+                m_ObjControl.isPushingCart = false;
             }
         }
-        if (objControl.isPushingCart)
+        if (m_ObjControl.isPushingCart)
         {
-            m_CartParent.transform.position += objControl.movedir * 0.01f;
+            m_CartMoveDirection = m_ObjControl.movedir;
+            m_CartMoveDirection.x = 0;
+            m_CartParent.transform.position += m_CartMoveDirection * 0.01f;
         }
         
     }
@@ -55,8 +63,8 @@ public class Push_CartScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player2")
         {
-            player2.parent = null;
-            player2 = null;
+            m_Player2.parent = null;
+            m_Player2 = null;
         }
     }
 
@@ -64,8 +72,8 @@ public class Push_CartScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player2")
         {
-            player2 = other.transform;
-            player2.transform.parent = m_CartParent;
+            m_Player2 = other.transform;
+            m_Player2.transform.parent = m_CartParent;
         }
     }
 

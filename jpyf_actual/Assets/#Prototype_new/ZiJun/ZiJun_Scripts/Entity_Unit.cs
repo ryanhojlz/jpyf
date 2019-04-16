@@ -80,10 +80,11 @@ public class Entity_Unit : MonoBehaviour
             SetAttackStat(Attack_Stat);
             SetDefenceStat(Defence_Stat);
             SetAttackSpeedStat(Attack_Speed_Stat);
+            UpdateHealth();//is in taking damage & Healing(If applicable)
         }
         //Debug Purposes only ^
         FindNearestInList();
-        UpdateHealth();
+        
     }
 
     public void Attack()
@@ -119,6 +120,7 @@ public class Entity_Unit : MonoBehaviour
     {
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
         Unit_Stats.TakeDamage(((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef()));
+        UpdateHealth();//Health only changes when taking damage or getting healed
     }
 
     public void UpdateHealth()

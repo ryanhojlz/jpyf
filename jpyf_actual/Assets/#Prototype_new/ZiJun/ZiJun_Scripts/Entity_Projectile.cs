@@ -21,7 +21,7 @@ public class Entity_Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //this.transform.position += Direction.
     }
 
     public void SetTarget(Vector3 _targetPos)
@@ -37,7 +37,6 @@ public class Entity_Projectile : MonoBehaviour
     public Vector3 GetDirection(Vector3 _targetPos)
     {
         return (_targetPos - this.transform.position).normalized;
-
     }
 
     private void OnTriggerEnter(Collider other)

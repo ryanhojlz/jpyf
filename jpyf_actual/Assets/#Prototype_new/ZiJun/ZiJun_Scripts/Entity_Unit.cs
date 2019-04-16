@@ -43,6 +43,8 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     Image healthBar;//Put healthbar image inside here (The one that change not prefeb)
 
+    Transform Target;
+
     Entity_Stats Unit_Stats = new Entity_Stats();
 
     // Use this for initialization
@@ -76,7 +78,7 @@ public class Entity_Unit : MonoBehaviour
             SetAttackSpeedStat(Attack_Speed_Stat);
         }
         //Debug Purposes only ^
-
+        FindNearestInList();
         UpdateHealth();
     }
 
@@ -96,6 +98,7 @@ public class Entity_Unit : MonoBehaviour
     public float GetHealthStat() { return Unit_Stats.GetHealth(); }
     public float GetRangeStat() { return Unit_Stats.GetRange(); }
     public float GetMaxHealthStat() { return Unit_Stats.GetMaxHealth(); }
+    public Transform GetTarget() { if (Target) { return Target; } return null; }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
@@ -125,5 +128,28 @@ public class Entity_Unit : MonoBehaviour
     public void RemoveFromUnitsInRange(GameObject Unit)
     {
         UnitsInRange.Remove(Unit);
+    }
+
+    //Currently put here since no other special units yet
+    public void FindNearestInList()
+    {
+        if (UnitsInRange.Count <= 0)
+        {
+            Target = null;//If there is nothing in the list, there is no target
+            return;
+        }
+
+        float nearest = float.MaxValue;
+        float temp_dist = 0f;
+        for (int i = 0; i < UnitsInRange.Count; ++i)
+        {
+            temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+
+            if (temp_dist < nearest)
+            {
+                nearest = temp_dist;
+                Target = UnitsInRange[i].transform;
+            }
+        }
     }
 }

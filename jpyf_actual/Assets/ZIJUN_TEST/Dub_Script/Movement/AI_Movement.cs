@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class AI_Movement : MonoBehaviour
 {
     [SerializeField]
+    GameObject Self;
+
+    [SerializeField]
     Transform m_targetPos;
 
     NavMeshAgent m_agent;
@@ -27,6 +30,14 @@ public class AI_Movement : MonoBehaviour
     void Update()
     {
         //CheckForRotation(); //Don't think this will work well with unit
+        if (Self.GetComponent<Entity_Unit>())
+        {
+            if (Self.GetComponent<Entity_Unit>().GetTarget())
+            {
+                Debug.Log(Self.GetComponent<Entity_Unit>().GetTarget().name);
+            }
+            m_targetPos = Self.GetComponent<Entity_Unit>().GetTarget();//Finding Self own target
+        }
 
         //Constantly changing target position
         if (m_targetPos)
@@ -36,7 +47,8 @@ public class AI_Movement : MonoBehaviour
         else
         {
             Debug.Log("No Target found");
-            m_agent.SetDestination(this.transform.position);//If no target is found, go to itself position
+            FindPayload();
+            m_agent.SetDestination(m_targetPos.position);//If no target is found, go to itself position
         }
     }
 

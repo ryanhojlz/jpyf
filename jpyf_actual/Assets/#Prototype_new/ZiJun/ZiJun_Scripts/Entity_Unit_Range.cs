@@ -33,6 +33,9 @@ public class Entity_Unit_Range : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Ally_Unit") //if is enemy unit, ignore each other
+            return;
+
         Unit.GetComponent<Entity_Unit>().AddToUnitsInRange(other.gameObject);
     }
 

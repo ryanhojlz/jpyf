@@ -24,7 +24,7 @@ public class AI_Movement : MonoBehaviour
     void Start()
     {
         m_agent = this.GetComponent<NavMeshAgent>();
-        FindPayload();
+       FindPayload();
     }
     // Update is called once per frame
     void Update()

@@ -47,6 +47,8 @@ public class Push_CartScript : MonoBehaviour
         {
             m_CartMoveDirection = m_ObjControl.movedir;
             m_CartMoveDirection.x = 0;
+            m_CartMoveDirection.y = 0;
+
             m_CartParent.transform.position += m_CartMoveDirection * 0.01f;
         }
         

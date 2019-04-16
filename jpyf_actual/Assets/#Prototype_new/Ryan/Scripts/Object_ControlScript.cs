@@ -22,6 +22,10 @@ public class Object_ControlScript : MonoBehaviour
     // Object Interaction
     public bool pushCart = true;
     public bool isPushingCart = false;
+
+    // For moving
+    private Vector3 tempVelocity = Vector3.zero;
+    
     // Use this for initialization
     void Start ()
     {
@@ -44,9 +48,15 @@ public class Object_ControlScript : MonoBehaviour
 
         movedir.Set(Controller.axisLeft_x * 8, 0, -Controller.axisLeft_y * 8);
 
+        tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+
         movedir = CameraObj.transform.TransformDirection(movedir);
+
         if (movedir != Vector3.zero)
         {
+            tempVelocity.x = movedir.x;
+            tempVelocity.z = movedir.z;
+
             // Current experimental
             prevRot = CurrentObj.transform.rotation;
             testTransform = CurrentObj.transform;
@@ -55,17 +65,17 @@ public class Object_ControlScript : MonoBehaviour
             newRotation.x = 0;
             newRotation.z = 0;
             CurrentObj.transform.rotation = Quaternion.Lerp(prevRot, newRotation, 0.35f);
-            movedir.y = 0;
         }
         else
         {
-            movedir = Vector3.zero;
+            tempVelocity.x = 0;
+            tempVelocity.z = 0;
         }
-
+       
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
         if (!isPushingCart)
         {
-            CurrentObj.GetComponent<Rigidbody>().velocity = movedir;
+            CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;

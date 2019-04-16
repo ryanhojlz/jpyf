@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_PS4
 using UnityEngine.PS4;
+using UnityEngine.XR;
 using System;
 #endif
 using UnityEngine.UI;
@@ -123,6 +124,15 @@ public class PS4_ControllerScript : MonoBehaviour
         {
             SquareDown = false;
         }
+
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")))
+        {
+            if (UnityEngine.XR.XRSettings.showDeviceView)
+                UnityEngine.XR.XRSettings.showDeviceView = false;
+            else if (!UnityEngine.XR.XRSettings.showDeviceView)
+                UnityEngine.XR.XRSettings.showDeviceView = true;
+        }
+
 #endif
 
 #if UNITY_EDITOR_WIN

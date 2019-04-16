@@ -24,8 +24,8 @@ public class WeaponHandleScript : GrabbableObject
     }
 
     // Can prolly do coroutine on grab release but brute forcing it for now
-    private void Update()
-    {
+    //private void Update()
+    //{
         
-    }
+    //}
 }

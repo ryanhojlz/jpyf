@@ -48,6 +48,8 @@ public class Entity_Unit : MonoBehaviour
 
     Transform Target;
 
+    
+
     Entity_Stats Unit_Stats = new Entity_Stats();
 
     // Use this for initialization
@@ -76,11 +78,11 @@ public class Entity_Unit : MonoBehaviour
         //Leave here for Debug purposes only v
         if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
         {
-            SetHealthStat(Health_Stat);
-            SetAttackStat(Attack_Stat);
-            SetDefenceStat(Defence_Stat);
-            SetAttackSpeedStat(Attack_Speed_Stat);
-            UpdateHealth();//is in taking damage & Healing(If applicable)
+            //SetHealthStat(Health_Stat);
+            //SetAttackStat(Attack_Stat);
+            //SetDefenceStat(Defence_Stat);
+            //SetAttackSpeedStat(Attack_Speed_Stat);
+            //UpdateHealth();//is in taking damage & Healing(If applicable)
         }
         //Debug Purposes only ^
         FindNearestInList();

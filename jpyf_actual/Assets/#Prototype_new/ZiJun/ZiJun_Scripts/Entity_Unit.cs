@@ -29,7 +29,10 @@ public class Entity_Unit : MonoBehaviour
     float Attack_Speed_Stat = 0f;//Attack speed of unit
 
     [SerializeField]
-    float Range_Stat = 5f;//Attack Range of unit
+    float Attack_Range_Stat = 5f;//Attack Range of unit
+
+    [SerializeField]
+    float Chase_Range_Stat = 5f;//Chase Range of unit
 
     [SerializeField]
     bool isMelee = true;//Decides whether projectile follows the player
@@ -55,10 +58,11 @@ public class Entity_Unit : MonoBehaviour
         SetAttackStat(Attack_Stat);
         SetDefenceStat(Defence_Stat);
         SetAttackSpeedStat(Attack_Speed_Stat);
+        SetAttackRangeStat(Attack_Range_Stat);
 
         //Debug.Log("Range Value : " + Range_Stat);
 
-        SetRangeStat(Range_Stat);
+        SetChaseRangeStat(Chase_Range_Stat);
     }
     void Start ()
     {
@@ -96,17 +100,19 @@ public class Entity_Unit : MonoBehaviour
     public float GetDefenceStat() { return Unit_Stats.GetDef(); }
     public float GetAttackSpeedStat() { return Unit_Stats.GetAtkS(); }
     public float GetHealthStat() { return Unit_Stats.GetHealth(); }
-    public float GetRangeStat() { return Unit_Stats.GetRange(); }
+    public float GetChaseRangeStat() { return Unit_Stats.GetChaseRange(); }
     public float GetMaxHealthStat() { return Unit_Stats.GetMaxHealth(); }
     public Transform GetTarget() { if (Target) { return Target; } return null; }
+    public float GetAttackRangeStat() { return Attack_Range_Stat; }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
     public void SetDefenceStat(float _def) { Unit_Stats.SetDef(_def); }
     public void SetAttackSpeedStat(float _atkS) { Unit_Stats.SetAtkS(_atkS); }
     public void SetHealthStat(float _health) { Unit_Stats.SetHealth(_health); }
-    public void SetRangeStat(float _range) { Unit_Stats.SetRange(_range); }
+    public void SetChaseRangeStat(float _chaserange) { Unit_Stats.SetChaseRange(_chaserange); }
     public void SetMaxHealthStat(float _maxhealth) { Unit_Stats.SetMaxHealth(_maxhealth); }
+    public void SetAttackRangeStat(float _atkRange) { Unit_Stats.SetAtkRange(_atkRange);  }
 
     //Other functions
     public void TakeDamage(float _damage)

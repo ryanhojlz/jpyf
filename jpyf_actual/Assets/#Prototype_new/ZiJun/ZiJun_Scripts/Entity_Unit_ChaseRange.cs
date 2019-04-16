@@ -20,7 +20,7 @@ public class Entity_Unit_ChaseRange : MonoBehaviour
 
         if (Unit.GetComponent<Entity_Unit>())
         {
-            Range = Unit.GetComponent<Entity_Unit>().GetRangeStat();
+            Range = Unit.GetComponent<Entity_Unit>().GetChaseRangeStat();
             this.GetComponent<SphereCollider>().radius = Range;
         }
     }

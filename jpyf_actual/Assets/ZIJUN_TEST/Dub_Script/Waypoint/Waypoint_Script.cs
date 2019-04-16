@@ -44,7 +44,7 @@ public class Waypoint_Script : MonoBehaviour
 
     void SettingWaypointPosition()
     {
-        Debug.Log("Updating Waypoint position of " + this.name);//If the waypoint is newly assigned, this line will prompt 
+        //Debug.Log("Updating Waypoint position of " + this.name);//If the waypoint is newly assigned, this line will prompt 
 
         m_OnTerrain.origin = transform.position;
         m_OnTerrain.direction = Vector3.down;

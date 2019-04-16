@@ -19,10 +19,13 @@ public class Unit_Attack_State : IState
 
     public void Execute()
     {
-        if (!m_user.GetTarget() || (m_user.GetTarget().position - m_user.transform.position).magnitude < m_user.GetAttackRangeStat())//If there is not a target or target is not within attack range
+        //if (!m_user.GetTarget() || (m_user.GetTarget().position - m_user.transform.position).magnitude > m_user.GetAttackRangeStat())//If there is not a target or target is not within attack range
+        //    m_user.ChangeState("chase");
+
+        if (!m_user.GetTarget() || !m_user.GetInAttackRange())//If there is not a target or target is not within attack range
             m_user.ChangeState("chase");
 
-            m_user.Attack();//Attack if enemy is in range
+        m_user.Attack();//Attack if enemy is in range
         
     }
 

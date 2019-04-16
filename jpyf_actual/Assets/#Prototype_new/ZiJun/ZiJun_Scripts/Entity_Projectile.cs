@@ -20,7 +20,7 @@ public class Entity_Projectile : MonoBehaviour
     Vector3 m_Direction = Vector3.zero;
 
     [SerializeField]
-    float m_lifetime;
+    float m_lifetime = 0f;
 
     // Use this for initialization
     void Start()
@@ -31,6 +31,13 @@ public class Entity_Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_lifetime -= Time.deltaTime;
+        if (m_lifetime < 0)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         if (m_Direction == Vector3.zero)//Somehow the Direction is 0, 0, 0;
         {
             Destroy(this.gameObject);

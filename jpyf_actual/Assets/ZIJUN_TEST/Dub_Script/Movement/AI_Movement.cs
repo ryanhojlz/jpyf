@@ -34,7 +34,7 @@ public class AI_Movement : MonoBehaviour
         {
             if (Self.GetComponent<Entity_Unit>().GetTarget())
             {
-                Debug.Log(Self.GetComponent<Entity_Unit>().GetTarget().name);
+                //Debug.Log(Self.GetComponent<Entity_Unit>().GetTarget().name);
             }
             m_targetPos = Self.GetComponent<Entity_Unit>().GetTarget();//Finding Self own target
         }
@@ -82,12 +82,14 @@ public class AI_Movement : MonoBehaviour
 
     public void StopMoving()
     {
+        //Debug.Log("Stop");
         if(m_agent)
             m_agent.isStopped = true;
     }
 
     public void StartMoving()
     {
+        //Debug.Log("Move");
         if (m_agent)
             m_agent.isStopped = false;
     }

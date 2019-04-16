@@ -45,15 +45,15 @@ public class Cart_Movement : MonoBehaviour
 	void Update ()
     {
         //agent.SetDestination(waypoint);
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            NextDestination();
-        }
+        //if (agent.remainingDistance <= agent.stoppingDistance)
+        //{
+        //    NextDestination();
+        //}
 
-        if (CheckInMovingRange())
-        {
-            CheckForRotation();
-        }
+        //if (CheckInMovingRange())
+        //{
+        //    CheckForRotation();
+        //}
         
     }
 

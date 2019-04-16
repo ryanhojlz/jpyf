@@ -54,6 +54,17 @@ public class Entity_Unit : MonoBehaviour
 
     Unit_StateMachine sm = new Unit_StateMachine();
 
+
+    bool m_InAtkRange = false;
+    Vector3 m_HitPoint = Vector3.zero;
+
+    AudioSource UnitThatProduceSound;
+    AudioClip AttackSound;
+
+    //For Attack
+    float atkcooldown = 0f;
+    float countdown = -1f;
+
     // Use this for initialization
     private void Awake()
     {
@@ -65,6 +76,8 @@ public class Entity_Unit : MonoBehaviour
         SetAttackRangeStat(Attack_Range_Stat);
 
         //Debug.Log("Range Value : " + Range_Stat);
+
+        atkcooldown = 1f / GetAttackSpeedStat();
 
         SetChaseRangeStat(Chase_Range_Stat);
     }
@@ -80,50 +93,64 @@ public class Entity_Unit : MonoBehaviour
         //Leave here for Debug purposes only v
         if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
         {
-            //SetHealthStat(Health_Stat);
-            //SetAttackStat(Attack_Stat);
-            //SetDefenceStat(Defence_Stat);
-            //SetAttackSpeedStat(Attack_Speed_Stat);
-            //UpdateHealth();//is in taking damage & Healing(If applicable)
+            SetHealthStat(Health_Stat);
+            SetAttackStat(Attack_Stat);
+            SetDefenceStat(Defence_Stat);
+            SetAttackSpeedStat(Attack_Speed_Stat);
+            UpdateHealth();//is in taking damage & Healing(If applicable)
         }
         //Debug Purposes only ^
         //FindNearestInList();
 
+        if (countdown >= 0)
+            countdown -= Time.deltaTime;
+
+        if (GetHealthStat() <= 0 && sm.GetCurrentStateName() != "dead")
+        {
+            ChangeState("dead");
+        }
+
         sm.ExecuteStateUpdate();//Updating statemachine
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack();
-        }
-        
     }
 
     public void Attack()
     {
-        float lifeTime = 1f;//Temporary hard coding it here
-        //DO shooting projectile here
-        if (Projectile_Prefeb)
+        if (countdown < 0)
         {
-            GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
+            float lifeTime = 1f;//Temporary hard coding it here
+                                //DO shooting projectile here
+            if (Projectile_Prefeb)
+            {
+                GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
 
-            Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
+                Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
 
-            if (!Projectile)
-            {
-                Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
-                return;
+                if (AttackSound)
+                {
+                    UnitThatProduceSound.clip = AttackSound;
+                    UnitThatProduceSound.Play();
+                }
+
+                if (!Projectile)
+                {
+                    Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
+                    return;
+                }
+                if (!Target)
+                {
+                    Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+                }
+                else
+                {
+                    Projectile.SetDirection(Target.position, this.transform.position);
+                }
+                Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
+                Projectile.SetLifeTime(lifeTime);
+
             }
-            if (!Target)
-            {
-                Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
-            }
-            else
-            {
-                Projectile.SetDirection(Target.position, this.transform.position);
-            }
-            Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
-            Projectile.SetLifeTime(lifeTime);
-            
+
+            countdown = atkcooldown;
         }
     }
 
@@ -136,6 +163,8 @@ public class Entity_Unit : MonoBehaviour
     public float GetMaxHealthStat() { return Unit_Stats.GetMaxHealth(); }
     public Transform GetTarget() { if (Target) { return Target; } return null; }
     public float GetAttackRangeStat() { return Attack_Range_Stat; }
+    public bool GetInAttackRange() { return m_InAtkRange; }
+    public Vector3 GetHitPoint() { return m_HitPoint; }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
@@ -144,7 +173,10 @@ public class Entity_Unit : MonoBehaviour
     public void SetHealthStat(float _health) { Unit_Stats.SetHealth(_health); }
     public void SetChaseRangeStat(float _chaserange) { Unit_Stats.SetChaseRange(_chaserange); }
     public void SetMaxHealthStat(float _maxhealth) { Unit_Stats.SetMaxHealth(_maxhealth); }
+    public void SetTarget(Transform _Target) { Target = _Target; }
     public void SetAttackRangeStat(float _atkRange) { Unit_Stats.SetAtkRange(_atkRange);  }
+    public void SetInAttackRange(bool _InAtkRange) { m_InAtkRange = _InAtkRange; }
+    public void SetHitPoint(Vector3 _hit) { m_HitPoint = _hit; }
 
     //Other functions
     public void TakeDamage(float _damage)
@@ -166,7 +198,21 @@ public class Entity_Unit : MonoBehaviour
 
     public void RemoveFromUnitsInRange(GameObject Unit)
     {
+        if (Target.gameObject == Unit)
+            Target = null;
+
         UnitsInRange.Remove(Unit);
+    }
+
+    public void UpdateCheckList()
+    {
+        for (int i = 0; i < UnitsInRange.Count; ++i)
+        {
+            if (!UnitsInRange[i].gameObject)
+            {
+                UnitsInRange.Remove(UnitsInRange[i]);
+            }
+        }
     }
 
     public void StopMoving()
@@ -216,6 +262,7 @@ public class Entity_Unit : MonoBehaviour
         sm.AddState("attack", new Unit_Attack_State(this));
         sm.AddState("chase", new Unit_Chase_State(this));
         sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
+        sm.AddState("dead", new Unit_Dead_State(this));
     }
 
     public void ChangeState(string name)
@@ -226,5 +273,10 @@ public class Entity_Unit : MonoBehaviour
     public int InRangeCount()
     {
         return UnitsInRange.Count;
+    }
+
+    public void Dead()
+    {
+        Destroy(this.gameObject.transform.parent.gameObject);
     }
 }

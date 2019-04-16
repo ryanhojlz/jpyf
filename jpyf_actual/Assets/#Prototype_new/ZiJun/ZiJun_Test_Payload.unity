@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 762690800}
   m_Layer: 0
   m_Name: PayLoad
-  m_TagString: Ally_Unit
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -964,6 +964,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &858651634
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619536322115524, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ea2c895bc2ae27f44a21d23a8f54e3c1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &904770406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1228,7 @@ GameObject:
   - component: {fileID: 1111100729}
   m_Layer: 0
   m_Name: Temp_Player
-  m_TagString: Ally_Unit
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1282,7 +1324,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4861639688968860, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -9.22
       objectReference: {fileID: 0}
     - target: {fileID: 4861639688968860, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1290,7 +1332,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4861639688968860, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 6.88
       objectReference: {fileID: 0}
     - target: {fileID: 4861639688968860, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
       propertyPath: m_LocalRotation.x

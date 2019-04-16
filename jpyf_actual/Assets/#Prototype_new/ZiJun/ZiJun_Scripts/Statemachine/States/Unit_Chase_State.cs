@@ -13,6 +13,7 @@ public class Unit_Chase_State : IState
 
     public void Enter()
     {
+        Debug.Log("Enter chase");
         m_user.StartMoving();//Setting it to start moving
     }
 
@@ -29,7 +30,12 @@ public class Unit_Chase_State : IState
 
         if (m_user.GetTarget())//If there is a target
         {
-            if ((m_user.GetTarget().position - m_user.transform.position).magnitude < m_user.GetAttackRangeStat())//if is within attack range, goes to attack state
+            //if ((m_user.GetTarget().position - m_user.transform.position).magnitude < m_user.GetAttackRangeStat())//if is within attack range, goes to attack state
+            //{
+            //    m_user.ChangeState("attack");
+            //}
+
+            if (m_user.GetInAttackRange())//if is within attack range, goes to attack state
             {
                 m_user.ChangeState("attack");
             }
@@ -39,6 +45,7 @@ public class Unit_Chase_State : IState
 
     public void Exit()
     {
+        Debug.Log("Exit chase");
         m_user.StopMoving();//Setting it to start moving
     }
 }

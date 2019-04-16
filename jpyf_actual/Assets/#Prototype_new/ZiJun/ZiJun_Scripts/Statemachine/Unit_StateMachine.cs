@@ -27,6 +27,7 @@ public class Unit_StateMachine
 
     public void ChangeState(string statename)
     {
+        Debug.Log(statename);
 
         if (FindState(statename) == null)
         {
@@ -54,6 +55,11 @@ public class Unit_StateMachine
         {
             runningState.Execute();
         }
+    }
+
+    public string GetCurrentStateName()
+    {
+        return FindStateName(currentlyRunningState);
     }
 
     public IState GetCurrentState()
@@ -94,6 +100,21 @@ public class Unit_StateMachine
         }
 
         return ToReturn;
+    }
+
+    string FindStateName(IState _state)
+    {
+        string ToReturn = null;
+
+        for (int i = 0; i < ListOfStates.Count; ++i)
+        {
+            if (ListOfStates[i].GetState() == _state)
+            {
+                ToReturn = ListOfStates[i].GetName();
+            }
+        }
+
+        return ToReturn; 
     }
 
 }

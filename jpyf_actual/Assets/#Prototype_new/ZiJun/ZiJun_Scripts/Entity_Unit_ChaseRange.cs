@@ -28,7 +28,7 @@ public class Entity_Unit_ChaseRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,11 +36,17 @@ public class Entity_Unit_ChaseRange : MonoBehaviour
         if (other.tag != "Ally_Unit") //if is enemy unit, ignore each other
             return;
 
-        Unit.GetComponent<Entity_Unit>().AddToUnitsInRange(other.gameObject);
+        if (Unit.GetComponent<Entity_Unit>())
+        {
+            Unit.GetComponent<Entity_Unit>().AddToUnitsInRange(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Unit.GetComponent<Entity_Unit>().RemoveFromUnitsInRange(other.gameObject);
+        if (Unit.GetComponent<Entity_Unit>())
+        {
+            Unit.GetComponent<Entity_Unit>().RemoveFromUnitsInRange(other.gameObject);
+        }
     }
 }

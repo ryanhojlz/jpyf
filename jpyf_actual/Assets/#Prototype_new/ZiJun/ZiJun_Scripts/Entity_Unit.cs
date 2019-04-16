@@ -50,6 +50,8 @@ public class Entity_Unit : MonoBehaviour
 
     Entity_Stats Unit_Stats = new Entity_Stats();
 
+    Unit_StateMachine sm = new Unit_StateMachine();
+
     // Use this for initialization
     private void Awake()
     {
@@ -66,9 +68,9 @@ public class Entity_Unit : MonoBehaviour
     }
     void Start ()
     {
-       
-       
-	}
+        AddState();
+        ChangeState("attack");
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -83,16 +85,43 @@ public class Entity_Unit : MonoBehaviour
             UpdateHealth();//is in taking damage & Healing(If applicable)
         }
         //Debug Purposes only ^
-        FindNearestInList();
+        //FindNearestInList();
+
+        sm.ExecuteStateUpdate();//Updating statemachine
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
         
     }
 
     public void Attack()
     {
+        float lifeTime = 1f;//Temporary hard coding it here
         //DO shooting projectile here
         if (Projectile_Prefeb)
         {
+            GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
 
+            Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
+
+            if (!Projectile)
+            {
+                Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
+                return;
+            }
+            if (!Target)
+            {
+                Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+            }
+            else
+            {
+                Projectile.SetDirection(Target.position, this.transform.position);
+            }
+            Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
+            Projectile.SetLifeTime(lifeTime);
+            
         }
     }
 
@@ -138,14 +167,28 @@ public class Entity_Unit : MonoBehaviour
         UnitsInRange.Remove(Unit);
     }
 
+    public void StopMoving()
+    {
+        if (this.transform.parent)
+            if (this.transform.parent.GetComponent<AI_Movement>())
+                this.transform.parent.GetComponent<AI_Movement>().StopMoving();
+    }
+
+    public void StartMoving()
+    {
+        if (this.transform.parent)
+            if (this.transform.parent.GetComponent<AI_Movement>())
+                this.transform.parent.GetComponent<AI_Movement>().StartMoving();
+    }
+
     //Currently put here since no other special units yet
     public void FindNearestInList()
     {
-        if (UnitsInRange.Count <= 0)
-        {
-            Target = null;//If there is nothing in the list, there is no target
-            return;
-        }
+        //if (UnitsInRange.Count <= 0)
+        //{
+        //    Target = null;//If there is nothing in the list, there is no target
+        //    return;
+        //}
 
         float nearest = float.MaxValue;
         float temp_dist = 0f;
@@ -159,5 +202,26 @@ public class Entity_Unit : MonoBehaviour
                 Target = UnitsInRange[i].transform;
             }
         }
+    }
+
+    public void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
+    {
+        Target = GameObject.Find("PayLoad").transform;
+    }
+
+    void AddState()//Put all the required states here
+    {
+        sm.AddState("attack", new Unit_Attack_State(this));
+        sm.AddState("chase", new Unit_Chase_State(this));
+    }
+
+    public void ChangeState(string name)
+    {
+        sm.ChangeState(name);
+    }
+
+    public int InRangeCount()
+    {
+        return UnitsInRange.Count;
     }
 }

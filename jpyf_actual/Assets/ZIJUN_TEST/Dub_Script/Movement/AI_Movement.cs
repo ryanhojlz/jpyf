@@ -44,12 +44,12 @@ public class AI_Movement : MonoBehaviour
         {
             m_agent.SetDestination(m_targetPos.position);//Have to constantly changing he unit movement
         }
-        else
-        {
-            Debug.Log("No Target found");
-            FindPayload();
-            m_agent.SetDestination(m_targetPos.position);//If no target is found, go to itself position
-        }
+        //else
+        //{
+        //    Debug.Log("No Target found");
+        //    FindPayload();
+        //    m_agent.SetDestination(m_targetPos.position);//If no target is found, go to itself position
+        //}
     }
 
     void SetTarget(Transform _targetPos)
@@ -57,27 +57,39 @@ public class AI_Movement : MonoBehaviour
         m_targetPos = _targetPos;
     }
 
-    bool CheckForRotation()
+    //bool CheckForRotation()
+    //{
+    //    m_currentAngularVelocity = Vector3.Angle(transform.forward, m_PrevForward) / Time.deltaTime;
+    //    m_PrevForward = transform.forward;
+
+    //    if (m_currentAngularVelocity > 3f)
+    //    {
+    //        m_agent.isStopped = true;//Stops it from moving
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        m_agent.isStopped = false;//Making it move again
+    //    }
+
+    //    return false;
+    //}
+
+    //void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
+    //{
+    //    m_targetPos = GameObject.Find("PayLoad").transform;
+    //}
+
+    public void StopMoving()
     {
-        m_currentAngularVelocity = Vector3.Angle(transform.forward, m_PrevForward) / Time.deltaTime;
-        m_PrevForward = transform.forward;
-
-        if (m_currentAngularVelocity > 3f)
-        {
-            m_agent.isStopped = true;//Stops it from moving
-            return true;
-        }
-        else
-        {
-            m_agent.isStopped = false;//Making it move again
-        }
-
-        return false;
+        if(m_agent)
+            m_agent.isStopped = true;
     }
 
-    void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
+    public void StartMoving()
     {
-        m_targetPos = GameObject.Find("PayLoad").transform;
+        if (m_agent)
+            m_agent.isStopped = false;
     }
 
 }

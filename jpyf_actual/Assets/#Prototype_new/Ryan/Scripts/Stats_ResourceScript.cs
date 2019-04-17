@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Besides this script I know theres alot of handlers
+// But as of now the general thinking is this script handle a specific e.g
+// e.g this script handles the values and certain triggers of the game
+// While scripts like Object Control is suppose to manage the controls of the object
+// While ps4 controller script is just for checking axis and button presses
 
 public class Stats_ResourceScript : MonoBehaviour
 {

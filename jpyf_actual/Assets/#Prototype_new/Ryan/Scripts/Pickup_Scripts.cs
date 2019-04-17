@@ -13,15 +13,17 @@ public class Pickup_Scripts : MonoBehaviour
         {
             case 1:
                 transform.name = "pickup_spirit";
-                this.GetComponent<Renderer>().material.color = Color.blue;
+                //this.GetComponent<Renderer>().material.color = Color.blue;
                 break;
             case 2:
                 transform.name = "pickup_mineral";
-                this.GetComponent<Renderer>().material.color = Color.red;
+                //this.GetComponent<Renderer>().material.color = Color.red;
                 break;
             default:
                 transform.name = "???";
                 break;
         }
 	}
+
+    
 }

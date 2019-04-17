@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Object_ControlScript : MonoBehaviour
 {
     // Current Obj reference
     public GameObject CurrentObj = null;
+
     // PS4 Controller Reference
     public PS4_ControllerScript Controller = null;
+    
     // Camera Reference
     public Camera CameraObj = null;
-    // Move direction
+    
+    // Movement direction
     public Vector3 movedir = Vector3.zero;
 
     // Quaternion for rotation value
@@ -20,8 +25,13 @@ public class Object_ControlScript : MonoBehaviour
     Vector3 tempRotation;
 
     // Object Interaction
+    // Cart Interaction
     public bool pushCart = true;
     public bool isPushingCart = false;
+
+    // Item Interaction
+    public bool pickup = false;
+    public bool throw_item = false;
 
     // For moving
     private Vector3 tempVelocity = Vector3.zero;
@@ -83,12 +93,50 @@ public class Object_ControlScript : MonoBehaviour
 
     void Interaction()
     {
+        pickup = false;
+        throw_item = false;
+
+#if UNITY_PS4
+        // Hold square to push cart
         if (Controller.IsSquareDown())
             pushCart = true;
         else
             pushCart = false;
+
+        // Pick up
+        if (Controller.ReturnCirclePress())
+        {
+            pickup = true;
+        }
+
+        // Throw item
+        if (Controller.ReturnR1Press())
+        {
+            throw_item = true;
+        }
+#endif
+
+#if UNITY_EDITOR_WIN
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            pickup = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            throw_item = true;
+        }
+
+#endif
+
+
+        //Debug.Log("Pickup   + " + pickup);
+        GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup;
+        
     }
 
 
-    
+
+
+
 }

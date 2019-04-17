@@ -125,6 +125,7 @@ public class PS4_ControllerScript : MonoBehaviour
             SquareDown = false;
         }
 
+        // Debug For turning on and off VR view
         if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")))
         {
             if (UnityEngine.XR.XRSettings.showDeviceView)
@@ -133,10 +134,12 @@ public class PS4_ControllerScript : MonoBehaviour
                 UnityEngine.XR.XRSettings.showDeviceView = true;
         }
 
+
+
 #endif
 
 #if UNITY_EDITOR_WIN
-        if (Input.GetKey(KeyCode.P))
+            if (Input.GetKey(KeyCode.P))
         {
             SquareDown = true;
         }
@@ -154,6 +157,15 @@ public class PS4_ControllerScript : MonoBehaviour
         return SquareDown;
     }
 
+    public bool ReturnCirclePress()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")));
+    }
+
+    public bool ReturnR1Press()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")));
+    }
 
 
 }

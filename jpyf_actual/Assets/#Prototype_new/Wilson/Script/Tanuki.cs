@@ -10,5 +10,10 @@ public class Tanuki : MonoBehaviour
     Dub_Lazer_Projectile laser;
     bool isLazer;
     //public AudioSource attackSound;
+    public AudioClip attackSound;
 
+    private void Start()
+    {
+        attackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_attack;
+    }
 }

@@ -72,7 +72,7 @@ public class Nurikabe : Entity_Unit
             //If the current target is not piority && the currently compared unit is piority
             if (Target)
             {
-                if (Target.tag != piority && (UnitsInRange[i].tag == piority))
+                if (Target.tag != priority && (UnitsInRange[i].tag == priority))
                 {
                     //Force Assign
                     nearest = temp_dist;
@@ -80,7 +80,7 @@ public class Nurikabe : Entity_Unit
                     continue;
                 }
                 //If the current target is piority && the currently compared unit is not piority
-                else if (Target.tag == piority && (UnitsInRange[i].tag != piority))
+                else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
                 {
                     //Ignore and continue
                     continue;

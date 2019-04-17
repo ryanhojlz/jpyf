@@ -10,6 +10,7 @@ public class SpawnHandlerScript : MonoBehaviour
     public List<Transform> SpawnLocation;
     public float timer = 5;
     float timerReference = 0;
+    float spawnlocation;
 	// Use this for initialization
 	void Start ()
     {
@@ -26,6 +27,7 @@ public class SpawnHandlerScript : MonoBehaviour
         timer -= 1 * Time.deltaTime;
         if (timer <= 0)
         {
+            
             timer = timerReference;
             // spawn object
             GameObject obj = Instantiate(ObjectList[0].gameObject);

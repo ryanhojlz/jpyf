@@ -26,7 +26,7 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     Piority Piority_Unit = Piority.NONE;
 
-    protected string piority = "";
+    protected string priority = "";
 
     [SerializeField]
     protected float Health_Stat = 1f;//Attack stats of unit
@@ -100,11 +100,11 @@ public class Entity_Unit : MonoBehaviour
 
         if (Piority_Unit == Piority.PAYLOAD)
         {
-            piority = "Payload";//Tag payload
+            priority = "Payload";//Tag payload
         }
         else if (Piority_Unit == Piority.PLAYER)
         {
-            piority = "player2";//Tag controller player
+            priority = "Player2";//Tag controller player
         }
 
         SelfStart();

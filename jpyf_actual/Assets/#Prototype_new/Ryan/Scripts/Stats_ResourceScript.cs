@@ -82,6 +82,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
         // Assign
         m_P2_hp = m_P2_hpCap;
+        m_CartHP = 50;
         m_LanternHp = 100;
     }
 

@@ -45,6 +45,10 @@ public class Stats_ResourceScript : MonoBehaviour
     public Transform digetic_cart_healthbar_ui = null;
     public Transform digetic_lantern_ui = null;
 
+    // Lantern Light
+    public Transform LanternLight = null;
+  
+
     // Use this for initialization
     void Start ()
     {
@@ -68,10 +72,12 @@ public class Stats_ResourceScript : MonoBehaviour
         digetic_cart_healthbar_ui = GameObject.Find("DigeticHealthBar").transform;
         digetic_lantern_ui = GameObject.Find("DigeticLampBar").transform;
 
-
+        // Lanter Light
+        LanternLight = GameObject.Find("LanternLight").transform;
 
         // Assign
         m_P2_hp = m_P2_hpCap;
+        m_LanternHp = 100;
     }
 
     // Update is called once per frame
@@ -79,6 +85,11 @@ public class Stats_ResourceScript : MonoBehaviour
     {
         PS4_UI();
         PSVR_UI();
+        
+        // Its just one line for now be if expanded i will put in func
+        //LanternGameplay();
+        LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
+
 
         // Debug Function
         _DebugFunc();
@@ -122,10 +133,6 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             ++m_Minerals;
             ++m_Souls;
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
             m_P2_hp++;
 
             if (m_P2_hp < 0)
@@ -137,7 +144,10 @@ public class Stats_ResourceScript : MonoBehaviour
                 m_P2_hp = m_P2_hpCap;
             }
 
+        }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             m_CartHP += 10;
             if (m_CartHP < 0)
             {
@@ -166,9 +176,14 @@ public class Stats_ResourceScript : MonoBehaviour
 
     }
 
-
+    void LanternGameplay()
+    {
+        LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
+    }
+    
     public void Cart_TakeDmg(int damage)
     {
+        // if my supervisor was mr toh he would have just put a plus and parameter would be a minus but not in this house
         m_CartHP -= damage;
         if (m_CartHP < 0)
         {
@@ -181,5 +196,16 @@ public class Stats_ResourceScript : MonoBehaviour
         }
     }
 
-    
+    public void Lantern_TakeDmg(int damage)
+    {
+        m_LanternHp -= damage;
+        if (m_LanternHp < 0)
+        {
+            m_LanternHp = 0;
+        }
+        else if (m_LanternHp > m_LanternHpCap)
+        {
+            m_LanternHp = m_LanternHpCap;
+        }
+    }
 }

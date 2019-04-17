@@ -187,7 +187,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 251028c3dee91bc498ecc1e54ca62146, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   Defence_Stat: 0
   Attack_Speed_Stat: 1
   Attack_Range_Stat: 5
-  Chase_Range_Stat: 5
+  Chase_Range_Stat: 10
   isMelee: 1
   Projectile_Prefeb: {fileID: 1892895758873684, guid: ea2c895bc2ae27f44a21d23a8f54e3c1,
     type: 2}

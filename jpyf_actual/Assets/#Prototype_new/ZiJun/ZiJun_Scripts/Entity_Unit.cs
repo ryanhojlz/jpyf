@@ -59,6 +59,8 @@ public class Entity_Unit : MonoBehaviour
     Vector3 m_HitPoint = Vector3.zero;
 
     AudioSource UnitThatProduceSound;
+
+    [SerializeField]
     AudioClip AttackSound;
 
     //For Attack

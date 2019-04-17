@@ -56,7 +56,7 @@ public class Entity_Projectile : MonoBehaviour
 
     public void SetSpeed(float _speed) { m_speed = _speed; }
 
-    public void SetLifeTime(float _lifetime) { m_lifetime = _lifetime;  }
+    public void SetLifeTime(float _lifetime) { m_lifetime = _lifetime + (_lifetime * 0.5f);  }//Added 1 to give it abit further range
 
     public void SetDirection(Vector3 _targetPos, Vector3 _shooterPos)
     {
@@ -74,6 +74,20 @@ public class Entity_Projectile : MonoBehaviour
         {
             Debug.Log("Take Damage");
             other.GetComponent<Entity_Unit>().TakeDamage(m_dmg);
+        }
+       
+        if (other.tag == "Payload")
+        {
+            Debug.Log("Hit_Pay_Load");
+            Debug.Log("Damage : " + m_dmg);
+            GameObject hello = GameObject.Find("Stats_ResourceHandler");
+
+            if (hello)
+            {
+                Debug.Log(hello.name);
+            }
+
+            GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)m_dmg);
         }
     }
 }

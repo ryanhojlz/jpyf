@@ -27,7 +27,7 @@ public class Unit_StateMachine
 
     public void ChangeState(string statename)
     {
-        Debug.Log(statename);
+        //Debug.Log(statename);
 
         if (FindState(statename) == null)
         {

@@ -43,10 +43,10 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
     {
         if (Unit.GetComponent<Entity_Unit>())
         {
-            if (other.gameObject.name == "PayLoad")
-            {
-                Debug.Log("Collided's name : " + other.name);
-            }
+            //if (other.gameObject.name == "PayLoad")
+            //{
+            //    Debug.Log("Collided's name : " + other.name);
+            //}
             //Debug.Log("Collided's name : " + other.name);
             if (Unit.GetComponent<Entity_Unit>().GetTarget() == other.transform)
             {

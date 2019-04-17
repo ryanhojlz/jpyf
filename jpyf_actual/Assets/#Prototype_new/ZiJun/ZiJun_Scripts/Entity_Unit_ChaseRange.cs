@@ -33,7 +33,7 @@ public class Entity_Unit_ChaseRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Player") //if is enemy unit, ignore each other
+        if (other.tag != "Player" && other.tag != "Player2" && other.tag != "Payload") //if is enemy unit, ignore each other
             return;
 
         if (Unit.GetComponent<Entity_Unit>())

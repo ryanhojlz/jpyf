@@ -111,7 +111,7 @@ public class Entity_Unit : MonoBehaviour
         {
             ChangeState("dead");
         }
-        Debug.Log("State machine is " + sm.GetCurrentStateName());
+        //Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
 
     }
@@ -149,6 +149,7 @@ public class Entity_Unit : MonoBehaviour
                 }
                 Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
                 Projectile.SetLifeTime(lifeTime);
+                Projectile.SetDamage(GetAttackStat());
 
             }
 

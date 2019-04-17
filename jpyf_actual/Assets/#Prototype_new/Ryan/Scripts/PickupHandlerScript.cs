@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LanternHandler : MonoBehaviour {
-
+public class PickupHandlerScript : MonoBehaviour
+{
+    Transform pickup_object = null;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	

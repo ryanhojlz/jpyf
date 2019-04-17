@@ -208,4 +208,17 @@ public class Stats_ResourceScript : MonoBehaviour
             m_LanternHp = m_LanternHpCap;
         }
     }
+
+    public void Player2_TakeDmg(int damage)
+    {
+        m_P2_hp -= damage;
+        if (m_P2_hp < 0)
+        {
+            m_P2_hp = 0;
+        }
+        else if (m_P2_hp > m_P2_hpCap)
+        {
+            m_P2_hp = m_P2_hpCap;
+        }
+    }
 }

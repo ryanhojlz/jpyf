@@ -167,7 +167,19 @@ public class Stats_ResourceScript : MonoBehaviour
     }
 
 
-    
+    public void Cart_TakeDmg(int damage)
+    {
+        m_CartHP -= damage;
+        if (m_CartHP < 0)
+        {
+            m_CartHP = 0;
+        }
+
+        if (m_CartHP > m_CartHpCap)
+        {
+            m_CartHP = m_CartHpCap;
+        }
+    }
 
     
 }

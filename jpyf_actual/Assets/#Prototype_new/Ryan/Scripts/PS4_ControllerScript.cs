@@ -151,7 +151,7 @@ public class PS4_ControllerScript : MonoBehaviour
     }
 
 
-
+#if UNITY_PS4
     public bool IsSquareDown()
     {
         return SquareDown;
@@ -166,6 +166,7 @@ public class PS4_ControllerScript : MonoBehaviour
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")));
     }
+#endif
 
 
 }

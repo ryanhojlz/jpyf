@@ -111,7 +111,7 @@ public class Entity_Unit : MonoBehaviour
         {
             ChangeState("dead");
         }
-
+        Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
 
     }

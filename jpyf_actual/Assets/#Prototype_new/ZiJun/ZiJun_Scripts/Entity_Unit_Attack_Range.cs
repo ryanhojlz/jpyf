@@ -33,7 +33,7 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
         {
             if (Unit.GetComponent<Entity_Unit>().GetTarget() == null)
             {
-                Debug.Log("Target's name : " + Unit.GetComponent<Entity_Unit>().GetTarget().name);
+                //Debug.Log("Target's name : " + Unit.GetComponent<Entity_Unit>().GetTarget().name);
                 Unit.GetComponent<Entity_Unit>().SetInAttackRange(false);
             }
         }
@@ -43,7 +43,11 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
     {
         if (Unit.GetComponent<Entity_Unit>())
         {
-            Debug.Log("Collided's name : " + other.name);
+            if (other.gameObject.name == "PayLoad")
+            {
+                Debug.Log("Collided's name : " + other.name);
+            }
+            //Debug.Log("Collided's name : " + other.name);
             if (Unit.GetComponent<Entity_Unit>().GetTarget() == other.transform)
             {
                 Unit.GetComponent<Entity_Unit>().SetInAttackRange(true);
@@ -55,7 +59,7 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
     {
         if (Unit.GetComponent<Entity_Unit>())
         {
-            Debug.Log("Collided_exit name : " + other.name);
+            //Debug.Log("Collided_exit name : " + other.name);
             if (Unit.GetComponent<Entity_Unit>().GetTarget() == other.transform)
             {
                 Unit.GetComponent<Entity_Unit>().SetInAttackRange(false);

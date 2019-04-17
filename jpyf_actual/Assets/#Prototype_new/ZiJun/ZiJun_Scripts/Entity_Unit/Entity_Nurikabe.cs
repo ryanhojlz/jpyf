@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Nurikabe : Entity_Unit
+public class Entity_Nurikabe : Entity_Unit
 {
     GameObject bulletGO = null;
 
-    public override void SelfStart()
-    {
-        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().NRKB_attack;
-        UnitThatProduceSound = this.GetComponent<AudioSource>();
-        UnitThatProduceSound.clip = AttackSound;
-    }
-
     public override void SelfUpdate()
     {
-        if (GetStillAttacking())//if it is still attacking
+        if(GetStillAttacking())//if it is still attacking
             if (bulletGO == null)//Bullet no longer exist
                 SetStillAttacking(false);//State it is no longer attacking
     }
@@ -33,7 +26,7 @@ public class Nurikabe : Entity_Unit
 
                 if (AttackSound)
                 {
-                    //UnitThatProduceSound.clip = AttackSound;
+                    UnitThatProduceSound.clip = AttackSound;
                     UnitThatProduceSound.Play();
                 }
 

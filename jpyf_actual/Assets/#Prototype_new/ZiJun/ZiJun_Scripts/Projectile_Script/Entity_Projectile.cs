@@ -8,7 +8,7 @@ public class Entity_Projectile : MonoBehaviour
     //GameObject m_Target = null;//The unit's target
 
     [SerializeField]
-    float m_dmg = 0f; //Unit's Damage
+    protected float m_dmg = 0f; //Unit's Damage
 
     [SerializeField]
     float m_speed = 0f;
@@ -68,26 +68,39 @@ public class Entity_Projectile : MonoBehaviour
         return m_Direction;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Entity_Unit>())//Only if it is an Entity Unit
         {
             Debug.Log("Take Damage");
             other.GetComponent<Entity_Unit>().TakeDamage(m_dmg);
+
+            Destroy(this.gameObject);
         }
        
         if (other.tag == "Payload")
         {
-            Debug.Log("Hit_Pay_Load");
-            Debug.Log("Damage : " + m_dmg);
-            GameObject hello = GameObject.Find("Stats_ResourceHandler");
+            //Debug.Log("Hit_Pay_Load");
+            //Debug.Log("Damage : " + m_dmg);
+            //GameObject hello = GameObject.Find("Stats_ResourceHandler");
 
-            if (hello)
-            {
-                Debug.Log(hello.name);
-            }
+            //if (hello)
+            //{
+            //    Debug.Log(hello.name);
+            //}
 
-            GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)m_dmg);
+            HitCart(other);
+            Destroy(this.gameObject);
         }
+    }
+
+    public virtual void HitCart(Collider other)
+    {
+        GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)m_dmg);
+    }
+
+    public virtual void HitPlayer(Collider other)
+    {
+        other.GetComponent<PS4_PlayerHitboxScript>().TakeDamage((int)m_dmg);
     }
 }

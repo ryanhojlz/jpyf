@@ -13,7 +13,7 @@ public class Unit_Chase_State : IState
 
     public void Enter()
     {
-        Debug.Log("Enter chase");
+        //Debug.Log("Enter chase");
         m_user.StartMoving();//Setting it to start moving
     }
 
@@ -45,7 +45,7 @@ public class Unit_Chase_State : IState
 
     public void Exit()
     {
-        Debug.Log("Exit chase");
+        //Debug.Log("Exit chase");
         m_user.StopMoving();//Setting it to start moving
     }
 }

@@ -21,6 +21,8 @@ public class AI_Movement : MonoBehaviour
     Vector3 m_PlayerPosition_Without_y;
     Vector3 m_CartPosition_Without_y;
 
+    Vector3 tempThis = new Vector3();
+    Vector3 tempTarget = new Vector3();
     void Start()
     {
        m_agent = this.GetComponent<NavMeshAgent>();
@@ -43,6 +45,26 @@ public class AI_Movement : MonoBehaviour
         if (m_targetPos)
         {
             m_agent.SetDestination(m_targetPos.position);//Have to constantly changing he unit movement
+        }
+
+        if (m_agent.isStopped && m_targetPos)
+        {
+            if (Self.GetComponent<Entity_Unit>())
+                if (!Self.GetComponent<Entity_Unit>().GetStillAttacking())
+                {
+                    tempThis.x = transform.position.x;
+                    tempThis.z = transform.position.z;
+
+                    tempTarget.x = m_targetPos.position.x;
+                    tempTarget.z = m_targetPos.position.z;
+
+                    var _direction = (tempTarget - tempThis).normalized;
+                    var _lookRotation = Quaternion.LookRotation(_direction);
+
+                    Debug.Log(Mathf.Atan2(_lookRotation.y, _lookRotation.x));
+
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 120);
+                }
         }
         //else
         //{

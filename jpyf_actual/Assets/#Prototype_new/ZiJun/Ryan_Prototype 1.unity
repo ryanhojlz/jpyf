@@ -2341,6 +2341,7 @@ MonoBehaviour:
   lantern_ui_text: {fileID: 0}
   digetic_cart_healthbar_ui: {fileID: 0}
   digetic_lantern_ui: {fileID: 0}
+  LanternLight: {fileID: 0}
 --- !u!1 &762690795
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,7 +4159,8 @@ MonoBehaviour:
   m_Player2: {fileID: 0}
   m_ObjControl: {fileID: 0}
   m_CartMoveDirection: {x: 0, y: 0, z: 0}
-  m_CartFriction: 0
+  m_CartSpeed: 0.01
+  m_handler: {fileID: 0}
 --- !u!1 &1377749654
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,8 +4487,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 135480482674513522, guid: 3ae07c3b7e232dc4e874f77763907a5c,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}

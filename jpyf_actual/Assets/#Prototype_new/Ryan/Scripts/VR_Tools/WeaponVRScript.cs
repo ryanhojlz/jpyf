@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponVRScript : MonoBehaviour {
 
-    float damage = 1;
+    float damage = 3;
 	// Use this for initialization
 	void Start () {
 		
@@ -20,7 +20,7 @@ public class WeaponVRScript : MonoBehaviour {
         if (other.GetComponent<Entity_Unit>())
         {
             Debug.Log("Damage Taken");
-            other.GetComponent<Entity_Unit>().TakeDamage(1);
+            other.GetComponent<Entity_Unit>().TakeDamage(damage);
         }
     }
 }

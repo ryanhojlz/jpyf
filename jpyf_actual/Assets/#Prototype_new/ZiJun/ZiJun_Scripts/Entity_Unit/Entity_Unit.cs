@@ -113,7 +113,7 @@ public class Entity_Unit : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("Hi from Entity_Unit Script");
+        //Debug.Log("Hi from Entity_Unit Script");
         //Leave here for Debug purposes only v
         //if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
         //{

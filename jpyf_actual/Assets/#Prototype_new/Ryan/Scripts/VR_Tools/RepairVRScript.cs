@@ -8,6 +8,9 @@ public class RepairVRScript : MonoBehaviour {
     public GameObject repairSpot = null;
     // Resource Handler
     public Stats_ResourceScript handler;
+    // repair ticks
+    int repairTick = 0;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -23,14 +26,24 @@ public class RepairVRScript : MonoBehaviour {
         {
             handler.m_CartHP += 10;
         }
+
+        if (repairTick >= 3)
+        {
+            //handler.m_Minerals -= 10;
+            handler.m_CartHP += 10;
+            repairTick = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == repairSpot)
         {
-            handler.m_Minerals -= 10;
-            handler.m_CartHP += 10;
+            ++repairTick;
+            handler.m_Minerals -= 5;
+            //handler.m_CartHP += 10;
         }
+
+
     }
 }

@@ -19,6 +19,12 @@ public class Unit_Chase_State : IState
 
     public void Execute()
     {
+        // Check if there is no target
+        //if (!m_user.GetTarget())
+        //{
+        //    m_user.ChangeState("chase_cart");
+        //}
+
         if (m_user.InRangeCount() <= 0)//if there is nothing within range, goes to chase cart
         {
             m_user.ChangeState("chase_cart");

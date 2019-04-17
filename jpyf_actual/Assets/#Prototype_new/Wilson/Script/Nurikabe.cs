@@ -70,18 +70,21 @@ public class Nurikabe : Entity_Unit
             temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
 
             //If the current target is not piority && the currently compared unit is piority
-            if (Target.tag != piority && (UnitsInRange[i].tag == piority))
+            if (Target)
             {
-                //Force Assign
-                nearest = temp_dist;
-                Target = UnitsInRange[i].transform;
-                continue;
-            }
-            //If the current target is piority && the currently compared unit is not piority
-            else if (Target.tag == piority && (UnitsInRange[i].tag != piority))
-            {
-                //Ignore and continue
-                continue;
+                if (Target.tag != piority && (UnitsInRange[i].tag == piority))
+                {
+                    //Force Assign
+                    nearest = temp_dist;
+                    Target = UnitsInRange[i].transform;
+                    continue;
+                }
+                //If the current target is piority && the currently compared unit is not piority
+                else if (Target.tag == piority && (UnitsInRange[i].tag != piority))
+                {
+                    //Ignore and continue
+                    continue;
+                }
             }
 
             if (temp_dist < nearest)

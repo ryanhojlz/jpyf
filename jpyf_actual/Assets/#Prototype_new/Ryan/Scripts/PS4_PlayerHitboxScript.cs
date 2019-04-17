@@ -5,6 +5,7 @@ using UnityEngine;
 public class PS4_PlayerHitboxScript : MonoBehaviour
 {
     Stats_ResourceScript handler = null;
+    Object_ControlScript objHandler = null;
 	// Use this for initialization
 	void Start ()
     {

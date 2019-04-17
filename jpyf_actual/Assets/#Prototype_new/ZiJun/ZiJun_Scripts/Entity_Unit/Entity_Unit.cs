@@ -257,7 +257,10 @@ public class Entity_Unit : MonoBehaviour
 
     public void UpdateHealth()
     {
-        healthBar.fillAmount = GetHealthStat() / GetMaxHealthStat();
+        if (healthBar)
+        {
+            healthBar.fillAmount = GetHealthStat() / GetMaxHealthStat();
+        }
     }
 
     public void AddToUnitsInRange(GameObject Unit)
@@ -307,6 +310,11 @@ public class Entity_Unit : MonoBehaviour
     public void ChangeState(string name)
     {
         sm.ChangeState(name);
+    }
+
+    public void ReturnPreviousState()
+    {
+        sm.ChangeToPrevious();
     }
 
     public int InRangeCount()

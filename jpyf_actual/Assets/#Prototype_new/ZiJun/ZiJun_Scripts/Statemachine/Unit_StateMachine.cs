@@ -117,4 +117,22 @@ public class Unit_StateMachine
         return ToReturn; 
     }
 
+    public void ChangeToPrevious()
+    {
+        //Debug.Log(statename);
+
+        if (this.currentlyRunningState != null)
+        {
+            this.currentlyRunningState.Exit();//Exiting the state
+        }
+
+        IState StateHolder = this.currentlyRunningState;
+
+        this.currentlyRunningState = previousState;
+
+        this.previousState = StateHolder;
+
+        this.currentlyRunningState.Enter();
+    }
+
 }

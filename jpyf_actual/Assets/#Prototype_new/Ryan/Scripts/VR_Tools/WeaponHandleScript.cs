@@ -21,6 +21,7 @@ public class WeaponHandleScript : GrabbableObject
     {
         base.OnGrab(currentController);
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        //this.transform.rotation = currentController.transform.rotation;
     }
 
     // Can prolly do coroutine on grab release but brute forcing it for now

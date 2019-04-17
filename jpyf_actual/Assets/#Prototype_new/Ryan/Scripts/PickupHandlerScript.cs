@@ -24,6 +24,7 @@ public class PickupHandlerScript : MonoBehaviour
         // If picking up
 		if (objHandler.pickup)
         {
+            // Nearest Pickup object
             if (!nearest_pickup_object)
                 return;
             if (currentObject)

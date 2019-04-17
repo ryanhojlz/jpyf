@@ -84,6 +84,8 @@ public class Stats_ResourceScript : MonoBehaviour
         m_P2_hp = m_P2_hpCap;
         m_CartHP = 50;
         m_LanternHp = 100;
+        m_Minerals = 200;
+        m_Souls = 200;
     }
 
     // Update is called once per frame
@@ -95,7 +97,6 @@ public class Stats_ResourceScript : MonoBehaviour
         // Its just one line for now be if expanded i will put in func
         //LanternGameplay();
         LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
-
 
         // Debug Function
         _DebugFunc();

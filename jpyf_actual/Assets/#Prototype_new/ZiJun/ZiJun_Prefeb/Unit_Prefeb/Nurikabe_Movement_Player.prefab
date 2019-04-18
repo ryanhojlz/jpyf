@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114623834693342520}
   - component: {fileID: 195663791507529128}
   m_Layer: 0
-  m_Name: Nurikabe_Movement
+  m_Name: Nurikabe_Movement_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Unit: 0
-  Piority_Unit: 1
+  Piority_Unit: 2
   Health_Stat: 10
   Attack_Stat: 1
   Defence_Stat: 1

@@ -31,4 +31,13 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Entity_Projectile>())
+        {
+            TakeDamage((int)other.GetComponent<Entity_Projectile>().GetDamage());
+            Destroy(other.gameObject);
+        }
+    }
+
 }

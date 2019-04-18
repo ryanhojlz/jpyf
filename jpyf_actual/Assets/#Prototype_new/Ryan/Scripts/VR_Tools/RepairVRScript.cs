@@ -32,7 +32,7 @@ public class RepairVRScript : MonoBehaviour {
         if (repairTick >= 3)
         {
             //handler.m_Minerals -= 10;
-            handler.m_CartHP += 15;
+            handler.m_CartHP += 2;
             //handler.Cart_TakeDmg(-5);
             if (handler.m_CartHP > handler.m_CartHpCap)
             {
@@ -49,7 +49,8 @@ public class RepairVRScript : MonoBehaviour {
             if (handler.m_Minerals > 5)
             {
                 ++repairTick;
-                handler.m_Minerals -= 5;
+                handler.m_CartHP += 3;
+                --handler.m_Minerals;
                 //handler.m_CartHP += 10;
             }
         }

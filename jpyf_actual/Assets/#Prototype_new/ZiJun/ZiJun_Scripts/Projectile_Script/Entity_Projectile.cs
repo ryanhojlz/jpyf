@@ -54,6 +54,8 @@ public class Entity_Projectile : MonoBehaviour
 
     public void SetDamage(float _dmg) { m_dmg = _dmg; }
 
+    public float GetDamage() {return m_dmg; }
+
     public void SetSpeed(float _speed) { m_speed = _speed; }
 
     public void SetLifeTime(float _lifetime) { m_lifetime = _lifetime + (_lifetime * 0.5f);  }//Added 1 to give it abit further range

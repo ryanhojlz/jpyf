@@ -27,6 +27,8 @@ public class Object_ControlScript : MonoBehaviour
     // Object Interaction
     // Cart Interaction
     public bool pushCart = true;
+    public bool checkCart = false;
+
     public bool isPushingCart = false;
 
     // Item Interaction
@@ -46,6 +48,9 @@ public class Object_ControlScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log("Moving boolean is " + isPushingCart);
+        Debug.Log("Check cart " + checkCart);
+
         ObjectMovement();
         Interaction();
 	}
@@ -81,12 +86,13 @@ public class Object_ControlScript : MonoBehaviour
             tempVelocity.x = 0;
             tempVelocity.z = 0;
         }
-       
+
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
         if (!isPushingCart)
         {
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
+
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;
     }
@@ -95,6 +101,7 @@ public class Object_ControlScript : MonoBehaviour
     {
         throw_item = false;
         pickup = false;
+        checkCart = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -103,6 +110,10 @@ public class Object_ControlScript : MonoBehaviour
         else
             pushCart = false;
 
+        if (Controller.ReturnSquarePress())
+        {
+            checkCart = true;
+        }
         // Pick up
 
         if (Controller.ReturnCirclePress())
@@ -127,6 +138,11 @@ public class Object_ControlScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             throw_item = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            checkCart = true;
         }
 
 #endif

@@ -5,11 +5,12 @@ using UnityEngine;
 public class WeaponHandleScript : GrabbableObject
 {
 
-    //// Use this for initialization
-    //void Start ()
-    //   {
+   
+    // Use this for initialization
+    void Start()
+    {
 
-    //}
+    }
 
     //// Update is called once per frame
     //void Update ()
@@ -24,9 +25,16 @@ public class WeaponHandleScript : GrabbableObject
         //this.transform.rotation = currentController.transform.rotation;
     }
 
+    public override void OnGrabReleased(MoveController currentController)
+    {
+        base.OnGrabReleased(currentController);
+        
+    }
+
+
     // Can prolly do coroutine on grab release but brute forcing it for now
     //private void Update()
     //{
-        
+
     //}
 }

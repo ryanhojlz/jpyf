@@ -24,7 +24,8 @@ public class SpawnHandlerScript : MonoBehaviour
         timerReference = timer;
         for (int i = 0; i < transform.childCount; ++i)
         {
-            SpawnLocation.Add(transform.GetChild(i));
+            if (transform.GetChild(i).gameObject.activeSelf)
+                SpawnLocation.Add(transform.GetChild(i));
         }
         timerReference = timer;
         spawnSpeed = 0.1f;
@@ -39,7 +40,7 @@ public class SpawnHandlerScript : MonoBehaviour
 
         if (timer <= 0)
         {
-            spawnInt = Random.Range(0, SpawnLocation.Count - 1);
+            spawnInt = Random.Range(0, SpawnLocation.Count);
             // spawn object
             GameObject obj = Instantiate(ObjectList[0].gameObject);
             obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
@@ -49,7 +50,7 @@ public class SpawnHandlerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            spawnInt = Random.Range(0, SpawnLocation.Count - 1);
+            spawnInt = Random.Range(0, SpawnLocation.Count);
 
             // spawn object
             GameObject obj = Instantiate(ObjectList[0].gameObject);

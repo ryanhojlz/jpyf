@@ -18,6 +18,8 @@ public class Push_CartScript : MonoBehaviour
     // Cart Move Speed Multiplier
     public float m_CartSpeed = 0.01f;
 
+
+    Transform point;
     // Game Handler
     public Stats_ResourceScript m_handler = null;
 
@@ -31,36 +33,42 @@ public class Push_CartScript : MonoBehaviour
 
         // Handler
         m_handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
+
+        point = transform.GetChild(0);
     }
 
     // Update is called once per frame
     void Update()
     {
         // If player 2 in range
-        if (m_Player2)
-        {
-            // Debug
-            if (m_ObjControl.pushCart)
-            {
-                m_ObjControl.isPushingCart = true;
-            }
-            else
-            {
-                m_ObjControl.isPushingCart = false;
-            }
-        }
+        //if (m_Player2)
+        //{
+        //    // Debug
+        //    if (m_ObjControl.pushCart)
+        //    {
+        //        m_ObjControl.isPushingCart = true;
+        //    }
+        //    else
+        //    {
+        //        m_ObjControl.isPushingCart = false;
+        //    }
+        //}
 
         if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.7f)
         {
-            m_CartSpeed = 0.01f;
+            m_CartSpeed = 0.007f;
         }
-        else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.4f)
+        else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.5f)
         {
             m_CartSpeed = 0.005f;
         }
+        else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.3f)
+        {
+            m_CartSpeed = 0.003f;
+        }
         else if (m_handler.m_CartHP > 0)
         {
-            m_CartSpeed = 0.002f;
+            m_CartSpeed = 0.001f;
         }
         else if (m_handler.m_CartHP <= 0)
         {
@@ -70,21 +78,46 @@ public class Push_CartScript : MonoBehaviour
 
 
 
-        // Pushing Cart
-        if (m_ObjControl.isPushingCart)
-        {
-            m_CartMoveDirection = m_ObjControl.movedir;
-            m_CartMoveDirection.x = 0;
-            m_CartMoveDirection.y = 0;
-            m_CartParent.transform.position += (m_CartMoveDirection * m_CartSpeed);
-            m_Player2.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        else
-        {
-            if (m_Player2)
-                m_Player2.GetComponent<Rigidbody>().isKinematic = false;
-        }
+        //// Pushing Cart
+        //if (m_ObjControl.isPushingCart)
+        //{
+        //    m_CartMoveDirection = m_ObjControl.movedir;
+        //    m_CartMoveDirection.x = 0;
+        //    m_CartMoveDirection.y = 0;
+        //    m_CartParent.transform.position += (m_CartMoveDirection * m_CartSpeed);
+        //    m_Player2.GetComponent<Rigidbody>().isKinematic = true;
+        //}
+        //else
+        //{
+        //    if (m_Player2)
+        //        m_Player2.GetComponent<Rigidbody>().isKinematic = false;
+        //}
 
+
+        if (m_Player2)
+        {
+            if (m_ObjControl.checkCart)
+            {
+                if (m_ObjControl.isPushingCart)
+                {
+                    m_ObjControl.isPushingCart = false;
+                }
+                else if (!m_ObjControl.isPushingCart)
+                {
+                    m_ObjControl.isPushingCart = true;
+                }
+            }
+
+            if (m_ObjControl.isPushingCart)
+            {
+                m_Player2.transform.position = point.position;
+                m_CartMoveDirection = m_ObjControl.movedir;
+                m_CartMoveDirection.x = 0;
+                m_CartMoveDirection.y = 0;
+                m_CartParent.transform.position += (m_CartMoveDirection * m_CartSpeed);
+            }
+
+        }
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -98,7 +131,7 @@ public class Push_CartScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player2")
         {
-            m_Player2.GetComponent<Rigidbody>().isKinematic = false;
+            //m_Player2.GetComponent<Rigidbody>().isKinematic = false;
             m_Player2.parent = null;
             m_Player2 = null;
         }

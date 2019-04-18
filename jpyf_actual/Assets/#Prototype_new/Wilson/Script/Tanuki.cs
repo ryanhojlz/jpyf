@@ -2,18 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tanuki : MonoBehaviour
+public class Tanuki : Entity_Unit
 {
-    public GameObject bulletPrefab;
-    public GameObject laserPrefeb;
-
-    Dub_Lazer_Projectile laser;
-    bool isLazer;
-    //public AudioSource attackSound;
-    public AudioClip attackSound;
-
-    private void Start()
+    public override void SelfStart()
     {
-        attackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_attack;
+        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_attack;
+        UnitThatProduceSound = this.GetComponent<AudioSource>();
+        UnitThatProduceSound.clip = AttackSound;
+    }
+
+    public override void SelfUpdate()
+    {
+       
+    }
+
+    public override void Attack()
+    {
+        
+    }
+
+    public override void FindNearestInList()
+    {
+        float nearest = float.MaxValue;
+        float temp_dist = 0f;
+        for (int i = 0; i < UnitsInRange.Count; ++i)
+        {
+            temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+
+            if (Target)
+            {
+                //If the current target is not piority && the currently compared unit is piority
+                if (Target.tag != priority && (UnitsInRange[i].tag == priority))
+                {
+                    //Force Assign
+                    nearest = temp_dist;
+                    Target = UnitsInRange[i].transform;
+                    continue;
+                }
+                //If the current target is piority && the currently compared unit is not piority
+                else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
+                {
+                    //Ignore and continue
+                    continue;
+                }
+            }
+
+            if (temp_dist < nearest)
+            {
+                nearest = temp_dist;
+                Target = UnitsInRange[i].transform;
+            }
+        }
     }
 }

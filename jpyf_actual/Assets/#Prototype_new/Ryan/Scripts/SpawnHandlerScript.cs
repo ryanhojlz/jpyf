@@ -8,35 +8,42 @@ public class SpawnHandlerScript : MonoBehaviour
 {
     public List<Transform> ObjectList;
     public List<Transform> SpawnLocation;
-    public float timer = 10.5f;
+    public Stats_ResourceScript handler;
+    public float timer = 1;
 
     float timerReference = 0;
     int spawnI = 0;
-	
+    public float spawnSpeed = 0.01f;
     
 
     // Use this for initialization
 	void Start ()
     {
+        handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         timerReference = timer;
         for (int i = 0; i < transform.childCount; ++i)
         {
             SpawnLocation.Add(transform.GetChild(i));
         }
-	}
+        timerReference = timer;
+        spawnSpeed = 0.1f;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        timer -= 1 * Time.deltaTime;
+       //Spawner
+       //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
+       timer -= (spawnSpeed) * Time.deltaTime;
+
         if (timer <= 0)
         {
+
             spawnI = Random.Range(0, SpawnLocation.Count);
-            timer = timerReference;
             // spawn object
             GameObject obj = Instantiate(ObjectList[0].gameObject);
-
             obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnI].position);
+            timer = timerReference;
         }
 
         if (Input.GetKeyDown(KeyCode.M))

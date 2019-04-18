@@ -62,7 +62,7 @@ public class Push_CartScript : MonoBehaviour
         {
             m_CartSpeed = 0.002f;
         }
-        else if (m_handler.m_CartHP <=  0)
+        else if (m_handler.m_CartHP <= 0)
         {
             m_CartSpeed = 0.0f;
         }
@@ -77,8 +77,14 @@ public class Push_CartScript : MonoBehaviour
             m_CartMoveDirection.x = 0;
             m_CartMoveDirection.y = 0;
             m_CartParent.transform.position += (m_CartMoveDirection * m_CartSpeed);
+            m_Player2.GetComponent<Rigidbody>().isKinematic = true;
         }
-        
+        else
+        {
+            if (m_Player2)
+                m_Player2.GetComponent<Rigidbody>().isKinematic = false;
+        }
+
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -92,6 +98,7 @@ public class Push_CartScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player2")
         {
+            m_Player2.GetComponent<Rigidbody>().isKinematic = false;
             m_Player2.parent = null;
             m_Player2 = null;
         }

@@ -21,8 +21,22 @@ public class PickupHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        // Throws object
+        if (objHandler.throw_item)
+        {
+            if (currentObject)
+            {
+                // Drop the current object
+                //currentObject.localPosition = Vector3.zero;
+                currentObject.parent = null;
+                currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                throwDirection = this.transform.forward * 22;
+                currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
+            }
+        }
+
         // If picking up
-		if (objHandler.pickup)
+        if (objHandler.pickup)
         {
             // Nearest Pickup object
             if (!nearest_pickup_object)
@@ -46,20 +60,7 @@ public class PickupHandlerScript : MonoBehaviour
 
         }
 
-        if (objHandler.throw_item)
-        {
-            if (currentObject)
-            {
-                // Drop the current object
-                //currentObject.localPosition = Vector3.zero;
-                currentObject.parent = null;
-                currentObject.GetComponent<Rigidbody>().isKinematic = false;
-                throwDirection = this.transform.forward;
-                throwDirection.y = 15;
-                throwDirection.z *= 35;
-                currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
-            }
-        }
+
         // Yabai code
         nearest_pickup_object = null;
     }

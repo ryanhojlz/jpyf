@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponVRScript : MonoBehaviour {
 
-    float damage = 4;
+    public int damage = 5;
 	// Use this for initialization
 	void Start () {
 		

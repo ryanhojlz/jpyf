@@ -93,8 +93,8 @@ public class Object_ControlScript : MonoBehaviour
 
     void Interaction()
     {
-        pickup = false;
         throw_item = false;
+        pickup = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -104,8 +104,10 @@ public class Object_ControlScript : MonoBehaviour
             pushCart = false;
 
         // Pick up
+
         if (Controller.ReturnCirclePress())
         {
+            throw_item = true;
             pickup = true;
         }
 

@@ -6,6 +6,7 @@ public class RepairVRScript : MonoBehaviour {
 
     public float repairPower = 10;
     public GameObject repairSpot = null;
+    public GameObject lanternSpot = null;
     // Resource Handler
     public Stats_ResourceScript handler;
     // repair ticks
@@ -16,6 +17,7 @@ public class RepairVRScript : MonoBehaviour {
     {
         repairSpot = GameObject.Find("RepairSpot");
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
+        lanternSpot = GameObject.Find("LanternSpot");
     }
 
     // Update is called once per frame
@@ -24,13 +26,18 @@ public class RepairVRScript : MonoBehaviour {
         // dis debug stuff
         if (Input.GetKeyDown(KeyCode.U))
         {
-            handler.m_CartHP += 10;
+            handler.m_CartHP += 5;
         }
 
         if (repairTick >= 3)
         {
             //handler.m_Minerals -= 10;
-            handler.m_CartHP += 10;
+            handler.m_CartHP += 15;
+            //handler.Cart_TakeDmg(-5);
+            if (handler.m_CartHP > handler.m_CartHpCap)
+            {
+                handler.m_CartHP = handler.m_CartHpCap;
+            }
             repairTick = 0;
         }
     }
@@ -39,9 +46,18 @@ public class RepairVRScript : MonoBehaviour {
     {
         if (other.gameObject == repairSpot)
         {
-            ++repairTick;
-            handler.m_Minerals -= 5;
-            //handler.m_CartHP += 10;
+            if (handler.m_Minerals > 5)
+            {
+                ++repairTick;
+                handler.m_Minerals -= 5;
+                //handler.m_CartHP += 10;
+            }
+        }
+
+        if (other.gameObject == lanternSpot)
+        {
+            handler.Lantern_TakeDmg(-2);
+            --handler.m_Souls;
         }
 
 

@@ -29,7 +29,20 @@ public class Stats_ResourceScript : MonoBehaviour
     public int m_Minerals = 0;
     public int m_Souls = 0;
 
+    public int m_MineralsCap = 300;
+    public int m_SoulsCap = 300;
+
+    public float m_spawnMultiplier = 0;
+
+    // Some game logic / boolean
+    public float m_LanternTimerTick = 1;
+    float m_LanternTimerTickReference = 0;
+    // Controls lantern ticking
+    public bool m_StartLanternTick = false;
+
+
     /// Text ui debug etc
+    
     /// Minerals
     public Text soulText = null;
     public Text mineralText = null;
@@ -49,10 +62,16 @@ public class Stats_ResourceScript : MonoBehaviour
     // Digetic UI
     public Transform digetic_cart_healthbar_ui = null;
     public Transform digetic_lantern_ui = null;
+    
+    public Transform digetic_mineral_ui = null;
+    public Transform digetic_soul_ui = null;
+
 
     // Lantern Light
     public Transform LanternLight = null;
-  
+
+    float m_startTicking = 6;
+
 
     // Use this for initialization
     void Start ()
@@ -77,26 +96,35 @@ public class Stats_ResourceScript : MonoBehaviour
         digetic_cart_healthbar_ui = GameObject.Find("DigeticHealthBar").transform;
         digetic_lantern_ui = GameObject.Find("DigeticLampBar").transform;
 
+        // Digetic UI
+        digetic_mineral_ui = GameObject.Find("DigeticMineralBar").transform;
+        digetic_soul_ui = GameObject.Find("DigeticSoulBar").transform;
+
+
         // Lanter Light
         LanternLight = GameObject.Find("LanternLight").transform;
 
-        // Assign
+        //m_StartLanternTick = true;
+
+        // Assign Values Initial game init
         m_P2_hp = m_P2_hpCap;
-        m_CartHP = 50;
+        m_CartHP = 0;
         m_LanternHp = 100;
-        m_Minerals = 200;
-        m_Souls = 200;
+        m_Minerals = 0;
+        m_Souls = 0;
+        m_LanternTimerTickReference = m_LanternTimerTick;
     }
 
     // Update is called once per frame
     void Update ()
     {
+        
         PS4_UI();
         PSVR_UI();
         
         // Its just one line for now be if expanded i will put in func
-        //LanternGameplay();
-        LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
+        LanternGameplay();
+        //LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
 
         // Debug Function
         _DebugFunc();
@@ -130,6 +158,13 @@ public class Stats_ResourceScript : MonoBehaviour
 
         /// Update Lamp UI
         digetic_lantern_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_LanternHp / (float)m_LanternHpCap);
+
+        // Update Mineral UI
+        digetic_mineral_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_Minerals / (float)m_MineralsCap);
+
+        // Update Mineral UI
+        digetic_soul_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_Souls / (float)m_SoulsCap);
+
 
     }
 
@@ -185,6 +220,29 @@ public class Stats_ResourceScript : MonoBehaviour
 
     void LanternGameplay()
     {
+
+
+        // Lantern ticks
+        if (m_StartLanternTick)
+        {
+            m_LanternTimerTick -= 10 * Time.deltaTime;
+            if (m_LanternTimerTick <= 0)
+            {
+                Lantern_TakeDmg(1);
+                m_LanternTimerTick = m_LanternTimerTickReference;
+            }
+        }
+        else if (!m_StartLanternTick)
+        {
+            m_startTicking -= 1 * Time.deltaTime;
+            if (m_startTicking <= 0)
+            {
+                m_StartLanternTick = true;
+            }
+        }
+
+        m_spawnMultiplier = (m_LanternHpCap - m_LanternHp) * 0.01f;
+        // Update Light component
         LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
     }
     
@@ -227,5 +285,22 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             m_P2_hp = m_P2_hpCap;
         }
+    }
+
+   
+
+    public void ProcessPickUp(Pickup_Scripts item)
+    {
+        switch (item.id)
+        {
+            case 1:
+                m_Souls += 20;
+                break;
+            case 2:
+                m_Minerals += 30;
+                break;
+        }
+
+        //Debug.Log("Hey hey im being processed");
     }
 }

@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651497398580514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.65, y: -1, z: 8.971221}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224580516482717720}
@@ -431,8 +431,8 @@ MonoBehaviour:
   Health_Stat: 10
   Attack_Stat: 10
   Defence_Stat: 1
-  Attack_Speed_Stat: 0.2
-  Attack_Range_Stat: 2
+  Attack_Speed_Stat: 0.5
+  Attack_Range_Stat: 3
   Chase_Range_Stat: 10
   Projectile_Prefeb: {fileID: 1892895758873684, guid: 5c8bdf742819da94a90acdcdd80b0ad7,
     type: 2}

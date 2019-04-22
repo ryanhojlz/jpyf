@@ -160,14 +160,14 @@ public class Tengu : Entity_Unit
     Vector3 SetOriginalPosition()
     {
         Vector3 Temp = Vector3.zero;
-        Temp = GameObject.Find("TenguEscapePoint").transform.position;
-        //if (transform.parent.GetComponent<AI_Movement>())
-        //{
-        //    Temp.x = this.transform.position.x;
-        //    Temp.y = transform.parent.position.y + this.GetAttackRangeStat();
-        //    Temp.z = this.transform.position.z;
-        //    return Temp;
-        //}
+        //Temp = GameObject.Find("TenguEscapePoint").transform.position;
+        if (transform.parent.GetComponent<AI_Movement>())
+        {
+            Temp.x = this.transform.position.x;
+            Temp.y = transform.parent.position.y + this.GetAttackRangeStat();
+            Temp.z = this.transform.position.z;
+            return Temp;
+        }
         return Temp;
     }
 }

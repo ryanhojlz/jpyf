@@ -17,5 +17,6 @@ public class Entity_Tanuki_Projectile : Entity_Projectile
     {
         other.GetComponent<PS4_PlayerHitboxScript>().TakeDamage((int)m_dmg);
         //Add Slow Effects here (Once have)
+        GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetDebuff(slowAmount, slowDuration);
     }
 }

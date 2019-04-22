@@ -2,23 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tanuki : Entity_Unit
+public class Entity_Tanuki : Entity_Unit
 {
     public override void SelfStart()
     {
         AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_attack;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         UnitThatProduceSound.clip = AttackSound;
-    }
-
-    public override void SelfUpdate()
-    {
-       
-    }
-
-    public override void Attack()
-    {
-        
     }
 
     public override void FindNearestInList()

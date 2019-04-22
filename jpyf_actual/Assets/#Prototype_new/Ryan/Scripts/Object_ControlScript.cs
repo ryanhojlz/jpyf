@@ -24,6 +24,11 @@ public class Object_ControlScript : MonoBehaviour
     Transform testTransform;
     Vector3 tempRotation;
 
+    //Player movespeed
+    public float m_playerSpeed = 0;
+    public float m_playerSpeedDebuff = 0;
+    public float m_debuffDuration = 0;
+
     // Object Interaction
     // Cart Interaction
     public bool pushCart = true;
@@ -45,6 +50,7 @@ public class Object_ControlScript : MonoBehaviour
     {
         Controller = GameObject.Find("PS4_ControllerHandler").GetComponent<PS4_ControllerScript>();
         CameraObj = GameObject.Find("ControllerCam").GetComponent<Camera>();
+        m_playerSpeed = 8;
     }
 	
 	// Update is called once per frame
@@ -59,14 +65,31 @@ public class Object_ControlScript : MonoBehaviour
 
     void ObjectMovement()
     {
-        
+
+        // Update Debuff speed
+        if (m_debuffDuration > 0)
+        {
+            m_debuffDuration -= 1 * Time.deltaTime;
+            if (m_debuffDuration <= 0)
+            {
+                m_debuffDuration = 0;
+            }
+        }
+        else
+        {
+            m_playerSpeedDebuff = 0;
+        }
+
         CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
 
-        movedir.Set(Controller.axisLeft_x * 8, 0, -Controller.axisLeft_y * 8);
+        // Set move direction
+        movedir.Set(Controller.axisLeft_x * (m_playerSpeed - m_playerSpeedDebuff), 0, -Controller.axisLeft_y * (m_playerSpeed - m_playerSpeedDebuff));
 
+        // Modify velocity
         tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
 
+   
         movedir = CameraObj.transform.TransformDirection(movedir);
 
         if (movedir != Vector3.zero)
@@ -99,8 +122,6 @@ public class Object_ControlScript : MonoBehaviour
             CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
-
-        
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;
     }
@@ -166,6 +187,24 @@ public class Object_ControlScript : MonoBehaviour
     {
         Gropper = obj;
     }
+
+    public void SetDebuff(float debuffspeed , float debuffDuration)
+    {
+        m_playerSpeedDebuff = debuffspeed;
+        m_debuffDuration = debuffDuration;
+    }
+
+    public float GetDebuffDuration()
+    {
+        return m_debuffDuration;
+    }
+
+    public float GetDebuffSpeed()
+    {
+        return m_playerSpeed;
+    }
+
+
 
 
 }

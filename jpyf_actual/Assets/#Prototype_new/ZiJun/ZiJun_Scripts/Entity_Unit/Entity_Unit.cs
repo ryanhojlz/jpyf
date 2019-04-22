@@ -125,6 +125,11 @@ public class Entity_Unit : MonoBehaviour
         //}
         //Debug Purposes only ^
 
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    Stun();
+        //}
+
         SelfUpdate();
 
         if (countdown >= 0)
@@ -237,6 +242,7 @@ public class Entity_Unit : MonoBehaviour
         sm.AddState("chase", new Unit_Chase_State(this));
         sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
         sm.AddState("dead", new Unit_Dead_State(this));
+        sm.AddState("stun", new Unit_Stun_State(this));
     }
 
     public virtual void SelfUpdate()//Use this to update units without overrideing original update
@@ -326,5 +332,10 @@ public class Entity_Unit : MonoBehaviour
     public void Dead()
     {
         Destroy(this.gameObject.transform.parent.gameObject);
+    }
+
+    public void Stun()
+    {
+        this.sm.ChangeState("stun");
     }
 }

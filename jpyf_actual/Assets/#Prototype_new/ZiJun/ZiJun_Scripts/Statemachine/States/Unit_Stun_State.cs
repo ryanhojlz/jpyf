@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit_Stun_State : IState
 {
     Entity_Unit m_user;
-    float CountDownTImer = 5f;//Init the death timw (Animation delay before deletion)
+    float CountDownTImer = 10f;//Init the death timw (Animation delay before deletion)
 
     public Unit_Stun_State(Entity_Unit _user)
     {
@@ -14,7 +14,7 @@ public class Unit_Stun_State : IState
 
     public void Enter()
     {
-        CountDownTImer = 5f;
+        CountDownTImer = 10f;
     }
 
     public void Execute()

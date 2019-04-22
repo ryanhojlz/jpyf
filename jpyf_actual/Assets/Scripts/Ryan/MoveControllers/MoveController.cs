@@ -21,8 +21,6 @@ public class MoveController : MonoBehaviour
     public bool hand_Enter = false;
     // Debug Reference
    
-
-   
     [SerializeField]
     private GameObject m_HandModel;
 
@@ -85,10 +83,13 @@ public class MoveController : MonoBehaviour
         {
             ProcessHandAnimation();
             ProcessGrabbing();
-            if (!MainMenu)
-                StartMiniGame();
-            else
-                MainMenuController();
+
+            //if (!MainMenu)
+            //    StartMiniGame();
+            //else
+            //    MainMenuController();
+            CartGame();
+
         }
     }
 
@@ -565,13 +566,12 @@ public class MoveController : MonoBehaviour
         }
     }
 
-
     void MainMenuController()
     {
         GameObject menuManager = GameObject.Find("ButtonManager");
         if (GetButtonDown(MoveControllerHotkeys.buttonUse))
         {
-            Debug.Log("HAI DOMO, VARCHURUAL YEWTOOBER KEEZOONAH AEY DES");
+            //Debug.Log("HAI DOMO, VARCHURUAL YEWTOOBER KEEZOONAH AEY DES");
             menuManager.GetComponent<MainMenuButton>().EnterSelected();
             menuManager.GetComponent<MainMenuButton>().TitlescreenDisplay = false;
         }
@@ -595,4 +595,19 @@ public class MoveController : MonoBehaviour
 
 
     }
+
+    void CartGame()
+    {
+        if (GetButtonDown(MoveControllerHotkeys.buttonConfirm))
+        {
+            transform.parent.GetComponent<HandGestureManager>().StartLazerBeamInteraction();
+        }
+        if (GetButtonDown(MoveControllerHotkeys.buttonUse))
+        {
+            transform.parent.GetComponent<
+        }
+       
+    }
+
+
 }

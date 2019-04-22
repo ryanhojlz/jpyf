@@ -88,11 +88,17 @@ public class Object_ControlScript : MonoBehaviour
         }
 
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
-        if (!isPushingCart)
+        if (isPushingCart)
         {
+            CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
+        }
+        else if (!isPushingCart)
+        {
+            CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
 
+        
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;
     }
@@ -152,9 +158,6 @@ public class Object_ControlScript : MonoBehaviour
         GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup;
         
     }
-
-
-
 
 
 }

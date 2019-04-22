@@ -17,7 +17,8 @@ public class Push_CartScript : MonoBehaviour
 
     // Cart Move Speed Multiplier
     public float m_CartSpeed = 0.01f;
-
+    public float m_SpeedDebuff = 0;
+    public float debuffDuration = 0;
 
     Transform point;
     // Game Handler
@@ -114,18 +115,37 @@ public class Push_CartScript : MonoBehaviour
                 m_CartMoveDirection = m_ObjControl.movedir;
                 m_CartMoveDirection.x = 0;
                 m_CartMoveDirection.y = 0;
-                m_CartParent.transform.position += (m_CartMoveDirection * m_CartSpeed);
+                m_CartParent.transform.position += (m_CartMoveDirection * (m_CartSpeed - m_SpeedDebuff));
+            }
+
+            if (debuffDuration < 0)
+            {
+                m_SpeedDebuff = 0;
+            }
+            else
+            {
+                debuffDuration -= 1 * Time.deltaTime;
+                if (debuffDuration <= 0)
+                {
+                    debuffDuration = 0;
+                }
             }
 
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag != "Player2")
-    //        return;
-    //    player2 = other.transform;
-    //}
+
+    public void SetDebuffSpeed(float speed, float duration)
+    {
+        debuffDuration = duration;
+        m_SpeedDebuff = speed;
+    }
+
+    public float GetDebuffSpeed()
+    {
+        return m_SpeedDebuff;
+        
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -147,6 +167,8 @@ public class Push_CartScript : MonoBehaviour
     }
 
 
+
+    
 }
 
 

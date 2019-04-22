@@ -18,5 +18,13 @@ public class RangeAttackScript : MonoBehaviour
 		
 	}
 
+    public void SpawnBullet()
+    {
+        Entity_Projectile p_projectile = Instantiate(playerProjectile).GetComponent<Entity_Projectile>();
+        p_projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+        p_projectile.SetDamage(100);
+    }
+
+
 
 }

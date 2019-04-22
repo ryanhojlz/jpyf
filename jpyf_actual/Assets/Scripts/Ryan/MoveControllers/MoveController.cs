@@ -598,15 +598,16 @@ public class MoveController : MonoBehaviour
 
     void CartGame()
     {
-        if (GetButtonDown(MoveControllerHotkeys.buttonConfirm))
-        {
-            transform.parent.GetComponent<HandGestureManager>().StartLazerBeamInteraction();
-        }
+        //if (GetButtonDown(MoveControllerHotkeys.buttonConfirm))
+        //{
+        //    transform.parent.GetComponent<HandGestureManager>().StartLazerBeamInteraction();
+        //}
         if (GetButtonDown(MoveControllerHotkeys.buttonUse))
         {
-            transform.parent.GetComponent<
+            this.GetComponent<RangeAttackScript>().SpawnBullet();
         }
-       
+
+        
     }
 
 

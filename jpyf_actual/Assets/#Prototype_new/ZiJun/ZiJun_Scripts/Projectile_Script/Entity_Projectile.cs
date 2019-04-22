@@ -76,21 +76,11 @@ public class Entity_Projectile : MonoBehaviour
         {
             Debug.Log("Take Damage");
             other.GetComponent<Entity_Unit>().TakeDamage(m_dmg);
-
             Destroy(this.gameObject);
         }
        
         if (other.tag == "Payload")
         {
-            //Debug.Log("Hit_Pay_Load");
-            //Debug.Log("Damage : " + m_dmg);
-            //GameObject hello = GameObject.Find("Stats_ResourceHandler");
-
-            //if (hello)
-            //{
-            //    Debug.Log(hello.name);
-            //}
-
             HitCart(other);
             Destroy(this.gameObject);
         }

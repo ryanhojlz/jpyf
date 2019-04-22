@@ -15,8 +15,8 @@ public class SpawnHandlerScript : MonoBehaviour
     int spawnInt = 0;
     
     public float spawnSpeed = 0.01f;
-    
 
+    public bool spawnEnemy = false;
     // Use this for initialization
 	void Start ()
     {
@@ -34,8 +34,10 @@ public class SpawnHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       //Spawner
-       //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
+        //Spawner
+        //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
+        if (!spawnEnemy)
+            return;
        timer -= (spawnSpeed) * Time.deltaTime;
 
         if (timer <= 0)

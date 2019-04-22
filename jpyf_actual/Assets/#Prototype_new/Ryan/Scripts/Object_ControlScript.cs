@@ -56,8 +56,8 @@ public class Object_ControlScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("Moving boolean is " + isPushingCart);
-        Debug.Log("Check cart " + checkCart);
+        //Debug.Log("Moving boolean is " + isPushingCart);
+        //Debug.Log("Check cart " + checkCart);
 
         ObjectMovement();
         Interaction();
@@ -178,8 +178,7 @@ public class Object_ControlScript : MonoBehaviour
 
 
         //Debug.Log("Pickup   + " + pickup);
-        GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup;
-        
+        GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 
     }
 
 

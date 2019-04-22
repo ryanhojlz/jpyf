@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeAttackScript : MonoBehaviour
 {
-    public Transform playerProjectile = null;
+    public GameObject playerProjectile = null;
 
 	// Use this for initialization
 	void Start ()
@@ -15,14 +15,18 @@ public class RangeAttackScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            SpawnBullet();
+        }
+    }
 
     public void SpawnBullet()
     {
-        Entity_Projectile p_projectile = Instantiate(playerProjectile).GetComponent<Entity_Projectile>();
-        p_projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
-        p_projectile.SetDamage(100);
+        Debug.Log("Beep");
+        GameObject p_projectile = Instantiate(playerProjectile,this.transform.position,this.transform.rotation) as GameObject;
+        p_projectile.GetComponent<Entity_Player_Projectile>().SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+      
     }
 
 

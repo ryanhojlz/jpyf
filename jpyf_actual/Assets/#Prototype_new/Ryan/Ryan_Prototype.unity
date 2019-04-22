@@ -5734,7 +5734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a83604d183921040b046849fcc5f2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProjectile: {fileID: 4619536322115524, guid: 3dda5534f2537bc478ad7473e82c5e32,
+  playerProjectile: {fileID: 1892895758873684, guid: 3dda5534f2537bc478ad7473e82c5e32,
     type: 2}
 --- !u!1001 &1052953046
 Prefab:
@@ -7088,11 +7088,15 @@ MonoBehaviour:
   Controller: {fileID: 0}
   CameraObj: {fileID: 0}
   movedir: {x: 0, y: 0, z: 0}
+  m_playerSpeed: 0
+  m_playerSpeedDebuff: 0
+  m_debuffDuration: 0
   pushCart: 1
   checkCart: 0
   isPushingCart: 0
   pickup: 0
   throw_item: 0
+  Gropper: {fileID: 0}
 --- !u!1 &1371278419
 GameObject:
   m_ObjectHideFlags: 0
@@ -10249,7 +10253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a83604d183921040b046849fcc5f2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProjectile: {fileID: 4619536322115524, guid: 3dda5534f2537bc478ad7473e82c5e32,
+  playerProjectile: {fileID: 1892895758873684, guid: 3dda5534f2537bc478ad7473e82c5e32,
     type: 2}
 --- !u!4 &2112692608 stripped
 Transform:

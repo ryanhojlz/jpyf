@@ -329,7 +329,7 @@ public class Entity_Unit : MonoBehaviour
         return UnitsInRange.Count;
     }
 
-    public void Dead()
+    public virtual void Dead()
     {
         Destroy(this.gameObject.transform.parent.gameObject);
     }

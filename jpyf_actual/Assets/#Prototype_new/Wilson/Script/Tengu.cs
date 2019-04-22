@@ -13,13 +13,20 @@ public class Tengu : Entity_Unit
     float SinCounter = 0f;
 
     bool moveRight = true;
-
+    //For Grabbing player
     GameObject TargetEscape = null;
     GameObject TargetLeft = null;
     GameObject TargetRight = null;
 
     public float flySpeed = 10f;
     public float glidingSpeed = 5f;
+    //For Grabbing player
+
+    //For hitting cart
+    bool hitCart = false;
+    bool goOriginPos = false;
+    //For hitting cart
+
 
     public override void SelfStart()
     {
@@ -47,14 +54,14 @@ public class Tengu : Entity_Unit
         {
             this.GetTarget().parent = null; // Unparent
             this.GetTarget().GetComponent<Rigidbody>().useGravity = true; // make gravity true so that the target drop to the ground after tengu dies
-            Debug.Log("child count: " + this.transform.childCount);
+            //Debug.Log("child count: " + this.transform.childCount);
             //Dead(); 
             Destroy(gameObject); // destroy tengu gameobject
         }
 
         if (GoBack)
         {
-            Debug.Log("GO BACK");
+            //Debug.Log("GO BACK");
             GoToCartFront();
         }
         else if (hovering)
@@ -64,9 +71,114 @@ public class Tengu : Entity_Unit
                 moveRight = !moveRight;
             }
         }
+
+        if (goOriginPos)
+        {
+            ReturnToOrigin();
+        }
     }
 
     public override void Attack()
+    {
+        //if (transform.childCount > 0)
+        //{
+        //    if (reachPrev == false)
+        //        GoBack = true;
+
+        //    return;
+        //}
+
+        ////Debug.Log("Still Attack for what");
+
+        ////this.gameObject.transform.position = new Vector3(Target.position.x, Target.position.y, Target.position.z);
+
+        //if ((this.GetTarget().position - this.transform.position).magnitude > 0.5f && this.transform.childCount == 0) // Distance less than 2 and tengu not grabbing the target
+        //{
+        //    //Debug.Log("Tengu found player");
+        //    // Go down to the target
+        //    Vector3 dir = Vector3.zero; // get direction
+        //    Vector3 TargetPos = this.GetTarget().position; // get the target position
+
+        //    if (startAttack)
+        //    {
+        //        startAttack = false;
+        //        reachPrev = false;
+        //    }
+
+        //    //TargetPos.y += this.GetTarget().lossyScale.y;
+
+        //    dir = (this.GetTarget().position - this.transform.position).normalized; // direction equals to distance between the two normalised
+
+        //    Vector3 vel = dir * 10 * Time.deltaTime; // velocity
+
+        //    this.transform.position += vel; // Making the tengu move
+        //}
+        //else if (this.transform.childCount == 0) // tengu not grabbing the target
+        //{
+        //    this.GetTarget().transform.position = this.transform.position;
+        //    this.GetTarget().parent = this.transform; // parent the target to the tengu as the tengu grabs the target
+        //    this.GetTarget().GetComponent<Rigidbody>().useGravity = false; // make gravity false so that the target won't drop to the ground
+        //    GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(this.transform);
+        //    Debug.Log(GetTarget().parent);
+        //    //Grabbing();
+        //}
+        if (Target.tag == "Player2")
+        {
+            HitPlayer();
+        }
+        else if (Target.tag == "Payload")
+        {
+            HitCart();
+        }
+    }
+
+    public void HitCart()
+    {
+        if ((this.GetTarget().position - this.transform.position).magnitude > 0.5f && !goOriginPos) // Distance less than 2 and tengu not grabbing the target
+        {
+            //Debug.Log("Tengu found player");
+            // Go down to the target
+            Vector3 dir = Vector3.zero; // get direction
+            Vector3 TargetPos = this.GetTarget().position; // get the target position
+
+            //TargetPos.y += this.GetTarget().lossyScale.y;
+
+            dir = (this.GetTarget().position - this.transform.position).normalized; // direction equals to distance between the two normalised
+
+            Vector3 vel = dir * 10 * Time.deltaTime; // velocity
+
+            this.transform.position += vel; // Making the tengu move
+        }
+        else if (!hitCart)
+        {
+            hitCart = true;
+            goOriginPos = true;
+
+            GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Lantern_TakeDmg((int)this.GetAttackStat());
+        }
+    }
+
+    public void ReturnToOrigin()
+    {
+        Vector3 dir = Vector3.zero; // get direction
+        Vector3 TargetPos = SetOriginalPosition(); // get the target position
+
+        dir = (TargetPos - this.transform.position).normalized; // direction equals to distance between the two normalised
+
+        Vector3 vel = dir * 10 * Time.deltaTime; // velocity
+
+        this.transform.position += vel; // Making the tengu move
+
+        //this.transform.position = TargetPos;
+
+        if ((TargetPos - this.transform.position).magnitude < 0.5f)
+        {
+            goOriginPos = false;
+            hitCart = false;
+        }
+    }
+
+    public void HitPlayer()
     {
         if (transform.childCount > 0)
         {
@@ -76,7 +188,7 @@ public class Tengu : Entity_Unit
             return;
         }
 
-        Debug.Log("Still Attack for what");
+        //Debug.Log("Still Attack for what");
 
         //this.gameObject.transform.position = new Vector3(Target.position.x, Target.position.y, Target.position.z);
 
@@ -122,7 +234,7 @@ public class Tengu : Entity_Unit
             Grabbing();
         }
 
-        Debug.Log("HIIIII");
+        //Debug.Log("HIIIII");
 
         Vector3 dir = Vector3.zero;
         Vector3 TargetPos = TargetEscape.transform.position;
@@ -267,9 +379,9 @@ public class Tengu : Entity_Unit
         //Temp = GameObject.Find("TenguEscapePoint").transform.position;
         if (transform.parent.GetComponent<AI_Movement>())
         {
-            Temp.x = this.transform.position.x;
+            Temp.x = this.transform.parent.position.x;
             Temp.y = transform.parent.position.y + this.GetAttackRangeStat();
-            Temp.z = this.transform.position.z;
+            Temp.z = this.transform.parent.position.z;
             return Temp;
         }
         return Temp;

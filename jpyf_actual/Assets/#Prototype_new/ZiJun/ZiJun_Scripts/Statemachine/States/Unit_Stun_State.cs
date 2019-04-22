@@ -24,7 +24,7 @@ public class Unit_Stun_State : IState
         if (CountDownTImer < 0f)
         {
             Debug.Log("Finish_Stun");
-            m_user.ReturnPreviousState();
+            m_user.ReturnPreviousState();//After finish stun, go back to previous state
         }
     }
 

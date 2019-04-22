@@ -72,6 +72,7 @@ public class Entity_Projectile : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+       
         if (other.GetComponent<Entity_Unit>())//Only if it is an Entity Unit
         {
             Debug.Log("Take Damage");
@@ -88,6 +89,7 @@ public class Entity_Projectile : MonoBehaviour
 
     public virtual void HitCart(Collider other)
     {
+        Debug.Log("Hello In Original");
         GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)m_dmg);
     }
 

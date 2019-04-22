@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33451456525392250}
   - component: {fileID: 23767385627164078}
   - component: {fileID: 135448818613930532}
-  - component: {fileID: 114795194532355356}
+  - component: {fileID: 114603322969001872}
   m_Layer: 0
   m_Name: Nurikabe_Projectile
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892895758873684}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114795194532355356
+--- !u!114 &114603322969001872
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1892895758873684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4dc7b2c2cf29c469cdea1f8a93b669, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a6e80edc0463fe43a5261ef93a77506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_dmg: 0

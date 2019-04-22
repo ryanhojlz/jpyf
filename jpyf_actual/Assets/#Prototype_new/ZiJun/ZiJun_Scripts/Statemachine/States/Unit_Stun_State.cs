@@ -6,15 +6,23 @@ public class Unit_Stun_State : IState
 {
     Entity_Unit m_user;
     float CountDownTImer = 10f;//Init the death timw (Animation delay before deletion)
+    float OriginalTime = 10f;
 
     public Unit_Stun_State(Entity_Unit _user)
     {
         m_user = _user;
     }
 
+    public Unit_Stun_State(Entity_Unit _user, float stunTime)
+    {
+        m_user = _user;
+        CountDownTImer = stunTime;
+        OriginalTime = CountDownTImer;
+    }
+
     public void Enter()
     {
-        CountDownTImer = 10f;
+        CountDownTImer = OriginalTime;
     }
 
     public void Execute()

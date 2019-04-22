@@ -16,6 +16,6 @@ public class VRCam_Ignore : MonoBehaviour {
     void Update ()
     {
        
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
 	}
 }

@@ -157,17 +157,28 @@ public class PS4_ControllerScript : MonoBehaviour
         return SquareDown;
     }
 
-   
-
-    public bool ReturnSquarePress()
+    public bool ReturnCrossPress()
     {
-        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")));
     }
 
     public bool ReturnCirclePress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")));
     }
+
+    public bool ReturnSquarePress()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
+    }
+
+    public bool ReturnTrianglePress()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")));
+    }
+
+
+
 
     public bool ReturnR1Press()
     {

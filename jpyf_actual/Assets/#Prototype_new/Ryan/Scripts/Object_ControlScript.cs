@@ -40,6 +40,7 @@ public class Object_ControlScript : MonoBehaviour
     public bool pickup = false;
     public bool throw_item = false;
 
+
     public Transform Gropper = null;
 
     // For moving

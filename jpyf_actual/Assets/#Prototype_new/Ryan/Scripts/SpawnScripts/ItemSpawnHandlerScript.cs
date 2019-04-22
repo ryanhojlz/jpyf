@@ -7,7 +7,7 @@ public class ItemSpawnHandlerScript : MonoBehaviour
     public List<Transform> SpawnLocation;
     public List<Pickup_Scripts> Items;
     
-    float SpawnSpeed = 0.2f;
+    float SpawnSpeed = 0.1f;
     float timer = 1;
 
     // Random random

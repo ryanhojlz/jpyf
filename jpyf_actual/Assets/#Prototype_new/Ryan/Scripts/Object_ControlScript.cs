@@ -35,6 +35,8 @@ public class Object_ControlScript : MonoBehaviour
     public bool pickup = false;
     public bool throw_item = false;
 
+    public Transform Gropper = null;
+
     // For moving
     private Vector3 tempVelocity = Vector3.zero;
     
@@ -157,6 +159,12 @@ public class Object_ControlScript : MonoBehaviour
         //Debug.Log("Pickup   + " + pickup);
         GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup;
         
+    }
+
+
+    public void SetGropper(Transform obj)
+    {
+        Gropper = obj;
     }
 
 

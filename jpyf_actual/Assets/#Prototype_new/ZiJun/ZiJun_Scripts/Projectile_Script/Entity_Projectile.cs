@@ -90,6 +90,12 @@ public class Entity_Projectile : MonoBehaviour
             HitCart(other);
             Destroy(this.gameObject);
         }
+
+        if (other.tag == "Player2")
+        {
+            HitPlayer(other);
+            Destroy(this.gameObject);
+        }
     }
 
     public virtual void HitCart(Collider other)

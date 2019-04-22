@@ -65,6 +65,11 @@ public class Entity_Projectile : MonoBehaviour
         m_Direction = (_targetPos - _shooterPos).normalized;
     }
 
+    public void SetProjectileTag(string _tag)
+    {
+        this.tag = _tag;
+    }
+
     public Vector3 GetDirection()
     {
         return m_Direction;
@@ -73,7 +78,7 @@ public class Entity_Projectile : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
        
-        if (other.GetComponent<Entity_Unit>())//Only if it is an Entity Unit
+        if (other.GetComponent<Entity_Unit>() && this.tag != other.tag)//Only if it is an Entity Unit
         {
             Debug.Log("Take Damage");
             other.GetComponent<Entity_Unit>().TakeDamage(m_dmg);
@@ -89,7 +94,6 @@ public class Entity_Projectile : MonoBehaviour
 
     public virtual void HitCart(Collider other)
     {
-        Debug.Log("Hello In Original");
         GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)m_dmg);
     }
 

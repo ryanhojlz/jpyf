@@ -200,6 +200,7 @@ public class Entity_Unit : MonoBehaviour
                 Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
                 Projectile.SetLifeTime(lifeTime);
                 Projectile.SetDamage(GetAttackStat());
+                Projectile.SetProjectileTag(this.tag);
 
             }
 

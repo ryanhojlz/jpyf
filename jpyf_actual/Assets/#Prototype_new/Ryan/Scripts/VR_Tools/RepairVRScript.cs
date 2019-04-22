@@ -55,11 +55,11 @@ public class RepairVRScript : MonoBehaviour {
             }
         }
 
-        if (other.gameObject == lanternSpot)
-        {
-            handler.Lantern_TakeDmg(-2);
-            --handler.m_Souls;
-        }
+        //if (other.gameObject == lanternSpot)
+        //{
+        //    handler.Lantern_TakeDmg(-2);
+        //    --handler.m_Souls;
+        //}
 
 
     }

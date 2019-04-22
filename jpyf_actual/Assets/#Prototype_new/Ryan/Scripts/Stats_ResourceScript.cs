@@ -29,8 +29,8 @@ public class Stats_ResourceScript : MonoBehaviour
     public int m_Minerals = 0;
     public int m_Souls = 0;
 
-    public int m_MineralsCap = 300;
-    public int m_SoulsCap = 300;
+    public int m_MineralsCap = 150;
+    public int m_SoulsCap = 150;
 
     public float m_spawnMultiplier = 0;
 
@@ -287,8 +287,6 @@ public class Stats_ResourceScript : MonoBehaviour
         }
     }
 
-   
-
     public void ProcessPickUp(Pickup_Scripts item)
     {
         switch (item.id)
@@ -302,5 +300,18 @@ public class Stats_ResourceScript : MonoBehaviour
         }
 
         //Debug.Log("Hey hey im being processed");
+    }
+
+    public void ConsumeSouls(int souls)
+    {
+        this.m_Souls -= souls;
+        if (m_Souls < 0)
+        {
+            m_Souls = 0;
+        }
+        else if (m_Souls > m_SoulsCap)
+        {
+            m_SoulsCap = m_Souls;
+        }
     }
 }

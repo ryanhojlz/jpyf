@@ -165,7 +165,7 @@ public class Tengu : Entity_Unit
 
         dir = (TargetPos - this.transform.position).normalized; // direction equals to distance between the two normalised
 
-        Vector3 vel = dir * 10 * Time.deltaTime; // velocity
+        Vector3 vel = dir * (flySpeed * 0.2f) * Time.deltaTime; // velocity
 
         this.transform.position += vel; // Making the tengu move
 

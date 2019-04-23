@@ -17,6 +17,10 @@ public class Push_CartScript : MonoBehaviour
 
     // Cart Move Speed Multiplier
     public float m_CartSpeed = 0.01f;
+
+    // Cart BuffSpeed
+    public float m_CartBuffSpeed = 0;
+    // Debuff Speed n Debuff Duration
     public float m_SpeedDebuff = 0;
     public float debuffDuration = 0;
 
@@ -115,7 +119,10 @@ public class Push_CartScript : MonoBehaviour
                 m_CartMoveDirection = m_ObjControl.movedir;
                 m_CartMoveDirection.x = 0;
                 m_CartMoveDirection.y = 0;
-                m_CartParent.transform.position += (m_CartMoveDirection * (m_CartSpeed - m_SpeedDebuff));
+                float cartspeed = (m_CartSpeed + m_CartBuffSpeed) - m_SpeedDebuff;
+                if (cartspeed < 0)
+                    cartspeed = 0;
+                m_CartParent.transform.position += (m_CartMoveDirection * cartspeed);
             }
 
             if (debuffDuration < 0)

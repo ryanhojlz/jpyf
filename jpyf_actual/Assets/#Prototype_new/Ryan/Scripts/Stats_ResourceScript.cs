@@ -70,6 +70,8 @@ public class Stats_ResourceScript : MonoBehaviour
     // Lantern Light
     public Transform LanternLight = null;
 
+   
+
     float m_startTicking = 6;
 
 

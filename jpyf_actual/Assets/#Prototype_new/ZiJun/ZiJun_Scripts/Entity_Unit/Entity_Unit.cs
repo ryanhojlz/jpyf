@@ -130,6 +130,21 @@ public class Entity_Unit : MonoBehaviour
         //    Stun();
         //}
 
+        UpdateCheckList();
+
+        if (Target)
+        {
+            if (!Target.gameObject.activeSelf)
+            {
+                Target = null;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            TakeDamage(1);
+        }
+
         SelfUpdate();
 
         if (countdown >= 0)
@@ -141,6 +156,7 @@ public class Entity_Unit : MonoBehaviour
         }
         //Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
+
 
     }
 
@@ -226,6 +242,9 @@ public class Entity_Unit : MonoBehaviour
         float temp_dist = 0f;
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
+            if (!UnitsInRange[i] || !UnitsInRange[i].activeSelf)
+                continue;
+
             temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
 
             if (temp_dist < nearest)
@@ -257,6 +276,7 @@ public class Entity_Unit : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
         Unit_Stats.TakeDamage(((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef()));
         UpdateHealth();//Health only changes when taking damage or getting healed
@@ -288,8 +308,9 @@ public class Entity_Unit : MonoBehaviour
     {
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
-            if (!UnitsInRange[i].gameObject)
+            if (!UnitsInRange[i].gameObject || !UnitsInRange[i].gameObject.activeSelf)
             {
+                //Debug.Log("Hehe");
                 UnitsInRange.Remove(UnitsInRange[i]);
             }
         }
@@ -307,6 +328,13 @@ public class Entity_Unit : MonoBehaviour
         if (this.transform.parent)
             if (this.transform.parent.GetComponent<AI_Movement>())
                 this.transform.parent.GetComponent<AI_Movement>().StartMoving();
+    }
+
+    public void ChangeAgentPosition(Vector3 pos)
+    {
+        if (this.transform.parent)
+            if (this.transform.parent.GetComponent<AI_Movement>())
+                this.transform.parent.GetComponent<AI_Movement>().ChangeNavAgentPosition(pos);
     }
 
     public void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position

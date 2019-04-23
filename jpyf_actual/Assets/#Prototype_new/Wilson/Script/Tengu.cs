@@ -50,6 +50,8 @@ public class Tengu : Entity_Unit
             this.SetHealthStat(0);
         }
 
+        Debug.Log(sm.GetCurrentStateName());
+
         if (GetHealthStat() == 0) // if tengu dies
         {
             this.GetTarget().parent = null; // Unparent

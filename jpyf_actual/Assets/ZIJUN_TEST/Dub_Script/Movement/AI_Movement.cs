@@ -116,4 +116,9 @@ public class AI_Movement : MonoBehaviour
             m_agent.isStopped = false;
     }
 
+    public void ChangeNavAgentPosition(Vector3 position)
+    {
+        this.transform.position = position;
+    }
+
 }

@@ -36,6 +36,9 @@ public class Entity_Unit_ChaseRange : MonoBehaviour
         if (other.tag != "Player" && other.tag != "Player2" && other.tag != "Payload") //if is enemy unit, ignore each other
             return;
 
+        if (!other.gameObject.activeSelf)
+            return;
+
         if (Unit.GetComponent<Entity_Unit>())
         {
             Unit.GetComponent<Entity_Unit>().AddToUnitsInRange(other.gameObject);

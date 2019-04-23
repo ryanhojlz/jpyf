@@ -35,7 +35,7 @@ public class Camera_Script : MonoBehaviour
         // Camera offseting
         var newPos = m_Camera.transform.position;
         newPos.x += 0.55f;
-        newPos.y += 1.3f;
+        newPos.y += 1.8f;
         newPos.z -= 4;
         m_Camera.transform.position = newPos;
     }

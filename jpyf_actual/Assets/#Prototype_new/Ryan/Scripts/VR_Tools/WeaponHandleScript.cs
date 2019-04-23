@@ -36,6 +36,7 @@ public class WeaponHandleScript : GrabbableObject
     {
         base.OnGrab(currentController);
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        b_ToolReleased = false; 
     }
 
     public override void OnGrabReleased(MoveController currentController)

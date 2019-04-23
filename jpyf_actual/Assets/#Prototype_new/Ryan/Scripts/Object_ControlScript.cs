@@ -114,6 +114,11 @@ public class Object_ControlScript : MonoBehaviour
         }
 
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
+
+        if (Gropper)
+        {
+            return;
+        }
         if (isPushingCart)
         {
             CurrentObj.GetComponent<Rigidbody>().isKinematic = true;

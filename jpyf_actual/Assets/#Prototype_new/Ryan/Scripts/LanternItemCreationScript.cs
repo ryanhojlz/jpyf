@@ -35,7 +35,6 @@ public class LanternItemCreationScript : MonoBehaviour
                 SpawnPickUp();
             }
         }
-		
 	}
 
     void SpawnPickUp()
@@ -46,7 +45,6 @@ public class LanternItemCreationScript : MonoBehaviour
         originPoint.y += 0.1f;
         spiritObject.transform.position = originPoint;
         objectinplace = spiritObject;
-
         spiritObject.transform.parent = this.transform;
     }
 

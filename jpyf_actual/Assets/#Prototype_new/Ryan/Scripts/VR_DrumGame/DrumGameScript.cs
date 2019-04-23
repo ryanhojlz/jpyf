@@ -18,10 +18,15 @@ public class DrumGameScript : MonoBehaviour
     public Transform m_beatIndicator;
     public Transform m_beatIndicator_left = null;
     public Transform m_beatIndicator_right = null;
-
+    
     // Indicator Gameplay
     public Vector3 v_indicatorPos = Vector3.zero;
     bool b_translateRight = true;
+    // Inside left indicator / right indicator booleans
+    public bool b_insideLeft = false;
+    public bool b_insideRight = false;
+
+
 
     // Boolean to check minigame
     public bool b_miniGamePlay = false;
@@ -95,7 +100,7 @@ public class DrumGameScript : MonoBehaviour
                     b_translateRight = true;
                 }
                 v_indicatorPos.x -= 0.5f * Time.deltaTime;
-                m_beatIndicator.transform.localPosition = v_indicatorPos;                
+                m_beatIndicator.transform.localPosition = v_indicatorPos;
             }
         }
         else if (!b_miniGamePlay) // if not minigame in play
@@ -115,7 +120,7 @@ public class DrumGameScript : MonoBehaviour
             b_miniGamePlay = false;
         }
 
-       
+
         // If got hit in general
         if (b_Hit_inGeneral)
         {
@@ -127,8 +132,22 @@ public class DrumGameScript : MonoBehaviour
             //m_beatIndicator.gameObject.SetActive(false);
             //m_beatIndicator.gameObject.SetActive(false);
             OnOffUI(true);
+
+            if (b_insideLeft)
+            {
+                //Debug.Log("SWITCH TO RIGHT");
+                b_translateRight = true;
+            }
+            else if (b_insideRight)
+            {
+                //Debug.Log("SWITCH TO LEFT");
+                b_translateRight = false;
+            }
         }
 
+
+
+        
         // iirc ontrigger updates first
         // So process logic above 
         // if im wrong then wrong lo
@@ -183,6 +202,8 @@ public class DrumGameScript : MonoBehaviour
             b_Right_StickHit = false;
             b_Hit_inGeneral = true;
         }
+
+        
 
     }
 

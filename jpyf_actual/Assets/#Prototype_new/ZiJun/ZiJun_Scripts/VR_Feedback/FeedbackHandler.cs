@@ -90,36 +90,16 @@ public class FeedbackHandler : MonoBehaviour
                 {
                     if (Previous != StartWith)
                     {
-                        //payloadTurning = TurnSEQ.None;
-                        //Previous = TurnSEQ.None;
-                        //StartWith = TurnSEQ.None;
-
-                        //isHit = false;
-
                         isComplete = true;
                     }
                    
                     if (Previous == TurnSEQ.TurnLeft)
                     {
                         payLoad.transform.Rotate(Vector3.forward, -10 * Time.deltaTime);
-
-                        //if (previousTime + rotateTime < Time.time)
-                        //{
-                        //    previousTime = Time.time;
-                        //    Previous = TurnSEQ.BackToCenter;
-                        //    payloadTurning = TurnSEQ.TurnRight;
-                        //}
                     }
                     else if (Previous == TurnSEQ.TurnRight)
                     {
                         payLoad.transform.Rotate(Vector3.forward, 10 * Time.deltaTime);
-
-                        //if (previousTime + rotateTime < Time.time)
-                        //{
-                        //    previousTime = Time.time;
-                        //    Previous = TurnSEQ.BackToCenter;
-                        //    payloadTurning = TurnSEQ.TurnLeft;
-                        //}
                     }
 
                     if (previousTime + rotateTime < Time.time)

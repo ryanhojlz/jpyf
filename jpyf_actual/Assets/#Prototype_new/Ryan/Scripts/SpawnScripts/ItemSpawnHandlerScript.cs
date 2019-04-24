@@ -50,6 +50,13 @@ public class ItemSpawnHandlerScript : MonoBehaviour
         item.transform.position = SpawnLocation[location].position;
     }
 
+    public void SpawnItem(Vector3 position)
+    {
+        item_type = Random.Range(0, Items.Count);
+        Pickup_Scripts item = Instantiate(Items[item_type]);
+        item.transform.position = position;
+    }
+
     public void SpawnItem_randomBatch()
     {
         Debug.Log("Random batches ");

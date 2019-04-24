@@ -18,8 +18,11 @@ public class Entity_Tengu : Entity_Unit
     bool isGrabbing = false;
 
     //Variables////////////////////////
-    float flyspeed = 10f;
+    public float flyspeed = 10f;
     GameObject HoldUnit = null;
+
+    float StayDuration = 2f;
+    float NextTime = 0f;
 
     enum AtkPlayer
     {
@@ -28,7 +31,14 @@ public class Entity_Tengu : Entity_Unit
         HOVER
     }
 
+    enum AtkPayload
+    {
+        ATTACK,
+        GOBACK,
+    }
+
     AtkPlayer AttackPlayerSeq = AtkPlayer.GRAB;//Initing it to be grabbing player
+    AtkPayload AttackPayloadSeq = AtkPayload.ATTACK;
 
     //Override functions
     public override void SelfStart()
@@ -92,6 +102,8 @@ public class Entity_Tengu : Entity_Unit
             isGrabbing = false;
             SetInAttackRange(false);
             isAttacking = false;
+
+            GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
         }
     }
 
@@ -103,6 +115,8 @@ public class Entity_Tengu : Entity_Unit
 
     public override void Dead()
     {
+        GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
+
         if (HoldUnit)
         {
             HoldUnit.transform.parent = null; // Unparent
@@ -152,7 +166,7 @@ public class Entity_Tengu : Entity_Unit
     {
         //Debug.Log(HoldUnit);
         //Debug.Log("Still attacking");
-        if (!HoldUnit)
+        if (!HoldUnit || !HoldUnit.activeSelf)
         {
             Debug.Log("Oh no, U are not holding at units");
             return;
@@ -164,6 +178,11 @@ public class Entity_Tengu : Entity_Unit
                 {
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed))// <- This portion will be used to fly to target position && tell if it has reached
                     {
+                        if (HoldUnit.transform.parent)//Being parented to a cart
+                        {
+                            HoldUnit.transform.parent = null;
+                        }
+
                         HoldUnit.transform.parent = this.transform;
                         isGrabbing = true;
                         HoldUnit.GetComponent<Rigidbody>().isKinematic = true;
@@ -193,8 +212,40 @@ public class Entity_Tengu : Entity_Unit
 
     void AttackPayload()
     {
-        if(GetTarget())
-            FlyToTarget(GetTarget().position, flyspeed);
+        if (!GetTarget())
+        {
+            return;
+        }
+
+        switch (AttackPayloadSeq)
+        {
+            case AtkPayload.ATTACK:
+                {
+                    if (Time.time > NextTime)
+                    {
+                        if (FlyToTarget(GetTarget().position, flyspeed))
+                        {
+                            GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Lantern_TakeDmg((int)this.GetAttackStat());
+                            NextTime = Time.time + StayDuration;//Setting the timer for tengu to stay on the spot its attacking
+                            AttackPayloadSeq = AtkPayload.GOBACK;
+                        }
+                    }
+                }
+                break;
+
+            case AtkPayload.GOBACK:
+                {
+                    if (Time.time > NextTime)
+                    {
+                        if (FlyToTarget(GetOriginalPosition(), flyspeed))
+                        {
+                            AttackPayloadSeq = AtkPayload.ATTACK;
+                            NextTime = Time.time + StayDuration;//Setting the timer for tengu to stay on the spot after flying back
+                        }
+                    }
+                }
+                break;
+        }
     }
 
     bool FlyToTarget(Vector3 _Pos, float speed)
@@ -212,6 +263,22 @@ public class Entity_Tengu : Entity_Unit
 
         return false;
     }
+
+    //bool FlyToTarget(Vector3 _Pos, float speed, float time)
+    //{
+    //    Vector3 Temp = _Pos - this.transform.position;
+    //    if (Temp != Vector3.zero)
+    //    {
+    //        Vector3 Dir = (_Pos - this.transform.position).normalized;//Get the direction to fly to
+
+    //        this.transform.position += Dir * speed * Time.deltaTime;
+    //    }
+
+    //    if ((_Pos - this.transform.position).magnitude < 0.1f)
+    //        return true;//If have reached target position, return true
+
+    //    return false;
+    //}
 
     bool FlyToLeft_Right(bool right)
     {

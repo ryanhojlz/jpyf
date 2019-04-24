@@ -250,6 +250,7 @@ public class Stats_ResourceScript : MonoBehaviour
     
     public void Cart_TakeDmg(int damage)
     {
+        GameObject.Find("FeedBackHandler").GetComponent<FeedbackHandler>().HitPayload();
         // if my supervisor was mr toh he would have just put a plus and parameter would be a minus but not in this house
         m_CartHP -= damage;
         if (m_CartHP < 0)

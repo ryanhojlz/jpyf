@@ -85,7 +85,7 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
-        Debug.Log("This one " + GetTarget());
+        //Debug.Log("This one " + GetTarget());
 
         if ((!HoldUnit || !HoldUnit.activeSelf) && isGrabbing)//This will run if it used to be grabbing something but now not
         {

@@ -2284,6 +2284,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1122899876887240, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ae07c3b7e232dc4e874f77763907a5c, type: 2}
   m_IsPrefabParent: 0
@@ -8854,6 +8858,8 @@ MonoBehaviour:
   isPushingCart: 0
   pickup: 0
   throw_item: 0
+  checkCanGatherItem: 0
+  isGathering: 0
   Gropper: {fileID: 0}
 --- !u!1 &1371278419
 GameObject:
@@ -12741,23 +12747,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114861230094036638, guid: e1d6624ae02dd6b4482a824857c727ea,
-        type: 2}
-      propertyPath: Attack_Stat
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114861230094036638, guid: e1d6624ae02dd6b4482a824857c727ea,
-        type: 2}
-      propertyPath: Piority_Unit
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1282772710117974, guid: e1d6624ae02dd6b4482a824857c727ea, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114861230094036638, guid: e1d6624ae02dd6b4482a824857c727ea,
-        type: 2}
-      propertyPath: flyspeed
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

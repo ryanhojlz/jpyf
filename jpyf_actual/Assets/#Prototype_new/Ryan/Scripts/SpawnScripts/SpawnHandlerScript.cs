@@ -14,7 +14,7 @@ public class SpawnHandlerScript : MonoBehaviour
     float timerReference = 0;
     int spawnInt = 0;
     
-    public float spawnSpeed = 0.01f;
+    public float spawnSpeed = 0.1f;
 
     public bool spawnEnemy = false;
     // Use this for initialization
@@ -44,7 +44,7 @@ public class SpawnHandlerScript : MonoBehaviour
         {
             spawnInt = Random.Range(0, SpawnLocation.Count);
             // spawn object
-            GameObject obj = Instantiate(ObjectList[0].gameObject);
+            GameObject obj = Instantiate(ObjectList[Random.Range(0,ObjectList.Count)].gameObject);
             obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
 
             timer = timerReference;

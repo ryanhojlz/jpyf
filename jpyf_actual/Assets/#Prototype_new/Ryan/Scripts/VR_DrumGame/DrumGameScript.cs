@@ -232,7 +232,7 @@ public class DrumGameScript : MonoBehaviour
 
     void HandleBuffSpeed()
     {
-        m_pushCartRef.m_CartBuffSpeed = bufflevel / 10.0f;
+        m_pushCartRef.m_CartBuffSpeed = bufflevel / 1000.0f;
         //Debug.Log("m_pushCartRef.m_CartBuffSpeed " + m_pushCartRef.m_CartBuffSpeed);
     }
 

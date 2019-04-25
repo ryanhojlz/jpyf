@@ -11,6 +11,9 @@ public class Object_ControlScript : MonoBehaviour
 
     // PS4 Controller Reference
     public PS4_ControllerScript Controller = null;
+
+    //
+    public Stats_ResourceScript handler = null;
     
     // Camera Reference
     public Camera CameraObj = null;
@@ -40,7 +43,10 @@ public class Object_ControlScript : MonoBehaviour
     public bool pickup = false;
     public bool throw_item = false;
 
+    public bool checkCanGatherItem = false;
+    public bool isGathering = false;
 
+    // Object that grabs the player away
     public Transform Gropper = null;
 
     // For moving
@@ -51,6 +57,7 @@ public class Object_ControlScript : MonoBehaviour
     {
         Controller = GameObject.Find("PS4_ControllerHandler").GetComponent<PS4_ControllerScript>();
         CameraObj = GameObject.Find("ControllerCam").GetComponent<Camera>();
+        handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         m_playerSpeed = 8;
     }
 	
@@ -117,8 +124,10 @@ public class Object_ControlScript : MonoBehaviour
 
         if (Gropper)
         {
+            handler.Player2_TakeDmg(1);
             return;
         }
+        // Movement
         if (isPushingCart)
         {
             CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
@@ -141,6 +150,7 @@ public class Object_ControlScript : MonoBehaviour
         throw_item = false;
         pickup = false;
         checkCart = false;
+        checkCanGatherItem = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -166,6 +176,13 @@ public class Object_ControlScript : MonoBehaviour
         {
             throw_item = true;
         }
+
+        if (Controller.ReturnTrianglePress())
+        {
+            checkCanGatherItem = true;
+        }
+
+
 #endif
 
 #if UNITY_EDITOR_WIN

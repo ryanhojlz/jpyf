@@ -24,6 +24,8 @@ public class Push_CartScript : MonoBehaviour
     public float m_SpeedDebuff = 0;
     public float debuffDuration = 0;
 
+    public float m_stunDuration = 0;
+
     Transform point;
     // Game Handler
     public Stats_ResourceScript m_handler = null;
@@ -61,15 +63,15 @@ public class Push_CartScript : MonoBehaviour
 
         if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.7f)
         {
-            m_CartSpeed = 0.005f;
+            m_CartSpeed = 0.003f;
         }
         else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.5f)
         {
-            m_CartSpeed = 0.003f;
+            m_CartSpeed = 0.002f;
         }
         else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.3f)
         {
-            m_CartSpeed = 0.002f;
+            m_CartSpeed = 0.0015f;
         }
         else if (m_handler.m_CartHP > 0)
         {
@@ -113,24 +115,13 @@ public class Push_CartScript : MonoBehaviour
                 }
             }
 
-            if (m_ObjControl.isPushingCart)
-            {
-                m_Player2.transform.position = point.position;
-                m_CartMoveDirection = m_ObjControl.movedir;
-                m_CartMoveDirection.x = 0;
-                m_CartMoveDirection.y = 0;
-                float cartspeed = (m_CartSpeed + m_CartBuffSpeed) - m_SpeedDebuff;
-                if (cartspeed < 0)
-                    cartspeed = 0;
-                m_CartParent.transform.position += (m_CartMoveDirection * cartspeed);
-            }
-
             if (m_ObjControl.Gropper)
             {
                 m_ObjControl.isPushingCart = false;
-                //m_Player2.parent = null;
                 m_Player2 = null;
             }
+
+
 
             if (debuffDuration < 0)
             {
@@ -145,9 +136,37 @@ public class Push_CartScript : MonoBehaviour
                 }
             }
 
+            if (m_stunDuration > 0)
+            {
+                
+                m_stunDuration -= 1 * Time.deltaTime;
+                return;
+            }
+            else
+            {
+                m_stunDuration = 0;
+            }
+
+            if (m_ObjControl.isPushingCart)
+            {
+                m_Player2.transform.position = point.position;
+                m_CartMoveDirection = m_ObjControl.movedir;
+                m_CartMoveDirection.x = 0;
+                m_CartMoveDirection.y = 0;
+                float cartspeed = (m_CartSpeed + m_CartBuffSpeed) - m_SpeedDebuff;
+                if (cartspeed < 0)
+                    cartspeed = 0;
+                m_CartParent.transform.position += (m_CartMoveDirection * cartspeed);
+            }
+
         }
     }
 
+
+    public void SetStunned(float duration)
+    {
+        m_stunDuration = duration;
+    }
 
     public void SetDebuffSpeed(float speed, float duration)
     {

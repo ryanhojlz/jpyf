@@ -227,7 +227,7 @@ public class Stats_ResourceScript : MonoBehaviour
         // Lantern ticks
         if (m_StartLanternTick)
         {
-            m_LanternTimerTick -= 10 * Time.deltaTime;
+            m_LanternTimerTick -= 5 * Time.deltaTime;
             if (m_LanternTimerTick <= 0)
             {
                 Lantern_TakeDmg(1);
@@ -243,9 +243,29 @@ public class Stats_ResourceScript : MonoBehaviour
             }
         }
 
-        m_spawnMultiplier = (m_LanternHpCap - m_LanternHp) * 0.01f;
-        // Update Light component
-        LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
+        //m_spawnMultiplier = (m_LanternHpCap - m_LanternHp) * 0.01f;
+
+        // hardcode
+        if (m_LanternHp >= m_LanternHpCap * 0.7f)
+        {
+            m_spawnMultiplier = 0;
+        }
+        else if (m_LanternHp >= m_LanternHpCap * 0.5f)
+        {
+            m_spawnMultiplier = 0.1f;
+        }
+        else if (m_LanternHp >= m_LanternHpCap * 0.2f)
+        {
+            m_spawnMultiplier = 0.15f;
+        }
+        else if (m_LanternHp <= m_LanternHpCap * 0.0f)
+        {
+            m_spawnMultiplier = 0.2f;
+        }
+
+
+            // Update Light component
+            LanternLight.GetComponent<Light>().intensity = 2.5f * ((float)m_LanternHp / (float)m_LanternHpCap);
     }
     
     public void Cart_TakeDmg(int damage)

@@ -125,7 +125,7 @@ public class DrumGameScript : MonoBehaviour
                 b_translateRight = false;
             }
 
-            if (!b_insideLeft && b_insideRight)
+            if (!b_insideLeft && !b_insideRight)
             {
                 --bufflevel;
                 if (bufflevel < 0)

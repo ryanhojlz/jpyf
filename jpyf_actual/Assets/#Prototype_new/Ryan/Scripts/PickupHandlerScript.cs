@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PickupHandlerScript : MonoBehaviour
 {
@@ -29,9 +30,25 @@ public class PickupHandlerScript : MonoBehaviour
                 // Drop the current object
                 //currentObject.localPosition = Vector3.zero;
                 currentObject.parent = null;
-                currentObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                // If object is an items
+                if (currentObject.GetComponent<Pickup_Scripts>())
+                {
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentObject.GetComponent<BoxCollider>().enabled = true;
+                }
+                // If thrown object is enemy
+                if (currentObject.GetComponent<AI_Movement>())
+                {
+                    //currentObject.GetComponent<NavMeshAgent>().enabled = true;
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    //currentObject.GetComponent<AI_Movement>().enabled = true;
+                }
+
+
                 throwDirection = this.transform.forward * 22;
                 currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
+                
             }
         }
 
@@ -41,21 +58,61 @@ public class PickupHandlerScript : MonoBehaviour
             // Nearest Pickup object
             if (!nearest_pickup_object)
                 return;
+
+            
             if (currentObject)
             {
                 // Drop the current object
                 currentObject.localPosition = Vector3.zero;
                 currentObject.parent = null;
-                currentObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                // if its a item that can be picked up
+                if (currentObject.GetComponent<Pickup_Scripts>())
+                {
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentObject.GetComponent<BoxCollider>().enabled = true;
+                }
+                // If its an AI object
+                if (currentObject.GetComponent<AI_Movement>())
+                {
+                    currentObject.GetComponent<NavMeshAgent>().enabled = true;
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentObject.GetComponent<AI_Movement>().enabled = true;
+                }
 
             }
-            // Nearest object gone // ReAssign
+
+            // Nearest object gone // ReAssign           
             currentObject = nearest_pickup_object;
             nearest_pickup_object = null;
+
+            // If item has animation script
+            if (currentObject.GetComponent<ItemAnimation>())
+                currentObject.GetComponent<ItemAnimation>().enabled = false;
+
+            // If object is an enemy unit
+            if (currentObject.GetComponent<AI_Movement>())
+            {
+                // Set nav mesh false
+                currentObject.GetComponent<AI_Movement>().enabled = false;
+                currentObject.GetComponent<Rigidbody>().isKinematic = true;
+                currentObject.GetComponent<NavMeshAgent>().enabled = false;
+            }
+            // If its a normal item
+            if (currentObject.GetComponent<Pickup_Scripts>())
+            {
+                currentObject.GetComponent<Rigidbody>().isKinematic = true;
+                currentObject.GetComponent<BoxCollider>().enabled = false;
+            }
+
+            
+
             // Parent cos picking up**
             currentObject.parent = this.transform;
             currentObject.transform.localPosition = offset;
-            currentObject.GetComponent<Rigidbody>().isKinematic = true;
+
+
+            // Reset rotations
             currentObject.localEulerAngles = Vector3.zero;
 
         }
@@ -71,6 +128,13 @@ public class PickupHandlerScript : MonoBehaviour
         {
             nearest_pickup_object = other.transform;
         }
+
+        if (other.GetComponent<Entity_Unit>())
+        {
+            // This is occuring 
+            nearest_pickup_object = other.transform.parent;
+        }
+
     }
 
     //private void OnTriggerExit(Collider other)

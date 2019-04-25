@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemAnimation : MonoBehaviour
 {
-
     public float xAngle, yAngle, zAngle;
     public AnimationCurve normalCurve;
     float bounceTimer;

@@ -4085,6 +4085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentObj: {fileID: 550583958}
   Controller: {fileID: 0}
+  handler: {fileID: 0}
   CameraObj: {fileID: 0}
   movedir: {x: 0, y: 0, z: 0}
   m_playerSpeed: 0
@@ -4095,6 +4096,8 @@ MonoBehaviour:
   isPushingCart: 0
   pickup: 0
   throw_item: 0
+  checkCanGatherItem: 0
+  isGathering: 0
   Gropper: {fileID: 0}
 --- !u!1 &1371278419
 GameObject:
@@ -6012,6 +6015,7 @@ GameObject:
   - component: {fileID: 2031289902}
   - component: {fileID: 2031289901}
   - component: {fileID: 2031289900}
+  - component: {fileID: 2031289904}
   m_Layer: 0
   m_Name: ControllerCam
   m_TagString: MainCamera
@@ -6082,6 +6086,18 @@ Transform:
   m_Father: {fileID: 1132956510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031289904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031289899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7286fa883ac1a4cb005ccb078858a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraShake: {fileID: 2031289904}
 --- !u!1 &2059195967
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,12 @@ using UnityEngine.XR;
 
 public class MainMenuButton : MonoBehaviour
 {
-    GameObject[,] buttons = new GameObject[2, 2];
+    GameObject[] buttons = new GameObject[4];
 
-    public GameObject x0y0;
-    public GameObject x0y1;
-    public GameObject x1y0;
-    public GameObject x1y1;
+    public GameObject coopvsai;
+    public GameObject pvp;
+    public GameObject settings;
+    public GameObject credits;
 
     public GameObject highlighted;
 
@@ -23,21 +23,29 @@ public class MainMenuButton : MonoBehaviour
     public Canvas Mainmenucanvas;
 
     GameObject titleScreen;
+    GameObject text1;
+    GameObject text2;
+    GameObject text3;
+    GameObject text4;
 
     public bool TitlescreenDisplay = true;
 
-    int indexX = 1;
-    int indexY = 1;
+    int indexX = 0;
+    int indexY = 0;
 
     // Use this for initialization
     void Start()
     {
         //buttons = new Transform[1][1];
-        buttons[0, 0] = x0y0;
-        buttons[0, 1] = x0y1;
-        buttons[1, 0] = x1y0;
-        buttons[1, 1] = x1y1;
+        buttons[0] = coopvsai;
+        buttons[1] = pvp;
+        buttons[2] = settings;
+        buttons[3] = credits;
         titleScreen = GameObject.Find("Titlescreen");
+        text1 = GameObject.Find("Text1");
+        text2 = GameObject.Find("Text2");
+        text3 = GameObject.Find("Text3");
+        text4 = GameObject.Find("Text4");
         UnityEngine.XR.XRSettings.showDeviceView = false;
 
     }
@@ -45,10 +53,16 @@ public class MainMenuButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log(buttons[indexX, indexY].gameObject.name);
+        Debug.Log(buttons[indexX/*, indexY*/].gameObject.name);
 
-        highlighted.gameObject.transform.position = buttons[indexX, indexY].gameObject.transform.position;
+        text1.SetActive(false);
+        text2.SetActive(false);
+        text3.SetActive(false);
+        text4.SetActive(false);
+        MessageDisplay();
+        highlighted.gameObject.transform.position = buttons[indexX/*, indexY*/].gameObject.transform.position;
 
+        highlighted.transform.position = new Vector3(buttons[indexX].transform.position.x + ((buttons[indexX].GetComponent<RectTransform>().rect.width * buttons[indexX].transform.lossyScale.x * 0.5f)) + (highlighted.GetComponent<RectTransform>().rect.width * highlighted.transform.lossyScale.x * 0.5f), buttons[indexX].transform.position.y, buttons[indexX].transform.position.z);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveUp();
@@ -91,57 +105,33 @@ public class MainMenuButton : MonoBehaviour
 
     public void MoveUp()
     {
-        if (indexY > 0)
-        {
-            indexY = 0;
-        }
-        else
-        {
-            indexY += 1;
-        }
+        if (indexX > 0)
+            indexX--;
     }
 
     public void MoveDown()
     {
-        if (indexY <= 0)
-        {
-            indexY = 1;
-        }
-        else
-        {
-            indexY -= 1;
-        }
+        if (indexX < 3)
+            indexX++;
     }
 
     public void MoveLeft()
     {
-        if (indexX <= 0)
-        {
-            indexX = 0;
-        }
-        else
-        {
-            indexX -= 1;
-        }
+        if (indexX > 0)
+            indexX--;
     }
 
     public void MoveRight()
     {
-        if (indexX > 0)
-        {
-            indexX = 0;
-        }
-        else
-        {
-            indexX += 1;
-        }
+        if (indexX < 3)
+            indexX++;
     }
 
     public void EnterSelected()
     {
         if (TitlescreenDisplay)
             return;
-        switch (buttons[indexX, indexY].gameObject.name)
+        switch (buttons[indexX/*, indexY*/].gameObject.name)
         {
             case "coopvsai":
                 {
@@ -177,5 +167,36 @@ public class MainMenuButton : MonoBehaviour
     }
 
 
+    public void MessageDisplay()
+    {
+        if (TitlescreenDisplay)
+            return;
+        switch (buttons[indexX/*, indexY*/].gameObject.name)
+        {
+            case "coopvsai":
+                {
+                    text1.SetActive(true);
 
+                }
+                break;
+
+            case "pvp":
+                {
+                    text2.SetActive(true);
+                }
+                break;
+
+            case "settings":
+                {
+                    text3.SetActive(true);
+                }
+                break;
+
+            case "credits":
+                {
+                    text4.SetActive(true);
+                }
+                break;
+        }
+    }
 }

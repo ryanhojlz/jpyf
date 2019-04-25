@@ -128,10 +128,10 @@ public class Object_ControlScript : MonoBehaviour
             CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
-        if (Gropper)
-        {
-            isPushingCart = false;
-        }
+        //if (Gropper)
+        //{
+        //    isPushingCart = false;
+        //}
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;
     }

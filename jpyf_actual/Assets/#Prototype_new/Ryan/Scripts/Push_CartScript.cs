@@ -125,6 +125,13 @@ public class Push_CartScript : MonoBehaviour
                 m_CartParent.transform.position += (m_CartMoveDirection * cartspeed);
             }
 
+            if (m_ObjControl.Gropper)
+            {
+                m_ObjControl.isPushingCart = false;
+                m_Player2.parent = null;
+                m_Player2 = null;
+            }
+
             if (debuffDuration < 0)
             {
                 m_SpeedDebuff = 0;

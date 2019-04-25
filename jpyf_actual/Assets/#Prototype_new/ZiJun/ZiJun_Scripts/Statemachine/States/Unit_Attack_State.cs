@@ -23,8 +23,14 @@ public class Unit_Attack_State : IState
     {
         //if (!m_user.GetTarget() || (m_user.GetTarget().position - m_user.transform.position).magnitude > m_user.GetAttackRangeStat())//If there is not a target or target is not within attack range
         //    m_user.ChangeState("chase");
+        //if (m_user.GetStillAttacking())
+        //{
+        //    Debug.Log("Attack State : " + m_user.name + "Still attacking");
+        //}
+
         if (Time.time > previousTime + 1f)
         {
+            //Debug.Log("Finding : " + m_user.name + " ...");
             previousTime = Time.time;
             m_user.FindNearestInList();
         }

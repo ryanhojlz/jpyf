@@ -57,6 +57,8 @@ public class Entity_Tengu : Entity_Unit
 
     public override void SelfUpdate()
     {
+        //Debug.Log(this.name + " : " + AttackPlayerSeq);
+        //Debug.Log("State : " + this.name + " - " + sm.GetCurrentStateName());
 
         if (GetHealthStat() <= 0)
         {
@@ -70,12 +72,26 @@ public class Entity_Tengu : Entity_Unit
 
         if (HoldUnit)
         {
+            if (HoldUnit)
+            {
+                if (HoldUnit.transform.parent)
+                {
+                    if (HoldUnit.transform.parent != this.transform)
+                    {
+                        HoldUnit = null;
+                    }
+                }
+            }
+
+            //Debug.Log(this.name + "_ _" +  HoldUnit);
+
             AttackPlayer();
         }
         else if (isAttacking && GetTarget())
         {
             if (GetTarget().tag == "Player2")
             {
+                isGrabbing = true;
                 if (GetTarget().gameObject && GetTarget().gameObject.activeSelf)
                     HoldUnit = GetTarget().gameObject;
             }
@@ -85,7 +101,8 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
-        //Debug.Log("This one " + GetTarget());
+        //Debug.Log("This one : " + this.name + " : " + GetTarget());
+        //Debug.Log("This one : " + this.name + " : isGrabbing - " + isGrabbing);
 
         if ((!HoldUnit || !HoldUnit.activeSelf) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
@@ -109,6 +126,7 @@ public class Entity_Tengu : Entity_Unit
 
     public override void Attack()
     {
+        //Debug.Log(this.name + " : Setting to attack");
         SetStillAttacking(true);//Set to start attacking
         isAttacking = true;
     }
@@ -178,24 +196,33 @@ public class Entity_Tengu : Entity_Unit
                 {
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed))// <- This portion will be used to fly to target position && tell if it has reached
                     {
-                        //if (HoldUnit.transform.parent)//Being parented to a cart
-                        //{
-                        //    HoldUnit.transform.parent = null;
-                        //}
-                        
+                        ////if (HoldUnit.transform.parent)//Being parented to a cart
+                        ////{
+                        ////    HoldUnit.transform.parent = null;
+                        ////}
+                        //Debug.Log("HIIIIIIIII");
                         HoldUnit.transform.parent = this.transform;
-                        isGrabbing = true;
+                        
                         HoldUnit.GetComponent<Rigidbody>().isKinematic = true;
                         GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(this.transform);
                         AttackPlayerSeq = AtkPlayer.POSITIONING;
+                    }
+
+                    if (this.transform.childCount > 0)
+                    {
+                        this.transform.GetChild(0).position = this.transform.position;
                     }
                 }
                 break;
             case AtkPlayer.POSITIONING:
                 {
-                    if(FlyToTarget(TargetEscape.transform.position, flyspeed))
+                    if (FlyToTarget(TargetEscape.transform.position, flyspeed))
                     {
                         AttackPlayerSeq = AtkPlayer.HOVER;
+                    }
+                    if (this.transform.childCount > 0)
+                    {
+                        this.transform.GetChild(0).position = this.transform.position;
                     }
                 }
                 break;
@@ -258,7 +285,7 @@ public class Entity_Tengu : Entity_Unit
             this.transform.position += Dir * speed * Time.deltaTime;
         }
 
-        if ((_Pos - this.transform.position).magnitude < 0.1f)
+        if ((_Pos - this.transform.position).magnitude < 1.0f)
             return true;//If have reached target position, return true
 
         return false;

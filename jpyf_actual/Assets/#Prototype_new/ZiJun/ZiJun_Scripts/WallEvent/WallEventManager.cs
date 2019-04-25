@@ -16,7 +16,7 @@ public class WallEventManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(EventStart);
+        //Debug.Log(EventStart);
 	}
 
     public void SetEvent(bool trigger)

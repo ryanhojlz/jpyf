@@ -261,6 +261,17 @@ public class Entity_Unit : MonoBehaviour
         float temp_dist = 0f;
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
+            if (UnitsInRange[i].tag == "Player2")
+            {
+                if (UnitsInRange[i].transform.parent != null)
+                {
+                    if (UnitsInRange[i].transform.parent != this.transform)
+                    {
+                        continue;
+                    }
+                }
+            }
+
             temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
 
             if (Target && Target.gameObject.activeSelf)

@@ -182,7 +182,7 @@ public class Entity_Tengu : Entity_Unit
                         {
                             HoldUnit.transform.parent = null;
                         }
-
+                        
                         HoldUnit.transform.parent = this.transform;
                         isGrabbing = true;
                         HoldUnit.GetComponent<Rigidbody>().isKinematic = true;

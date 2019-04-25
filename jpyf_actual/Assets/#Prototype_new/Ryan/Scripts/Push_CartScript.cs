@@ -128,7 +128,7 @@ public class Push_CartScript : MonoBehaviour
             if (m_ObjControl.Gropper)
             {
                 m_ObjControl.isPushingCart = false;
-                m_Player2.parent = null;
+                //m_Player2.parent = null;
                 m_Player2 = null;
             }
 
@@ -173,16 +173,26 @@ public class Push_CartScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (m_ObjControl.Gropper)
+            return;
         if (other.gameObject.tag == "Player2")
-        {
+        { 
             m_Player2 = other.transform;
             m_Player2.transform.parent = m_CartParent;
         }
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player2")
+    //    {
+    //        m_Player2 = other.transform;
+    //        m_Player2.transform.parent = m_CartParent;
+    //    }
+    //}
 
 
-    
+
 }
 
 

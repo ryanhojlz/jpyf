@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Entity_Unit : MonoBehaviour
 {
@@ -400,4 +401,20 @@ public class Entity_Unit : MonoBehaviour
     {
         this.sm.ChangeState("stun");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!transform.parent.GetComponent<NavMeshAgent>().enabled)
+        {
+            if (other.tag == "floor")
+            {
+                Debug.Log("Collide with floor");  
+                transform.parent.GetComponent<NavMeshAgent>().enabled = true;
+                transform.parent.GetComponent<AI_Movement>().enabled = true;
+                transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+    }
+
+
 }

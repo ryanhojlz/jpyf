@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114161130695939336}
   - component: {fileID: 65439909755101356}
   - component: {fileID: 54890307347345768}
+  - component: {fileID: 114748015187719390}
   m_Layer: 0
   m_Name: Pickup_mineral
   m_TagString: Untagged
@@ -126,9 +127,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65439909755101356
 BoxCollider:
@@ -154,3 +155,140 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+--- !u!114 &114748015187719390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243042196946166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad37f4fb6a2abe40bcbdca0bcd7bd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xAngle: 0
+  yAngle: 5
+  zAngle: 0
+  normalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.020965576
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19358718
+      value: 1.2358207
+      inSlope: 3.5753124
+      outSlope: 3.5753124
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7597726
+      value: 2.037082
+      inSlope: -0.013817313
+      outSlope: -0.013817313
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.53030616
+    - serializedVersion: 3
+      time: 1.2409465
+      value: 1.2376503
+      inSlope: -3.89054
+      outSlope: -3.89054
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5487772
+    - serializedVersion: 3
+      time: 1.4909973
+      value: -0.016838074
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.8463396
+      value: 1.0409253
+      inSlope: 2.0032096
+      outSlope: 2.0032096
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17529613
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.2119644
+      value: 1.2877924
+      inSlope: 0.04279449
+      outSlope: 0.04279449
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.6376588
+      value: 0.60475254
+      inSlope: -4.2803817
+      outSlope: -4.2803817
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.9592862
+      value: 0.025099508
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3.2599757
+      value: 0.32049504
+      inSlope: 1.9056104
+      outSlope: 1.9056104
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2375928
+      outWeight: 0.15362968
+    - serializedVersion: 3
+      time: 3.6674235
+      value: 0.7088342
+      inSlope: 0.030506708
+      outSlope: 0.030506708
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4.075432
+      value: 0.4546821
+      inSlope: -1.7361606
+      outSlope: -1.7361606
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.32327092
+      outWeight: 0.19864301
+    - serializedVersion: 3
+      time: 4.4946456
+      value: 0.05632725
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -44,11 +44,9 @@ public class PickupHandlerScript : MonoBehaviour
                     currentObject.GetComponent<Rigidbody>().isKinematic = false;
                     //currentObject.GetComponent<AI_Movement>().enabled = true;
                 }
-
-
                 throwDirection = this.transform.forward * 22;
                 currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
-                
+                currentObject = null;
             }
         }
 
@@ -59,28 +57,33 @@ public class PickupHandlerScript : MonoBehaviour
             if (!nearest_pickup_object)
                 return;
 
-            
-            if (currentObject)
-            {
-                // Drop the current object
-                currentObject.localPosition = Vector3.zero;
-                currentObject.parent = null;
 
-                // if its a item that can be picked up
-                if (currentObject.GetComponent<Pickup_Scripts>())
-                {
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
-                    currentObject.GetComponent<BoxCollider>().enabled = true;
-                }
-                // If its an AI object
-                if (currentObject.GetComponent<AI_Movement>())
-                {
-                    currentObject.GetComponent<NavMeshAgent>().enabled = true;
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
-                    currentObject.GetComponent<AI_Movement>().enabled = true;
-                }
+            //if (currentObject)
+            //{
+            //    // Drop the current object
+            //    currentObject.localPosition = Vector3.zero;
+            //    currentObject.parent = null;
 
-            }
+            //    // if its a item that can be picked up
+            //    if (currentObject.GetComponent<Pickup_Scripts>())
+            //    {
+            //        currentObject.GetComponent<Rigidbody>().isKinematic = false;
+            //        currentObject.GetComponent<BoxCollider>().enabled = true;
+            //    }
+            //    // If its an AI object
+            //    if (currentObject.GetComponent<AI_Movement>())
+            //    {
+            //        //currentObject.GetComponent<NavMeshAgent>().enabled = true;
+            //        currentObject.GetComponent<Rigidbody>().isKinematic = false;
+            //        //currentObject.GetComponent<AI_Movement>().enabled = true;
+            //        throwDirection = this.transform.forward * 22;
+            //        currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
+            //    }
+
+            //    currentObject = null;
+
+
+            //}
 
             // Nearest object gone // ReAssign           
             currentObject = nearest_pickup_object;
@@ -106,11 +109,9 @@ public class PickupHandlerScript : MonoBehaviour
             }
 
             
-
             // Parent cos picking up**
             currentObject.parent = this.transform;
             currentObject.transform.localPosition = offset;
-
 
             // Reset rotations
             currentObject.localEulerAngles = Vector3.zero;
@@ -124,6 +125,9 @@ public class PickupHandlerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (currentObject)
+            return;
+
         if (other.GetComponent<Pickup_Scripts>())
         {
             nearest_pickup_object = other.transform;

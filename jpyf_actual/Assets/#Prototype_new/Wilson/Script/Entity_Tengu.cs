@@ -368,7 +368,7 @@ public class Entity_Tengu : Entity_Unit
             this.transform.position += Dir * speed * Time.deltaTime;
         }
 
-        if ((_Pos - this.transform.position).magnitude < 1.0f)
+        if ((_Pos - this.transform.position).magnitude < 0.2f)
             return true;//If have reached target position, return true
 
         return false;

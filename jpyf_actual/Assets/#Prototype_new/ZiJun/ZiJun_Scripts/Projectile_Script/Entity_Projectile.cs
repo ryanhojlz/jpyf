@@ -80,7 +80,7 @@ public class Entity_Projectile : MonoBehaviour
        
         if (other.GetComponent<Entity_Unit>() && this.tag != other.tag)//Only if it is an Entity Unit
         {
-            Debug.Log("Take Damage");
+            //Debug.Log("Take Damage");
             other.GetComponent<Entity_Unit>().TakeDamage(m_dmg);
             Destroy(this.gameObject);
         }

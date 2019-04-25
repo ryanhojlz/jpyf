@@ -36,7 +36,7 @@ public class Unit_Dead_State : IState
         //m_user.transform.localEulerAngles = rota_te;
         if (CountDownTImer < 0f)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
             m_user.Dead();
         }
     }

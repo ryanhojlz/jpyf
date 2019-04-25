@@ -34,7 +34,7 @@ public class SpawnHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("adawdaw" + (spawnSpeed + handler.m_spawnMultiplier));
+        //Debug.Log("adawdaw" + (spawnSpeed + handler.m_spawnMultiplier));
         //Spawner
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
         if (!spawnEnemy)

@@ -178,10 +178,10 @@ public class Entity_Tengu : Entity_Unit
                 {
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed))// <- This portion will be used to fly to target position && tell if it has reached
                     {
-                        if (HoldUnit.transform.parent)//Being parented to a cart
-                        {
-                            HoldUnit.transform.parent = null;
-                        }
+                        //if (HoldUnit.transform.parent)//Being parented to a cart
+                        //{
+                        //    HoldUnit.transform.parent = null;
+                        //}
                         
                         HoldUnit.transform.parent = this.transform;
                         isGrabbing = true;

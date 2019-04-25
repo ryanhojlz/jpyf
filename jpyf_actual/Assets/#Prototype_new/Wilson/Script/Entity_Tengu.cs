@@ -16,6 +16,7 @@ public class Entity_Tengu : Entity_Unit
     bool returnTo = false;
     bool moveRight = false;
     bool isGrabbing = false;
+    bool ReturnToOrigin = false;
 
     //Variables////////////////////////
     public float flyspeed = 10f;
@@ -70,15 +71,40 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
+        if ((!GetTarget() || !GetTarget().gameObject.activeSelf) && AttackPlayerSeq == AtkPlayer.GRAB)
+        {
+            Reset(false);
+        }
+
         if (HoldUnit)
         {
             if (HoldUnit)
             {
                 if (HoldUnit.transform.parent)
                 {
-                    if (HoldUnit.transform.parent != this.transform)
+                    if (HoldUnit.transform.parent.GetComponent<Entity_Tengu>())
                     {
-                        HoldUnit = null;
+                        if (HoldUnit.transform.parent != this.transform)
+                        {
+                            //Debug.Log(this.name + " : " + HoldUnit);
+                            HoldUnit = null;
+
+                            //if (HoldUnit)
+                            //{
+                            //    HoldUnit.transform.parent = null; // Unparent
+                            //    HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
+                            //}
+                            //HoldUnit = null;
+                            //SetStillAttacking(false);
+                            //SetTarget(null);
+                            //AttackPlayerSeq = AtkPlayer.GRAB;
+                            ////this.transform.position = GetOriginalPosition();
+                            //isGrabbing = false;
+                            //SetInAttackRange(false);
+                            //isAttacking = false;
+
+                            Reset(false);
+                        }
                     }
                 }
             }
@@ -91,7 +117,7 @@ public class Entity_Tengu : Entity_Unit
         {
             if (GetTarget().tag == "Player2")
             {
-                isGrabbing = true;
+                //isGrabbing = true;
                 if (GetTarget().gameObject && GetTarget().gameObject.activeSelf)
                     HoldUnit = GetTarget().gameObject;
             }
@@ -101,27 +127,53 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
+        if (ReturnToOrigin)
+        {
+            if (FlyToTarget(GetOriginalPosition(), flyspeed))
+            {
+                SetStillAttacking(false);
+                ReturnToOrigin = false;
+            }
+        }
+
         //Debug.Log("This one : " + this.name + " : " + GetTarget());
         //Debug.Log("This one : " + this.name + " : isGrabbing - " + isGrabbing);
 
         if ((!HoldUnit || !HoldUnit.activeSelf) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
-            if (HoldUnit)
-            {
-                HoldUnit.transform.parent = null; // Unparent
-                HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
-            }
-            HoldUnit = null;
-            SetStillAttacking(false);
-            SetTarget(null);
-            AttackPlayerSeq = AtkPlayer.GRAB;
-            this.transform.position = GetOriginalPosition();
-            isGrabbing = false;
-            SetInAttackRange(false);
-            isAttacking = false;
+            //if (HoldUnit)
+            //{
+            //    HoldUnit.transform.parent = null; // Unparent
+            //    HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
+            //}
+            //HoldUnit = null;
+            //SetStillAttacking(false);
+            //SetTarget(null);
+            //AttackPlayerSeq = AtkPlayer.GRAB;
+            ////this.transform.position = GetOriginalPosition();
+            //isGrabbing = false;
+            //SetInAttackRange(false);
+            //isAttacking = false;
 
-            GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
+            //GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
+            Reset(true);
         }
+
+        //if (!HoldUnit)//This will run if it used to be grabbing something but now not
+        //{
+        //    if (HoldUnit)
+        //    {
+        //        HoldUnit.transform.parent = null; // Unparent
+        //        HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
+        //    }
+        //    HoldUnit = null;
+        //    SetStillAttacking(false);
+        //    SetTarget(null);
+        //    AttackPlayerSeq = AtkPlayer.GRAB;
+        //    this.transform.position = GetOriginalPosition()
+        //    SetInAttackRange(false);
+        //    isAttacking = false;
+        //}
     }
 
     public override void Attack()
@@ -148,6 +200,30 @@ public class Entity_Tengu : Entity_Unit
     }
 
     //Tengu Only Function
+
+    private void Reset(bool Grope)
+    {
+        if (HoldUnit)
+        {
+            HoldUnit.transform.parent = null; // Unparent
+            HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
+        }
+        HoldUnit = null;
+        //SetStillAttacking(false);
+        SetTarget(null);
+        AttackPlayerSeq = AtkPlayer.GRAB;
+        //this.transform.position = GetOriginalPosition();
+        isGrabbing = false;
+        SetInAttackRange(false);
+        isAttacking = false;
+        ReturnToOrigin = true;
+
+        if (Grope)
+        {
+            GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
+            SetStillAttacking(false);
+        }
+    }
 
     Vector3 GetOriginalPosition()
     {
@@ -196,16 +272,23 @@ public class Entity_Tengu : Entity_Unit
                 {
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed))// <- This portion will be used to fly to target position && tell if it has reached
                     {
-                        ////if (HoldUnit.transform.parent)//Being parented to a cart
-                        ////{
-                        ////    HoldUnit.transform.parent = null;
-                        ////}
-                        //Debug.Log("HIIIIIIIII");
+                        if (HoldUnit.transform.parent)//Being parented to a cart
+                        {
+                            if (!HoldUnit.transform.parent.GetComponent<Entity_Tengu>())
+                            {
+                                HoldUnit.transform.parent = null;
+                                
+                            }
+                        }
+
+                        isGrabbing = true;
                         HoldUnit.transform.parent = this.transform;
-                        
+
                         HoldUnit.GetComponent<Rigidbody>().isKinematic = true;
                         GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(this.transform);
                         AttackPlayerSeq = AtkPlayer.POSITIONING;
+                        //Debug.Log("HIIIIIIIII");
+
                     }
 
                     if (this.transform.childCount > 0)

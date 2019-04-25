@@ -30,6 +30,6 @@ public class ItemAnimation : MonoBehaviour
         this.gameObject.transform.position = Bounce;
         //if(bounceTimer > 5)
         //    this.gameObject.transform.position = lighterBounce;
-        Debug.Log(this.gameObject.transform.position);
+        //Debug.Log(this.gameObject.transform.position);
     }
 }

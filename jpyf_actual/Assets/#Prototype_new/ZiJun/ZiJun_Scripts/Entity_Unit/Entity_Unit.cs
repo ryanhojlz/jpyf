@@ -266,7 +266,8 @@ public class Entity_Unit : MonoBehaviour
             {
                 if (UnitsInRange[i].transform.parent != null)
                 {
-                    if (UnitsInRange[i].transform.parent != this.transform)
+                    //if (UnitsInRange[i].transform.parent != this.transform)
+                    if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
                     {
                         continue;
                     }

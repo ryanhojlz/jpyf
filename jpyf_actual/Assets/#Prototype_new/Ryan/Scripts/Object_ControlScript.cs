@@ -90,7 +90,7 @@ public class Object_ControlScript : MonoBehaviour
         // Modify velocity
         tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
 
-   
+
         movedir = CameraObj.transform.TransformDirection(movedir);
 
         if (movedir != Vector3.zero)
@@ -127,6 +127,10 @@ public class Object_ControlScript : MonoBehaviour
         {
             CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+        }
+        if (Gropper)
+        {
+            isPushingCart = false;
         }
 
         //CurrentObj.transform.position += movedir * Time.deltaTime;

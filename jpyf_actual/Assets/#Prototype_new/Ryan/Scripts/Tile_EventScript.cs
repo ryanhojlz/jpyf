@@ -10,6 +10,7 @@ public class Tile_EventScript : MonoBehaviour
     public Stats_ResourceScript handler;
     public Light m_lightObj = null;
     public bool b_eventStart = false;
+    bool b_dimlights = false;
 
     // Use this for initialization
     void Start ()
@@ -30,16 +31,32 @@ public class Tile_EventScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        
+        Lights_Update();
 	}
 
     void Lights_Update()
     {
-        if (m_lightObj.intensity > 0)
+        // Update the lights so the players can tell something is there
+
+        if (!b_dimlights)
         {
-            m_lightObj.intensity -= 1 * Time.deltaTime;
-            
+            m_lightObj.intensity -= 2 * Time.deltaTime;
+            if (m_lightObj.intensity <= 0)
+            {
+                b_dimlights = true;
+            }
         }
+        else if (b_dimlights)
+        {
+            m_lightObj.intensity += 2 * Time.deltaTime;
+            if (m_lightObj.intensity >= 5)
+            {
+                b_dimlights = false;
+            }
+        }
+
+
+        
         
     }
 }

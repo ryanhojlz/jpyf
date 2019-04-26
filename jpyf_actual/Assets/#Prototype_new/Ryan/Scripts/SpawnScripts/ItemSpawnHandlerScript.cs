@@ -15,6 +15,7 @@ public class ItemSpawnHandlerScript : MonoBehaviour
     int location = 0;
     int itemCount = 0;
 
+    public bool SpawnItems = false;
     // Use this for initialization
 	void Start ()
     {
@@ -28,6 +29,8 @@ public class ItemSpawnHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (!SpawnItems)
+            return;
         timer -= SpawnSpeed * Time.deltaTime;
         if (timer <= 0)
         {
@@ -56,6 +59,14 @@ public class ItemSpawnHandlerScript : MonoBehaviour
         Pickup_Scripts item = Instantiate(Items[item_type]);
         item.transform.position = position;
     }
+
+    public void SpawnItem(int id,Vector3 position)
+    {
+        item_type = id;
+        Pickup_Scripts item = Instantiate(Items[item_type]);
+        item.transform.position = position;
+    }
+
 
     public void SpawnItem_randomBatch()
     {

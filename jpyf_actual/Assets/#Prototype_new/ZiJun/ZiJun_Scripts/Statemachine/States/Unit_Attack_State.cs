@@ -43,8 +43,8 @@ public class Unit_Attack_State : IState
 
         //Debug.Log(m_user.GetTarget());
 
-        if (!m_user.GetStillAttacking())
-        m_user.Attack();//Attack if enemy is in range
+        if (!m_user.GetStillAttacking() && m_user.GetInAttackRange())
+            m_user.Attack();//Attack if enemy is in range
         
     }
 

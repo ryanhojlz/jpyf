@@ -31,7 +31,14 @@ public class Unit_Chase_State : IState
         //}
         if (!m_user.GetTarget())//if there is nothing within range, goes into roaming state
         {
-            m_user.ChangeState("roam");
+            if (!m_user.GetisIdle())
+            {
+                m_user.ChangeState("roam");
+            }
+            else
+            {
+                m_user.ChangeState("afk");
+            }
         }
         else
         {

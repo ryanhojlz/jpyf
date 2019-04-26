@@ -27,6 +27,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     Piority Piority_Unit = Piority.NONE;
 
+    [SerializeField]
+    bool idle = false;
+
     protected string priority = "";
 
     [SerializeField]
@@ -98,7 +101,8 @@ public class Entity_Unit : MonoBehaviour
     {
         
         AddState();
-        ChangeState("roam");
+        
+        ChangeState("chase");
 
         if (Piority_Unit == Piority.PAYLOAD)
         {
@@ -174,6 +178,7 @@ public class Entity_Unit : MonoBehaviour
     public bool GetInAttackRange() { return m_InAtkRange; }
     public Vector3 GetHitPoint() { return m_HitPoint; }
     public bool GetStillAttacking() { return stillAttacking; }
+    public bool GetisIdle() { return idle; }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
@@ -311,6 +316,7 @@ public class Entity_Unit : MonoBehaviour
         sm.AddState("dead", new Unit_Dead_State(this));
         sm.AddState("stun", new Unit_Stun_State(this));
         sm.AddState("roam", new Unit_Roam_State(this));
+        sm.AddState("afk", new Unit_AFK_State(this));
     }
 
     public virtual void SelfUpdate()//Use this to update units without overrideing original update

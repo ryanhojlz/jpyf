@@ -380,10 +380,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Unit: 0
   Piority_Unit: 2
+  idle: 0
   Health_Stat: 3
   Attack_Stat: 10
   Defence_Stat: 0
-  Attack_Speed_Stat: 1
+  Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 5
   Chase_Range_Stat: 10
   Projectile_Prefeb: {fileID: 0}

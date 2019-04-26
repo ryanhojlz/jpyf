@@ -2,15 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit_AFK_State : MonoBehaviour {
+public class Unit_AFK_State : IState
+{
+    Entity_Unit m_user;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Unit_AFK_State(Entity_Unit _user)
+    {
+        m_user = _user;
+    }
+
+    public void Enter()
+    {
+
+    }
+
+    public void Execute()
+    {
+        m_user.FindNearestInList();
+
+        if (m_user.GetTarget())//If target found go chase it
+        {
+            m_user.ChangeState("chase");
+        }
+    }
+
+    public void Exit()
+    {
+
+    }
+
 }

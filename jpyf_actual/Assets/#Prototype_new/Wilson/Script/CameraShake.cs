@@ -6,21 +6,34 @@ public class CameraShake : MonoBehaviour
 {
     public CameraShake cameraShake;
     Vector3 originalPos;
+    bool initing = false;
 
     // Use this for initialization
     void Start()
     {
-        originalPos = transform.localPosition;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if (!initing)
+        {
+            initing = true;
+            originalPos = cameraShake.transform.localPosition;
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
         {
             StartCoroutine(cameraShake.Shake(.4f, .4f));
         }
     }
+
+    public void ShakeCam()
+    {
+        StartCoroutine(cameraShake.Shake(.4f, .5f));
+    }
+
 
     IEnumerator Shake (float duration, float magnitude)
     {

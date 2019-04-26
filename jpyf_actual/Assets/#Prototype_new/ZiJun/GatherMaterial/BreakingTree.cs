@@ -46,7 +46,7 @@ public class BreakingTree : MonoBehaviour
     {
         if (Player)
         {
-            //GameObject.Find("QTE").GetComponent<Slider>().QTEStart();
+            GameObject.Find("QTE_Collecting_Object").GetComponent<Mini_Game>().QTEstart();
             ItemSpawnHandlerScript tempObj = GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>();
             tempObj.SpawnItem(this.gameObject.transform.position);
             Destroy(this.gameObject);

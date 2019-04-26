@@ -17,7 +17,7 @@ public class MainMenuButton : MonoBehaviour
     public GameObject settings;
     public GameObject credits;
 
-    public GameObject highlighted;
+    //public GameObject highlighted;
 
     public Canvas Titlescreencanvas;
     public Canvas Mainmenucanvas;
@@ -27,6 +27,13 @@ public class MainMenuButton : MonoBehaviour
     GameObject text2;
     GameObject text3;
     GameObject text4;
+
+    Vector3 originalPos;
+    Vector3 originalPos2;
+    Vector3 originalPos3;
+    Vector3 originalPos4;
+
+    float optionOffset = 100;
 
     public bool TitlescreenDisplay = true;
 
@@ -46,8 +53,11 @@ public class MainMenuButton : MonoBehaviour
         text2 = GameObject.Find("Text2");
         text3 = GameObject.Find("Text3");
         text4 = GameObject.Find("Text4");
+        originalPos = buttons[0].transform.position;
+        originalPos2 = buttons[1].transform.position;
+        originalPos3 = buttons[2].transform.position;
+        originalPos4 = buttons[3].transform.position;
         UnityEngine.XR.XRSettings.showDeviceView = false;
-
     }
 
     // Update is called once per frame
@@ -60,9 +70,10 @@ public class MainMenuButton : MonoBehaviour
         text3.SetActive(false);
         text4.SetActive(false);
         MessageDisplay();
-        highlighted.gameObject.transform.position = buttons[indexX/*, indexY*/].gameObject.transform.position;
+        SelectedOptions();
+        //highlighted.gameObject.transform.position = buttons[indexX/*, indexY*/].gameObject.transform.position;
 
-        highlighted.transform.position = new Vector3(buttons[indexX].transform.position.x + ((buttons[indexX].GetComponent<RectTransform>().rect.width * buttons[indexX].transform.lossyScale.x * 0.5f)) + (highlighted.GetComponent<RectTransform>().rect.width * highlighted.transform.lossyScale.x * 0.5f), buttons[indexX].transform.position.y, buttons[indexX].transform.position.z);
+        //highlighted.transform.position = new Vector3(buttons[indexX].transform.position.x + ((buttons[indexX].GetComponent<RectTransform>().rect.width * buttons[indexX].transform.lossyScale.x * 0.5f)) + (highlighted.GetComponent<RectTransform>().rect.width * highlighted.transform.lossyScale.x * 0.5f), buttons[indexX].transform.position.y, buttons[indexX].transform.position.z);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveUp();
@@ -100,6 +111,23 @@ public class MainMenuButton : MonoBehaviour
             }
         }
 
+        if (originalPos != buttons[0].transform.position && buttons[indexX] != buttons[0])
+        {
+            buttons[0].transform.position = originalPos;
+        }
+        if (originalPos != buttons[1].transform.position && buttons[indexX] != buttons[1])
+        {
+            buttons[1].transform.position = originalPos2;
+        }
+        if (originalPos != buttons[2].transform.position && buttons[indexX] != buttons[2])
+        {
+            buttons[2].transform.position = originalPos3;
+        }
+        if (originalPos != buttons[3].transform.position && buttons[indexX] != buttons[3])
+        {
+            buttons[3].transform.position = originalPos4;
+        }
+
         //Debug.Log(TitlescreenDisplay);
     }
 
@@ -125,6 +153,46 @@ public class MainMenuButton : MonoBehaviour
     {
         if (indexX < 3)
             indexX++;
+    }
+
+    public void SelectedOptions()
+    {
+        if (TitlescreenDisplay)
+            return;
+
+        Vector3 currButtonPos = buttons[indexX].transform.position;
+
+        switch (buttons[indexX/*, indexY*/].gameObject.name)
+        {
+            case "coopvsai":
+                {
+                    if (buttons[indexX].transform.position.x < originalPos.x + optionOffset)
+                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                }
+                break;
+
+            case "pvp":
+                {
+                    if (buttons[indexX].transform.position.x < originalPos2.x + optionOffset)
+                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                }
+                break;
+
+            case "settings":
+                {
+                    if (buttons[indexX].transform.position.x < originalPos3.x + optionOffset)
+                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                }
+                break;
+
+            case "credits":
+                {
+                    if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
+                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                }
+                break;
+        }
+
     }
 
     public void EnterSelected()
@@ -176,7 +244,6 @@ public class MainMenuButton : MonoBehaviour
             case "coopvsai":
                 {
                     text1.SetActive(true);
-
                 }
                 break;
 

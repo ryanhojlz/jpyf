@@ -7,6 +7,7 @@ public class SpiritPickupScript : GrabbableObject
     public Stats_ResourceScript handler = null;
     public Transform lanternSpot = null;
     public bool grabbedOnce = false;
+    
 
     private void Start()
     {

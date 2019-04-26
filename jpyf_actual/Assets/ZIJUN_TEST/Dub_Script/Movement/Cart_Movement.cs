@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Cart_Movement : MonoBehaviour
 {
+    public static Cart_Movement instance = null;
+
     [SerializeField]
     Vector3 waypoint;
 
@@ -26,6 +28,18 @@ public class Cart_Movement : MonoBehaviour
     //For checking purposes
     Vector3 PlayerPosition_Without_y;
     Vector3 CartPosition_Without_y;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {

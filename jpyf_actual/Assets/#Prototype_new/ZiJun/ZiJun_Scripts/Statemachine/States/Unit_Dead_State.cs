@@ -11,7 +11,7 @@ public class Unit_Dead_State : IState
     //float y_rota_te = 0;
     //float x_rota_te = 0;
     Vector3 deadpos = Vector3.zero;
-
+    bool b_spawnOnce = false;
     public Unit_Dead_State(Entity_Unit _user)
     {
         m_user = _user;
@@ -32,7 +32,11 @@ public class Unit_Dead_State : IState
         //x_rota_te -= 0.1f;
         //rota_te.y = y_rota_te;
         //rota_te.x = x_rota_te;
-
+        if (!b_spawnOnce)
+        {
+            GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>().SpawnItem(0, m_user.transform.position);
+            b_spawnOnce = true;
+        }
         //m_user.transform.localEulerAngles = rota_te;
         if (CountDownTImer < 0f)
         {

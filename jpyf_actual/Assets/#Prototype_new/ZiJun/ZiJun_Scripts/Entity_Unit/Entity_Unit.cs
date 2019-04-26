@@ -96,6 +96,7 @@ public class Entity_Unit : MonoBehaviour
     }
     void Start ()
     {
+        
         AddState();
         ChangeState("roam");
 

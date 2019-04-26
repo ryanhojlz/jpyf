@@ -47,7 +47,6 @@ public class SpawnHandlerScript : MonoBehaviour
             // spawn object
             GameObject obj = Instantiate(ObjectList[Random.Range(0,ObjectList.Count)].gameObject);
             obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
-
             timer = timerReference;
         }
 

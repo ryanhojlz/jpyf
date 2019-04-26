@@ -113,6 +113,12 @@ public class Entity_Unit : MonoBehaviour
             priority = "Player2";//Tag controller player
         }
 
+        if (Random.Range(0f, 1f) < 0.5f)
+        {
+            idle = true;
+        }
+       
+
         SelfStart();
     }
 	

@@ -22,8 +22,14 @@ public class Entity_Tengu : Entity_Unit
     public float flyspeed = 10f;
     GameObject HoldUnit = null;
 
+    bool TouchedUnit = false;
+    Stats_ResourceScript handler = null;
+
     float StayDuration = 2f;
     float NextTime = 0f;
+
+    float attackTimer = 0f;
+    float previousAttackTimer = 0f;
 
     enum AtkPlayer
     {
@@ -52,8 +58,10 @@ public class Entity_Tengu : Entity_Unit
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         UnitThatProduceSound.clip = AttackSound;
 
+        handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
 
         this.transform.position = GetOriginalPosition();//Vector3(this.transform.position.x, transform.parent.position.y + this.GetAttackRangeStat(), this.transform.position.z)
+        attackTimer = 1 / this.GetAttackSpeedStat();
     }
 
     public override void SelfUpdate()
@@ -71,8 +79,9 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
-        if ((!GetTarget() || !GetTarget().gameObject.activeSelf) && AttackPlayerSeq == AtkPlayer.GRAB)
+        if ((!GetTarget() || !GetTarget().gameObject.activeSelf) && AttackPlayerSeq == AtkPlayer.GRAB && sm.GetCurrentStateName() == "attack")
         {
+            Debug.Log("Why you constantly entering");
             Reset(false);
         }
 
@@ -131,6 +140,7 @@ public class Entity_Tengu : Entity_Unit
         {
             if (FlyToTarget(GetOriginalPosition(), flyspeed))
             {
+                Debug.Log("Back");
                 SetStillAttacking(false);
                 ReturnToOrigin = false;
             }
@@ -208,6 +218,7 @@ public class Entity_Tengu : Entity_Unit
             HoldUnit.transform.parent = null; // Unparent
             HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
         }
+        TouchedUnit = false;
         HoldUnit = null;
         //SetStillAttacking(false);
         SetTarget(null);
@@ -270,7 +281,7 @@ public class Entity_Tengu : Entity_Unit
         {
             case AtkPlayer.GRAB:
                 {
-                    if (FlyToTarget(HoldUnit.transform.position, flyspeed))// <- This portion will be used to fly to target position && tell if it has reached
+                    if (FlyToTarget(HoldUnit.transform.position, flyspeed) || TouchedUnit)// <- This portion will be used to fly to target position && tell if it has reached
                     {
                         if (HoldUnit.transform.parent)//Being parented to a cart
                         {
@@ -311,6 +322,12 @@ public class Entity_Tengu : Entity_Unit
                 break;
             case AtkPlayer.HOVER:
                 {
+                    if (previousAttackTimer + attackTimer < Time.time)
+                    {
+                        previousAttackTimer = Time.time;
+                        handler.Player2_TakeDmg((int)this.GetAttackStat());
+                    }
+
                     if (FlyToLeft_Right(moveRight))
                     {
                         moveRight = !moveRight;
@@ -335,7 +352,7 @@ public class Entity_Tengu : Entity_Unit
                     {
                         if (FlyToTarget(GetTarget().position, flyspeed))
                         {
-                            GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Lantern_TakeDmg((int)this.GetAttackStat());
+                            handler.Lantern_TakeDmg((int)this.GetAttackStat());
                             NextTime = Time.time + StayDuration;//Setting the timer for tengu to stay on the spot its attacking
                             AttackPayloadSeq = AtkPayload.GOBACK;
                         }
@@ -445,6 +462,22 @@ public class Entity_Tengu : Entity_Unit
         this.transform.position += new Vector3(0, (Mathf.Sin(Time.time % 3.45f )) * 0.05f, 0);
 
         return false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player2")
+        {
+            TouchedUnit = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player2")
+        {
+            TouchedUnit = false;
+        }
     }
 }
 

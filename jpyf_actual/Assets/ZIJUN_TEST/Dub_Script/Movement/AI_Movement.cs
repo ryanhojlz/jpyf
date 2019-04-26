@@ -11,6 +11,8 @@ public class AI_Movement : MonoBehaviour
     [SerializeField]
     Transform m_targetPos;
 
+    Vector3 m_moveToPosition = Vector3.zero;
+
     NavMeshAgent m_agent;
 
     Vector3 m_PrevForward = Vector3.zero;
@@ -37,6 +39,7 @@ public class AI_Movement : MonoBehaviour
             if (Self.GetComponent<Entity_Unit>().GetTarget())
             {
                 //Debug.Log(Self.GetComponent<Entity_Unit>().GetTarget().name);
+                //m_targetPos = Self.GetComponent<Entity_Unit>().GetTarget();//Finding Self own target
             }
             m_targetPos = Self.GetComponent<Entity_Unit>().GetTarget();//Finding Self own target
         }
@@ -45,6 +48,10 @@ public class AI_Movement : MonoBehaviour
         if (m_targetPos)
         {
             m_agent.SetDestination(m_targetPos.position);//Have to constantly changing he unit movement
+        }
+        else//If the target is null, go to a set position
+        {
+            m_agent.SetDestination(m_moveToPosition);
         }
 
         if (m_agent.isStopped && m_targetPos)
@@ -77,6 +84,11 @@ public class AI_Movement : MonoBehaviour
     void SetTarget(Transform _targetPos)
     {
         m_targetPos = _targetPos;
+    }
+
+    public void SetTargetPosition(Vector3 _pos)
+    {
+        m_moveToPosition = _pos;
     }
 
     //bool CheckForRotation()

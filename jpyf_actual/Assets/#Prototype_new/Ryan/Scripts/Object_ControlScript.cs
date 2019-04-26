@@ -124,7 +124,7 @@ public class Object_ControlScript : MonoBehaviour
 
         if (Gropper)
         {
-            handler.Player2_TakeDmg(1);
+            //handler.Player2_TakeDmg(1);
             return;
         }
         // Movement

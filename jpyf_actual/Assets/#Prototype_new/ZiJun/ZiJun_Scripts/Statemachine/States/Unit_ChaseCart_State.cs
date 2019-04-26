@@ -23,10 +23,10 @@ public class Unit_ChaseCart_State : IState
         {
             m_user.ChangeState("chase");
         }
-        else if (!m_user.GetTarget())
-        {
-            m_user.FindPayload();//If there is no target && no units in list, Chase cart
-        }
+        //else if (!m_user.GetTarget())
+        //{
+        //    m_user.FindPayload();//If there is no target && no units in list, Chase cart
+        //}
 
     }
 

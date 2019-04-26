@@ -25,9 +25,13 @@ public class Unit_Chase_State : IState
         //    m_user.ChangeState("chase_cart");
         //}
 
-        if (m_user.InRangeCount() <= 0)//if there is nothing within range, goes to chase cart
+        //if (m_user.InRangeCount() <= 0)//if there is nothing within range, goes to chase cart
+        //{
+        //    m_user.ChangeState("chase_cart");
+        //}
+        if (!m_user.GetTarget())//if there is nothing within range, goes into roaming state
         {
-            m_user.ChangeState("chase_cart");
+            m_user.ChangeState("roam");
         }
         else
         {

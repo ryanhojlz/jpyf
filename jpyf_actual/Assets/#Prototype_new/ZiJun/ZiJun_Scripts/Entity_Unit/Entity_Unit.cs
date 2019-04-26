@@ -97,7 +97,7 @@ public class Entity_Unit : MonoBehaviour
     void Start ()
     {
         AddState();
-        ChangeState("chase_cart");
+        ChangeState("roam");
 
         if (Piority_Unit == Piority.PAYLOAD)
         {
@@ -306,9 +306,10 @@ public class Entity_Unit : MonoBehaviour
     {
         sm.AddState("attack", new Unit_Attack_State(this));
         sm.AddState("chase", new Unit_Chase_State(this));
-        sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
+        //sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
         sm.AddState("dead", new Unit_Dead_State(this));
         sm.AddState("stun", new Unit_Stun_State(this));
+        sm.AddState("roam", new Unit_Roam_State(this));
     }
 
     public virtual void SelfUpdate()//Use this to update units without overrideing original update
@@ -375,6 +376,19 @@ public class Entity_Unit : MonoBehaviour
         if (this.transform.parent)
             if (this.transform.parent.GetComponent<AI_Movement>())
                 this.transform.parent.GetComponent<AI_Movement>().StartMoving();
+    }
+
+    public void MoveToTargetedPosition(Vector3 _target)
+    {
+        if (!this.transform.parent)
+            return;
+
+        if (!this.transform.parent.GetComponent<AI_Movement>())
+            return;
+
+        Vector3 MoveTo = _target;
+        MoveTo.y = this.transform.parent.transform.position.y;
+        this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
     }
 
     public void ChangeAgentPosition(Vector3 pos)

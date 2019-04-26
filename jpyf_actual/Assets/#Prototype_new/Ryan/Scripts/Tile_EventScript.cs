@@ -13,10 +13,14 @@ public class Tile_EventScript : MonoBehaviour
     public bool b_eventStart = false;
     bool b_dimlights = false;
 
+    public float f_spawnTimer = 0;
+
+    public int i_shrineHungerMeter = 0;
+
+    // Object List
     public List<Transform> m_spawnList;
     public List<GameObject> enemy_list;
-
-
+    
     // Use this for initialization
     void Start ()
     {
@@ -34,8 +38,9 @@ public class Tile_EventScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        // Update the light
         Lights_Update();
-
+        Tile_EventStart();
         funcDebugg();
 	}
 
@@ -62,6 +67,35 @@ public class Tile_EventScript : MonoBehaviour
         
     }
 
+    void Tile_EventStart()
+    {
+        // Event Start
+        if (b_eventStart)
+        {
+            // Start spawning mobs
+            f_spawnTimer -= 1 * Time.deltaTime;
+            if (f_spawnTimer <= 0)
+            {
+                f_spawnTimer = 9;
+                SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+            }
+            else
+            {
+                
+            }
+
+        }
+        else // If not event Start
+        {
+            
+        }
+
+
+        if (i_shrineHungerMeter >= 2)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void SpawnEnemy(int id, Vector3 pos)
     {
@@ -69,6 +103,24 @@ public class Tile_EventScript : MonoBehaviour
         go.GetComponent<NavMeshAgent>().Warp(pos);
     }
 
+    void SpawnEnemyRandomLocation(int id)
+    {
+        GameObject go = Instantiate(enemy_list[id].gameObject);
+        go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+
+    }
+
+    public void Start_Event()
+    {
+        if (b_eventStart)
+            return;
+        b_eventStart = true;
+    }
+
+    public void UpShrineHunger(int value)
+    {
+        i_shrineHungerMeter += value;
+    }
 
     void funcDebugg()
     {

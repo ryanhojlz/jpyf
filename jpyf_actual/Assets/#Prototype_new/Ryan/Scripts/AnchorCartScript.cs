@@ -12,7 +12,7 @@ public class AnchorCartScript : MonoBehaviour
     bool b_startAnchoring = false;
     //
     Object_ControlScript handler_ctrl = null;
-
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -20,9 +20,6 @@ public class AnchorCartScript : MonoBehaviour
         m_anchorPoint = transform.position;
         m_anchorPoint.y = 0;
         handler_ctrl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
-
-
-
     }
 	
 	// Update is called once per frame
@@ -30,15 +27,18 @@ public class AnchorCartScript : MonoBehaviour
     {
         if (b_startAnchoring)
         {
-            
+            transform.parent.GetComponent<Tile_EventScript>().Start_Event();
+            handler_ctrl.isPushingCart = false;
         }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != m_payLoad)
-            return;
-
-        b_startAnchoring = true;
+        if (other.gameObject == m_payLoad.gameObject)
+        {
+            Debug.Log("Hi");
+            b_startAnchoring = true;
+            m_payLoad.transform.position = m_anchorPoint;
+        }
     }
 }

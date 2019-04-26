@@ -11,7 +11,9 @@ public class FeedbackHandler : MonoBehaviour
     float rotateTime = 0f;                    //
     float previousTime = 0f;                  //
                                               //
-    float TotalRotateTime = 0.2f;             //
+                                              //
+    public float CartRotateSpeed = 10;        //
+    public float TotalRotateTime = 0.2f;      //
                                               //
     enum TurnSEQ                              //
     {                                         //
@@ -30,7 +32,7 @@ public class FeedbackHandler : MonoBehaviour
                                               //
     GameObject payLoad = null;                //
     //For hitting payload feedback//////////////
-
+   
 
     // Use this for initialization
     void Start()
@@ -44,6 +46,7 @@ public class FeedbackHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rotateTime = TotalRotateTime / 4;
         //For hitting payload feedback//////////
         if (Input.GetKeyDown(KeyCode.K))      //
         {                                     //
@@ -63,7 +66,7 @@ public class FeedbackHandler : MonoBehaviour
         {
             case TurnSEQ.TurnLeft:
                 {
-                    payLoad.transform.Rotate(Vector3.forward, 10 * Time.deltaTime);
+                    payLoad.transform.Rotate(Vector3.forward, CartRotateSpeed * Time.deltaTime);
 
                     if (previousTime + rotateTime < Time.time)
                     {
@@ -76,7 +79,7 @@ public class FeedbackHandler : MonoBehaviour
 
             case TurnSEQ.TurnRight:
                 {
-                    payLoad.transform.Rotate(Vector3.forward, -10 * Time.deltaTime);
+                    payLoad.transform.Rotate(Vector3.forward, -CartRotateSpeed * Time.deltaTime);
 
                     if (previousTime + rotateTime < Time.time)
                     {
@@ -95,11 +98,11 @@ public class FeedbackHandler : MonoBehaviour
                    
                     if (Previous == TurnSEQ.TurnLeft)
                     {
-                        payLoad.transform.Rotate(Vector3.forward, -10 * Time.deltaTime);
+                        payLoad.transform.Rotate(Vector3.forward, -CartRotateSpeed * Time.deltaTime);
                     }
                     else if (Previous == TurnSEQ.TurnRight)
                     {
-                        payLoad.transform.Rotate(Vector3.forward, 10 * Time.deltaTime);
+                        payLoad.transform.Rotate(Vector3.forward, CartRotateSpeed * Time.deltaTime);
                     }
 
                     if (previousTime + rotateTime < Time.time)

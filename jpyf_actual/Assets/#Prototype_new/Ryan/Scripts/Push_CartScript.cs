@@ -194,6 +194,8 @@ public class Push_CartScript : MonoBehaviour
     {
         if (m_ObjControl.Gropper)
             return;
+        
+
         if (other.gameObject.tag == "Player2")
         { 
             m_Player2 = other.transform;

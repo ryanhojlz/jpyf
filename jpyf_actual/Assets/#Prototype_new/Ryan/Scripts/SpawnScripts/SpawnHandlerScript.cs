@@ -37,27 +37,47 @@ public class SpawnHandlerScript : MonoBehaviour
         //Debug.Log("adawdaw" + (spawnSpeed + handler.m_spawnMultiplier));
         //Spawner
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
-        if (!spawnEnemy)
-            return;
-       timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
+        //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
 
-        if (timer <= 0)
+        if (spawnEnemy)
         {
-            spawnInt = Random.Range(0, SpawnLocation.Count);
-            // spawn object
-            GameObject obj = Instantiate(ObjectList[Random.Range(0,ObjectList.Count)].gameObject);
-            obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
-            timer = timerReference;
+            timer -= (spawnSpeed) * Time.deltaTime;
+            if (timer <= 0)
+            {
+                SpawnEnemyRandom(1);
+                //spawnInt = Random.Range(0, SpawnLocation.Count);
+                //// spawn object
+                //GameObject obj = Instantiate(ObjectList[Random.Range(0,ObjectList.Count)].gameObject);
+                //obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
+                //timer = timerReference;
+            }
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            spawnInt = Random.Range(0, SpawnLocation.Count);
+            SpawnEnemyRandom(1);
+            //spawnInt = Random.Range(0, SpawnLocation.Count);
 
-            // spawn object
-            GameObject obj = Instantiate(ObjectList[0].gameObject);
+            //// spawn object
+            //GameObject obj = Instantiate(ObjectList[0].gameObject);
 
-            obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
+            //obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
         }
 	}
+
+    void SpawnEnemyRandom(int count)
+    {
+        Debug.Log("Text is " + count + handler.i_num_enemies_spawn);
+        for (int i = 0; i < count + handler.i_num_enemies_spawn; ++i)
+        {
+            spawnInt = Random.Range(0, SpawnLocation.Count);
+            // spawn object
+            GameObject obj = Instantiate(ObjectList[Random.Range(0, ObjectList.Count)].gameObject);
+            obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
+            timer = timerReference;
+
+        }
+    }
 }

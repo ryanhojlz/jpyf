@@ -43,6 +43,8 @@ public class DrumGameScript : MonoBehaviour
     // 5 ticks = one buff lvl
     int buffticks = 0;
     int buffticksCap = 4;
+
+    Transform particleFeedback = null;
     
 
     // Counter way
@@ -67,13 +69,15 @@ public class DrumGameScript : MonoBehaviour
         m_beatIndicator_left = GameObject.Find("BeatIndicatorLeft").transform;
         m_beatIndicator_right = GameObject.Find("BeatIndicatorRight").transform;
 
+        particleFeedback = transform.GetChild(0);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         // Input shud come on top
-
         DebuggCodess();
 
         ActivityDetector();        
@@ -111,6 +115,8 @@ public class DrumGameScript : MonoBehaviour
             f_activity_timer = 10;
             OnOffUI(true);
 
+            // Play particle effect
+            particleFeedback.GetComponent<ParticleSystem>().Play();
             // When i sucessfull hit has been detected
             if (b_insideLeft)
             {
@@ -155,6 +161,11 @@ public class DrumGameScript : MonoBehaviour
         {
             Debug.Log("Running ");
             b_Hit_inGeneral = true;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("Running ");
+            particleFeedback.GetComponent<ParticleSystem>().Play();
         }
     }
 
@@ -277,6 +288,7 @@ public class DrumGameScript : MonoBehaviour
         {
             b_Right_StickHit = false;
             b_Hit_inGeneral = true;
+            
         }
 
         

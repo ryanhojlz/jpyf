@@ -606,8 +606,24 @@ public class MoveController : MonoBehaviour
         {
             this.GetComponent<RangeAttackScript>().SpawnBullet();
         }
+        if (GetButtonDown(MoveControllerHotkeys.buttonCross))
+        {
 
-        
+            if (!GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy)
+            {
+                GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy = true;
+            }
+            else if (GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy)
+            {
+                GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy = false;
+            }
+        }
+        if (GetButtonDown(MoveControllerHotkeys.buttonTriangle))
+        {
+            this.GetComponent<RangeAttackScript>().SpawnBullet();
+        }
+
+
     }
 
 

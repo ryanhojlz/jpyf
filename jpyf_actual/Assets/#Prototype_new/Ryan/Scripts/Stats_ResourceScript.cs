@@ -70,7 +70,7 @@ public class Stats_ResourceScript : MonoBehaviour
     // Lantern Light
     public Transform LanternLight = null;
 
-   
+    public int i_num_enemies_spawn = 0;
 
     float m_startTicking = 6;
 
@@ -264,8 +264,29 @@ public class Stats_ResourceScript : MonoBehaviour
         }
 
 
-            // Update Light component
-            LanternLight.GetComponent<Light>().intensity = 2.5f * ((float)m_LanternHp / (float)m_LanternHpCap);
+        if (m_LanternHp >= m_LanternHpCap * 0.9f)
+        {
+            i_num_enemies_spawn = 0;
+        }
+        else if (m_LanternHp >= m_LanternHpCap * 0.7)
+        {
+            i_num_enemies_spawn = 1;
+        }
+        else if (m_LanternHp >= m_LanternHpCap * 0.5)
+        {
+            i_num_enemies_spawn = 2;
+        }
+        else if (m_LanternHp >= m_LanternHpCap * 0.3)
+        {
+            i_num_enemies_spawn = 3;
+        }
+        
+
+
+
+
+        // Update Light component
+        LanternLight.GetComponent<Light>().intensity = 2.5f * ((float)m_LanternHp / (float)m_LanternHpCap);
     }
     
     public void Cart_TakeDmg(int damage)
@@ -314,11 +335,17 @@ public class Stats_ResourceScript : MonoBehaviour
     {
         switch (item.id)
         {
-            case 1:
+            case 1: // Souls
                 m_Souls += 20;
                 break;
-            case 2:
+            case 2: // Minerals
                 m_Minerals += 30;
+                break;
+            case 3: // Small Souls
+                m_Souls += 10;
+                break;
+            case 4:
+                m_Souls += 40;
                 break;
         }
 

@@ -10,6 +10,7 @@ public class Mini_Game : MonoBehaviour
     public GameObject Manager;
 
     bool isActiveQTE = false;
+    bool QTE_Completed = true;
 
     float timeLimit = 5f;
 
@@ -52,10 +53,20 @@ public class Mini_Game : MonoBehaviour
 
         currentTime -= Time.deltaTime;
         imgTimer.fillAmount = currentTime / maxTimeLimit;
+        img.fillAmount = sourceCurrentAmount / sourceMaxAmount;
+
+        if (imgTimer.fillAmount <= 0)
+        {
+            isActiveQTE = false;
+        }
+        else if (img.fillAmount >= 1)
+        {
+            isActiveQTE = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            sourceCurrentAmount += 1f;
+            sourceCurrentAmount += 5f;
         }
         
 	}

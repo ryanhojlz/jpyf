@@ -5,6 +5,7 @@ using UnityEngine;
 public class BreakingTree : MonoBehaviour
 {
     bool Player = false;
+    int SuccessAmount = 0;
     // Use this for initialization
     void Start()
     {

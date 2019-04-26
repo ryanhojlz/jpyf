@@ -30,6 +30,12 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     bool idle = false;
 
+    [SerializeField]
+    bool instantChasePlayer = false;
+
+    //Target Player Instant
+    Transform PlayerTransform = null;
+
     protected string priority = "";
 
     [SerializeField]
@@ -113,11 +119,12 @@ public class Entity_Unit : MonoBehaviour
             priority = "Player2";//Tag controller player
         }
 
+        PlayerTransform = GameObject.Find("PS4_Player").transform;
         //if (Random.Range(0f, 1f) < 0.5f)
         //{
         //    idle = true;
         //}
-       
+
 
         SelfStart();
     }
@@ -439,15 +446,24 @@ public class Entity_Unit : MonoBehaviour
 
     public void MoveToTargetedPosition(Vector3 _target)
     {
-        if (!this.transform.parent)
-            return;
+        if (!instantChasePlayer)
+        {
+            if (!this.transform.parent)
+                return;
 
-        if (!this.transform.parent.GetComponent<AI_Movement>())
-            return;
+            if (!this.transform.parent.GetComponent<AI_Movement>())
+                return;
 
-        Vector3 MoveTo = _target;
-        MoveTo.y = this.transform.parent.transform.position.y;
-        this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
+            Vector3 MoveTo = _target;
+            MoveTo.y = this.transform.parent.transform.position.y;
+            this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
+        }
+        else
+        {
+            Vector3 MoveTo = PlayerTransform.position;
+            MoveTo.y = this.transform.parent.transform.position.y;
+            this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
+        }
     }
 
     public void ChangeAgentPosition(Vector3 pos)
@@ -485,6 +501,11 @@ public class Entity_Unit : MonoBehaviour
     public void Stun()
     {
         this.sm.ChangeState("stun");
+    }
+
+    public bool GetinstantChasePlayer()
+    {
+        return instantChasePlayer;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -42,13 +42,13 @@ public class DayNightCycle : MonoBehaviour
         if ((sunRotation < 90 && sunRotation > 0) || (sunRotation > 270 && sunRotation < 360))
         {
             isDaytime = true;
-            Debug.Log("Daytime " + isDaytime);
+            //Debug.Log("Daytime " + isDaytime);
         }
 
         if (sunRotation > 90 && sunRotation < 270)
         {
             isDaytime = false;
-            Debug.Log("Night " + isDaytime);
+            //Debug.Log("Night " + isDaytime);
         }
     }
 

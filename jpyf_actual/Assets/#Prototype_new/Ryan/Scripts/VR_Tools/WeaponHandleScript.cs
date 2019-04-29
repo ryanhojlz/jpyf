@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class WeaponHandleScript : GrabbableObject
 {
-    public bool b_ToolReleased = false;
+    /*
+     * OCD vector is a reset vector for the object
+     * 
+     */
+
+
+    public bool b_ToolReleased = true;
     Vector3 localResetPos = Vector3.zero;
     Vector3 originalLocalAngles = Vector3.zero;
     public float timerToReset;
@@ -22,13 +28,17 @@ public class WeaponHandleScript : GrabbableObject
         {
             timerToReset += 1 * Time.deltaTime;
         }
+        else
+        {
+            timerToReset = 0;
+        }
         if (timerToReset >= 3.5f)
         {
             timerToReset = 0;
             this.transform.localPosition = localResetPos;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             this.transform.eulerAngles= originalLocalAngles;
-            b_ToolReleased = false;
+            //b_ToolReleased = false;
         }
     }
 

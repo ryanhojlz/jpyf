@@ -396,7 +396,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
     public void CheckPlayer2Dead()
     {
-        Debug.Log("Player dead " + playerDead);
+        //Debug.Log("Player dead " + playerDead);
         if (!playerDead)
         {
             // Half current lantern 

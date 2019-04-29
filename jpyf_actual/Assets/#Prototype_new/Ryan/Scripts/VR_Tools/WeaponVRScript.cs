@@ -17,10 +17,14 @@ public class WeaponVRScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Entity_Unit>())
+        if (!transform.parent.GetComponent<WeaponHandleScript>().b_ToolReleased)
         {
-            Debug.Log("Damage Taken");
-            other.GetComponent<Entity_Unit>().TakeDamage(damage);
+            if (other.GetComponent<Entity_Unit>())
+            {
+                Debug.Log("Damage Taken");
+                other.GetComponent<Entity_Unit>().TakeDamage(damage);
+            }
         }
+        
     }
 }

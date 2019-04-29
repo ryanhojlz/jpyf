@@ -69,7 +69,7 @@ public class SpawnHandlerScript : MonoBehaviour
 
     void SpawnEnemyRandom(int count)
     {
-        Debug.Log("Text is " + count + handler.i_num_enemies_spawn);
+        Debug.Log("Text is " + (count + handler.i_num_enemies_spawn));
         for (int i = 0; i < count + handler.i_num_enemies_spawn; ++i)
         {
             spawnInt = Random.Range(0, SpawnLocation.Count);

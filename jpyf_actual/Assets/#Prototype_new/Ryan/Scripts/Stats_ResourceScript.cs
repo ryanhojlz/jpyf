@@ -77,10 +77,21 @@ public class Stats_ResourceScript : MonoBehaviour
     // If player dies
     public bool playerDead = false;
 
+    //
+    public static Stats_ResourceScript Instance = null;
 
     // Use this for initialization
     void Start ()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         /// Resources
         soulText = GameObject.Find("Soul_Text").GetComponent<Text>();
         mineralText = GameObject.Find("Mineral_Text").GetComponent<Text>();

@@ -344,9 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01ccc5396f05f147ba85a1eff7b7e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eulerAngleX: 0
-  eulerAngleY: 0
-  eulerAngleZ: 0
+  sunRotation: 0
+  isDaytime: 0
 --- !u!114 &114885131066437728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,9 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01ccc5396f05f147ba85a1eff7b7e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eulerAngleX: 0
-  eulerAngleY: 0
-  eulerAngleZ: 0
+  sunRotation: 0
+  isDaytime: 0
 --- !u!135 &135150899803689872
 SphereCollider:
   m_ObjectHideFlags: 1

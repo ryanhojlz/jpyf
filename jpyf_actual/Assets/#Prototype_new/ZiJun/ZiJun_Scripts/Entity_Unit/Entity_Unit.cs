@@ -95,6 +95,7 @@ public class Entity_Unit : MonoBehaviour
 
     //For day night cycle
     DayNightCycle daynightInstance = null;
+    protected Stats_ResourceScript resource = null;
     // Use this for initialization
     private void Awake()
     {
@@ -113,6 +114,7 @@ public class Entity_Unit : MonoBehaviour
 
         SetChaseRangeStat(Chase_Range_Stat);
         ++Stats_ResourceScript.Instance.EnemyCount;
+        resource = Stats_ResourceScript.Instance;
 
     }
     void Start ()
@@ -317,6 +319,9 @@ public class Entity_Unit : MonoBehaviour
         {
             if (UnitsInRange[i].tag == "Player2")
             {
+                if (resource.m_P2_hp <= 0)
+                    continue;
+
                 if (UnitsInRange[i].transform.parent != null)
                 {
                     //if (UnitsInRange[i].transform.parent != this.transform)

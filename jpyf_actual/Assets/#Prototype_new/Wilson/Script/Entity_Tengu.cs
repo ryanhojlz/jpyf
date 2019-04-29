@@ -79,7 +79,7 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
-        if ((!GetTarget() || !GetTarget().gameObject.activeSelf) && AttackPlayerSeq == AtkPlayer.GRAB && sm.GetCurrentStateName() == "attack")
+        if ((!GetTarget() || !GetTarget().gameObject.activeSelf || resource.m_P2_hp <= 0) && AttackPlayerSeq == AtkPlayer.GRAB && sm.GetCurrentStateName() == "attack")
         {
             Debug.Log("Why you constantly entering");
             Reset(false);
@@ -149,7 +149,7 @@ public class Entity_Tengu : Entity_Unit
         //Debug.Log("This one : " + this.name + " : " + GetTarget());
         //Debug.Log("This one : " + this.name + " : isGrabbing - " + isGrabbing);
 
-        if ((!HoldUnit || !HoldUnit.activeSelf) && isGrabbing)//This will run if it used to be grabbing something but now not
+        if ((!HoldUnit || !HoldUnit.activeSelf || resource.m_P2_hp <= 0) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
             //if (HoldUnit)
             //{

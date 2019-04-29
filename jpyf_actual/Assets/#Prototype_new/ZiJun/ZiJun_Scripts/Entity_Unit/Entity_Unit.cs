@@ -112,12 +112,13 @@ public class Entity_Unit : MonoBehaviour
         atkcooldown = 1f / GetAttackSpeedStat();
 
         SetChaseRangeStat(Chase_Range_Stat);
+        ++Stats_ResourceScript.Instance.EnemyCount;
+
     }
     void Start ()
     {
-        ++Stats_ResourceScript.Instance.EnemyCount;
         AddState();
-        
+
         ChangeState("chase");
 
         if (Piority_Unit == Piority.PAYLOAD)

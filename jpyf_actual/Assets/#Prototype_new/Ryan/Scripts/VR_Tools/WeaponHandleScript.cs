@@ -20,6 +20,7 @@ public class WeaponHandleScript : GrabbableObject
     {
         localResetPos = this.transform.localPosition;
         originalLocalAngles = this.transform.eulerAngles;
+        b_ToolReleased = true;
     }
 
     private void Update()

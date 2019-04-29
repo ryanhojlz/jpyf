@@ -25,6 +25,12 @@ public class AI_Movement : MonoBehaviour
 
     Vector3 tempThis = new Vector3();
     Vector3 tempTarget = new Vector3();
+
+    private void Awake()
+    {
+        transform.parent = GameObject.Find("DebugParent").transform;
+    }
+
     void Start()
     {
        m_agent = this.GetComponent<NavMeshAgent>();

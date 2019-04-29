@@ -7,39 +7,41 @@ public class DayNightCycle : MonoBehaviour
     //float dayTimeTimer;
     //float nightTimeTimer;
     //bool isChangingDayNight;
-    bool isDay;
     [SerializeField]
     float eulerAngleX;
     [SerializeField]
     float eulerAngleY;
     [SerializeField]
     float eulerAngleZ;
-    [SerializeField]
-    float eulerAngleXm;
-    [SerializeField]
-    float eulerAngleYm;
-    [SerializeField]
-    float eulerAngleZm;
     GameObject Sun;
     GameObject Moon;
+    bool isDaytime;
+
+    public static DayNightCycle Instance = null;
 
     // Start is called before the first frame update
     void Start()
     {
         //isChangingDayNight = false;
-        Sun = GameObject.Find("Sun");
-        Moon = GameObject.Find("Moon");
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        eulerAngleX = Sun.transform.localEulerAngles.x;
+        eulerAngleX = Sun.transform.eulerAngles.x;
         eulerAngleY = Sun.transform.localEulerAngles.y;
         eulerAngleZ = Sun.transform.localEulerAngles.z;
-        eulerAngleXm = Moon.transform.localEulerAngles.x;
-        eulerAngleYm = Moon.transform.localEulerAngles.y;
-        eulerAngleZm = Moon.transform.localEulerAngles.z;
+        //eulerAngleXm = Moon.transform.localEulerAngles.x;
+        //eulerAngleYm = Moon.transform.localEulerAngles.y;
+        //eulerAngleZm = Moon.transform.localEulerAngles.z;
 
         //dayTimeTimer += Time.deltaTime;
         transform.RotateAround(Vector3.zero, Vector3.right, 0); // to rotate by the side instead of front and back
@@ -47,9 +49,16 @@ public class DayNightCycle : MonoBehaviour
         //if (isChangingDayNight == true)
         RotatingSun();
 
-        if ((eulerAngleX/* == 360f*/> 0f && eulerAngleX < 180f) && (eulerAngleX > 180f && eulerAngleX < 360f))
+        if (eulerAngleX <= 90)
         {
             Debug.Log("Daytime");
+            isDaytime = true;
+        }
+
+        if (eulerAngleX > 90)
+        {
+            Debug.Log("Night");
+            isDaytime = false;
         }
     }
 

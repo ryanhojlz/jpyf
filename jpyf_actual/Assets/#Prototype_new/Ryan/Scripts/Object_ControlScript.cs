@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class Object_ControlScript : MonoBehaviour
 {
+    // last min do ps
+    public static Object_ControlScript Instance = null;
+
+
     // Current Obj reference
     public GameObject CurrentObj = null;
 
@@ -46,6 +50,8 @@ public class Object_ControlScript : MonoBehaviour
     public bool checkCanGatherItem = false;
     public bool isGathering = false;
 
+    public bool jump = false;
+
     // Object that grabs the player away
     public Transform Gropper = null;
 
@@ -59,6 +65,17 @@ public class Object_ControlScript : MonoBehaviour
         CameraObj = GameObject.Find("ControllerCam").GetComponent<Camera>();
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         m_playerSpeed = 8;
+
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
     }
 	
 	// Update is called once per frame
@@ -122,6 +139,12 @@ public class Object_ControlScript : MonoBehaviour
 
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
 
+        if (handler.playerDead)
+        {
+            isPushingCart = false;
+            return;
+        }
+
         if (Gropper)
         {
             //handler.Player2_TakeDmg(1);
@@ -147,10 +170,14 @@ public class Object_ControlScript : MonoBehaviour
 
     void Interaction()
     {
+        if (handler.playerDead)
+            return;
+        // Dangerous Stuffs
         throw_item = false;
         pickup = false;
         checkCart = false;
         checkCanGatherItem = false;
+        jump = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -171,16 +198,24 @@ public class Object_ControlScript : MonoBehaviour
             pickup = true;
         }
 
-        // Throw item
-        if (Controller.ReturnR1Press())
-        {
-            throw_item = true;
-        }
+        //// Throw item
+        //if (Controller.ReturnR1Press())
+        //{
+        //    throw_item = true;
+        //}
 
+        // Gather Items
         if (Controller.ReturnTrianglePress())
         {
             checkCanGatherItem = true;
         }
+
+        // Kun Hua wants to jump so i give him
+        if (Controller.ReturnCrossPress())
+        {
+            jump = true;
+        }
+
 
 
 #endif
@@ -199,6 +234,11 @@ public class Object_ControlScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             checkCart = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            checkCanGatherItem = true;
         }
 
 #endif

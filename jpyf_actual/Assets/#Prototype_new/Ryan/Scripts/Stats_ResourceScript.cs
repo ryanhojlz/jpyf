@@ -74,6 +74,9 @@ public class Stats_ResourceScript : MonoBehaviour
 
     float m_startTicking = 6;
 
+    // If player dies
+    public bool playerDead = false;
+
 
     // Use this for initialization
     void Start ()
@@ -120,13 +123,14 @@ public class Stats_ResourceScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        
         PS4_UI();
         PSVR_UI();
         
         // Its just one line for now be if expanded i will put in func
         LanternGameplay();
         //LanternLight.GetComponent<Light>().intensity = 2 * ((float)m_LanternHp / (float)m_LanternHpCap);
+        // Check if play is dead
+        CheckPlayer2Dead();
 
         // Debug Function
         _DebugFunc();
@@ -216,6 +220,12 @@ public class Stats_ResourceScript : MonoBehaviour
                 m_LanternHp = m_LanternHpCap;
             }
 
+        }
+
+        // Debug function to kill the player
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            m_P2_hp = 0;
         }
 
     }
@@ -364,4 +374,31 @@ public class Stats_ResourceScript : MonoBehaviour
             m_SoulsCap = m_Souls;
         }
     }
+
+    public void CheckPlayer2Dead()
+    {
+        Debug.Log("Player dead " + playerDead);
+        if (!playerDead)
+        {
+            // Half current lantern 
+            if (m_P2_hp <= 0)
+            {
+                m_LanternHp = m_LanternHp / 2;
+                playerDead = true;
+            }
+        }
+        else if (playerDead)
+        {
+            if (m_P2_hp >= 100)
+            {
+                playerDead = false;
+            }
+        }
+        
+    }
+
+
+
+
+   
 }

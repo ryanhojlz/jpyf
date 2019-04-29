@@ -30,9 +30,12 @@ public class Mini_Game : MonoBehaviour
 
     float powerHit = 0f;
 
+    Object_ControlScript objControl = null;
+
     // Use this for initialization
     void Start()
     {
+        objControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
         //QTEstart();
         if (!imgTimer)
         {
@@ -73,12 +76,19 @@ public class Mini_Game : MonoBehaviour
                 objBreak.SetComplete(counter);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    BreakObject();
+            //}
+
+
+            if (objControl.checkCanGatherItem)
             {
                 BreakObject();
             }
+
         }
-	}
+    }
 
     public void QTEstart(Object_Breaking other)
     {
@@ -97,6 +107,7 @@ public class Mini_Game : MonoBehaviour
         
     }
 
+    // Breaking Object
     public void BreakObject()
     {
         sourceCurrentAmount += powerHit;

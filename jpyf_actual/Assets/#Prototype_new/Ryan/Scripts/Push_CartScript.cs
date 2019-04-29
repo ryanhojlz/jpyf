@@ -61,6 +61,7 @@ public class Push_CartScript : MonoBehaviour
         //    }
         //}
 
+        // Adjusting / Hardcode cart speed
         if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.7f)
         {
             m_CartSpeed = 0.003f;
@@ -149,6 +150,7 @@ public class Push_CartScript : MonoBehaviour
 
             if (m_ObjControl.isPushingCart)
             {
+                // If dead return;
                 m_Player2.transform.position = point.position;
                 m_CartMoveDirection = m_ObjControl.movedir;
                 m_CartMoveDirection.x = 0;

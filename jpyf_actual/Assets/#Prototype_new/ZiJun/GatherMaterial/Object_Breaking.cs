@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_Breaking : MonoBehaviour {
-
+public class Object_Breaking : MonoBehaviour
+{
     bool m_Player = false;
     int m_SuccessAmount = 0;
 
@@ -17,6 +17,8 @@ public class Object_Breaking : MonoBehaviour {
 
     [SerializeField]
     Pickup_Scripts ObjPrefeb = null;
+
+    
     // Use this for initialization
     void Start()
     {
@@ -31,10 +33,16 @@ public class Object_Breaking : MonoBehaviour {
             Debug.Log("I AM INSIDE");
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    CollectMaterial();
+        //}
+
+        if (Object_ControlScript.Instance.checkCanGatherItem)
         {
             CollectMaterial();
         }
+
 
         if (m_successGather)
         {

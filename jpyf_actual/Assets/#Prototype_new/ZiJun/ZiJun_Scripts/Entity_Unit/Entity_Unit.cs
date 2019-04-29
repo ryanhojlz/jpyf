@@ -60,6 +60,9 @@ public class Entity_Unit : MonoBehaviour
     protected float Chase_Range_Stat = 5f;//Chase Range of unit
 
     [SerializeField]
+    protected float Move_Speed_Stat = 3f;//Attack stats of unit
+
+    [SerializeField]
     protected GameObject Projectile_Prefeb = null;
 
     [SerializeField]
@@ -90,6 +93,8 @@ public class Entity_Unit : MonoBehaviour
     protected float countdown = -1f;
     protected bool stillAttacking = false;
 
+    //For day night cycle
+    DayNightCycle daynightInstance = null;
     // Use this for initialization
     private void Awake()
     {
@@ -99,6 +104,8 @@ public class Entity_Unit : MonoBehaviour
         SetDefenceStat(Defence_Stat);
         SetAttackSpeedStat(Attack_Speed_Stat);
         SetAttackRangeStat(Attack_Range_Stat);
+        SetOriginalMoveSpeed(Move_Speed_Stat);
+        SetMoveSpeed(Move_Speed_Stat);
 
         //Debug.Log("Range Value : " + Range_Stat);
 
@@ -128,13 +135,14 @@ public class Entity_Unit : MonoBehaviour
         //    idle = true;
         //}
 
-
+        daynightInstance = DayNightCycle.Instance;
         SelfStart();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        //Debug.Log("Day : " + daynightInstance.isDaytime);
         //Debug.Log("Hi from Entity_Unit Script");
         //Leave here for Debug purposes only v
         //if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
@@ -151,6 +159,10 @@ public class Entity_Unit : MonoBehaviour
         //{
         //    Stun();
         //}
+
+
+
+
 
         UpdateCheckList();
 
@@ -178,7 +190,7 @@ public class Entity_Unit : MonoBehaviour
         }
         //Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
-
+        MoveSpeedUpdate();
 
     }
 
@@ -195,6 +207,8 @@ public class Entity_Unit : MonoBehaviour
     public Vector3 GetHitPoint() { return m_HitPoint; }
     public bool GetStillAttacking() { return stillAttacking; }
     public bool GetisIdle() { return idle; }
+    public float GetOriginalMoveSpeed() { return Unit_Stats.GetOriginalMoveSpeed(); }
+    public float GetMoveSpeed() { return Unit_Stats.GetMoveSpeed(); }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
@@ -208,6 +222,8 @@ public class Entity_Unit : MonoBehaviour
     public void SetInAttackRange(bool _InAtkRange) { m_InAtkRange = _InAtkRange; }
     public void SetHitPoint(Vector3 _hit) { m_HitPoint = _hit; }
     public void SetStillAttacking(bool _stillAttacking) { stillAttacking = _stillAttacking; }
+    public void SetOriginalMoveSpeed(float _originalmovespeed) { Unit_Stats.SetOriginalMoveSpeed(_originalmovespeed); }
+    public void SetMoveSpeed(float _movespeed) { Unit_Stats.SetMoveSpeed(_movespeed); }
 
     //Other functions
     public virtual void Attack()
@@ -250,6 +266,20 @@ public class Entity_Unit : MonoBehaviour
 
             countdown = atkcooldown;
         }
+    }
+
+    public void MoveSpeedUpdate()
+    {
+        if (daynightInstance.isDaytime)
+        {
+            SetMoveSpeed(GetOriginalMoveSpeed());
+        }
+        else
+        {
+            SetMoveSpeed(GetOriginalMoveSpeed() * 3);
+        }
+
+        ChangeAgentMovespeed(GetMoveSpeed());
     }
 
     //Currently put here since no other special units yet
@@ -474,6 +504,13 @@ public class Entity_Unit : MonoBehaviour
         if (this.transform.parent)
             if (this.transform.parent.GetComponent<AI_Movement>())
                 this.transform.parent.GetComponent<AI_Movement>().ChangeNavAgentPosition(pos);
+    }
+
+    public void ChangeAgentMovespeed(float movespeed)
+    {
+        if (this.transform.parent)
+            if (this.transform.parent.GetComponent<NavMeshAgent>())
+                this.transform.parent.GetComponent<NavMeshAgent>().speed = movespeed;
     }
 
     public void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position

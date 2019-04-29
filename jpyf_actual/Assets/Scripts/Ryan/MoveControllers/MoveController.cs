@@ -604,7 +604,7 @@ public class MoveController : MonoBehaviour
         //}
         if (GetButtonDown(MoveControllerHotkeys.buttonUse))
         {
-            this.GetComponent<RangeAttackScript>().SpawnBullet();
+            GetComponent<RangeAttackScript>().SpawnBullet();
         }
         if (GetButtonDown(MoveControllerHotkeys.buttonCross))
         {
@@ -618,10 +618,7 @@ public class MoveController : MonoBehaviour
                 GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy = false;
             }
         }
-        if (GetButtonDown(MoveControllerHotkeys.buttonTriangle))
-        {
-            this.GetComponent<RangeAttackScript>().SpawnBullet();
-        }
+
 
 
     }

@@ -13,11 +13,9 @@ public class VelocityCheckScript : MonoBehaviour
     Transform debugUI;
     Transform debugUI2;
 
-
     // Debug
     public Vector3 originalPos = Vector3.zero;
     
-
     //Shake Counter
     int shakeCounter = 0;
     float threshHold = 0.05f;
@@ -69,12 +67,14 @@ public class VelocityCheckScript : MonoBehaviour
         {
             if (currVelocity > threshHold) // Upwards
             {
-                Debug.Log("Dmitri neutral to up");
+                //Debug.Log("Dmitri neutral to up");
+                ++shakeCounter;
                 ControllerState = VelocityCheck.UP;
             }
             else if (currVelocity < -threshHold) // Downwards
             {
-                Debug.Log("Dmitri neutral to down");
+                //Debug.Log("Dmitri neutral to down");
+                ++shakeCounter;
                 ControllerState = VelocityCheck.DOWN;
             }
         }
@@ -82,7 +82,8 @@ public class VelocityCheckScript : MonoBehaviour
         {
             if (currVelocity < -threshHold)
             {
-                Debug.Log("Dmitri up to down");
+                //Debug.Log("Dmitri up to down");
+                ++shakeCounter;
                 ControllerState = VelocityCheck.DOWN;
             }
         }
@@ -90,19 +91,18 @@ public class VelocityCheckScript : MonoBehaviour
         {
             if (currVelocity > threshHold)
             {
-                Debug.Log("Dmitri down to up");
+                //Debug.Log("Dmitri down to up");
+                ++shakeCounter;
                 ControllerState = VelocityCheck.UP;
             }
         }
 
-
-
-
         debugUI.GetComponent<Text>().text = "" + currVelocity;
         debugUI2.GetComponent<Text>().text = "" + ControllerState;
 
-
         oldPos = newPos;
+
+        ReloadAction();
         DebugFunc();
     }
 
@@ -138,10 +138,15 @@ public class VelocityCheckScript : MonoBehaviour
         this.transform.position = pos;
     }
 
-    // Hand Buffing
-    void ReviveUnit()
+    // Reload action
+    void ReloadAction()
     {
-        
+        if (shakeCounter >= 5)
+        {
+            Debug.Log("Reload");
+            shakeCounter = 0;
+            GetComponent<RangeAttackScript>().Ammo = 3;
+        }
     }
 
 }

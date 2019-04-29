@@ -8,13 +8,8 @@ public class DayNightCycle : MonoBehaviour
     //float nightTimeTimer;
     //bool isChangingDayNight;
     [SerializeField]
-    float eulerAngleX;
-    [SerializeField]
-    float eulerAngleY;
-    [SerializeField]
-    float eulerAngleZ;
-    GameObject Sun;
-    GameObject Moon;
+    float sunRotation;
+
     bool isDaytime;
 
     public static DayNightCycle Instance = null;
@@ -22,7 +17,7 @@ public class DayNightCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //isChangingDayNight = false;
+  
         if (Instance == null)
         {
             Instance = this;
@@ -36,12 +31,7 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        eulerAngleX = Sun.transform.eulerAngles.x;
-        eulerAngleY = Sun.transform.localEulerAngles.y;
-        eulerAngleZ = Sun.transform.localEulerAngles.z;
-        //eulerAngleXm = Moon.transform.localEulerAngles.x;
-        //eulerAngleYm = Moon.transform.localEulerAngles.y;
-        //eulerAngleZm = Moon.transform.localEulerAngles.z;
+        sunRotation = transform.eulerAngles.z;
 
         //dayTimeTimer += Time.deltaTime;
         transform.RotateAround(Vector3.zero, Vector3.right, 0); // to rotate by the side instead of front and back
@@ -49,16 +39,16 @@ public class DayNightCycle : MonoBehaviour
         //if (isChangingDayNight == true)
         RotatingSun();
 
-        if (eulerAngleX <= 90)
+        if ((sunRotation < 90 && sunRotation > 0) || (sunRotation > 270 && sunRotation < 360))
         {
-            Debug.Log("Daytime");
             isDaytime = true;
+            Debug.Log("Daytime " + isDaytime);
         }
 
-        if (eulerAngleX > 90)
+        if (sunRotation > 90 && sunRotation < 270)
         {
-            Debug.Log("Night");
             isDaytime = false;
+            Debug.Log("Night " + isDaytime);
         }
     }
 

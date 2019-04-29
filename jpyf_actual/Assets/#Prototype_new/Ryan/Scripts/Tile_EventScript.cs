@@ -76,7 +76,7 @@ public class Tile_EventScript : MonoBehaviour
             f_spawnTimer -= 1 * Time.deltaTime;
             if (f_spawnTimer <= 0)
             {
-                f_spawnTimer = 9;
+                f_spawnTimer = 8.5f;
                 SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
             }
             else
@@ -105,9 +105,10 @@ public class Tile_EventScript : MonoBehaviour
 
     void SpawnEnemyRandomLocation(int id)
     {
+        if (handler.EnemyCount >= 15)
+            return;
         GameObject go = Instantiate(enemy_list[id].gameObject);
         go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
-
     }
 
     public void Start_Event()

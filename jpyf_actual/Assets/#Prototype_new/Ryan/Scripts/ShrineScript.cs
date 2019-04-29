@@ -26,7 +26,7 @@ public class ShrineScript : MonoBehaviour
             {
                 tile_event.UpShrineHunger(1);
                 Destroy(other.gameObject);
-                Debug.Log("Run this wdawdawdawdawd");
+                //Debug.Log("Run this wdawdawdawdawd");
             }
         }
     }

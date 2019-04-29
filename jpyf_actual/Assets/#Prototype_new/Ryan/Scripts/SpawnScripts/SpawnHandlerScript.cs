@@ -44,7 +44,7 @@ public class SpawnHandlerScript : MonoBehaviour
             timer -= (spawnSpeed) * Time.deltaTime;
             if (timer <= 0)
             {
-                SpawnEnemyRandom(1);
+                SpawnEnemyRandom(1 + handler.i_num_enemies_spawn);
                 //spawnInt = Random.Range(0, SpawnLocation.Count);
                 //// spawn object
                 //GameObject obj = Instantiate(ObjectList[Random.Range(0,ObjectList.Count)].gameObject);
@@ -57,7 +57,7 @@ public class SpawnHandlerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            SpawnEnemyRandom(1);
+            SpawnEnemyRandom(1 + handler.i_num_enemies_spawn);
             //spawnInt = Random.Range(0, SpawnLocation.Count);
 
             //// spawn object
@@ -69,9 +69,11 @@ public class SpawnHandlerScript : MonoBehaviour
 
     void SpawnEnemyRandom(int count)
     {
-        Debug.Log("Text is " + (count + handler.i_num_enemies_spawn));
-        for (int i = 0; i < count + handler.i_num_enemies_spawn; ++i)
+        Debug.Log("Text is " + count);
+        for (int i = 0; i < count; ++i)
         {
+            if (handler.EnemyCount >= 12)
+                continue;
             spawnInt = Random.Range(0, SpawnLocation.Count);
             // spawn object
             GameObject obj = Instantiate(ObjectList[Random.Range(0, ObjectList.Count)].gameObject);

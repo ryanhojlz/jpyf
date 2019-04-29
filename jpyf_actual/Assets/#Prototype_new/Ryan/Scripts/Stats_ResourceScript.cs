@@ -195,7 +195,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
     void _DebugFunc()
     {
-
+        GameObject.Find("Text2").GetComponent<Text>().text = "Number of enemies " + EnemyCount;
         if (Input.GetKeyDown(KeyCode.V))
         {
             ++m_Minerals;
@@ -416,7 +416,7 @@ public class Stats_ResourceScript : MonoBehaviour
         
     }
 
-
+   
 
 
    

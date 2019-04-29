@@ -203,6 +203,8 @@ public class Push_CartScript : MonoBehaviour
             m_Player2 = other.transform;
             m_Player2.transform.parent = m_CartParent;
         }
+
+
     }
 
     //private void OnTriggerEnter(Collider other)

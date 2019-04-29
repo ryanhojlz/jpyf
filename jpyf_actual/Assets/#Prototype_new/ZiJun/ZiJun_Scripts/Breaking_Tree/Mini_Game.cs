@@ -9,6 +9,8 @@ public class Mini_Game : MonoBehaviour
     public Image img;
     public GameObject Manager;
 
+    public GameObject Player;
+
     Object_Breaking objBreak = null;
 
     int counter = 1;
@@ -35,6 +37,7 @@ public class Mini_Game : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Player = GameObject.Find("PS4_Player");
         objControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
         //QTEstart();
         if (!imgTimer)
@@ -88,11 +91,18 @@ public class Mini_Game : MonoBehaviour
             }
 
         }
+
+        if (Player && isActiveQTE)
+        {
+            if (Player.GetComponent<Rigidbody>())
+                if (Player.GetComponent<Rigidbody>().velocity.magnitude > 1f)
+                    isActiveQTE = false;
+        }
     }
 
     public void QTEstart(Object_Breaking other)
     {
-        if (other)
+        if (other && !isActiveQTE)
         {
             objBreak = other;
             isActiveQTE = true;
@@ -105,6 +115,11 @@ public class Mini_Game : MonoBehaviour
             powerHit = other.GetPowerPerHit();
         }
         
+    }
+
+    public void QTEstop()
+    {
+        isActiveQTE = false;
     }
 
     // Breaking Object

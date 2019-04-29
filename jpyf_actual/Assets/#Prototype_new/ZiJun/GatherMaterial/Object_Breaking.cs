@@ -18,7 +18,8 @@ public class Object_Breaking : MonoBehaviour
     [SerializeField]
     Pickup_Scripts ObjPrefeb = null;
 
-    
+    List<GameObject> WithinRange = new List<GameObject>();
+
     // Use this for initialization
     void Start()
     {
@@ -32,7 +33,6 @@ public class Object_Breaking : MonoBehaviour
         {
             Debug.Log("I AM INSIDE");
         }
-
         //if (Input.GetKeyDown(KeyCode.E))
         //{
         //    CollectMaterial();
@@ -55,6 +55,7 @@ public class Object_Breaking : MonoBehaviour
     {
         if (other.tag == "Player2")
         {
+            //WithinRange
             m_Player = true;
         }
     }

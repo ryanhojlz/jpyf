@@ -57,15 +57,9 @@ public class Object_ControlScript : MonoBehaviour
 
     // For moving
     private Vector3 tempVelocity = Vector3.zero;
-    
-    // Use this for initialization
-    void Start ()
-    {
-        Controller = GameObject.Find("PS4_ControllerHandler").GetComponent<PS4_ControllerScript>();
-        CameraObj = GameObject.Find("ControllerCam").GetComponent<Camera>();
-        handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
-        m_playerSpeed = 8;
 
+    private void Awake()
+    {
 
         if (Instance == null)
         {
@@ -75,6 +69,17 @@ public class Object_ControlScript : MonoBehaviour
         {
             Destroy(this);
         }
+
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
+        Controller = GameObject.Find("PS4_ControllerHandler").GetComponent<PS4_ControllerScript>();
+        CameraObj = GameObject.Find("ControllerCam").GetComponent<Camera>();
+        handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
+        m_playerSpeed = 8;
+
 
     }
 	

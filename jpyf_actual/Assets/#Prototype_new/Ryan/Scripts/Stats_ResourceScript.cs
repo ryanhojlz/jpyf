@@ -82,10 +82,8 @@ public class Stats_ResourceScript : MonoBehaviour
 
     //
     public static Stats_ResourceScript Instance = null;
-    
 
-    // Use this for initialization
-    void Start ()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -95,6 +93,12 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
+        
 
         /// Resources
         soulText = GameObject.Find("Soul_Text").GetComponent<Text>();

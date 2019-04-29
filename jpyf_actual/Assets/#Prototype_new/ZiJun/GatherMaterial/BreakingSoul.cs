@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakingTree : Object_Breaking
+public class BreakingSoul : Object_Breaking
 {
     private void Start()
     {

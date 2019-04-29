@@ -9,6 +9,12 @@ public class Mini_Game : MonoBehaviour
     public Image img;
     public GameObject Manager;
 
+    Object_Breaking objBreak = null;
+
+    int counter = 1;
+    //section
+    int section = 3;
+
     bool isActiveQTE = false;
     bool QTE_Completed = true;
 
@@ -21,6 +27,8 @@ public class Mini_Game : MonoBehaviour
 
     float sourceCurrentAmount = 0f;
     float sourceMaxAmount = 0f;
+
+    float powerHit = 0f;
 
     // Use this for initialization
     void Start()
@@ -35,6 +43,7 @@ public class Mini_Game : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        
         if (!isActiveQTE)
         {
             Manager.SetActive(false);// = false;
@@ -45,39 +54,51 @@ public class Mini_Game : MonoBehaviour
             Manager.SetActive(true);
         }
 
-        if (!imgTimer || !img)
+        if (objBreak)
         {
-            Debug.Log("some image cannot be found");
-            return;
-        }
+            if (!imgTimer || !img)
+            {
+                Debug.Log("some image cannot be found");
+                return;
+            }
 
-        currentTime -= Time.deltaTime;
-        imgTimer.fillAmount = currentTime / maxTimeLimit;
-        img.fillAmount = sourceCurrentAmount / sourceMaxAmount;
+            currentTime -= Time.deltaTime;
+            imgTimer.fillAmount = currentTime / maxTimeLimit;
+            img.fillAmount = sourceCurrentAmount / sourceMaxAmount;
 
-        if (imgTimer.fillAmount <= 0)
-        {
-            isActiveQTE = false;
-        }
-        else if (img.fillAmount >= 1)
-        {
-            isActiveQTE = false;
-        }
+            if (imgTimer.fillAmount <= 0 || img.fillAmount >= 1)
+            {
+                counter = (int)(section * img.fillAmount);
+                isActiveQTE = false;
+                objBreak.SetComplete(counter);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sourceCurrentAmount += 5f;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                BreakObject();
+            }
         }
-        
 	}
 
-    public void QTEstart()
+    public void QTEstart(Object_Breaking other)
     {
-        isActiveQTE = true;
-        currentTime = timeLimit;
-        maxTimeLimit = timeLimit;
+        if (other)
+        {
+            objBreak = other;
+            isActiveQTE = true;
+            currentTime = other.GetTimeLimit();
+            maxTimeLimit = other.GetTimeLimit();
 
-        sourceCurrentAmount = 0f;
-        sourceMaxAmount = sourceAmout;
+            sourceCurrentAmount = 0f;
+            sourceMaxAmount = other.GetMaxSpamPoint();
+
+            powerHit = other.GetPowerPerHit();
+        }
+        
+    }
+
+    public void BreakObject()
+    {
+        sourceCurrentAmount += powerHit;
     }
 }

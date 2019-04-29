@@ -108,7 +108,7 @@ public class Entity_Unit : MonoBehaviour
     }
     void Start ()
     {
-        
+        ++Stats_ResourceScript.Instance.EnemyCount;
         AddState();
         
         ChangeState("chase");

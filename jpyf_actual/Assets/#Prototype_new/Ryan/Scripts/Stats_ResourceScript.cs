@@ -77,8 +77,12 @@ public class Stats_ResourceScript : MonoBehaviour
     // If player dies
     public bool playerDead = false;
 
+    // Enemy Count
+    public int EnemyCount = 0;
+
     //
     public static Stats_ResourceScript Instance = null;
+    
 
     // Use this for initialization
     void Start ()

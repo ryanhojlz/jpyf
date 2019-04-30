@@ -10,7 +10,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField]
     float sunRotation;
 
-    bool isDaytime;
+    public bool isDaytime;
 
     public static DayNightCycle Instance = null;
 

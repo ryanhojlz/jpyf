@@ -60,6 +60,9 @@ public class Entity_Unit : MonoBehaviour
     protected float Chase_Range_Stat = 5f;//Chase Range of unit
 
     [SerializeField]
+    protected float Move_Speed_Stat = 3f;//Attack stats of unit
+
+    [SerializeField]
     protected GameObject Projectile_Prefeb = null;
 
     [SerializeField]
@@ -90,6 +93,9 @@ public class Entity_Unit : MonoBehaviour
     protected float countdown = -1f;
     protected bool stillAttacking = false;
 
+    //For day night cycle
+    DayNightCycle daynightInstance = null;
+    protected Stats_ResourceScript resource = null;
     // Use this for initialization
     private void Awake()
     {
@@ -99,18 +105,24 @@ public class Entity_Unit : MonoBehaviour
         SetDefenceStat(Defence_Stat);
         SetAttackSpeedStat(Attack_Speed_Stat);
         SetAttackRangeStat(Attack_Range_Stat);
+        SetOriginalMoveSpeed(Move_Speed_Stat);
+        SetMoveSpeed(Move_Speed_Stat);
 
         //Debug.Log("Range Value : " + Range_Stat);
 
         atkcooldown = 1f / GetAttackSpeedStat();
 
         SetChaseRangeStat(Chase_Range_Stat);
-        ++Stats_ResourceScript.Instance.EnemyCount;
+
+     
 
     }
     void Start ()
     {
         AddState();
+
+        ++Stats_ResourceScript.Instance.EnemyCount;
+        resource = Stats_ResourceScript.Instance;
 
         ChangeState("chase");
 
@@ -129,13 +141,14 @@ public class Entity_Unit : MonoBehaviour
         //    idle = true;
         //}
 
-
+        daynightInstance = DayNightCycle.Instance;
         SelfStart();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        //Debug.Log("Day : " + daynightInstance.isDaytime);
         //Debug.Log("Hi from Entity_Unit Script");
         //Leave here for Debug purposes only v
         //if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
@@ -152,6 +165,10 @@ public class Entity_Unit : MonoBehaviour
         //{
         //    Stun();
         //}
+
+
+
+
 
         UpdateCheckList();
 
@@ -179,7 +196,7 @@ public class Entity_Unit : MonoBehaviour
         }
         //Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
-
+        MoveSpeedUpdate();
 
     }
 
@@ -196,6 +213,8 @@ public class Entity_Unit : MonoBehaviour
     public Vector3 GetHitPoint() { return m_HitPoint; }
     public bool GetStillAttacking() { return stillAttacking; }
     public bool GetisIdle() { return idle; }
+    public float GetOriginalMoveSpeed() { return Unit_Stats.GetOriginalMoveSpeed(); }
+    public float GetMoveSpeed() { return Unit_Stats.GetMoveSpeed(); }
 
     // Setter
     public void SetAttackStat(float _atk) { Unit_Stats.SetAtk(_atk); }
@@ -209,6 +228,8 @@ public class Entity_Unit : MonoBehaviour
     public void SetInAttackRange(bool _InAtkRange) { m_InAtkRange = _InAtkRange; }
     public void SetHitPoint(Vector3 _hit) { m_HitPoint = _hit; }
     public void SetStillAttacking(bool _stillAttacking) { stillAttacking = _stillAttacking; }
+    public void SetOriginalMoveSpeed(float _originalmovespeed) { Unit_Stats.SetOriginalMoveSpeed(_originalmovespeed); }
+    public void SetMoveSpeed(float _movespeed) { Unit_Stats.SetMoveSpeed(_movespeed); }
 
     //Other functions
     public virtual void Attack()
@@ -253,6 +274,25 @@ public class Entity_Unit : MonoBehaviour
         }
     }
 
+    public void MoveSpeedUpdate()
+    {
+        if (!daynightInstance)
+            return;
+
+        //Debug.Log(this.GetMoveSpeed());
+
+        if (daynightInstance.isDaytime)
+        {
+            SetMoveSpeed(GetOriginalMoveSpeed());
+        }
+        else
+        {
+            SetMoveSpeed(GetOriginalMoveSpeed() * 3);
+        }
+
+        ChangeAgentMovespeed(GetMoveSpeed());
+    }
+
     //Currently put here since no other special units yet
     //public virtual void FindNearestInList()
     //{
@@ -287,6 +327,9 @@ public class Entity_Unit : MonoBehaviour
         {
             if (UnitsInRange[i].tag == "Player2")
             {
+                if (resource.m_P2_hp <= 0)
+                    continue;
+
                 if (UnitsInRange[i].transform.parent != null)
                 {
                     //if (UnitsInRange[i].transform.parent != this.transform)
@@ -475,6 +518,13 @@ public class Entity_Unit : MonoBehaviour
         if (this.transform.parent)
             if (this.transform.parent.GetComponent<AI_Movement>())
                 this.transform.parent.GetComponent<AI_Movement>().ChangeNavAgentPosition(pos);
+    }
+
+    public void ChangeAgentMovespeed(float movespeed)
+    {
+        if (this.transform.parent)
+            if (this.transform.parent.GetComponent<NavMeshAgent>())
+                this.transform.parent.GetComponent<NavMeshAgent>().speed = movespeed;
     }
 
     public void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position

@@ -80,7 +80,7 @@ public class Object_ControlScript : MonoBehaviour
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         m_playerSpeed = 8;
 
-
+        
     }
 	
 	// Update is called once per frame

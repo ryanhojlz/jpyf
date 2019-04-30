@@ -139,7 +139,7 @@ public class PS4_ControllerScript : MonoBehaviour
 #endif
 
 #if UNITY_EDITOR_WIN
-            if (Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.P))
         {
             SquareDown = true;
         }
@@ -177,9 +177,7 @@ public class PS4_ControllerScript : MonoBehaviour
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")));
     }
 
-
-
-
+ 
     public bool ReturnR1Press()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")));

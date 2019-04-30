@@ -166,10 +166,6 @@ public class Entity_Unit : MonoBehaviour
         //    Stun();
         //}
 
-
-
-
-
         UpdateCheckList();
 
         if (Target)

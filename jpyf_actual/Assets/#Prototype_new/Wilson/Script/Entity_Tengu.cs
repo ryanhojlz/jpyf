@@ -140,7 +140,7 @@ public class Entity_Tengu : Entity_Unit
         {
             if (FlyToTarget(GetOriginalPosition(), flyspeed))
             {
-                Debug.Log("Back");
+                //Debug.Log("Back");
                 SetStillAttacking(false);
                 ReturnToOrigin = false;
             }

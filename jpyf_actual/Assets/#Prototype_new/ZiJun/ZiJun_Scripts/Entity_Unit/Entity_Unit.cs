@@ -174,8 +174,9 @@ public class Entity_Unit : MonoBehaviour
 
         if (Target)
         {
-            if (!Target.gameObject.activeSelf)
+            if (!Target.gameObject.activeSelf || (Target.tag == "Player2" && (int)resource.m_P2_hp <= 0))
             {
+                Debug.Log("NUll leh");
                 Target = null;
             }
         }
@@ -319,17 +320,121 @@ public class Entity_Unit : MonoBehaviour
     //    }
     //}
 
+    //public virtual void FindNearestInList()
+    //{
+    //    float nearest = float.MaxValue;
+    //    float temp_dist = 0f;
+    //    for (int i = 0; i < UnitsInRange.Count; ++i)
+    //    {
+    //        if (UnitsInRange[i].tag == "Player2")
+    //        {
+    //            if ((int)resource.m_P2_hp <= 0)//Auto skip if player is dead
+    //                continue;
+
+    //            if (UnitsInRange[i].transform.parent != null)
+    //            {
+    //                //if (UnitsInRange[i].transform.parent != this.transform)
+    //                if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
+    //                {
+    //                    continue;
+    //                }
+    //            }
+    //        }
+
+    //        temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+
+    //        if (Target && Target.gameObject.activeSelf && (int)resource.m_P2_hp > 0)
+    //        {
+    //            //If the current target is not piority && the currently compared unit is piority
+    //            if (Target.tag != priority && (UnitsInRange[i].tag == priority))
+    //            {
+    //                //Force Assign
+    //                nearest = temp_dist;
+    //                Target = UnitsInRange[i].transform;
+    //                continue;
+    //            }
+    //            //If the current target is piority && the currently compared unit is not piority
+    //            else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
+    //            {
+    //                //Ignore and continue
+    //                continue;
+    //            }
+    //        }
+
+    //        if (temp_dist < nearest)
+    //        {
+    //            nearest = temp_dist;
+    //            Target = UnitsInRange[i].transform;
+    //        }
+    //    }
+    //}
+
+    #region use this for playtest
+    //For Testing(Attack only Piority)
+    //public virtual void FindNearestInList()
+    //{
+    //    float nearest = float.MaxValue;
+    //    float temp_dist = 0f;
+    //    for (int i = 0; i < UnitsInRange.Count; ++i)
+    //    {
+
+    //        if (UnitsInRange[i].tag != priority)
+    //            continue;
+
+    //        if (UnitsInRange[i].tag == "Player2")
+    //        {
+    //            if ((int)resource.m_P2_hp <= 0)//Auto skip if player is dead
+    //                continue;
+
+    //            if (UnitsInRange[i].transform.parent != null)
+    //            {
+    //                //if (UnitsInRange[i].transform.parent != this.transform)
+    //                if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
+    //                {
+    //                    continue;
+    //                }
+    //            }
+    //        }
+
+    //        temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+
+    //        if (Target && Target.gameObject.activeSelf && (int)resource.m_P2_hp > 0)
+    //        {
+    //            //If the current target is not piority && the currently compared unit is piority
+    //            if (Target.tag != priority && (UnitsInRange[i].tag == priority))
+    //            {
+    //                //Force Assign
+    //                nearest = temp_dist;
+    //                Target = UnitsInRange[i].transform;
+    //                continue;
+    //            }
+    //            //If the current target is piority && the currently compared unit is not piority
+    //            else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
+    //            {
+    //                //Ignore and continue
+    //                continue;
+    //            }
+    //        }
+
+    //        if (temp_dist < nearest)
+    //        {
+    //            nearest = temp_dist;
+    //            Target = UnitsInRange[i].transform;
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region use this for actual game
     public virtual void FindNearestInList()
     {
+        Debug.Log("Testing_Part_1");
         float nearest = float.MaxValue;
         float temp_dist = 0f;
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
             if (UnitsInRange[i].tag == "Player2")
             {
-                if (resource.m_P2_hp <= 0)
-                    continue;
-
                 if (UnitsInRange[i].transform.parent != null)
                 {
                     //if (UnitsInRange[i].transform.parent != this.transform)
@@ -341,9 +446,12 @@ public class Entity_Unit : MonoBehaviour
             }
 
             temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+            Debug.Log("Testing_Part_2");
+            //Debug.Log(UnitsInRange[i].name);
 
             if (Target && Target.gameObject.activeSelf)
             {
+                Debug.Log("Testing name : " + Target.name);
                 //If the current target is not piority && the currently compared unit is piority
                 if (Target.tag != priority && (UnitsInRange[i].tag == priority))
                 {
@@ -362,57 +470,59 @@ public class Entity_Unit : MonoBehaviour
 
             if (temp_dist < nearest)
             {
+                Debug.Log("Got reach here");
                 nearest = temp_dist;
                 Target = UnitsInRange[i].transform;
             }
+
+
+
+            //Debug.Log("Here");
+
+            //if (UnitsInRange[i].tag == "Player2")//Checking to see if it is player 2
+            //{
+            //    if (!UnitsInRange[i] || !UnitsInRange[i].activeSelf || (int)resource.m_P2_hp > 0)
+            //    {
+            //        continue;//if it is not alive, dont target it
+            //    }
+            //    else if (UnitsInRange[i].transform.parent != null)
+            //    {
+            //        //if (UnitsInRange[i].transform.parent != this.transform)
+            //        if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
+            //        {
+            //            continue;
+            //        }
+            //    }
+            //}
+
+            //temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
+
+            //if (Target && Target.gameObject.activeSelf && (int)resource.m_P2_hp > 0)
+            //{
+            //    //If the current target is not piority && the currently compared unit is piority
+            //    if (Target.tag != priority && (UnitsInRange[i].tag == priority))
+            //    {
+            //        //Force Assign
+            //        nearest = temp_dist;
+            //        Target = UnitsInRange[i].transform;
+            //        continue;
+            //    }
+            //    //If the current target is piority && the currently compared unit is not piority
+            //    else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
+            //    {
+            //        //Ignore and continue
+            //        continue;
+            //    }
+            //}
+
+            //if (temp_dist < nearest && UnitsInRange[i].tag == priority)
+            //{
+            //    nearest = temp_dist;
+            //    Target = UnitsInRange[i].transform;
+            //}
         }
     }
-
-    //public virtual void FindNearestInList()
-    //{
-    //    float nearest = float.MaxValue;
-    //    float temp_dist = 0f;
-    //    for (int i = 0; i < UnitsInRange.Count; ++i)
-    //    {
-    //        if (UnitsInRange[i].tag == "Player2")
-    //        {
-    //            if (UnitsInRange[i].transform.parent != null)
-    //            {
-    //                //if (UnitsInRange[i].transform.parent != this.transform)
-    //                if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
-    //                {
-    //                    continue;
-    //                }
-    //            }
-    //        }
-
-    //        temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
-
-    //        if (Target && Target.gameObject.activeSelf)
-    //        {
-    //            //If the current target is not piority && the currently compared unit is piority
-    //            if (Target.tag != priority && (UnitsInRange[i].tag == priority))
-    //            {
-    //                //Force Assign
-    //                nearest = temp_dist;
-    //                Target = UnitsInRange[i].transform;
-    //                continue;
-    //            }
-    //            //If the current target is piority && the currently compared unit is not piority
-    //            else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
-    //            {
-    //                //Ignore and continue
-    //                continue;
-    //            }
-    //        }
-
-    //        if (temp_dist < nearest && UnitsInRange[i].tag == priority)
-    //        {
-    //            nearest = temp_dist;
-    //            Target = UnitsInRange[i].transform;
-    //        }
-    //    }
-    //}
+    #endregion
 
     public virtual void AddState()//Put all the required states here
     {
@@ -469,7 +579,7 @@ public class Entity_Unit : MonoBehaviour
     {
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
-            if (!UnitsInRange[i].gameObject || !UnitsInRange[i].gameObject.activeSelf)
+            if (!UnitsInRange[i].gameObject || !UnitsInRange[i].gameObject.activeSelf || (UnitsInRange[i].tag == "Player2" && (int)resource.m_P2_hp <= 0))
             {
                 //Debug.Log("Hehe");
                 UnitsInRange.Remove(UnitsInRange[i]);

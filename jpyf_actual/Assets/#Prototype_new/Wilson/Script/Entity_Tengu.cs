@@ -79,7 +79,7 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
-        if ((!GetTarget() || !GetTarget().gameObject.activeSelf || resource.m_P2_hp <= 0) && AttackPlayerSeq == AtkPlayer.GRAB && sm.GetCurrentStateName() == "attack")
+        if ((!GetTarget() || !GetTarget().gameObject.activeSelf || (GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0))) && AttackPlayerSeq == AtkPlayer.GRAB && sm.GetCurrentStateName() == "attack")
         {
             Debug.Log("Why you constantly entering");
             Reset(false);

@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Unit: 0
-  Piority_Unit: 1
+  Piority_Unit: 2
   idle: 0
   instantChasePlayer: 0
   Health_Stat: 10
@@ -453,6 +453,7 @@ MonoBehaviour:
   Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 3
   Chase_Range_Stat: 10
+  Move_Speed_Stat: 3
   Projectile_Prefeb: {fileID: 1892895758873684, guid: 5c8bdf742819da94a90acdcdd80b0ad7,
     type: 2}
   UnitsInRange: []

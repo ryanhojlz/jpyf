@@ -71,6 +71,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected Image healthBar;//Put healthbar image inside here (The one that change not prefeb)
 
+    [SerializeField]
+    protected string statename;
+
     protected Transform Target;
 
 
@@ -194,6 +197,7 @@ public class Entity_Unit : MonoBehaviour
         //Debug.Log("State machine is " + sm.GetCurrentStateName());
         sm.ExecuteStateUpdate();//Updating statemachine
         MoveSpeedUpdate();
+        statename = sm.GetCurrentStateName();
 
     }
 
@@ -231,40 +235,53 @@ public class Entity_Unit : MonoBehaviour
     //Other functions
     public virtual void Attack()
     {
+
         if (countdown < 0)
         {
+            // Animation start animation
+            if (GetComponent<AnimationScript>())
+            {
+                GetComponent<AnimationScript>().SetAnimTrigger(0);
+            }
+
             float lifeTime = 1f;//Temporary hard coding it here
                                 //DO shooting projectile here
             if (Projectile_Prefeb)
             {
-                GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
-
-                Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
-
-                if (AttackSound)
+                if (GetComponent<AnimationScript>())
                 {
-                    UnitThatProduceSound.clip = AttackSound;
-                    UnitThatProduceSound.Play();
-                }
+                    if (GetComponent<AnimationScript>().Sync_Projectile())
+                    {
+                        GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
+                        Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
 
-                if (!Projectile)
-                {
-                    Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
-                    return;
-                }
-                if (!Target)
-                {
-                    Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
-                }
-                else
-                {
-                    Projectile.SetDirection(Target.position, this.transform.position);
-                }
-                Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
-                Projectile.SetLifeTime(lifeTime);
-                Projectile.SetDamage(GetAttackStat());
-                Projectile.SetProjectileTag(this.tag);
+                        if (AttackSound)
+                        {
+                            UnitThatProduceSound.clip = AttackSound;
+                            UnitThatProduceSound.Play();
+                        }
 
+                        if (!Projectile)
+                        {
+                            Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
+                            return;
+                        }
+                        if (!Target)
+                        {
+                            Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+                        }
+                        else
+                        {
+                            Projectile.SetDirection(Target.position, this.transform.position);
+                        }
+                        Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
+                        Projectile.SetLifeTime(lifeTime);
+                        Projectile.SetDamage(GetAttackStat());
+                        Projectile.SetProjectileTag(this.tag);
+
+                    }
+                }
+                
             }
 
             countdown = atkcooldown;

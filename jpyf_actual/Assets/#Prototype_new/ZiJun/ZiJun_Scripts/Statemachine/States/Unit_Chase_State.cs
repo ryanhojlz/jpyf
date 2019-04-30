@@ -15,10 +15,18 @@ public class Unit_Chase_State : IState
     {
         //Debug.Log("Enter chase");
         m_user.StartMoving();//Setting it to start moving
+        //if (m_user.GetComponent<AnimationScript>())
+        //{
+        //    m_user.GetComponent<AnimationScript>().SetAnim(1);
+        //}
     }
 
     public void Execute()
     {
+        if (m_user.GetComponent<AnimationScript>())
+        {
+            m_user.GetComponent<AnimationScript>().SetAnim(1);
+        }
         // Check if there is no target
         //if (!m_user.GetTarget())
         //{

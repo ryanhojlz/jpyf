@@ -17,6 +17,7 @@ public class Unit_Attack_State : IState
         //When entering, find a unit with that is nearest to unit
         //m_user.FindNearestInList();
         //Debug.Log("Entering : " + m_user.GetTarget());
+
     }
 
     public void Execute()

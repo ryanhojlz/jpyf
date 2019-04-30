@@ -370,7 +370,7 @@ public class Entity_Unit : MonoBehaviour
     //}
 
     #region use this for playtest
-    For Testing(Attack only Piority)
+    //For Testing(Attack only Piority)
     public virtual void FindNearestInList()
     {
         float nearest = float.MaxValue;

@@ -113,13 +113,16 @@ public class Entity_Unit : MonoBehaviour
         atkcooldown = 1f / GetAttackSpeedStat();
 
         SetChaseRangeStat(Chase_Range_Stat);
-        ++Stats_ResourceScript.Instance.EnemyCount;
-        resource = Stats_ResourceScript.Instance;
+
+     
 
     }
     void Start ()
     {
         AddState();
+
+        ++Stats_ResourceScript.Instance.EnemyCount;
+        resource = Stats_ResourceScript.Instance;
 
         ChangeState("chase");
 
@@ -273,6 +276,11 @@ public class Entity_Unit : MonoBehaviour
 
     public void MoveSpeedUpdate()
     {
+        if (!daynightInstance)
+            return;
+
+        //Debug.Log(this.GetMoveSpeed());
+
         if (daynightInstance.isDaytime)
         {
             SetMoveSpeed(GetOriginalMoveSpeed());

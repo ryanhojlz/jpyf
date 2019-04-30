@@ -28,7 +28,7 @@ public class AI_Movement : MonoBehaviour
 
     private void Awake()
     {
-        transform.parent = GameObject.Find("DebugParent").transform;
+        //transform.parent = GameObject.Find("DebugParent").transform;
     }
 
     void Start()

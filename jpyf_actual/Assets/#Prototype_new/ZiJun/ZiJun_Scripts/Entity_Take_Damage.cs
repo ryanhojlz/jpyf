@@ -15,7 +15,7 @@ public class Entity_Take_Damage : MonoBehaviour
         //materials = this.GetComponent<Renderer>().materials;
         if (!this.GetComponent<Renderer>())
         {
-            materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+            materials = transform.Find("model").GetComponent<Renderer>().materials;
         }
         else
         {
@@ -41,7 +41,7 @@ public class Entity_Take_Damage : MonoBehaviour
             //materials = this.GetComponent<Renderer>().materials;
             if (!this.GetComponent<Renderer>())
             {
-                materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+                materials = transform.Find("model").GetComponent<Renderer>().materials;
             }
             else
             {

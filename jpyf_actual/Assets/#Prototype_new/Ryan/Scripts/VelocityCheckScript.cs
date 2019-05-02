@@ -21,7 +21,7 @@ public class VelocityCheckScript : MonoBehaviour
     //Shake Counter
     int shakeCounter = 0;
     int shakeCounter2 = 0;
-    float threshHold = 0.05f;
+    float threshHold = 0.01f;
 
     enum VelocityCheck_Y
     {
@@ -200,7 +200,7 @@ public class VelocityCheckScript : MonoBehaviour
         {
             //Debug.Log("Reload");
             shakeCounter = 0;
-            GetComponent<RangeAttackScript>().Ammo = 3;
+            GetComponent<RangeAttackScript>().Ammo = 15;
         }
     }
 

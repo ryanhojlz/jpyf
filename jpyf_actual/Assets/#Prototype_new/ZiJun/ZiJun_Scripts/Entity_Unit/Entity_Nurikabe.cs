@@ -14,44 +14,51 @@ public class Entity_Nurikabe : Entity_Unit
     }
     public override void Attack()
     {
-        if (countdown < 0)
-        {
-            float lifeTime = 1f;//Temporary hard coding it here
-                                //DO shooting projectile here
-            if (Projectile_Prefeb)
-            {
-                bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
+        //Debug.Log("AWOIDBUAW IDFQIU DWVQ2WUD");
+        //if (countdown < 0)
+        //{
+        //    // Animation start animation
+        //    if (GetComponent<AnimationScript>())
+        //    {
+        //        GetComponent<AnimationScript>().SetAnimTrigger(0);
+        //    }
 
-                Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
+        //    float lifeTime = 1f;//Temporary hard coding it here
+        //                        //DO shooting projectile here
+        //    if (Projectile_Prefeb)
+        //    {
+        //        bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
 
-                if (AttackSound)
-                {
-                    UnitThatProduceSound.clip = AttackSound;
-                    UnitThatProduceSound.Play();
-                }
+        //        Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
 
-                if (!Projectile)
-                {
-                    Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
-                    return;
-                }
-                if (!Target)
-                {
-                    Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
-                }
-                else
-                {
-                    Projectile.SetDirection(Target.position, this.transform.position);
-                }
-                Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
-                Projectile.SetLifeTime(lifeTime);
-                Projectile.SetDamage(GetAttackStat());
-                //SetStillAttacking(true);
+        //        if (AttackSound)
+        //        {
+        //            UnitThatProduceSound.clip = AttackSound;
+        //            UnitThatProduceSound.Play();
+        //        }
 
-            }
+        //        if (!Projectile)
+        //        {
+        //            Debug.Log(Projectile_Prefeb + " Does not have -Entity_Projectile_Class-");
+        //            return;
+        //        }
+        //        if (!Target)
+        //        {
+        //            Projectile.SetDirection(this.transform.position + this.transform.forward, this.transform.position);
+        //        }
+        //        else
+        //        {
+        //            Projectile.SetDirection(Target.position, this.transform.position);
+        //        }
+        //        Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
+        //        Projectile.SetLifeTime(lifeTime);
+        //        Projectile.SetDamage(GetAttackStat());
+        //        SetStillAttacking(true);
 
-            countdown = atkcooldown;
-        }
+        //    }
+
+        //    countdown = atkcooldown;
+        //}
     }
 
     public override void FindNearestInList()

@@ -29,30 +29,32 @@ public class RepairVRScript : MonoBehaviour {
             handler.m_CartHP += 5;
         }
 
-        if (repairTick >= 3)
-        {
-            //handler.m_Minerals -= 10;
-            handler.m_CartHP += 2;
-            //handler.Cart_TakeDmg(-5);
-            if (handler.m_CartHP > handler.m_CartHpCap)
-            {
-                handler.m_CartHP = handler.m_CartHpCap;
-            }
-            repairTick = 0;
-        }
+        //if (repairTick >= 3)
+        //{
+        //    //handler.m_Minerals -= 10;
+        //    handler.m_CartHP += 2;
+        //    //handler.Cart_TakeDmg(-5);
+        //    if (handler.m_CartHP > handler.m_CartHpCap)
+        //    {
+        //        handler.m_CartHP = handler.m_CartHpCap;
+        //    }
+        //    repairTick = 0;
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == repairSpot)
         {
-            if (handler.m_Minerals > 5)
+            if (handler.m_Minerals > 10)
             {
-                ++repairTick;
-                handler.m_CartHP += 3;
-                --handler.m_Minerals;
+                //++repairTick;
+                handler.m_CartHP += 5;
+                handler.m_Minerals -= 10;
                 //handler.m_CartHP += 10;
             }
+            handler.m_CartHP += 1;
+
         }
 
         //if (other.gameObject == lanternSpot)

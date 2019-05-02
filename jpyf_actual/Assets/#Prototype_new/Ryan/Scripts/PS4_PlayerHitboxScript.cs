@@ -35,7 +35,7 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
     {
         if (other.GetComponent<Entity_Projectile>())
         {
-            TakeDamage((int)other.GetComponent<Entity_Projectile>().GetDamage());
+            //TakeDamage((int)other.GetComponent<Entity_Projectile>().GetDamage());
             Destroy(other.gameObject);
         }
     }

@@ -79,6 +79,8 @@ public class Tile_EventScript : MonoBehaviour
             {
                 f_spawnTimer = 8.5f;
                 SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+                SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+
             }
             else
             {

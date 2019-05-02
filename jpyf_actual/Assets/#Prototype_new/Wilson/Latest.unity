@@ -4880,6 +4880,9 @@ MonoBehaviour:
   digetic_mineral_ui: {fileID: 0}
   digetic_soul_ui: {fileID: 0}
   LanternLight: {fileID: 0}
+  i_num_enemies_spawn: 0
+  playerDead: 0
+  EnemyCount: 0
 --- !u!1 &762690795
 GameObject:
   m_ObjectHideFlags: 0
@@ -6417,6 +6420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerProjectile: {fileID: 1892895758873684, guid: 3dda5534f2537bc478ad7473e82c5e32,
     type: 2}
+  Ammo: 0
 --- !u!1001 &1052953046
 Prefab:
   m_ObjectHideFlags: 0
@@ -7106,6 +7110,9 @@ MonoBehaviour:
   handler: {fileID: 0}
   m_lightObj: {fileID: 0}
   b_eventStart: 0
+  f_spawnTimer: 0
+  i_shrineHungerMeter: 0
+  shrineHungerCap: 0
   m_spawnList: []
   enemy_list:
   - {fileID: 1651497398580514, guid: 740ba95442376714b9b931a54ac87b1c, type: 2}
@@ -7694,6 +7701,7 @@ MonoBehaviour:
   timer: 1
   spawnSpeed: 0
   spawnEnemy: 1
+  enemy_cap: 0
 --- !u!1 &1253768306 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 4bd802a710f19ae44bd2c5a761557d51, type: 3}
@@ -8235,6 +8243,7 @@ MonoBehaviour:
   throw_item: 0
   checkCanGatherItem: 0
   isGathering: 0
+  jump: 0
   Gropper: {fileID: 0}
 --- !u!1 &1371278419
 GameObject:
@@ -10367,6 +10376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handler: {fileID: 0}
+  effect: {fileID: 0}
 --- !u!1 &1764613247
 GameObject:
   m_ObjectHideFlags: 0
@@ -12058,3 +12068,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerProjectile: {fileID: 1892895758873684, guid: 3dda5534f2537bc478ad7473e82c5e32,
     type: 2}
+  Ammo: 0

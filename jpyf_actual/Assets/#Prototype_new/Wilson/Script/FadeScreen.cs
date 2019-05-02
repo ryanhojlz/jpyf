@@ -10,7 +10,7 @@ public class FadeScreen : MonoBehaviour
     Color Original;
     bool reverse = false;
 
-    float speed = 3f;
+    public float speed = 3f;
     float offset = 0.1f;
     // Use this for initialization
 
@@ -19,7 +19,7 @@ public class FadeScreen : MonoBehaviour
     void Start()
     {
         Original = redImage.color;
-        variable.a = 1f;
+        Original.a = 0.35f;
         variable = redImage.color;
         variable.a = 0f;
 

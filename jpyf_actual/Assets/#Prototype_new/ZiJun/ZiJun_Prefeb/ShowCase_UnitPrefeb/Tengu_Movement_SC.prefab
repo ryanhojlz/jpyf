@@ -383,7 +383,7 @@ MonoBehaviour:
   idle: 0
   instantChasePlayer: 0
   Health_Stat: 3
-  Attack_Stat: 10
+  Attack_Stat: 0
   Defence_Stat: 0
   Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 5
@@ -393,6 +393,8 @@ MonoBehaviour:
   UnitsInRange: []
   healthBar: {fileID: 114883078689799876}
   statename: 
+  Summoning_timer: 0
+  Take_Damage_timer: 0
   AttackSound: {fileID: 0}
   flyspeed: 1
 --- !u!114 &114883078689799876

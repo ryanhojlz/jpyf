@@ -16,7 +16,7 @@ public class bomb_script : MonoBehaviour
     Vector3 Expending_Scale = Vector3.zero;
     public float expending_speed = 5f;
 
-    public bool debugging = true;
+    public bool debugging = false;
 
     public float explosion_Range = 10f;
 
@@ -24,9 +24,9 @@ public class bomb_script : MonoBehaviour
     void Start ()
     {
         //State = Bomb_state.DORMANT;
-        //State = Bomb_state.ACTIVE;
+        State = Bomb_state.ACTIVE;
 
-        //Expending_Scale.Set(1, 1, 1);
+        Expending_Scale.Set(1, 1, 1);
 
     }
 	
@@ -38,7 +38,14 @@ public class bomb_script : MonoBehaviour
             if (this.transform.localScale.x > 10)
             {
                 Debug.Log("HIIIIII loooo");
-                this.transform.localScale = new Vector3(1,1,1);
+                this.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        else
+        {
+            if (this.transform.localScale.x > 10)
+            {
+                Destroy(this.gameObject);
             }
         }
 
@@ -60,6 +67,7 @@ public class bomb_script : MonoBehaviour
 
             case Bomb_state.EXPLOSION:
                 {
+                    Debug.Log("Came here");
                     this.GetComponent<Rigidbody>().isKinematic = true;
                     this.transform.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                 }
@@ -73,6 +81,33 @@ public class bomb_script : MonoBehaviour
         if (State == Bomb_state.ACTIVE)
         {
             State = Bomb_state.EXPLOSION;
+        }
+    }
+
+    //private void OnTriggerStay(Collision collision)
+    //{
+    //    if (State == Bomb_state.EXPLOSION)
+    //    {
+    //        Entity_Unit unit = collision.gameObject.GetComponent<Entity_Unit>();
+    //        if (unit)
+    //        {
+    //            unit.TakeDamage(unit.GetMaxHealthStat());
+    //        }
+    //    }
+    //}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (State == Bomb_state.EXPLOSION)
+        {
+            Entity_Unit unit = other.GetComponent<Entity_Unit>();
+            if (unit)
+            {
+                if (unit.GetHealthStat() > 0)
+                {
+                    unit.TakeDamage(unit.GetMaxHealthStat());
+                }
+            }
         }
     }
 }

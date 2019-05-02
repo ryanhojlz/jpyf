@@ -37,7 +37,7 @@ public class Entity_Tengu : Entity_Unit
     Transform Payload_Position = null;
 
     Vector3 FlyPos = Vector3.zero;
-    float flyOffset = 10f;
+    float flyOffset = 4f;
 
     enum AtkPlayer
     {
@@ -439,8 +439,12 @@ public class Entity_Tengu : Entity_Unit
         {
 
             Vector3 TargetPos = TargetRight.transform.position;
+            Vector3 ThatTargetPos = this.transform.position;
 
-            if ((TargetPos - this.transform.position).magnitude < 1f)
+            TargetPos.y = 0;
+            ThatTargetPos.y = 0;
+
+            if ((TargetPos - ThatTargetPos).magnitude < 1f)
             {
                 return true;
             }
@@ -459,8 +463,12 @@ public class Entity_Tengu : Entity_Unit
         {
 
             Vector3 TargetPos = TargetLeft.transform.position;
+            Vector3 ThatTargetPos = this.transform.position;
 
-            if ((TargetPos - this.transform.position).magnitude < 1f)
+            TargetPos.y = 0;
+            ThatTargetPos.y = 0;
+
+            if ((TargetPos - ThatTargetPos).magnitude < 1f)
             {
                 return true;
             }

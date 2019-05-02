@@ -31,6 +31,11 @@ public class Entity_Tengu : Entity_Unit
     float attackTimer = 0f;
     float previousAttackTimer = 0f;
 
+    Vector3 tempThis = new Vector3();
+    Vector3 tempTarget = new Vector3();
+
+    Transform Payload_Position = null;
+
     enum AtkPlayer
     {
         GRAB = 0,
@@ -62,6 +67,8 @@ public class Entity_Tengu : Entity_Unit
 
         this.transform.position = GetOriginalPosition();//Vector3(this.transform.position.x, transform.parent.position.y + this.GetAttackRangeStat(), this.transform.position.z)
         attackTimer = 1 / this.GetAttackSpeedStat();
+
+        Payload_Position = GameObject.Find("PayLoad").transform;
     }
 
     public override void SelfUpdate()
@@ -141,6 +148,7 @@ public class Entity_Tengu : Entity_Unit
             if (FlyToTarget(GetOriginalPosition(), flyspeed))
             {
                 //Debug.Log("Back");
+                this.transform.localEulerAngles = Vector3.zero;
                 SetStillAttacking(false);
                 ReturnToOrigin = false;
             }
@@ -277,12 +285,17 @@ public class Entity_Tengu : Entity_Unit
             return;
         }
 
+        
+
         switch (AttackPlayerSeq)
         {
             case AtkPlayer.GRAB:
                 {
+                    RotateTowardsTarget(HoldUnit.transform.position);
+
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed) || TouchedUnit)// <- This portion will be used to fly to target position && tell if it has reached
                     {
+                        
                         if (HoldUnit.transform.parent)//Being parented to a cart
                         {
                             if (!HoldUnit.transform.parent.GetComponent<Entity_Tengu>())
@@ -310,6 +323,8 @@ public class Entity_Tengu : Entity_Unit
                 break;
             case AtkPlayer.POSITIONING:
                 {
+                    RotateTowardsTarget(TargetEscape.transform.position);
+
                     if (FlyToTarget(TargetEscape.transform.position, flyspeed))
                     {
                         AttackPlayerSeq = AtkPlayer.HOVER;
@@ -322,6 +337,8 @@ public class Entity_Tengu : Entity_Unit
                 break;
             case AtkPlayer.HOVER:
                 {
+                    RotateTowardsTarget(Payload_Position.position);
+
                     if (previousAttackTimer + attackTimer < Time.time)
                     {
                         previousAttackTimer = Time.time;
@@ -464,6 +481,22 @@ public class Entity_Tengu : Entity_Unit
         return false;
     }
 
+    void RotateTowardsTarget(Vector3 pos)
+    {
+        tempThis.x = transform.position.x;
+        tempThis.z = transform.position.z;
+
+        tempTarget.x = pos.x;
+        tempTarget.z = pos.z;
+
+        var _direction = (tempTarget - tempThis).normalized;
+        var _lookRotation = Quaternion.LookRotation(_direction);
+
+        //Debug.Log(Mathf.Atan2(_lookRotation.y, _lookRotation.x));
+        Debug.Log("Got come in leh");
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 120);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player2")
@@ -480,6 +513,8 @@ public class Entity_Tengu : Entity_Unit
         }
     }
 }
+
+
 
 //public class Entity_Tengu : Entity_Unit
 //{

@@ -16,7 +16,7 @@ public class Tile_EventScript : MonoBehaviour
     public float f_spawnTimer = 0;
 
     public int i_shrineHungerMeter = 0;
-
+    public int shrineHungerCap = 0;
     // Object List
     public List<Transform> m_spawnList;
     public List<GameObject> enemy_list;
@@ -34,6 +34,7 @@ public class Tile_EventScript : MonoBehaviour
         {
             m_spawnList.Add(transform.Find("SpawnPoints").transform.GetChild(i));
         }
+        f_spawnTimer = 25;
     }
     // Update is called once per frame
     void Update ()
@@ -91,7 +92,7 @@ public class Tile_EventScript : MonoBehaviour
         }
 
 
-        if (i_shrineHungerMeter >= 2)
+        if (i_shrineHungerMeter >= shrineHungerCap)
         {
             Destroy(this.gameObject);
         }
@@ -105,8 +106,8 @@ public class Tile_EventScript : MonoBehaviour
 
     void SpawnEnemyRandomLocation(int id)
     {
-        if (handler.EnemyCount >= 15)
-            return;
+        //if (handler.EnemyCount >= 5)
+        //    return;
         GameObject go = Instantiate(enemy_list[id].gameObject);
         go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
     }

@@ -20,14 +20,18 @@ public class Unit_Dead_State : IState
     public void Enter()
     {
         CountDownTImer = 2f;
+        if (m_user.GetComponent<AnimationScript>())
+        {
+            m_user.GetComponent<AnimationScript>().SetAnimTrigger(2);
+        }
     }
 
     public void Execute()
     {
         CountDownTImer -= Time.deltaTime;
-        deadpos = m_user.transform.localPosition;
-        deadpos.y -= 1;
-        m_user.transform.localPosition = deadpos;
+        //deadpos = m_user.transform.localPosition;
+        //deadpos.y -= 1;
+        //m_user.transform.localPosition = deadpos;
         //y_rota_te += 100;
         //x_rota_te -= 0.1f;
         //rota_te.y = y_rota_te;
@@ -41,6 +45,7 @@ public class Unit_Dead_State : IState
         if (CountDownTImer < 0f)
         {
             //Debug.Log("Dead");
+            Stats_ResourceScript.Instance.EnemyCount--;
             m_user.Dead();
         }
     }

@@ -381,17 +381,20 @@ MonoBehaviour:
   Unit: 0
   Piority_Unit: 2
   idle: 0
+  instantChasePlayer: 0
   Health_Stat: 3
   Attack_Stat: 10
   Defence_Stat: 0
   Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 5
   Chase_Range_Stat: 10
+  Move_Speed_Stat: 1
   Projectile_Prefeb: {fileID: 0}
   UnitsInRange: []
   healthBar: {fileID: 114883078689799876}
+  statename: 
   AttackSound: {fileID: 0}
-  flyspeed: 10
+  flyspeed: 1
 --- !u!114 &114883078689799876
 MonoBehaviour:
   m_ObjectHideFlags: 1

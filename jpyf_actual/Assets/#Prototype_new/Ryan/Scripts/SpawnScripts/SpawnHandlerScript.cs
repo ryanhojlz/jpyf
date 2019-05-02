@@ -17,6 +17,11 @@ public class SpawnHandlerScript : MonoBehaviour
     public float spawnSpeed = 0.1f;
 
     public bool spawnEnemy = false;
+
+    float initial_spawn = 15;
+
+    public int enemy_cap = 0;
+
     // Use this for initialization
 	void Start ()
     {
@@ -38,6 +43,12 @@ public class SpawnHandlerScript : MonoBehaviour
         //Spawner
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
+
+        initial_spawn -= 1 * Time.deltaTime;
+        if (initial_spawn < 0)
+        {
+            spawnEnemy = true;
+        }
 
         if (spawnEnemy)
         {
@@ -72,7 +83,7 @@ public class SpawnHandlerScript : MonoBehaviour
         Debug.Log("Text is " + count);
         for (int i = 0; i < count; ++i)
         {
-            if (handler.EnemyCount >= 12)
+            if (handler.EnemyCount >= enemy_cap)
                 continue;
             spawnInt = Random.Range(0, SpawnLocation.Count);
             // spawn object

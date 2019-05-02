@@ -194,6 +194,17 @@ public class Stats_ResourceScript : MonoBehaviour
 
     }
 
+    public void ResetStats()
+    {
+        m_P2_hp = 100;
+        m_LanternHp = 100;
+        m_CartHP = 100;
+
+        m_Minerals = 50;
+        m_Souls = 50;
+
+    }
+
     void _DebugFunc()
     {
         GameObject.Find("Text2").GetComponent<Text>().text = "Number of enemies " + EnemyCount;
@@ -201,7 +212,7 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             ++m_Minerals;
             ++m_Souls;
-            m_P2_hp++;
+            m_P2_hp += 35;
 
             if (m_P2_hp < 0)
             {

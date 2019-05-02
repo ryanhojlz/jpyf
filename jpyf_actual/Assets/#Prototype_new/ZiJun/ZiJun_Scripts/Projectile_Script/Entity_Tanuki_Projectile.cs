@@ -15,7 +15,7 @@ public class Entity_Tanuki_Projectile : Entity_Projectile
 
     public override void HitPlayer(Collider other)
     {
-        other.GetComponent<PS4_PlayerHitboxScript>().TakeDamage((int)m_dmg);
+        other.GetComponent<PS4_PlayerHitboxScript>().TakeDamage((int)0);
         //Add Slow Effects here (Once have)
         GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetDebuff(slowAmount, slowDuration);
     }

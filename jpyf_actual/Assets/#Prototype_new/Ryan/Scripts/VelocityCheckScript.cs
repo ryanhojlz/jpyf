@@ -74,6 +74,7 @@ public class VelocityCheckScript : MonoBehaviour
         oldPos = newPos;
 
         ReloadAction();
+        HealingAction();
         DebugFunc();
     }
     // PC Debugg func
@@ -209,7 +210,7 @@ public class VelocityCheckScript : MonoBehaviour
         {
             //Debug.Log("Reload");
             shakeCounter2 = 0;
-            Stats_ResourceScript.Instance.Player2_TakeDmg(-35);
+            Stats_ResourceScript.Instance.Player2_TakeDmg(-15);
         }
     }
 }

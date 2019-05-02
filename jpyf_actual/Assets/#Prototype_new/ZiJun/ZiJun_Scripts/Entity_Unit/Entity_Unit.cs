@@ -130,9 +130,8 @@ public class Entity_Unit : MonoBehaviour
     {
         AddState();
 
-        ++Stats_ResourceScript.Instance.EnemyCount;
+        Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;
-
         ChangeState("summon");
 
         if (Piority_Unit == Piority.PAYLOAD)

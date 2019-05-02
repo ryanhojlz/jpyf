@@ -28,17 +28,17 @@ public class RangeAttackScript : MonoBehaviour
         {
             Ammo = 0;
         }
-        else if (Ammo > 3)
+        else if (Ammo > 30)
         {
-            Ammo = 3;
+            Ammo = 30;
         }
     }
 
     public void SpawnBullet()
     {
-        if (Ammo <= 0)
-            return;
-        --Ammo;
+        //if (Ammo <= 0)
+        //    return;
+        //--Ammo;
         GameObject p_projectile = Instantiate(playerProjectile,this.transform.position,this.transform.rotation) as GameObject;
         p_projectile.GetComponent<Entity_Player_Projectile>().SetDirection(this.transform.position + this.transform.forward, this.transform.position);
     }

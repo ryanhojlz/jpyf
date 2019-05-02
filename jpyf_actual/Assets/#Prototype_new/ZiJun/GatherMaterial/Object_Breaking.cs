@@ -10,7 +10,7 @@ public class Object_Breaking : MonoBehaviour
     protected float m_timelimit = 5f;
     protected float m_maxSpamPoint = 100f;
 
-    protected float m_powerPerHit = 5f;
+    protected float m_powerPerHit = 10f;
 
     bool m_successGather = false;
     int m_totalResource = 1;

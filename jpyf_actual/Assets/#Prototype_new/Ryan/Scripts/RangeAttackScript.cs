@@ -6,6 +6,9 @@ public class RangeAttackScript : MonoBehaviour
 {
     public GameObject playerProjectile = null;
     public int Ammo = 0;
+
+
+
 	// Use this for initialization
 	void Start ()
     {

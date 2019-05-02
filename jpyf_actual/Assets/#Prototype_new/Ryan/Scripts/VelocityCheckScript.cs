@@ -18,17 +18,27 @@ public class VelocityCheckScript : MonoBehaviour
     
     //Shake Counter
     int shakeCounter = 0;
+    int shakeCounter2 = 0;
     float threshHold = 0.05f;
-    enum VelocityCheck
+
+    enum VelocityCheck_Y
     {
         NEUTRAL,
         UP,
         DOWN
     };
 
+    enum VelocityCheck_X
+    {
+        NEUTRAL,
+        UP,
+        DOWN
+    };
 
-    VelocityCheck ControllerState = VelocityCheck.NEUTRAL;
-    
+    VelocityCheck_Y ControllerState = VelocityCheck_Y.NEUTRAL;
+    VelocityCheck_X ControllerState_2 = VelocityCheck_X.NEUTRAL;
+
+
     // Use this for initialization
     void Start()
     {
@@ -38,7 +48,8 @@ public class VelocityCheckScript : MonoBehaviour
         debugUI2 = GameObject.Find("Text4").transform;
 
         originalPos = this.transform.position;
-        ControllerState = VelocityCheck.NEUTRAL;
+        ControllerState = VelocityCheck_Y.NEUTRAL;
+        ControllerState_2 = VelocityCheck_X.NEUTRAL;
     }
 
     // Vigrous Shaking Thresh hold distance shud be around 0.016 ~ 0.02;
@@ -53,52 +64,47 @@ public class VelocityCheckScript : MonoBehaviour
         // Use magnitude here bcos can get negative value;
         currVelocity = newPos.y - oldPos.y;
 
-        //if (currVelocity < -0.05f)
-        //{
-        //    Debug.Log("Dmitri you have forsaken me down");
-        //}
-        //else if (currVelocity > 0.05f)
-        //{
-        //    Debug.Log("Dmitri you have forsaken me up");
-        //}
 
-        // Velocity Check
-        if (ControllerState == VelocityCheck.NEUTRAL)
+        // Velocity Check _ Y axis
+        if (ControllerState == VelocityCheck_Y.NEUTRAL)
         {
             if (currVelocity > threshHold) // Upwards
             {
                 //Debug.Log("Dmitri neutral to up");
                 ++shakeCounter;
-                ControllerState = VelocityCheck.UP;
+                ControllerState = VelocityCheck_Y.UP;
             }
             else if (currVelocity < -threshHold) // Downwards
             {
                 //Debug.Log("Dmitri neutral to down");
                 ++shakeCounter;
-                ControllerState = VelocityCheck.DOWN;
+                ControllerState = VelocityCheck_Y.DOWN;
             }
         }
-        else if (ControllerState == VelocityCheck.UP)
+        else if (ControllerState == VelocityCheck_Y.UP)
         {
             if (currVelocity < -threshHold)
             {
                 //Debug.Log("Dmitri up to down");
                 ++shakeCounter;
-                ControllerState = VelocityCheck.DOWN;
+                ControllerState = VelocityCheck_Y.DOWN;
             }
         }
-        else if (ControllerState == VelocityCheck.DOWN)
+        else if (ControllerState == VelocityCheck_Y.DOWN)
         {
             if (currVelocity > threshHold)
             {
                 //Debug.Log("Dmitri down to up");
                 ++shakeCounter;
-                ControllerState = VelocityCheck.UP;
+                ControllerState = VelocityCheck_Y.UP;
             }
         }
 
-        debugUI.GetComponent<Text>().text = "" + currVelocity;
-        debugUI2.GetComponent<Text>().text = "" + ControllerState;
+
+
+
+        //debugUI.GetComponent<Text>().text = "" + currVelocity;
+        //debugUI2.GetComponent<Text>().text = "" + ControllerState;
 
         oldPos = newPos;
 
@@ -136,6 +142,46 @@ public class VelocityCheckScript : MonoBehaviour
 
 
         this.transform.position = pos;
+    }
+
+
+    void VelocityCheck_AxisX()
+    {
+        // Velocity Check _ Y axis
+        if (ControllerState_2 == VelocityCheck_X.NEUTRAL)
+        {
+            if (currVelocity > threshHold) // Upwards
+            {
+                //Debug.Log("Dmitri neutral to up");
+                ++shakeCounter;
+                ControllerState_2 = VelocityCheck_X.UP;
+            }
+            else if (currVelocity < -threshHold) // Downwards
+            {
+                //Debug.Log("Dmitri neutral to down");
+                ++shakeCounter;
+                ControllerState_2 = VelocityCheck_X.DOWN;
+            }
+        }
+        else if (ControllerState_2 == VelocityCheck_X.UP)
+        {
+            if (currVelocity < -threshHold)
+            {
+                //Debug.Log("Dmitri up to down");
+                ++shakeCounter;
+                ControllerState_2 = VelocityCheck_X.DOWN;
+            }
+        }
+        else if (ControllerState_2 == VelocityCheck_X.DOWN)
+        {
+            if (currVelocity > threshHold)
+            {
+                //Debug.Log("Dmitri down to up");
+                ++shakeCounter;
+                ControllerState_2 = VelocityCheck_X.UP;
+            }
+        }
+
     }
 
     // Reload action

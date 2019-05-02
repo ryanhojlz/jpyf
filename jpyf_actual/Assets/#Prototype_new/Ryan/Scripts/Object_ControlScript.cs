@@ -35,6 +35,8 @@ public class Object_ControlScript : MonoBehaviour
     public float m_playerSpeed = 0;
     public float m_playerSpeedDebuff = 0;
     public float m_debuffDuration = 0;
+    public float m_dashSpeed = 5;
+
 
     // Object Interaction
     // Cart Interaction
@@ -51,6 +53,8 @@ public class Object_ControlScript : MonoBehaviour
     public bool isGathering = false;
 
     public bool jump = false;
+
+    public bool dash = false;
 
     // Object that grabs the player away
     public Transform Gropper = null;
@@ -114,7 +118,7 @@ public class Object_ControlScript : MonoBehaviour
         //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
 
         // Set move direction
-        movedir.Set(Controller.axisLeft_x * (m_playerSpeed - m_playerSpeedDebuff), 0, -Controller.axisLeft_y * (m_playerSpeed - m_playerSpeedDebuff));
+        movedir.Set(Controller.axisLeft_x * (m_playerSpeed + m_dashSpeed - m_playerSpeedDebuff), 0, -Controller.axisLeft_y * (m_playerSpeed - m_playerSpeedDebuff));
 
         // Modify velocity
         tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
@@ -182,7 +186,8 @@ public class Object_ControlScript : MonoBehaviour
         pickup = false;
         checkCart = false;
         checkCanGatherItem = false;
-        jump = false;
+        dash = false;
+        //jump = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -218,11 +223,11 @@ public class Object_ControlScript : MonoBehaviour
         // Kun Hua wants to jump so i give him
         if (Controller.ReturnCrossPress())
         {
-            jump = true;
+            dash = true;
+            //jump = true;
         }
 
-
-
+        
 #endif
 
 #if UNITY_EDITOR_WIN
@@ -246,9 +251,21 @@ public class Object_ControlScript : MonoBehaviour
             checkCanGatherItem = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            dash = true;
+        }
+
 #endif
 
-
+        if (dash == true)
+        {
+            m_dashSpeed = 150;
+        }
+        else
+        {
+            m_dashSpeed = 0;
+        }
         //Debug.Log("Pickup   + " + pickup);
         GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 
     }

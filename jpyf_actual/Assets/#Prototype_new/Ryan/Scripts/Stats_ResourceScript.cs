@@ -315,7 +315,7 @@ public class Stats_ResourceScript : MonoBehaviour
         }
         else if (m_LanternHp >= m_LanternHpCap * 0.5)
         {
-            i_num_enemies_spawn = 2;
+            i_num_enemies_spawn = 1;
         }
         else if (m_LanternHp >= m_LanternHpCap * 0.3)
         {

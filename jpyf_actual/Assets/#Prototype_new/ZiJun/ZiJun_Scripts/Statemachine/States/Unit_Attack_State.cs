@@ -37,8 +37,14 @@ public class Unit_Attack_State : IState
         }
 
         if ((!m_user.GetTarget() || !m_user.GetInAttackRange()) && !m_user.GetStillAttacking())
-        {//If there is not a target or target is not within attack range
+        {
+            //If there is not a target or target is not within attack range
             m_user.ChangeState("chase");
+
+            //Debug.Log("Target : " + m_user.GetTarget());
+            //Debug.Log("In Attack Range : " + m_user.GetInAttackRange());
+            //Debug.Log("Still Attacking : " + m_user.GetInAttackRange());
+
             return;
         }
 

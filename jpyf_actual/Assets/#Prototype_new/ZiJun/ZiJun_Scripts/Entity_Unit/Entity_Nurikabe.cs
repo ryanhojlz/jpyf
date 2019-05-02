@@ -46,7 +46,7 @@ public class Entity_Nurikabe : Entity_Unit
                 Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
                 Projectile.SetLifeTime(lifeTime);
                 Projectile.SetDamage(GetAttackStat());
-                SetStillAttacking(true);
+                //SetStillAttacking(true);
 
             }
 

@@ -493,7 +493,7 @@ public class Entity_Tengu : Entity_Unit
         var _lookRotation = Quaternion.LookRotation(_direction);
 
         //Debug.Log(Mathf.Atan2(_lookRotation.y, _lookRotation.x));
-        Debug.Log("Got come in leh");
+        //Debug.Log("Got come in leh");
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 120);
     }
 

@@ -9,13 +9,15 @@ public class VelocityCheckScript : MonoBehaviour
     // Velocity Check for move controller
     public Vector3 oldPos = Vector3.zero;
     public Vector3 newPos = Vector3.zero;
-    private float currVelocity = 0;
+    private float currVelocity_y = 0;
+    private float currVelocity_x = 0;
+
     Transform debugUI;
     Transform debugUI2;
 
     // Debug
     public Vector3 originalPos = Vector3.zero;
-    
+
     //Shake Counter
     int shakeCounter = 0;
     int shakeCounter2 = 0;
@@ -57,61 +59,23 @@ public class VelocityCheckScript : MonoBehaviour
     // Light Shaking Thresh hold distance shud be around 0.01 ish
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+
+    //}
+
+    private void FixedUpdate()
     {
         // Velocity Check calculation
         newPos = this.transform.position;
         // Use magnitude here bcos can get negative value;
-        currVelocity = newPos.y - oldPos.y;
-
-
-        // Velocity Check _ Y axis
-        if (ControllerState == VelocityCheck_Y.NEUTRAL)
-        {
-            if (currVelocity > threshHold) // Upwards
-            {
-                //Debug.Log("Dmitri neutral to up");
-                ++shakeCounter;
-                ControllerState = VelocityCheck_Y.UP;
-            }
-            else if (currVelocity < -threshHold) // Downwards
-            {
-                //Debug.Log("Dmitri neutral to down");
-                ++shakeCounter;
-                ControllerState = VelocityCheck_Y.DOWN;
-            }
-        }
-        else if (ControllerState == VelocityCheck_Y.UP)
-        {
-            if (currVelocity < -threshHold)
-            {
-                //Debug.Log("Dmitri up to down");
-                ++shakeCounter;
-                ControllerState = VelocityCheck_Y.DOWN;
-            }
-        }
-        else if (ControllerState == VelocityCheck_Y.DOWN)
-        {
-            if (currVelocity > threshHold)
-            {
-                //Debug.Log("Dmitri down to up");
-                ++shakeCounter;
-                ControllerState = VelocityCheck_Y.UP;
-            }
-        }
-
-
-
-
-        //debugUI.GetComponent<Text>().text = "" + currVelocity;
-        //debugUI2.GetComponent<Text>().text = "" + ControllerState;
-
+        VelocityCheck_AxisX();
+        VelocityCheck_AxisY();
         oldPos = newPos;
 
         ReloadAction();
         DebugFunc();
     }
-
     // PC Debugg func
     void DebugFunc()
     {
@@ -144,40 +108,84 @@ public class VelocityCheckScript : MonoBehaviour
         this.transform.position = pos;
     }
 
+    // I know theres a gyro scope thingy in the PS move thing 
+    //but the documentation to me kinda low or i couldnt find the right one atm so this is made
 
-    void VelocityCheck_AxisX()
+    void VelocityCheck_AxisY()
     {
+        currVelocity_y = newPos.y - oldPos.y;
+
         // Velocity Check _ Y axis
-        if (ControllerState_2 == VelocityCheck_X.NEUTRAL)
+        if (ControllerState == VelocityCheck_Y.NEUTRAL)
         {
-            if (currVelocity > threshHold) // Upwards
+            if (currVelocity_y > threshHold) // Upwards
             {
                 //Debug.Log("Dmitri neutral to up");
                 ++shakeCounter;
-                ControllerState_2 = VelocityCheck_X.UP;
+                ControllerState = VelocityCheck_Y.UP;
             }
-            else if (currVelocity < -threshHold) // Downwards
+            else if (currVelocity_y < -threshHold) // Downwards
             {
                 //Debug.Log("Dmitri neutral to down");
                 ++shakeCounter;
+                ControllerState = VelocityCheck_Y.DOWN;
+            }
+        }
+        else if (ControllerState == VelocityCheck_Y.UP)
+        {
+            if (currVelocity_y < -threshHold)
+            {
+                //Debug.Log("Dmitri up to down");
+                ++shakeCounter;
+                ControllerState = VelocityCheck_Y.DOWN;
+            }
+        }
+        else if (ControllerState == VelocityCheck_Y.DOWN)
+        {
+            if (currVelocity_y > threshHold)
+            {
+                //Debug.Log("Dmitri down to up");
+                ++shakeCounter;
+                ControllerState = VelocityCheck_Y.UP;
+            }
+        }
+    }
+
+    void VelocityCheck_AxisX()
+    {
+        currVelocity_x = newPos.x - oldPos.x;
+
+        // Velocity Check _ Y axis
+        if (ControllerState_2 == VelocityCheck_X.NEUTRAL)
+        {
+            if (currVelocity_x > threshHold) // Upwards
+            {
+                //Debug.Log("Dmitri neutral to up");
+                ++shakeCounter2;
+                ControllerState_2 = VelocityCheck_X.UP;
+            }
+            else if (currVelocity_x < -threshHold) // Downwards
+            {
+                //Debug.Log("Dmitri neutral to down");
+                ++shakeCounter2;
                 ControllerState_2 = VelocityCheck_X.DOWN;
             }
         }
         else if (ControllerState_2 == VelocityCheck_X.UP)
         {
-            if (currVelocity < -threshHold)
+            if (currVelocity_x < -threshHold)
             {
                 //Debug.Log("Dmitri up to down");
-                ++shakeCounter;
+                ++shakeCounter2;
                 ControllerState_2 = VelocityCheck_X.DOWN;
             }
         }
         else if (ControllerState_2 == VelocityCheck_X.DOWN)
         {
-            if (currVelocity > threshHold)
+            if (currVelocity_x > threshHold)
             {
                 //Debug.Log("Dmitri down to up");
-                ++shakeCounter;
+                ++shakeCounter2;
                 ControllerState_2 = VelocityCheck_X.UP;
             }
         }
@@ -189,10 +197,19 @@ public class VelocityCheckScript : MonoBehaviour
     {
         if (shakeCounter >= 5)
         {
-            Debug.Log("Reload");
+            //Debug.Log("Reload");
             shakeCounter = 0;
             GetComponent<RangeAttackScript>().Ammo = 3;
         }
     }
 
+    void HealingAction()
+    {
+        if (shakeCounter2 >= 15)
+        {
+            //Debug.Log("Reload");
+            shakeCounter2 = 0;
+            Stats_ResourceScript.Instance.Player2_TakeDmg(-35);
+        }
+    }
 }

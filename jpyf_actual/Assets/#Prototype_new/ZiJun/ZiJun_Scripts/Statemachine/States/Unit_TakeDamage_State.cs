@@ -11,26 +11,35 @@ public class Unit_TakeDamage_State : IState
     public Unit_TakeDamage_State(Entity_Unit _user)
     {
         m_user = _user;
-
         animationDuration = _user.GetTakeDamageTimer();
-
     }
 
     public void Enter()
     {
-        previousTime = Time.time;
+        if (m_user.GetComponent<AnimationScript>())
+        {
+            m_user.GetComponent<AnimationScript>().SetAnimTrigger(1);
+        }
+
+        //previousTime = Time.time;
     }
 
     public void Execute()
     {
-        if (previousTime == 0f)
-        {
-            previousTime = Time.time;
-        }
+        //if (previousTime == 0f)
+        //{
+        //    previousTime = Time.time;
+        //}
 
-        if (previousTime + animationDuration < Time.time)
+        //if (previousTime + animationDuration < Time.time)
+        //{
+        //    m_user.ReturnPreviousState();
+        //}
+
+
+        if (m_user.GetComponent<AnimationScript>().AnimatorObj.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
-            m_user.ReturnPreviousState();
+            m_user.ChangeState("chase");
         }
     }
 

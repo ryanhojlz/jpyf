@@ -23,6 +23,12 @@ public class Nurikabe : Entity_Unit
     {
         if (countdown < 0)
         {
+            // Animation start animation
+            if (GetComponent<AnimationScript>())
+            {
+                GetComponent<AnimationScript>().SetAnimTrigger(0);
+            }
+
             float lifeTime = 1f;//Temporary hard coding it here
                                 //DO shooting projectile here
             if (Projectile_Prefeb)

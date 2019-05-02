@@ -13,7 +13,14 @@ public class Entity_Take_Damage : MonoBehaviour
 
 
         //materials = this.GetComponent<Renderer>().materials;
-        materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+        if (!this.GetComponent<Renderer>())
+        {
+            materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+        }
+        else
+        {
+            materials = this.GetComponent<Renderer>().materials;
+        }
 
 
         if (materials.Length > 0)
@@ -32,7 +39,14 @@ public class Entity_Take_Damage : MonoBehaviour
             Material[] materials;
 
             //materials = this.GetComponent<Renderer>().materials;
-            materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+            if (!this.GetComponent<Renderer>())
+            {
+                materials = transform.GetChild(2).GetComponent<Renderer>().materials;
+            }
+            else
+            {
+                materials = this.GetComponent<Renderer>().materials;
+            }
             if (materials.Length > 0)
             {
                 materials[0].color = Color.white;

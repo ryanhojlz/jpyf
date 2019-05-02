@@ -74,6 +74,12 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected string statename;
 
+    [SerializeField]
+    protected float Summoning_timer = 0f;
+
+    [SerializeField]
+    protected float Take_Damage_timer = 0f;
+
     protected Transform Target;
 
 
@@ -127,7 +133,7 @@ public class Entity_Unit : MonoBehaviour
         ++Stats_ResourceScript.Instance.EnemyCount;
         resource = Stats_ResourceScript.Instance;
 
-        ChangeState("chase");
+        ChangeState("summon");
 
         if (Piority_Unit == Piority.PAYLOAD)
         {
@@ -231,6 +237,13 @@ public class Entity_Unit : MonoBehaviour
     public void SetStillAttacking(bool _stillAttacking) { stillAttacking = _stillAttacking; }
     public void SetOriginalMoveSpeed(float _originalmovespeed) { Unit_Stats.SetOriginalMoveSpeed(_originalmovespeed); }
     public void SetMoveSpeed(float _movespeed) { Unit_Stats.SetMoveSpeed(_movespeed); }
+
+    //Getter & Setter For AnimationTimer
+    public void SetSummoningTimer(float _Summoning_timer) { Summoning_timer = _Summoning_timer; }
+    public float GetSummoningTimer() { return Summoning_timer; }
+
+    public void SetTakeDamageTimer(float _Take_Damage_timer) { Take_Damage_timer = _Take_Damage_timer; }
+    public float GetTakeDamageTimer() { return Take_Damage_timer; }
 
     //Other functions
     public virtual void Attack()
@@ -546,6 +559,8 @@ public class Entity_Unit : MonoBehaviour
         sm.AddState("stun", new Unit_Stun_State(this));
         sm.AddState("roam", new Unit_Roam_State(this));
         sm.AddState("afk", new Unit_AFK_State(this));
+        sm.AddState("takedamage", new Unit_TakeDamage_State(this));
+        sm.AddState("summon", new Unit_Summoned_State(this));
     }
 
     public virtual void SelfUpdate()//Use this to update units without overrideing original update
@@ -563,6 +578,9 @@ public class Entity_Unit : MonoBehaviour
         gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
         Unit_Stats.TakeDamage(((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef()));
+
+        ChangeState("takedamage");
+
         UpdateHealth();//Health only changes when taking damage or getting healed
     }
 

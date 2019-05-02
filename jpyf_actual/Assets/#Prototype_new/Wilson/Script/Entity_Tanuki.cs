@@ -54,7 +54,7 @@ public class Entity_Tanuki : Entity_Unit
         if (!BulletShootFrom)
             return;
 
-        Debug.Log("Got come here");
+        //Debug.Log("Got come here");
 
         if (countdown < 0)
         {

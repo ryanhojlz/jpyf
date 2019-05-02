@@ -14,6 +14,10 @@ public class Entity_Stats
     float m_original_move_speed;
     float m_move_speed;
 
+    //For animations
+    float m_summoning_timer;
+    float m_take_damage_timer;
+
     // Getter
     public float GetHealth() { return m_health; }
     public float GetMaxHealth() { return m_maxhealth; }
@@ -35,6 +39,13 @@ public class Entity_Stats
     public void SetChaseRange(float _chase_range) { m_chase_range = _chase_range; }
     public void SetOriginalMoveSpeed(float _original_move_speed) { m_original_move_speed = _original_move_speed; }
     public void SetMoveSpeed(float _move_speed) { m_move_speed = _move_speed; }
+
+    //Getter & Setter For AnimationTimer
+    public void SetSummoningTimer(float _summoning_timer) { m_summoning_timer = _summoning_timer; }
+    public float GetSummoningTimer() { return m_summoning_timer; }
+
+    public void SetTakeDamageTimer(float _take_damage_timer) { m_take_damage_timer = _take_damage_timer; }
+    public float GetTakeDamageTimer() { return m_take_damage_timer; }
 
     //Other functions
     public void TakeDamage(float _damage) { m_health -= _damage; }

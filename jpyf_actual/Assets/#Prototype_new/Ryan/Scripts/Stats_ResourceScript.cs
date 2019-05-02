@@ -80,7 +80,7 @@ public class Stats_ResourceScript : MonoBehaviour
     // Enemy Count
     public int EnemyCount = 0;
 
-
+   
     //
     public static Stats_ResourceScript Instance = null;
 

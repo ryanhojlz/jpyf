@@ -5,7 +5,7 @@ using UnityEngine;
 public class VR_PickUpHandlerScript : MonoBehaviour
 {
     public Stats_ResourceScript handler = null;
-    
+    public Transform effect = null;
     // Use this for initialization
 	void Start ()
     {
@@ -22,6 +22,8 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     {
         if (other.GetComponent<Pickup_Scripts>())
         {
+            // Put effect here
+
             handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
             Destroy(other.gameObject);
         }

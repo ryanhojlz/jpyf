@@ -36,6 +36,9 @@ public class Entity_Tengu : Entity_Unit
 
     Transform Payload_Position = null;
 
+    Vector3 FlyPos = Vector3.zero;
+    float flyOffset = 10f;
+
     enum AtkPlayer
     {
         GRAB = 0,
@@ -475,8 +478,15 @@ public class Entity_Tengu : Entity_Unit
         }
 
         //Debug.Log("Testing Sin : " + Mathf.Sin(SinCounter += Time.deltaTime));
+        FlyPos = this.transform.position;
+        FlyPos.Set(FlyPos.x, FlyPos.y + (Mathf.Sin(Time.time % 3.45f)) * 0.05f, FlyPos.z);
 
-        this.transform.position += new Vector3(0, (Mathf.Sin(Time.time % 3.45f )) * 0.05f, 0);
+        if (FlyPos.y > TargetEscape.transform.position.y + flyOffset)
+        {
+            FlyPos.y = TargetEscape.transform.position.y + flyOffset;
+        }
+        this.transform.position = FlyPos;
+        //this.transform.position += new Vector3(0, (Mathf.Sin(Time.time % 3.45f )) * 0.05f, 0);
 
         return false;
     }

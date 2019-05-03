@@ -65,8 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetObject: {fileID: 0}
+  TargetedObject: {fileID: 0}
   despawnTimer: 4
-  spriteRenderer: {fileID: 212621094133514440}
+  exclamationMark: {fileID: 0}
 --- !u!212 &212621094133514440
 SpriteRenderer:
   m_ObjectHideFlags: 1

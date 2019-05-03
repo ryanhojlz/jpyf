@@ -16,6 +16,8 @@ public class FadeScreen : MonoBehaviour
 
     Stats_ResourceScript ForPlayer = null;
 
+    Vector3 scale = Vector3.zero;
+
     void Start()
     {
         Original = redImage.color;
@@ -29,9 +31,26 @@ public class FadeScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.25f)
+        if (((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.25f) && ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap >= 0.21f))
         {
             Fade();
+            scale.Set(15, 15, 1);
+            redImage.rectTransform.localScale = scale;
+            Debug.Log(redImage.rectTransform.localScale);
+        }
+        else if (((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.20f) && ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap >= 0.11f))
+        {
+            Fade();
+            scale.Set(13, 13, 1);
+            redImage.rectTransform.localScale = scale;
+            Debug.Log(redImage.rectTransform.localScale);
+        }
+        else if (((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.10f) && ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap >= 0f))
+        {
+            Fade();
+            scale.Set(10, 10, 1);
+            redImage.rectTransform.localScale = scale;
+            Debug.Log(redImage.rectTransform.localScale);
         }
         else
         {

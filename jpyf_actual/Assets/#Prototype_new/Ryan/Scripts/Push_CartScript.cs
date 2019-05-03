@@ -153,7 +153,7 @@ public class Push_CartScript : MonoBehaviour
                 // If dead return;
                 m_Player2.transform.position = point.position;
                 m_CartMoveDirection = m_ObjControl.movedir;
-                m_CartMoveDirection.x = 0;
+                //m_CartMoveDirection.x = 0;
                 m_CartMoveDirection.y = 0;
                 float cartspeed = (m_CartSpeed + m_CartBuffSpeed) - m_SpeedDebuff;
                 if (cartspeed < 0)

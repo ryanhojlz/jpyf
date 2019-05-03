@@ -576,7 +576,7 @@ public class Entity_Unit : MonoBehaviour
     {
         gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
-        Unit_Stats.TakeDamage(((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef()));
+        Unit_Stats.TakeDamage((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef());
 
         ChangeState("takedamage");
 

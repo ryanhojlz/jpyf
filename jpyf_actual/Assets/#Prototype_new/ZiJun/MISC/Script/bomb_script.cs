@@ -13,6 +13,8 @@ public class bomb_script : MonoBehaviour
 
     Bomb_state State;
 
+    public Collider Collider = null;
+
     Vector3 Expending_Scale = Vector3.zero;
     public float expending_speed = 5f;
 
@@ -67,7 +69,11 @@ public class bomb_script : MonoBehaviour
 
             case Bomb_state.EXPLOSION:
                 {
-                    Debug.Log("Came here");
+                    if (Collider && Collider.enabled)
+                    {
+                        Collider.enabled = false;
+                    }
+                    //Debug.Log("Came here");
                     this.GetComponent<Rigidbody>().isKinematic = true;
                     this.transform.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                 }
@@ -101,11 +107,19 @@ public class bomb_script : MonoBehaviour
         if (State == Bomb_state.EXPLOSION)
         {
             Entity_Unit unit = other.GetComponent<Entity_Unit>();
+            Wall_Script wall = other.GetComponent<Wall_Script>();
             if (unit)
             {
                 if (unit.GetHealthStat() > 0)
                 {
                     unit.TakeDamage(unit.GetMaxHealthStat());
+                }
+            }
+            else if (wall)
+            {
+                if (wall.GetHealth() > 0)
+                {
+                    wall.TakeDamage((int)wall.GetMaxHealth());
                 }
             }
         }
@@ -114,5 +128,15 @@ public class bomb_script : MonoBehaviour
     public void SetBombState_Active()
     {
         State = Bomb_state.ACTIVE;
+    }
+
+    public bool IsExplosion()
+    {
+        if (State == Bomb_state.EXPLOSION)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -123,14 +123,14 @@ public class AI_Movement : MonoBehaviour
     public void StopMoving()
     {
         //Debug.Log("Stop");
-        if(m_agent)
+        if(m_agent && m_agent.isActiveAndEnabled)
             m_agent.isStopped = true;
     }
 
     public void StartMoving()
     {
         //Debug.Log("Move");
-        if (m_agent)
+        if (m_agent && m_agent.isActiveAndEnabled)
             m_agent.isStopped = false;
     }
 

@@ -106,6 +106,7 @@ public class Entity_Unit : MonoBehaviour
     DayNightCycle daynightInstance = null;
     protected Stats_ResourceScript resource = null;
     // Use this for initialization
+
     private void Awake()
     {
         SetHealthStat(Health_Stat);
@@ -203,6 +204,9 @@ public class Entity_Unit : MonoBehaviour
         sm.ExecuteStateUpdate();//Updating statemachine
         MoveSpeedUpdate();
         statename = sm.GetCurrentStateName();
+
+        UpdateisParented();
+        UpdateInspector();
 
     }
 
@@ -574,6 +578,9 @@ public class Entity_Unit : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if (GetHealthStat() <= 0)
+            return;
+
         gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
         Unit_Stats.TakeDamage((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef());
@@ -702,6 +709,15 @@ public class Entity_Unit : MonoBehaviour
         return instantChasePlayer;
     }
 
+    private void UpdateisParented()
+    {
+        //used to check if it is being grabbed
+        if (this.transform.parent && this.transform.parent.parent)
+        {
+            Stun();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!transform.parent.GetComponent<NavMeshAgent>().enabled)
@@ -715,6 +731,25 @@ public class Entity_Unit : MonoBehaviour
             }
         }
     }
+
+
+    void UpdateInspector()
+    {
+       Health_Stat = GetHealthStat();//Attack stats of unit
+
+       Attack_Stat = GetAttackStat();//Attack stats of unit
+
+       Defence_Stat = GetDefenceStat();//Defence stats of unit
+
+       Attack_Speed_Stat = GetAttackSpeedStat();//Attack speed of unit
+
+       Attack_Range_Stat = GetAttackRangeStat();//Attack Range of unit
+
+       Chase_Range_Stat = GetChaseRangeStat();//Chase Range of unit
+
+       Move_Speed_Stat = GetMoveSpeed();//Attack stats of unit
+    }
+   
 
 
 }

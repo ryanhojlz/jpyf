@@ -44,9 +44,21 @@ public class PickupHandlerScript : MonoBehaviour
                     currentObject.GetComponent<Rigidbody>().isKinematic = false;
                     //currentObject.GetComponent<AI_Movement>().enabled = true;
                 }
+
+                if (currentObject.GetComponent<bomb_script>())
+                {
+                    //currentObject.GetComponent<NavMeshAgent>().enabled = true;
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentObject.GetComponent<SphereCollider>().enabled = true;
+                    currentObject.GetComponent<bomb_script>().SetBombState_Active();
+                    //currentObject.GetComponent<AI_Movement>().enabled = true;
+                }
+
+
                 throwDirection = this.transform.forward * 22;
                 currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
                 currentObject = null;
+
             }
         }
 
@@ -107,8 +119,13 @@ public class PickupHandlerScript : MonoBehaviour
                 currentObject.GetComponent<Rigidbody>().isKinematic = true;
                 currentObject.GetComponent<BoxCollider>().enabled = false;
             }
+            if (currentObject.GetComponent<bomb_script>())
+            {
+                currentObject.GetComponent<Rigidbody>().isKinematic = true;
+                currentObject.GetComponent<SphereCollider>().enabled = false;
+            }
 
-            
+
             // Parent cos picking up**
             currentObject.parent = this.transform;
             currentObject.transform.localPosition = offset;
@@ -137,6 +154,11 @@ public class PickupHandlerScript : MonoBehaviour
         {
             // This is occuring 
             nearest_pickup_object = other.transform.parent;
+        }
+
+        if (other.GetComponent<bomb_script>())
+        {
+            nearest_pickup_object = other.transform;
         }
 
     }

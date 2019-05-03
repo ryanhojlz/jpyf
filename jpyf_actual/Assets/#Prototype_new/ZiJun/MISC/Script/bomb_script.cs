@@ -24,7 +24,7 @@ public class bomb_script : MonoBehaviour
     void Start ()
     {
         //State = Bomb_state.DORMANT;
-        State = Bomb_state.ACTIVE;
+        State = Bomb_state.DORMANT;
 
         Expending_Scale.Set(1, 1, 1);
 
@@ -109,5 +109,10 @@ public class bomb_script : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetBombState_Active()
+    {
+        State = Bomb_state.ACTIVE;
     }
 }

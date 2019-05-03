@@ -6,10 +6,13 @@ public class VR_PickUpHandlerScript : MonoBehaviour
 {
     public Stats_ResourceScript handler = null;
     public GameObject particles_prefeb = null;
+    public GameObject particlesReference = null;
     // Use this for initialization
     void Start()
     {
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
+        particlesReference = Instantiate(particles_prefeb, transform.position, Quaternion.identity);
+        particlesReference.transform.parent = this.transform;
     }
 
     // Update is called once per frame
@@ -22,10 +25,8 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     {
         if (other.GetComponent<Pickup_Scripts>())
         {
+            particlesReference.GetComponent<ParticleSystem>().Play();
             // Put effect here
-            spawnEffect(this.transform.position);
-
-            //
             handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
             Destroy(other.gameObject);
         }

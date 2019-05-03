@@ -21,7 +21,7 @@ public class VelocityCheckScript : MonoBehaviour
     //Shake Counter
     int shakeCounter = 0;
     int shakeCounter2 = 0;
-    float threshHold = 0.01f;
+    float threshHold = 0.09f;
 
     enum VelocityCheck_Y
     {
@@ -206,11 +206,11 @@ public class VelocityCheckScript : MonoBehaviour
 
     void HealingAction()
     {
-        if (shakeCounter2 >= 15)
+        if (shakeCounter2 >= 5)
         {
             //Debug.Log("Reload");
             shakeCounter2 = 0;
-            Stats_ResourceScript.Instance.Player2_TakeDmg(-15);
+            Stats_ResourceScript.Instance.Player2_TakeDmg(-10);
         }
     }
 }

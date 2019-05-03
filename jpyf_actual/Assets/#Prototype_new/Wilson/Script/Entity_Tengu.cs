@@ -20,6 +20,7 @@ public class Entity_Tengu : Entity_Unit
 
     //Variables////////////////////////
     public float flyspeed = 10f;
+    public float hoverspeed = 10f;
     GameObject HoldUnit = null;
 
     bool TouchedUnit = false;
@@ -453,7 +454,7 @@ public class Entity_Tengu : Entity_Unit
 
             dir = (TargetPos - this.transform.position).normalized;
 
-            Vector3 vel = dir * flyspeed * Time.deltaTime;
+            Vector3 vel = dir * hoverspeed * Time.deltaTime;
 
             this.transform.position += vel;
 
@@ -477,7 +478,7 @@ public class Entity_Tengu : Entity_Unit
 
             dir = (TargetPos - this.transform.position).normalized;
 
-            Vector3 vel = dir * flyspeed * Time.deltaTime;
+            Vector3 vel = dir * hoverspeed * Time.deltaTime;
 
 
             this.transform.position += vel;

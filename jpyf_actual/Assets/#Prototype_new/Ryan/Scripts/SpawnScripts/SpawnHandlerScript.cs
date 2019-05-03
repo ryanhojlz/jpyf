@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class SpawnHandlerScript : MonoBehaviour
 {
+    public static SpawnHandlerScript Instance = null;
     public List<Transform> ObjectList;
     public List<Transform> SpawnLocation;
     public Stats_ResourceScript handler;
@@ -23,8 +24,19 @@ public class SpawnHandlerScript : MonoBehaviour
     public int enemy_cap = 0;
 
     // Use this for initialization
-	void Start ()
+    void Start()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else if (Instance)
+        {
+            Destroy(this.gameObject);
+        }
+
+
+
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         timerReference = timer;
         for (int i = 0; i < transform.childCount; ++i)
@@ -44,11 +56,11 @@ public class SpawnHandlerScript : MonoBehaviour
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
 
-        initial_spawn -= 1 * Time.deltaTime;
-        if (initial_spawn < 0)
-        {
-            spawnEnemy = true;
-        }
+        //initial_spawn -= 1 * Time.deltaTime;
+        //if (initial_spawn < 0)
+        //{
+        //    spawnEnemy = true;
+        //}
 
         if (spawnEnemy)
         {
@@ -90,7 +102,6 @@ public class SpawnHandlerScript : MonoBehaviour
             GameObject obj = Instantiate(ObjectList[Random.Range(0, ObjectList.Count)].gameObject);
             obj.GetComponent<NavMeshAgent>().Warp(SpawnLocation[spawnInt].position);
             timer = timerReference;
-
         }
     }
 }

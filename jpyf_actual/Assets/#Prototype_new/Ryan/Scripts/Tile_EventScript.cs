@@ -104,6 +104,7 @@ public class Tile_EventScript : MonoBehaviour
     {
         GameObject go = Instantiate(enemy_list[id].gameObject);
         go.GetComponent<NavMeshAgent>().Warp(pos);
+        go.transform.parent = this.transform;
     }
 
     void SpawnEnemyRandomLocation(int id)
@@ -144,5 +145,12 @@ public class Tile_EventScript : MonoBehaviour
         {
             SpawnEnemy(2, m_spawnList[3].position);
         }
+
+        
+
+
     }
+
+
+
 }

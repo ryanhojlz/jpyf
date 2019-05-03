@@ -123,13 +123,13 @@ public class Entity_Unit : MonoBehaviour
         atkcooldown = 1f / GetAttackSpeedStat();
 
         SetChaseRangeStat(Chase_Range_Stat);
+        AddState();
 
-     
+
 
     }
     void Start ()
     {
-        AddState();
 
         Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;

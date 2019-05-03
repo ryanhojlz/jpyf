@@ -11,20 +11,36 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     // Tutorial Boolean
     public bool BabySit = false;
-    public GameObject FirstObjective = null;
-    // Use this for initialization
-    void Start ()
+    public GameObject Objective1 = null;
+    public GameObject Objective2 = null;
+    public GameObject Objective3 = null;
+    public GameObject Objective4 = null;
+
+
+    public float f_difficulty = 0;
+
+
+    private void Awake()
     {
+
         // Singelton stuf
         if (!Instance)
             Instance = this;
-        else
+        else if (Instance)
             Destroy(this.gameObject);
 
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
         // Assigning milestones
         Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
 
-        FirstObjective = Milestones[Milestones.Length - 1];
+        Objective1 = Milestones[Milestones.Length - 1];
+        Objective2 = Milestones[Milestones.Length - 2];
+        Objective3 = Milestones[Milestones.Length - 3];
+        Objective4 = Milestones[Milestones.Length - 4];
 
         BabySit = true;
     }
@@ -32,7 +48,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (FirstObjective == null)
+        if (Objective1 == null)
         {
             BabySit = false;
         }
@@ -42,5 +58,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         else if (BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = false;
 
+
+        
+
     }
+
+    
 }

@@ -245,16 +245,21 @@ MonoBehaviour:
   Unit: 3
   Piority_Unit: 1
   idle: 0
+  instantChasePlayer: 0
   Health_Stat: 10
   Attack_Stat: 5
   Defence_Stat: 0
   Attack_Speed_Stat: 1
   Attack_Range_Stat: 5
   Chase_Range_Stat: 10
+  Move_Speed_Stat: 3
   Projectile_Prefeb: {fileID: 1892895758873684, guid: a9e046ec6fa19824eb23721443f37207,
     type: 2}
   UnitsInRange: []
   healthBar: {fileID: 114562284399038726}
+  statename: 
+  Summoning_timer: 0
+  Take_Damage_timer: 0
   AttackSound: {fileID: 0}
 --- !u!114 &114562284399038726
 MonoBehaviour:

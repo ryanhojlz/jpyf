@@ -14,7 +14,7 @@ public class Tile_EventScript : MonoBehaviour
     bool b_dimlights = false;
 
     public float f_spawnTimer = 0;
-
+    
     public int i_shrineHungerMeter = 0;
     public int shrineHungerCap = 0;
     // Object List
@@ -34,7 +34,9 @@ public class Tile_EventScript : MonoBehaviour
         {
             m_spawnList.Add(transform.Find("SpawnPoints").transform.GetChild(i));
         }
-        f_spawnTimer = 25;
+
+        
+
     }
     // Update is called once per frame
     void Update ()
@@ -77,16 +79,27 @@ public class Tile_EventScript : MonoBehaviour
             f_spawnTimer -= 1 * Time.deltaTime;
             if (f_spawnTimer <= 0)
             {
-                f_spawnTimer = 8.5f;
-                SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
-                SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+                if (GameEventsPrototypeScript.Instance.f_difficulty < 1)
+                {
+                    f_spawnTimer = 12.0f;
+                }
+                else if (GameEventsPrototypeScript.Instance.f_difficulty < 2)
+                {
+                    f_spawnTimer = 10.0f;
+                }
+                else if (GameEventsPrototypeScript.Instance.f_difficulty < 3)
+                {
+                    f_spawnTimer = 8.0f;
+                }
+                else if (GameEventsPrototypeScript.Instance.f_difficulty < 3)
+                {
+                    f_spawnTimer = 6.0f;
+                }
 
-            }
-            else
-            {
-                
-            }
 
+
+                SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+            }
         }
         else // If not event Start
         {
@@ -94,7 +107,11 @@ public class Tile_EventScript : MonoBehaviour
         }
 
 
-        if (i_shrineHungerMeter >= shrineHungerCap)
+
+
+
+        // Win condition shrine
+        if (i_shrineHungerMeter >= shrineHungerCap + GameEventsPrototypeScript.Instance.f_difficulty) 
         {
             Destroy(this.gameObject);
         }
@@ -107,12 +124,34 @@ public class Tile_EventScript : MonoBehaviour
         go.transform.parent = this.transform;
     }
 
-    void SpawnEnemyRandomLocation(int id)
+    public void SpawnEnemyRandomLocation(int id)
     {
         //if (handler.EnemyCount >= 5)
         //    return;
-        GameObject go = Instantiate(enemy_list[id].gameObject);
-        go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+
+        if (GameEventsPrototypeScript.Instance.f_difficulty > 2)
+        {
+
+            GameObject go = Instantiate(enemy_list[id].gameObject);
+            go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            go.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
+            go.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
+
+            GameObject go2 = Instantiate(enemy_list[id].gameObject);
+            go2.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            go2.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
+            go2.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
+
+        }
+        else
+        {
+            GameObject go = Instantiate(enemy_list[0].gameObject);
+            go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            //go.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
+            go.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
+        }
+
+
     }
 
     public void Start_Event()

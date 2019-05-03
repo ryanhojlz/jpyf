@@ -19,7 +19,8 @@ public class ItemParticleSpawn : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > 2f) 
         {
-            Destroy(this.gameObject);
+            //timer = 0;
+            //Destroy(this.gameObject);
         }
     }
 }

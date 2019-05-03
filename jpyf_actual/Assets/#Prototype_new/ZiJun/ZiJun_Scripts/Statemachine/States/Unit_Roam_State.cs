@@ -22,6 +22,11 @@ public class Unit_Roam_State : IState
 
     public void Execute()
     {
+        if (m_user.GetisIdle())
+        {
+            m_user.ChangeState("afk");
+        }
+
         m_user.FindNearestInList();
 
         if (m_user.GetTarget())//If target found go chase it

@@ -40,6 +40,8 @@ public class Entity_Tengu : Entity_Unit
     Vector3 FlyPos = Vector3.zero;
     float flyOffset = 4f;
 
+    Tengu_Warning warningHandler;
+
     enum AtkPlayer
     {
         GRAB = 0,
@@ -59,6 +61,8 @@ public class Entity_Tengu : Entity_Unit
     //Override functions
     public override void SelfStart()
     {
+        warningHandler = Tengu_Warning.instance;
+
         TargetEscape = GameObject.Find("TenguEscapePoint");
         TargetLeft = GameObject.Find("TenguEscapePointLeft");
         TargetRight = GameObject.Find("TenguEscapePointRight");
@@ -297,9 +301,11 @@ public class Entity_Tengu : Entity_Unit
                 {
                     RotateTowardsTarget(HoldUnit.transform.position);
 
+                    Tengu_Warning.instance.SetTargeter(HoldUnit.tag);
+
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed) || TouchedUnit)// <- This portion will be used to fly to target position && tell if it has reached
                     {
-                        
+
                         if (HoldUnit.transform.parent)//Being parented to a cart
                         {
                             if (!HoldUnit.transform.parent.GetComponent<Entity_Tengu>())

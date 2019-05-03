@@ -17,6 +17,8 @@ public class Mini_Game : MonoBehaviour
     //section
     int section = 3;
 
+    int currentSection = 0;
+
     bool isActiveQTE = false;
     bool QTE_Completed = true;
 
@@ -49,7 +51,6 @@ public class Mini_Game : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
         if (!isActiveQTE)
         {
             Manager.SetActive(false);// = false;
@@ -68,15 +69,19 @@ public class Mini_Game : MonoBehaviour
                 return;
             }
 
+            sourceCurrentAmount -= 10 * currentSection * Time.deltaTime;
+
             currentTime -= Time.deltaTime;
             imgTimer.fillAmount = currentTime / maxTimeLimit;
             img.fillAmount = sourceCurrentAmount / sourceMaxAmount;
 
+            currentSection = (int)(section * img.fillAmount);
+
             if (imgTimer.fillAmount <= 0 || img.fillAmount >= 1)
             {
-                counter = (int)(section * img.fillAmount);
+                //counter = (int)(section * img.fillAmount);
                 isActiveQTE = false;
-                objBreak.SetComplete(counter);
+                objBreak.SetComplete(1 + currentSection);//To always spawn at least once
             }
 
             //if (Input.GetKeyDown(KeyCode.Space))
@@ -109,7 +114,7 @@ public class Mini_Game : MonoBehaviour
             currentTime = other.GetTimeLimit();
             maxTimeLimit = other.GetTimeLimit();
 
-            sourceCurrentAmount = 0f;
+            sourceCurrentAmount = other.GetMaxSpamPoint() * 0.5f;
             sourceMaxAmount = other.GetMaxSpamPoint();
 
             powerHit = other.GetPowerPerHit();

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AbsorbParticle : MonoBehaviour
 {
-    public GameObject[] targetPosition;
+   
 
     ParticleSystem m_System;
     ParticleSystem.Particle[] m_Particles;
@@ -13,13 +14,20 @@ public class AbsorbParticle : MonoBehaviour
     //private ParticleSystem PSystem;
     private ParticleCollisionEvent[] CollisionEvents;
 
+    public GameObject unit = null;
+    public GameObject targetPosition = null;
 
+    private void Start()
+    {
+        unit.SetActive(false);
+        transform.parent.GetComponent<NavMeshAgent>().isStopped = true;
+    }
     // Update is called once per frame
     private void LateUpdate()
     {
         InitializeIfNeeded();
 
-        targetPosition = GameObject.FindGameObjectsWithTag("Soul_Absorber");
+        //targetPosition = GameObject.FindGameObjectsWithTag("Soul_Absorber");
 
        
 
@@ -28,53 +36,53 @@ public class AbsorbParticle : MonoBehaviour
 
         ///Debug.Log("Number of Particles alife = " + numParticlesAlive);
 
-        if (targetPosition.Length > 0)
+       
+        // Change only the particles that are alive
+        for (int i = 0; i < numParticlesAlive; i++)
         {
-            // Change only the particles that are alive
-            for (int i = 0; i < numParticlesAlive; i++)
+            Vector3 PosZero = new Vector3(0, 0, 0);
+            Vector3 PosToOffSet = PosZero - m_Particles[i].position;
+
+            float nearest = float.MaxValue;
+            Transform TargetedPosition = null;
+
+            //for (int j = 0; j < targetPosition.Length; j++)
+            //{
+            //    float distance = (m_Particles[i].position - (targetPosition[j].position - this.transform.position)).magnitude;
+
+            //    if (distance < nearest)
+            //    {
+            //        nearestIndex = j;
+            //        nearest = distance;
+            //    }
+            //}
+
+
+
+           
+            float distance = (m_Particles[i].position - (targetPosition.transform.position - this.transform.position)).magnitude;
+
+            if (distance < nearest)
             {
-                Vector3 PosZero = new Vector3(0, 0, 0);
-                Vector3 PosToOffSet = PosZero - m_Particles[i].position;
-
-                float nearest = float.MaxValue;
-                Transform TargetedPosition = null;
-
-                //for (int j = 0; j < targetPosition.Length; j++)
-                //{
-                //    float distance = (m_Particles[i].position - (targetPosition[j].position - this.transform.position)).magnitude;
-
-                //    if (distance < nearest)
-                //    {
-                //        nearestIndex = j;
-                //        nearest = distance;
-                //    }
-                //}
-
-
-
-                foreach (GameObject TargetPosition in targetPosition)
-                {
-                    float distance = (m_Particles[i].position - (TargetPosition.transform.position - this.transform.position)).magnitude;
-
-                    if (distance < nearest)
-                    {
-                        nearest = distance;
-                        TargetedPosition = TargetPosition.transform;
-                    }
-                }
-
-                Vector3 Direction = (m_Particles[i].position - (TargetedPosition.position - this.transform.position)).normalized;
-
-                if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
-                    m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
-
+                nearest = distance;
+                TargetedPosition = targetPosition.transform;
             }
+            
+
+            Vector3 Direction = (m_Particles[i].position - (TargetedPosition.position - this.transform.position)).normalized;
+
+            if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
+                m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
 
         }
 
+        
+
         if (numParticlesAlive <= 0)
         {
+            unit.SetActive(true);
             Destroy(this.gameObject);//.SetActive(false);
+            Destroy(targetPosition.gameObject);
         }
 
         // Apply the particle changes to the Particle System

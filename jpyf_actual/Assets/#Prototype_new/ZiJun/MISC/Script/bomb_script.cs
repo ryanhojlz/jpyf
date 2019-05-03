@@ -22,6 +22,8 @@ public class bomb_script : MonoBehaviour
 
     public float explosion_Range = 10f;
 
+    GameObject Fire = null;
+
     // Use this for initialization
     void Start ()
     {
@@ -29,6 +31,18 @@ public class bomb_script : MonoBehaviour
         State = Bomb_state.DORMANT;
 
         Expending_Scale.Set(1, 1, 1);
+
+        if (this.transform.childCount > 0)
+        {
+            Fire = this.transform.GetChild(0).GetChild(1).gameObject;
+
+            Debug.Log(Fire);
+
+            if (Fire)
+            {
+                Fire.SetActive(false);
+            }
+        }
 
     }
 	
@@ -39,7 +53,7 @@ public class bomb_script : MonoBehaviour
         {
             if (this.transform.localScale.x > 10)
             {
-                Debug.Log("HIIIIII loooo");
+                //Debug.Log("HIIIIII loooo");
                 this.transform.localScale = new Vector3(1, 1, 1);
             }
         }
@@ -62,6 +76,11 @@ public class bomb_script : MonoBehaviour
 
             case Bomb_state.ACTIVE:
                 {
+                    if (Fire)
+                    {
+                        Fire.SetActive(true);
+                    }
+                    //this.transform.GetChild(1).gameObject.SetActive(true);
                     this.GetComponent<Rigidbody>().isKinematic = false;
                     this.GetComponent<Rigidbody>().useGravity = true;
                 }
@@ -74,6 +93,7 @@ public class bomb_script : MonoBehaviour
                         Collider.enabled = false;
                     }
                     //Debug.Log("Came here");
+                    this.GetComponent<MeshRenderer>().enabled = true;
                     this.GetComponent<Rigidbody>().isKinematic = true;
                     this.transform.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                 }
@@ -87,6 +107,12 @@ public class bomb_script : MonoBehaviour
         if (State == Bomb_state.ACTIVE)
         {
             State = Bomb_state.EXPLOSION;
+
+            if(this.transform.childCount > 0)
+            {
+                Destroy(this.transform.GetChild(0).gameObject);
+                Destroy(this.transform.GetChild(1).gameObject);
+            }
         }
     }
 

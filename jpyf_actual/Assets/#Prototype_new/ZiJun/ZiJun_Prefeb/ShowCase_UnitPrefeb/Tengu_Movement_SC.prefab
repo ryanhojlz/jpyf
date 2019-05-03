@@ -165,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282772710117974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224677279059526362}
@@ -383,7 +383,7 @@ MonoBehaviour:
   idle: 0
   instantChasePlayer: 0
   Health_Stat: 3
-  Attack_Stat: 0
+  Attack_Stat: 5
   Defence_Stat: 0
   Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 5
@@ -396,7 +396,8 @@ MonoBehaviour:
   Summoning_timer: 0
   Take_Damage_timer: 0
   AttackSound: {fileID: 0}
-  flyspeed: 1
+  flyspeed: 1.2
+  hoverspeed: 3
 --- !u!114 &114883078689799876
 MonoBehaviour:
   m_ObjectHideFlags: 1

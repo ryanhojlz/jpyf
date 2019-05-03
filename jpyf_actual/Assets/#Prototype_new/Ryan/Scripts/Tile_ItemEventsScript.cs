@@ -27,7 +27,7 @@ public class Tile_ItemEventsScript : MonoBehaviour
     //}
 
 
-    void SpawnLocation()
+    public void SpawnLocation()
     {
         for (int i = 0; i < m_spawnList.Count; ++i)
         {

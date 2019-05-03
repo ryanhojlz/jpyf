@@ -30,7 +30,7 @@ public class SpawnHandlerScript : MonoBehaviour
         {
             Instance = this;
         }
-        else
+        else if (Instance)
         {
             Destroy(this.gameObject);
         }
@@ -56,11 +56,11 @@ public class SpawnHandlerScript : MonoBehaviour
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
         //timer -= (spawnSpeed + handler.m_spawnMultiplier) * Time.deltaTime;
 
-        initial_spawn -= 1 * Time.deltaTime;
-        if (initial_spawn < 0)
-        {
-            spawnEnemy = true;
-        }
+        //initial_spawn -= 1 * Time.deltaTime;
+        //if (initial_spawn < 0)
+        //{
+        //    spawnEnemy = true;
+        //}
 
         if (spawnEnemy)
         {

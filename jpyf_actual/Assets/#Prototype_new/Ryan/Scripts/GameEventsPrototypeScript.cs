@@ -32,21 +32,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Milestones[Milestones.Length - 3].activeSelf)
-            BabySit = true;
-        else
+        if (FirstObjective == null)
+        {
             BabySit = false;
-
-        if (BabySit)
-        {
-            SpawnHandlerScript.Instance.spawnEnemy = false;
         }
-        else
-        {
+
+        if (!BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = true;
-        }
-
-
+        else if (BabySit)
+            SpawnHandlerScript.Instance.spawnEnemy = false;
 
     }
 }

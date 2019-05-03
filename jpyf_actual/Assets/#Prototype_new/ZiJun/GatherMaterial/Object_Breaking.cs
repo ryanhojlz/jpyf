@@ -31,7 +31,7 @@ public class Object_Breaking : MonoBehaviour
     {
         if (m_Player)
         {
-            Debug.Log("I AM INSIDE");
+           // Debug.Log("I AM INSIDE");
         }
         //if (Input.GetKeyDown(KeyCode.E))
         //{

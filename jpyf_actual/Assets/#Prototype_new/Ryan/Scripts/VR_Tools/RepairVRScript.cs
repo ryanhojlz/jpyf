@@ -49,14 +49,19 @@ public class RepairVRScript : MonoBehaviour {
             if (handler.m_Minerals > 10)
             {
                 //++repairTick;
-                handler.m_CartHP += 5;
+                handler.m_CartHP += 20;
                 handler.m_Minerals -= 10;
                 //handler.m_CartHP += 10;
             }
-            handler.m_CartHP += 1;
+            handler.m_CartHP += 5;
 
         }
 
+
+        if (handler.m_CartHP > handler.m_CartHpCap)
+        {
+            handler.m_CartHP = 100;
+        }
         //if (other.gameObject == lanternSpot)
         //{
         //    handler.Lantern_TakeDmg(-2);

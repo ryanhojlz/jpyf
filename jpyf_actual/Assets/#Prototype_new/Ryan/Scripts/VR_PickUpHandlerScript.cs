@@ -23,8 +23,7 @@ public class VR_PickUpHandlerScript : MonoBehaviour
         if (other.GetComponent<Pickup_Scripts>())
         {
             // Put effect here
-            spawnEffect(this.transform.position);
-
+            //spawnEffect(this.transform.position);
             //
             handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
             Destroy(other.gameObject);

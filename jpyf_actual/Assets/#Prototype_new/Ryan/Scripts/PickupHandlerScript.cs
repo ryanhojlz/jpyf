@@ -123,6 +123,7 @@ public class PickupHandlerScript : MonoBehaviour
             {
                 currentObject.GetComponent<Rigidbody>().isKinematic = true;
                 currentObject.GetComponent<SphereCollider>().enabled = false;
+                currentObject.GetComponent<bomb_script>().SetPickUp();
             }
 
 

@@ -370,6 +370,8 @@ MonoBehaviour:
   expending_speed: 30
   debugging: 0
   explosion_Range: 10
+  dir: {x: 0, y: 0, z: -1}
+  speed: 10
 --- !u!135 &135271923292096026
 SphereCollider:
   m_ObjectHideFlags: 1

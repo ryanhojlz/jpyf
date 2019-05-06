@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class bomb_script : MonoBehaviour
 {
+
+    //Decide on how to despawn in the future
+
     enum Bomb_state
     {
         DORMANT,
@@ -23,6 +26,15 @@ public class bomb_script : MonoBehaviour
     public float explosion_Range = 10f;
 
     GameObject Fire = null;
+
+    public Vector3 dir = new Vector3();
+    public float speed = 10f;
+
+    bool save = false;
+    bool canMove = true;
+    bool spawnFromSpawner = false;
+
+    //float distanceToDespawn = 100f;
 
     // Use this for initialization
     void Start ()
@@ -65,7 +77,6 @@ public class bomb_script : MonoBehaviour
             }
         }
 
-
         switch (State)
         {
             case Bomb_state.DORMANT:
@@ -92,6 +103,9 @@ public class bomb_script : MonoBehaviour
                     {
                         Collider.enabled = false;
                     }
+
+                    canMove = false;
+
                     //Debug.Log("Came here");
                     this.GetComponent<MeshRenderer>().enabled = true;
                     this.GetComponent<Rigidbody>().isKinematic = true;
@@ -100,7 +114,11 @@ public class bomb_script : MonoBehaviour
                 break;
 
         }
-	}
+
+        Movement(dir, speed, canMove);
+
+        //this.transform.position += new Vector3(0, 0, 10);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -108,10 +126,16 @@ public class bomb_script : MonoBehaviour
         {
             State = Bomb_state.EXPLOSION;
 
-            if(this.transform.childCount > 0)
+            //if(this.transform.childCount > 0)
+            //{
+            //    //Destroy(transform.Get);
+            //    //Destroy(this.transform.GetChild(1).gameObject);
+
+            //}
+
+            foreach (Transform child in this.transform)
             {
-                Destroy(this.transform.GetChild(0).gameObject);
-                Destroy(this.transform.GetChild(1).gameObject);
+                Destroy(child.gameObject);
             }
         }
     }
@@ -148,12 +172,28 @@ public class bomb_script : MonoBehaviour
                     wall.TakeDamage((int)wall.GetMaxHealth());
                 }
             }
+            //If it hits payload
+            else if (other.tag == "Payload" && !save)
+            {
+                Stats_ResourceScript.Instance.Cart_TakeDmg(2);
+            }
+        }
+        else if (other.tag == "Payload" || other.tag == "BombStopper")
+        {
+            State = Bomb_state.ACTIVE;
         }
     }
 
     public void SetBombState_Active()
     {
         State = Bomb_state.ACTIVE;
+        save = true;
+        canMove = false;
+    }
+
+    public void SetPickUp()
+    {
+        canMove = false;
     }
 
     public bool IsExplosion()
@@ -164,5 +204,20 @@ public class bomb_script : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Movement(Vector3 Direction, float speed, bool canMove)
+    {
+        //Debug.Log(Direction * speed * Time.deltaTime);
+        Debug.Log(canMove);
+        if(canMove)
+            this.transform.localPosition = this.transform.localPosition + (Direction * speed * Time.deltaTime);
+
+        //this.transform.position += new Vector3(0, 0, 1);
+    }
+
+    public void SpawnerIniting()
+    {
+        spawnFromSpawner = true;
     }
 }

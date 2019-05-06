@@ -12,6 +12,9 @@ public class Alert : MonoBehaviour
     float deltaTimeIncrement = 0;
     public GameObject exclamationMark;
     bool rotateWay;
+    [SerializeField] protected Vector3 m_from = new Vector3(45.0f, 0.0f, 0.0f);
+    [SerializeField] protected Vector3 m_to = new Vector3(-45.0f, 0.0f, 0.0f);
+    [SerializeField] protected float m_frequency = 10.0F;
 
     private void Start()
     {
@@ -55,41 +58,7 @@ public class Alert : MonoBehaviour
             {
                 TargetedObject = null;
             }
-
-
-            transform.parent.eulerAngles = new Vector3(0, 0, 0);
-            float zAngle = 360 - this.transform.GetChild(1).rotation.eulerAngles.z;
-            Debug.Log(-zAngle);
-            if (zAngle < -35)
-            {
-                rotateWay = true;
-            }
-            if (zAngle > 35)
-            {
-                Debug.Log("hi");
-                rotateWay = false;
-            }
-
-            if (rotateWay) 
-            {
-                transform.Rotate(this.transform.GetChild(1).forward, 10 * Time.deltaTime);
-            }
-            if (!rotateWay)  
-            {
-                transform.Rotate(this.transform.GetChild(1).forward, - 10 * Time.deltaTime);
-            }
         }
-
-        //if (TargetObject)
-        //{
-
-        //}
-        //else
-        //{
-        //    //Destroy(gameObject);
-        //    this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-        //    this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
-        //}
 
         timer -= Time.deltaTime;
         if (timer < 0)
@@ -98,6 +67,12 @@ public class Alert : MonoBehaviour
             this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
         }
+
+        Quaternion from = Quaternion.Euler(this.m_from);
+        Quaternion to = Quaternion.Euler(this.m_to);
+
+        float lerp = 0.5F * (1.0F + Mathf.Sin(Mathf.PI * Time.realtimeSinceStartup * this.m_frequency));
+        this.transform/*.GetChild(0)*/.localRotation = Quaternion.Lerp(from, to, lerp);
     }
 
     public void TargetFound()
@@ -105,7 +80,5 @@ public class Alert : MonoBehaviour
         timer = despawnTimer;
         this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
         this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
-        
-        //this.transform.GetChild(1).GetComponent<MeshRenderer>().transform.rotation = Arotation ;
     }
 }

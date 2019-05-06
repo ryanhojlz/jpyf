@@ -40,6 +40,12 @@ public class MainMenuButton : MonoBehaviour
     int indexX = 0;
     int indexY = 0;
 
+    private bool loadScene = false;
+
+    private string scene;
+    //private Text loadingText;
+    public Image loadImage;
+
     // Use this for initialization
     void Start()
     {
@@ -58,6 +64,7 @@ public class MainMenuButton : MonoBehaviour
         originalPos3 = buttons[2].transform.position;
         originalPos4 = buttons[3].transform.position;
         UnityEngine.XR.XRSettings.showDeviceView = false;
+        loadImage.enabled = false;
     }
 
     // Update is called once per frame
@@ -129,6 +136,27 @@ public class MainMenuButton : MonoBehaviour
         }
 
         //Debug.Log(TitlescreenDisplay);
+        Debug.Log(scene);
+        // If the player has pressed the space bar and a new scene is not loading yet...
+        if (scene != null && loadScene == false)
+        {
+            // ...set the loadScene boolean to true to prevent loading a new scene more than once...
+            loadScene = true;
+
+            // ...change the instruction text to read "Loading..."
+            //loadingText.text = "Loading...";
+            loadImage.enabled = true;
+            // ...and start a coroutine that will load the desired scene.
+            StartCoroutine(LoadNewScene());
+        }
+
+        // If the new scene has started loading...
+        if (loadScene == true)
+        {
+            // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
+            //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+            loadImage.color = new Color(loadImage.color.r, loadImage.color.g, loadImage.color.b, Mathf.PingPong(Time.time, 1));
+        }
     }
 
     public void MoveUp()
@@ -204,7 +232,8 @@ public class MainMenuButton : MonoBehaviour
             case "coopvsai":
                 {
                     Debug.Log("Loading game scene");
-                    SceneManager.LoadScene("Week_3Merge");
+                    //SceneManager.LoadScene("Week_3Merge");
+                    scene = "Week_3Merge";
                     //SceneManager.LoadScene("PC_Build_Wilson");
 
                 }
@@ -219,14 +248,16 @@ public class MainMenuButton : MonoBehaviour
             case "settings":
                 {
                     Debug.Log("Loading game scene");
-                    SceneManager.LoadScene("Achievement_Scene");
+                    //SceneManager.LoadScene("Achievement_Scene");
+                    scene = "Achievement_Scene";
                 }
                 break;
 
             case "credits":
                 {
                     Debug.Log("Loading game scene");
-                    SceneManager.LoadScene("PC_Build");
+                    //SceneManager.LoadScene("PC_Build");
+                    scene = "PC_Build";
                 }
                 break;
 
@@ -264,6 +295,23 @@ public class MainMenuButton : MonoBehaviour
                     text4.SetActive(true);
                 }
                 break;
+        }
+    }
+
+    // The coroutine runs on its own at the same time as Update() and takes an integer indicating which scene to load.
+    IEnumerator LoadNewScene()
+    {
+        // This line waits for 3 seconds before executing the next line in the coroutine.
+        // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
+        yield return new WaitForSeconds(3);
+
+        // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+
+        // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
+        while (!async.isDone)
+        {
+            yield return null;
         }
     }
 }

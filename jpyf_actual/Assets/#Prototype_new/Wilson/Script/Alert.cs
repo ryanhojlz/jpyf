@@ -12,7 +12,9 @@ public class Alert : MonoBehaviour
     float deltaTimeIncrement = 0;
     public GameObject exclamationMark;
     bool rotateWay;
-
+    [SerializeField] protected Vector3 m_from = new Vector3(45.0f, 0.0f, 0.0f);
+    [SerializeField] protected Vector3 m_to = new Vector3(-45.0f, 0.0f, 0.0f);
+    [SerializeField] protected float m_frequency = 10.0F;
     private void Start()
     {
         timer = despawnTimer;
@@ -20,7 +22,9 @@ public class Alert : MonoBehaviour
         TargetObject = transform.parent.gameObject;
 
         this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-        this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+        this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+
+        //this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void SetPromptTarget(GameObject character)
@@ -39,9 +43,9 @@ public class Alert : MonoBehaviour
         //tmp.a -= 1.5f * Time.deltaTime;
         //spriteRenderer.color = tmp;
 
-        Debug.Log("Hi1");
-        Debug.Log(this.transform.GetChild(0));
-        Debug.Log(this.transform.GetChild(1));
+       // Debug.Log("Hi1");
+       // Debug.Log(this.transform.GetChild(0));
+       //Debug.Log(this.transform.GetChild(1));
         if (TargetObject.GetComponent<Entity_Unit>())
         {
             Debug.Log("Hi2");
@@ -58,26 +62,34 @@ public class Alert : MonoBehaviour
 
 
             transform.parent.eulerAngles = new Vector3(0, 0, 0);
-            float zAngle = 360 - this.transform.GetChild(1).rotation.eulerAngles.z;
-            Debug.Log(-zAngle);
-            if (zAngle < -35)
-            {
-                rotateWay = true;
-            }
-            if (zAngle > 35)
-            {
-                Debug.Log("hi");
-                rotateWay = false;
-            }
+            float zAngle = 360 - this.transform.GetChild(0).transform.GetChild(0).rotation.eulerAngles.z;
+            Debug.Log(zAngle);
+            //if ((zAngle < 90 && zAngle > 0) || (zAngle > 320 && zAngle < 360))
+            //{
+            //    Debug.Log("rotating one way round now");
+            //    rotateWay = true;
+            //}
+            //if (zAngle < 35)
+            //{
+            //    Debug.Log("rotating the other way round now");
+            //    rotateWay = false;
+            //}
+            //Debug.Log(rotateWay);
+            //if (rotateWay) 
+            //{
+            //    transform.Rotate(this.transform.GetChild(0).transform.GetChild(0).forward, 10 * Time.deltaTime);
+            //}
+            //if (!rotateWay)  
+            //{
+            //    transform.Rotate(this.transform.GetChild(0).transform.GetChild(0).forward, - 10 * Time.deltaTime);
+            //}
 
-            if (rotateWay) 
-            {
-                transform.Rotate(this.transform.GetChild(1).forward, 10 * Time.deltaTime);
-            }
-            if (!rotateWay)  
-            {
-                transform.Rotate(this.transform.GetChild(1).forward, - 10 * Time.deltaTime);
-            }
+            Quaternion from = Quaternion.Euler(this.m_from);
+            Quaternion to = Quaternion.Euler(this.m_to);
+
+            float lerp = 0.5F * (1.0F + Mathf.Sin(Mathf.PI * Time.realtimeSinceStartup * this.m_frequency));
+            this.transform/*.GetChild(0)*/.localRotation = Quaternion.Lerp(from, to, lerp);
+            //this.transform.GetChild(0).transform.GetChild(0).localRotation = Quaternion.Lerp(from, to, lerp);
         }
 
         //if (TargetObject)
@@ -96,7 +108,9 @@ public class Alert : MonoBehaviour
         {
             Debug.Log("Hi3");
             this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-            this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+            this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+
+            //this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -104,8 +118,9 @@ public class Alert : MonoBehaviour
     {
         timer = despawnTimer;
         this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
-        this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
-        
+        //this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+        this.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+
         //this.transform.GetChild(1).GetComponent<MeshRenderer>().transform.rotation = Arotation ;
     }
 }

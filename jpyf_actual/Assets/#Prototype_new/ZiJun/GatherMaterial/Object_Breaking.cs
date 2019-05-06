@@ -83,7 +83,7 @@ public class Object_Breaking : MonoBehaviour
             for (int i = 0; i < m_totalResource; ++i)
             {
                 //ItemSpawnHandlerScript tempObj = GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>();
-                //tempObj.SpawnItem(this.gameObject.transform.position);
+                //tempObj.SpawnItem(this.gameObject.transform.position);                
 
                 Pickup_Scripts item = Instantiate(ObjPrefeb);
                 item.transform.position = transform.position;

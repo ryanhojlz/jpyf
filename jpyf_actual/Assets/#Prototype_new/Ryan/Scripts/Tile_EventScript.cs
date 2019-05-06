@@ -33,7 +33,8 @@ public class Tile_EventScript : MonoBehaviour
 
         for (int i = 0; i < transform.Find("SpawnPoints").transform.childCount; ++i)
         {
-            m_spawnList.Add(transform.Find("SpawnPoints").transform.GetChild(i));
+            if (transform.Find("SpawnPoints").transform.GetChild(i).gameObject.activeInHierarchy)
+                m_spawnList.Add(transform.Find("SpawnPoints").transform.GetChild(i));
         }
 
         
@@ -51,23 +52,30 @@ public class Tile_EventScript : MonoBehaviour
     void Lights_Update()
     {
         // Update the lights so the players can tell something is there
-
-        if (!b_dimlights)
+        if (b_eventStart)
         {
-            m_lightObj.intensity -= 2 * Time.deltaTime;
-            if (m_lightObj.intensity <= 0)
+            if (!b_dimlights)
             {
-                b_dimlights = true;
+                m_lightObj.intensity -= 2 * Time.deltaTime;
+                if (m_lightObj.intensity <= 0)
+                {
+                    b_dimlights = true;
+                }
+            }
+            else if (b_dimlights)
+            {
+                m_lightObj.intensity += 2 * Time.deltaTime;
+                if (m_lightObj.intensity >= 5)
+                {
+                    b_dimlights = false;
+                }
             }
         }
-        else if (b_dimlights)
+        else
         {
-            m_lightObj.intensity += 2 * Time.deltaTime;
-            if (m_lightObj.intensity >= 5)
-            {
-                b_dimlights = false;
-            }
+            m_lightObj.intensity = 0;
         }
+        
         
     }
 
@@ -76,6 +84,7 @@ public class Tile_EventScript : MonoBehaviour
         // Event Start
         if (b_eventStart)
         {
+
             transform.Find("Shrine").transform.GetChild(1).gameObject.SetActive(true);
             transform.Find("Shrine").transform.GetChild(1).gameObject.GetComponent<TextMesh>().text = "" +  (shrineHungerCap - i_shrineHungerMeter);
 
@@ -127,6 +136,7 @@ public class Tile_EventScript : MonoBehaviour
         {
             GameEventsPrototypeScript.Instance.f_difficulty++;
             //Debug.Log("Difficulty " + GameEventsPrototypeScript.Instance.f_difficulty);
+            GameEventsPrototypeScript.Instance.TileEvent_Start = false;
             Destroy(this.gameObject);
         }
     }
@@ -170,6 +180,7 @@ public class Tile_EventScript : MonoBehaviour
         if (b_eventStart)
             return;
         b_eventStart = true;
+        GameEventsPrototypeScript.Instance.TileEvent_Start = true;
     }
 
     public void UpShrineHunger(int value)

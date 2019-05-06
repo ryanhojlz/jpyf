@@ -19,6 +19,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     public float f_difficulty = 0;
 
+    public bool TileEvent_Start = false;
 
     private void Awake()
     {

@@ -257,6 +257,7 @@ public class Stats_ResourceScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             m_P2_hp = 0;
+            m_CartHP = 0;
         }
 
     }

@@ -124,7 +124,7 @@ public class Push_CartScript : MonoBehaviour
 
 
 
-            if (debuffDuration < 0)
+            if (debuffDuration <= 0)
             {
                 m_SpeedDebuff = 0;
             }

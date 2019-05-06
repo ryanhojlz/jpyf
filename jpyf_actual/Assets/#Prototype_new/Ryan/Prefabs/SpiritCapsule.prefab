@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4440036192660762}
   - component: {fileID: 33898942270601532}
   - component: {fileID: 23190713892994188}
-  - component: {fileID: 136631556326359614}
   - component: {fileID: 54822841192088120}
   - component: {fileID: 114517623271696948}
+  - component: {fileID: 136485999207313714}
   m_Layer: 0
   m_Name: SpiritCapsule
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1970896600831042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 226427a1c919de746b82ba1b5f23895d, type: 2}
+  - {fileID: 2100000, guid: 662ca2c1a26285d48bff287ced07cd52, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1970896600831042}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 0e8345e66f1a9a84ab205235db7873e5, type: 3}
 --- !u!54 &54822841192088120
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -114,7 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handler: {fileID: 0}
   lanternSpot: {fileID: 0}
---- !u!136 &136631556326359614
+  grabbedOnce: 0
+--- !u!136 &136485999207313714
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,7 +124,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.01948608
+  m_Height: 0.19134548
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0.09567274, z: 0}

@@ -15,7 +15,7 @@ public class Mini_Game : MonoBehaviour
 
     int counter = 1;
     //section
-    int section = 3;
+    int section = 1;
 
     int currentSection = 0;
 

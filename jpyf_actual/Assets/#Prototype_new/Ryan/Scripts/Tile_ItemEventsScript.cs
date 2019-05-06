@@ -37,10 +37,10 @@ public class Tile_ItemEventsScript : MonoBehaviour
                     spawnId = 0;
                     break;
                 case 1:
-                    spawnId = 0;
+                    spawnId = 1;
                     break;
                 case 2:
-                    spawnId = 1;
+                    spawnId = 0;
                     break;
                 case 3:
                     spawnId = 1;
@@ -58,10 +58,10 @@ public class Tile_ItemEventsScript : MonoBehaviour
             //    spawnId = 1;
             //}
 
-
+            
             Transform spawneditem = Instantiate(Objects[spawnId]);
             spawneditem.position = m_spawnList[i].transform.position;
-           
+            spawneditem.parent = m_spawnList[i].transform;
         }
     }
 }

@@ -62,6 +62,23 @@ public class PickupHandlerScript : MonoBehaviour
             }
         }
 
+        //Update UI
+        if (!nearest_pickup_object)
+        {
+            UI_FeedbackScript.Instance.InteractTrue[2] = false;
+        }
+        else if (nearest_pickup_object && !currentObject)
+        {
+            UI_FeedbackScript.Instance.TextUI[2].text = "Pickup Object";
+            UI_FeedbackScript.Instance.InteractTrue[2] = true;
+        }
+        if (currentObject)
+        {
+            UI_FeedbackScript.Instance.TextUI[2].text = "Throw Object";
+            UI_FeedbackScript.Instance.InteractTrue[2] = true;
+        }
+
+
         // If picking up
         if (objHandler.pickup)
         {

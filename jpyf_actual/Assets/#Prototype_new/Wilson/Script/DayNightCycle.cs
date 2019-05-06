@@ -11,7 +11,7 @@ public class DayNightCycle : MonoBehaviour
     float sunRotation;
 
     public bool isDaytime;
-
+    public float rotateSpeed = 0;
     public static DayNightCycle Instance = null;
 
     // Start is called before the first frame update
@@ -54,7 +54,7 @@ public class DayNightCycle : MonoBehaviour
 
     void RotatingSun()
     {
-        transform.RotateAround(Vector3.zero, Vector3.forward, 15.0f * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.forward, rotateSpeed * Time.deltaTime);
         transform.LookAt(Vector3.zero);
     }
 }

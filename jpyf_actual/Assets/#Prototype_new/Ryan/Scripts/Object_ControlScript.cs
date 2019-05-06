@@ -93,9 +93,13 @@ public class Object_ControlScript : MonoBehaviour
         //Debug.Log("Moving boolean is " + isPushingCart);
         //Debug.Log("Check cart " + checkCart);
 
-        ObjectMovement();
         Interaction();
 	}
+
+    private void FixedUpdate()
+    {
+        ObjectMovement();
+    }
 
     void ObjectMovement()
     {
@@ -114,18 +118,24 @@ public class Object_ControlScript : MonoBehaviour
             m_playerSpeedDebuff = 0;
         }
 
-        CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+        //CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+
+        CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+        CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
         //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
 
         // Set move direction
-        movedir.Set(Controller.axisLeft_x * (m_playerSpeed + m_dashSpeed - m_playerSpeedDebuff), 0, -Controller.axisLeft_y * (m_playerSpeed - m_playerSpeedDebuff));
+        movedir.Set(Controller.axisLeft_x * (m_playerSpeed + m_dashSpeed - m_playerSpeedDebuff), 
+            0
+            , -Controller.axisLeft_y * (m_playerSpeed + m_dashSpeed - m_playerSpeedDebuff));
 
         // Modify velocity
         tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
 
-
+        // Ensure movement based on camera view
         movedir = CameraObj.transform.TransformDirection(movedir);
 
+        // Rotation code
         if (movedir != Vector3.zero)
         {
             tempVelocity.x = movedir.x;
@@ -167,7 +177,18 @@ public class Object_ControlScript : MonoBehaviour
         else if (!isPushingCart)
         {
             CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
+            //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+            
+            CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 150) * Time.deltaTime);
+            tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -10, 10);
+           
+            tempVelocity.z = Mathf.Clamp(tempVelocity.z, -10, 10);
+            GameObject.Find("Text3").GetComponent<Text>().text = "" + tempVelocity;
+            //Debug.Log("ufbuiawd " + (tempVelocity));
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+
+            //CurrentObj.transform.position += tempVelocity * Time.deltaTime;
         }
         //if (Gropper)
         //{

@@ -31,7 +31,7 @@ public class bomb_script : MonoBehaviour
     public float speed = 10f;
 
     bool save = false;
-    bool canMove = true;
+    public bool canMove = true;
     bool spawnFromSpawner = false;
 
     //float distanceToDespawn = 100f;

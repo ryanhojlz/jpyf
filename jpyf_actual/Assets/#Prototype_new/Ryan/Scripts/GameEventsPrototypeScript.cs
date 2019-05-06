@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 
 public class GameEventsPrototypeScript : MonoBehaviour
 {
@@ -8,6 +11,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     // Milestone / Blockade references
     public GameObject[] Milestones;
+
+    public int Tutorial = 0;
+    float tutorial_timer = 15;
+
 
     // Tutorial Boolean
     public bool BabySit = false;
@@ -17,8 +24,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public GameObject Objective4 = null;
 
 
+    public Text subtitles_外人;
     public float f_difficulty = 0;
-
     public bool TileEvent_Start = false;
 
     private void Awake()
@@ -38,6 +45,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Assigning milestones
         Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
 
+        
+
         Objective1 = Milestones[Milestones.Length - 1];
         Objective2 = Milestones[Milestones.Length - 2];
         Objective3 = Milestones[Milestones.Length - 3];
@@ -49,31 +58,35 @@ public class GameEventsPrototypeScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        BabySitConstraints();
+    }
+    
+
+    void UpdateTutorial()
+    {
+        switch (Tutorial)
+        {
+            case 0:
+                tutorial_timer -= 1 * Time.deltaTime;
+                break;
+            case 1:
+                break;
+        }
+    }
+
+
+    // Game was to hard nuff sad
+    void BabySitConstraints()
+    {
         if (Objective4 == null)
         {
             BabySit = false;
         }
-
-
-        
         if (!BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = true;
         else if (BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = false;
 
-
-
-        //f_difficulty = 0;
-        //for (int i = 0; i < Milestones.Length - 1; ++i)
-        //{
-        //    if (Milestones[i] == null)
-        //    {
-        //        ++f_difficulty;
-        //    }
-        //}
-        
-
     }
 
-    
 }

@@ -26,8 +26,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // References
     public Text subtitles_4外人 = null;
     public Text timer_4外人 = null;
-
-    public Text subtitles_4VR = null;
+    // VR Subtitless
+    public TextMesh subtitles_4VR = null;
     
 
     public Transform panel = null;
@@ -63,6 +63,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         subtitles_4外人 = GameObject.Find("Subtitles").GetComponent<Text>();
         panel = subtitles_4外人.transform.parent;
         timer_4外人 = panel.GetChild(1).GetComponent<Text>();
+        // Subtitles for VR
+        subtitles_4VR = GameObject.Find("VRTEXT_UI").GetComponent<TextMesh>();
 
 
         // Assign Objectives
@@ -90,15 +92,21 @@ public class GameEventsPrototypeScript : MonoBehaviour
         switch (Tutorial)
         {
             case 0:
+                // Introduction
+                // Text timer
                 tutorial_timer -= 1 * Time.deltaTime;
                 ShowSubtitles = true;
+
                 if (tutorial_timer > 35)
                 {
                     subtitles_4外人.text = "Push the old mans cart";
+                    subtitles_4VR.text = "You are old and \n you need your minion to push the cart";
                 }
                 else if (tutorial_timer > 30)
                 {
-                    subtitles_4外人.text = "The Cart is Damaged so you have to help repair it";
+                    subtitles_4外人.text = "The Cart is Damaged and you have to help repair it so you can move onward";
+                    subtitles_4VR.text = "The Cart is Damaged and you have to repair it \n so you can move onward \n" +
+                        "Wait for your minion to bring resources to you";
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_1);
                     tutorial_timer = 20;
                     ++Tutorial;
@@ -106,18 +114,27 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
             case 1:
                 //tutorial_timer -= 1 * Time.deltaTime;
-                
+                // Teach the player how to collect resources
                 if (tutorialObjective_1)
                 {
                     if (tutorialObjective_1.childCount < 3)
                     {
                         subtitles_4外人.text = "Collect the wood and throw back into the cart, Wait for the old man to repair with the materials";
-                    }    
+                    }
                 }
-                
+                if (Stats_ResourceScript.Instance.m_Minerals > 0)
+                {
+                    subtitles_4VR.text = "You have gained some materials, \n" +
+                        " use the repair tool \n " +
+                        "hammer the blue object below your drum";
+                }
+                if (Stats_ResourceScript.Instance.m_CartHP >= 100)
+                {
+                    ++Tutorial;
+                }
                 break;
             case 2:
-
+                
                 break;
         }
 

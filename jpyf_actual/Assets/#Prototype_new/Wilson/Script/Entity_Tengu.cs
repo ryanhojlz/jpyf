@@ -301,6 +301,7 @@ public class Entity_Tengu : Entity_Unit
                 {
                     RotateTowardsTarget(HoldUnit.transform.position);
 
+                    
                     Tengu_Warning.instance.SetTargeter(HoldUnit.tag);
 
                     if (FlyToTarget(HoldUnit.transform.position, flyspeed) || TouchedUnit)// <- This portion will be used to fly to target position && tell if it has reached

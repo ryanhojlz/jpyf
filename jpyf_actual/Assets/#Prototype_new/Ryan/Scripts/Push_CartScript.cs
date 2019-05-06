@@ -64,15 +64,15 @@ public class Push_CartScript : MonoBehaviour
         // Adjusting / Hardcode cart speed
         if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.7f)
         {
-            m_CartSpeed = 0.003f;
+            m_CartSpeed = 0.0065f;
         }
         else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.5f)
         {
-            m_CartSpeed = 0.002f;
+            m_CartSpeed = 0.003f;
         }
         else if (m_handler.m_CartHP > m_handler.m_CartHpCap * 0.3f)
         {
-            m_CartSpeed = 0.0015f;
+            m_CartSpeed = 0.002f;
         }
         else if (m_handler.m_CartHP > 0)
         {

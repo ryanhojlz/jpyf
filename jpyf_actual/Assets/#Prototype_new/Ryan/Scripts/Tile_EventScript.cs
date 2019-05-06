@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 
@@ -75,6 +76,10 @@ public class Tile_EventScript : MonoBehaviour
         // Event Start
         if (b_eventStart)
         {
+            transform.Find("Shrine").transform.GetChild(1).gameObject.SetActive(true);
+            transform.Find("Shrine").transform.GetChild(1).gameObject.GetComponent<TextMesh>().text = "" +  (shrineHungerCap - i_shrineHungerMeter);
+
+
             // Start spawning mobs
             f_spawnTimer -= 1 * Time.deltaTime;
             if (f_spawnTimer <= 0)
@@ -95,6 +100,10 @@ public class Tile_EventScript : MonoBehaviour
                 {
                     f_spawnTimer = 6.0f;
                 }
+                else
+                {
+                    f_spawnTimer = 5.0f;
+                }
 
 
 
@@ -107,12 +116,17 @@ public class Tile_EventScript : MonoBehaviour
         }
 
 
-
+        if (Input.GetKeyDown(KeyCode.Colon))
+        {
+            i_shrineHungerMeter = shrineHungerCap + (int)GameEventsPrototypeScript.Instance.f_difficulty;
+        }
 
 
         // Win condition shrine
-        if (i_shrineHungerMeter >= shrineHungerCap + GameEventsPrototypeScript.Instance.f_difficulty) 
+        if (i_shrineHungerMeter >= shrineHungerCap) 
         {
+            GameEventsPrototypeScript.Instance.f_difficulty++;
+            //Debug.Log("Difficulty " + GameEventsPrototypeScript.Instance.f_difficulty);
             Destroy(this.gameObject);
         }
     }
@@ -129,27 +143,24 @@ public class Tile_EventScript : MonoBehaviour
         //if (handler.EnemyCount >= 5)
         //    return;
 
-        if (GameEventsPrototypeScript.Instance.f_difficulty > 2)
-        {
+        //if (GameEventsPrototypeScript.Instance.f_difficulty > 2)
+        //{
+        //    GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
+        //    go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+        //    GameObject go2 = Instantiate(enemy_list[1].gameObject) as GameObject;
+        //    go2.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
 
-            GameObject go = Instantiate(enemy_list[id].gameObject);
-            go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
-            go.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
-            go.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
+        //}
+        //else if (GameEventsPrototypeScript.Instance.f_difficulty < 2)
+        //{
+        //    GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
+        //    go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+        //}
 
-            GameObject go2 = Instantiate(enemy_list[id].gameObject);
-            go2.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
-            go2.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
-            go2.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
 
-        }
-        else
-        {
-            GameObject go = Instantiate(enemy_list[0].gameObject);
-            go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
-            //go.GetComponent<Entity_Unit>().SetHealthStat(go.GetComponent<Entity_Unit>().GetHealthStat() + (1 * GameEventsPrototypeScript.Instance.f_difficulty));
-            go.transform.GetChild(1).GetComponent<Entity_Unit>().ChangeState("afk");
-        }
+        GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
+        go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+
 
 
     }

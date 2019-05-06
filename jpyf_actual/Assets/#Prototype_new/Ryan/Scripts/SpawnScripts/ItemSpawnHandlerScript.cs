@@ -22,7 +22,8 @@ public class ItemSpawnHandlerScript : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; ++i)
         {
-            SpawnLocation.Add(transform.GetChild(i));
+            if (transform.GetChild(i).gameObject.activeSelf)
+                SpawnLocation.Add(transform.GetChild(i));
         }
 	}
 	

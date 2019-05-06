@@ -144,7 +144,6 @@ public class PickupHandlerScript : MonoBehaviour
     {
         if (currentObject)
             return;
-
         if (other.GetComponent<Pickup_Scripts>())
         {
             nearest_pickup_object = other.transform;

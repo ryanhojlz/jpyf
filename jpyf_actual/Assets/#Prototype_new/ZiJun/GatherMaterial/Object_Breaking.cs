@@ -23,7 +23,7 @@ public class Object_Breaking : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        m_powerPerHit = 25;
     }
 
     // Update is called once per frame

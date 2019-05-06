@@ -22,6 +22,8 @@ public class VelocityCheckScript : MonoBehaviour
     int shakeCounter = 0;
     int shakeCounter2 = 0;
     float threshHold = 0.09f;
+    float threshHold2 = 0.06f;
+
 
     enum VelocityCheck_Y
     {
@@ -159,13 +161,13 @@ public class VelocityCheckScript : MonoBehaviour
         // Velocity Check _ Y axis
         if (ControllerState_2 == VelocityCheck_X.NEUTRAL)
         {
-            if (currVelocity_x > threshHold) // Upwards
+            if (currVelocity_x > threshHold2) // Upwards
             {
                 //Debug.Log("Dmitri neutral to up");
                 ++shakeCounter2;
                 ControllerState_2 = VelocityCheck_X.UP;
             }
-            else if (currVelocity_x < -threshHold) // Downwards
+            else if (currVelocity_x < -threshHold2) // Downwards
             {
                 //Debug.Log("Dmitri neutral to down");
                 ++shakeCounter2;
@@ -174,7 +176,7 @@ public class VelocityCheckScript : MonoBehaviour
         }
         else if (ControllerState_2 == VelocityCheck_X.UP)
         {
-            if (currVelocity_x < -threshHold)
+            if (currVelocity_x < -threshHold2)
             {
                 //Debug.Log("Dmitri up to down");
                 ++shakeCounter2;
@@ -183,7 +185,7 @@ public class VelocityCheckScript : MonoBehaviour
         }
         else if (ControllerState_2 == VelocityCheck_X.DOWN)
         {
-            if (currVelocity_x > threshHold)
+            if (currVelocity_x > threshHold2)
             {
                 //Debug.Log("Dmitri down to up");
                 ++shakeCounter2;
@@ -206,7 +208,7 @@ public class VelocityCheckScript : MonoBehaviour
 
     void HealingAction()
     {
-        if (shakeCounter2 >= 5)
+        if (shakeCounter2 >= 3)
         {
             //Debug.Log("Reload");
             shakeCounter2 = 0;

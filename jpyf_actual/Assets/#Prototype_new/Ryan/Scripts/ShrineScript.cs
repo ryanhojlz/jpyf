@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ShrineScript : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class ShrineScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        transform.GetChild(1).gameObject.SetActive(false);
         tile_event = transform.parent.GetComponent<Tile_EventScript>();
 	}
 	

@@ -10,7 +10,7 @@ public class Entity_Tanuki_Projectile : Entity_Projectile
 
     public override void HitCart(Collider other)
     {
-        GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)(m_dmg * damageReduction));
+        GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)(m_dmg));
     }
 
     public override void HitPlayer(Collider other)

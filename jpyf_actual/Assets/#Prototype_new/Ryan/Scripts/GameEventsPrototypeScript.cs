@@ -48,17 +48,28 @@ public class GameEventsPrototypeScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Objective1 == null)
+        if (Objective4 == null)
         {
             BabySit = false;
         }
 
+
+        
         if (!BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = true;
         else if (BabySit)
             SpawnHandlerScript.Instance.spawnEnemy = false;
 
 
+
+        //f_difficulty = 0;
+        //for (int i = 0; i < Milestones.Length - 1; ++i)
+        //{
+        //    if (Milestones[i] == null)
+        //    {
+        //        ++f_difficulty;
+        //    }
+        //}
         
 
     }

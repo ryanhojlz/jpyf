@@ -15,7 +15,7 @@ public class Mini_Game : MonoBehaviour
 
     int counter = 1;
     //section
-    int section = 1;
+    int section = 3;
 
     int currentSection = 0;
 
@@ -39,6 +39,7 @@ public class Mini_Game : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         Player = GameObject.Find("PS4_Player");
         objControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
         //QTEstart();
@@ -75,13 +76,26 @@ public class Mini_Game : MonoBehaviour
             imgTimer.fillAmount = currentTime / maxTimeLimit;
             img.fillAmount = sourceCurrentAmount / sourceMaxAmount;
 
-            currentSection = (int)(section * img.fillAmount);
+            currentSection = 1 + (int)(section * img.fillAmount);
 
-            if (imgTimer.fillAmount <= 0 || img.fillAmount >= 1)
+            //Debug.Log((int)(section * img.fillAmount))
+
+            //if (imgTimer.fillAmount <= 0 || img.fillAmount >= 1)
+            //{
+            //    //counter = (int)(section * img.fillAmount);
+            //    isActiveQTE = false;
+            //    objBreak.SetComplete(1 + currentSection);//To always spawn at least once
+            //}
+
+            if (imgTimer.fillAmount <= 0 && img.fillAmount < 1)
             {
-                //counter = (int)(section * img.fillAmount);
+                objBreak.SetComplete(false);//To always spawn at least once
                 isActiveQTE = false;
-                objBreak.SetComplete(1 + currentSection);//To always spawn at least once
+            }
+            else if (img.fillAmount >= 1)
+            {
+                objBreak.SetComplete(true);
+                isActiveQTE = false;
             }
 
             //if (Input.GetKeyDown(KeyCode.Space))

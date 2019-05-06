@@ -112,9 +112,15 @@ public class Object_Breaking : MonoBehaviour
         return m_powerPerHit;
     }
 
-    public void SetComplete(int _resourceAmount)
+    //public void SetComplete(int _resourceAmount)
+    //{
+    //    m_successGather = true;
+    //    m_totalResource = _resourceAmount;
+    //}
+
+    public void SetComplete(bool success)
     {
-        m_successGather = true;
-        m_totalResource = _resourceAmount;
+        m_successGather = success;
+        m_totalResource = 1;
     }
 }

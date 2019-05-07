@@ -134,7 +134,7 @@ public class Stats_ResourceScript : MonoBehaviour
         // Assign Values Initial game init
         m_P2_hp = m_P2_hpCap;
         m_CartHP = 0;
-        m_LanternHp = 0;
+        m_LanternHp = 100;
         m_Minerals = 0;
         m_Souls = 0;
         m_LanternTimerTickReference = m_LanternTimerTick;
@@ -276,14 +276,14 @@ public class Stats_ResourceScript : MonoBehaviour
                 m_LanternTimerTick = m_LanternTimerTickReference;
             }
         }
-        else if (!m_StartLanternTick)
-        {
-            m_startTicking -= 1 * Time.deltaTime;
-            if (m_startTicking <= 0)
-            {
-                m_StartLanternTick = true;
-            }
-        }
+        //else if (!m_StartLanternTick)
+        //{
+        //    m_startTicking -= 1 * Time.deltaTime;
+        //    if (m_startTicking <= 0)
+        //    {
+        //        m_StartLanternTick = true;
+        //    }
+        //}
 
         //m_spawnMultiplier = (m_LanternHpCap - m_LanternHp) * 0.01f;
 
@@ -389,6 +389,7 @@ public class Stats_ResourceScript : MonoBehaviour
             case 4:
                 m_Souls += 40;
                 break;
+
         }
 
         //Debug.Log("Hey hey im being processed");

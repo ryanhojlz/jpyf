@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemSpawnHandlerScript : MonoBehaviour
 {
+    public static ItemSpawnHandlerScript Instance = null;
     public List<Transform> SpawnLocation;
     public List<Pickup_Scripts> Items;
     
@@ -19,6 +20,14 @@ public class ItemSpawnHandlerScript : MonoBehaviour
     // Use this for initialization
 	void Start ()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else if (Instance)
+        {
+            Destroy(this.gameObject);
+        }
 
         for (int i = 0; i < transform.childCount; ++i)
         {
@@ -63,8 +72,10 @@ public class ItemSpawnHandlerScript : MonoBehaviour
 
     public void SpawnItem(int id,Vector3 position)
     {
+        
         item_type = id;
         Pickup_Scripts item = Instantiate(Items[item_type]);
+        position.y = +1;
         item.transform.position = position;
     }
 
@@ -75,7 +86,7 @@ public class ItemSpawnHandlerScript : MonoBehaviour
         itemCount = Random.Range(1, 4);
         for (int i = 0; i < itemCount; ++i)
         {
-            item_type = Random.Range(0, Items.Count);
+            item_type = Random.Range(0, 1);
             location = Random.Range(0, SpawnLocation.Count);
             Pickup_Scripts item = Instantiate(Items[item_type]);
             item.transform.position = SpawnLocation[location].position;

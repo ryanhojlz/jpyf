@@ -696,6 +696,7 @@ public class Entity_Unit : MonoBehaviour
 
     public virtual void Dead()
     {
+
         Destroy(this.gameObject.transform.parent.gameObject);
     }
 

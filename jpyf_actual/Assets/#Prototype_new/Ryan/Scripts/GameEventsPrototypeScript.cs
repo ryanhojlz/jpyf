@@ -89,6 +89,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         tutorialObjective_2 = GameObject.Find("TutorialObjective_2").transform;
         // Tutorial Objective 3 // Bombs 
         tutorialObjective_3 = GameObject.Find("TutorialObjective_3").transform;
+
+        tutorialObjective_3.gameObject.SetActive(false);
+
         // Tutorial Objective 4 // Wall
         tutorialObjective_4 = GameObject.Find("TutorialObjective_4").transform;
         // Tutorial Objective 5 // First shrine encounter
@@ -169,7 +172,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         "hammer the blue object below your drum";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
-                {
+                { 
                     ++Tutorial;
                 }
                 break;
@@ -178,8 +181,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // When payload reaches a certain distance
                 if (payload_ref.position.z > 1.5f)
                 {
+                    Debug.Log("???");
                     subtitles_4外人.text = "There is a wall infront grab a bomb to destroy it";
                     subtitles_4VR.text = "Wait for P2 to destroy it";
+                    tutorialObjective_3.gameObject.SetActive(true);
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_3);
                 }
                 else
@@ -195,6 +200,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     // When u pickup the bomb
                     if (PickupHandlerScript.Instance.currentObject.GetComponent<bomb_script>())
                     {
+                        Destroy(tutorialObjective_3.gameObject);
                         ++Tutorial;
                     }
                 }
@@ -212,12 +218,27 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 break;
             case 4:
-                if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
+                if (tutorialObjective_5)
                 {
-                    subtitles_4外人.text = "Enemies will start spawning";
+                    if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
+                    {
+                        subtitles_4外人.text = "Enemies will start spawning, you can grab them on throw them towards the P1 view";
+                    }
+                    else
+                    {
+                        subtitles_4外人.text = "Continue Pushing Onward";
+                    }
+                }
+                else
+                {
+                    // Wall has been destroyed on to the next tutorial
+                    ++Tutorial;
                 }
                 break;
+            case 5:
 
+                break;
+               
         }
 
         if (ShowSubtitles)

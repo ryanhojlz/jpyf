@@ -9,6 +9,11 @@ using UnityEngine.PS4;
 
 using System;
 
+// If u get this version of the code if you want the original clean version let me know
+// I kinda brutally murdered thru senior code due to lack of understanding early on
+// Due to subpar teammates everything is kinda all over the place
+// ~ryan
+
 public enum MoveControllerOrientation
 {
     Left,
@@ -84,12 +89,14 @@ public class MoveController : MonoBehaviour
             ProcessHandAnimation();
             ProcessGrabbing();
 
+            // For older game
             //if (!MainMenu)
             //    StartMiniGame();
             //else
             //    MainMenuController();
-            CartGame();
 
+            // For current game
+            //CartGame();
         }
     }
 
@@ -162,6 +169,7 @@ public class MoveController : MonoBehaviour
             if (grabbableObject.hideControllerOnGrab)
                 m_HandModel.SetActive(false);
 
+            
             grabbableObject.OnGrab(this);
 
             m_IsGrabbing = true;
@@ -523,6 +531,8 @@ public class MoveController : MonoBehaviour
     }
 
 
+    // You actually dont need to put anything here the hardware abstraction is already done
+    // is just that im bad early on and didnt understand anything so stuff is here
     void StartMiniGame()
     {
         
@@ -618,9 +628,6 @@ public class MoveController : MonoBehaviour
                 GameObject.Find("EnemySpawnPoint").GetComponent<SpawnHandlerScript>().spawnEnemy = false;
             }
         }
-
-
-
     }
 
 

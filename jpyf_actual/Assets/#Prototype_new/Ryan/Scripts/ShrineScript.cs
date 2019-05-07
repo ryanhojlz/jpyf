@@ -15,11 +15,11 @@ public class ShrineScript : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
         tile_event = transform.parent.GetComponent<Tile_EventScript>();
 
-        foreach (Transform obj in transform)
-        {
-            if (obj.GetComponent<Collider>())
-                Physics.IgnoreCollision(this.GetComponent<Collider>(), obj.GetComponent<Collider>());
-        }
+        //foreach (Transform obj in transform)
+        //{
+        //    if (obj.GetComponent<Collider>())
+        //        Physics.IgnoreCollision(this.GetComponent<Collider>(), obj.GetComponent<Collider>());
+        //}
 	}
 
     // Update is called once per frame

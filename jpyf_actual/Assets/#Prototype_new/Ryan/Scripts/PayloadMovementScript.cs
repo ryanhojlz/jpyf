@@ -52,20 +52,25 @@ public class PayloadMovementScript : MonoBehaviour
         {
             if (!tutorial_bool)
                 return;
-            // Move Payload
-            if (Stats_ResourceScript.Instance.m_CartHP >= 50)
+
+            if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
             {
-                // Assign velocity
-                payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
+                // Move Payload
+                if (Stats_ResourceScript.Instance.m_CartHP >= 50)
+                {
+                    // Assign velocity
+                    payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
 
-                // Assign velocity to clamp
-                capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
-                capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
-                // Reassign Velocity
-                payloadObject.GetComponent<Rigidbody>().velocity = capZVelocity;
+                    // Assign velocity to clamp
+                    capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
+                    capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
+                    // Reassign Velocity
+                    payloadObject.GetComponent<Rigidbody>().velocity = capZVelocity;
 
-                //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
+                    //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
+                }
             }
+            
         }
         else if (!playerInsideCart)
         {

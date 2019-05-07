@@ -38,7 +38,9 @@ public class Unit_Dead_State : IState
         //rota_te.x = x_rota_te;
         if (!b_spawnOnce)
         {
-            GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>().SpawnItem(0, m_user.transform.position);
+            if (GameEventsPrototypeScript.Instance.TileEvent_Start)
+                ItemSpawnHandlerScript.Instance.SpawnItem(2, m_user.transform.position);
+            //GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>().SpawnItem(0, m_user.transform.position);
             b_spawnOnce = true;
         }
         //m_user.transform.localEulerAngles = rota_te;

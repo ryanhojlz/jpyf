@@ -32,6 +32,20 @@ public class PickupHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (currentObject && currentObject.GetComponent<AI_Movement>())
+        {
+            if (currentObject.transform.GetChild(0))
+            {
+                if (currentObject.transform.GetChild(0).GetComponent<Entity_Unit>().GetHealthStat() <= 0)
+                {
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentObject.transform.parent = null;
+                    currentObject = null;
+                }
+            }
+        }
+
+
         // Throws object
         if (objHandler.throw_item)
         {

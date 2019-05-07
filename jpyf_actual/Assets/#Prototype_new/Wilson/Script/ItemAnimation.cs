@@ -19,7 +19,7 @@ public class ItemAnimation : MonoBehaviour
 
     private void Start()
     {
-        parentPosition = transform.parent.position;
+        //parentPosition = transform.parent.position;
     }
 
     void Update()

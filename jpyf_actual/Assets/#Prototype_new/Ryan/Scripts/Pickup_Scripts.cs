@@ -19,6 +19,9 @@ public class Pickup_Scripts : MonoBehaviour
                 transform.name = "pickup_mineral";
                 //this.GetComponent<Renderer>().material.color = Color.red;
                 break;
+            case 5:
+                transform.name = "pickup_shrineObj";
+                break;
             default:
                 transform.name = "???";
                 break;

@@ -214,7 +214,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             case 4:
                 if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
                 {
-                    subtitles_4外人.text = "awdawdwad";
+                    subtitles_4外人.text = "Enemies will start spawning";
                 }
                 break;
 

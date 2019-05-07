@@ -21,6 +21,7 @@ public class MainMenuButton : MonoBehaviour
 
     public Canvas Titlescreencanvas;
     public Canvas Mainmenucanvas;
+    public Canvas Loadingcanvas;
 
     GameObject titleScreen;
     GameObject text1;
@@ -65,6 +66,7 @@ public class MainMenuButton : MonoBehaviour
         originalPos4 = buttons[3].transform.position;
         UnityEngine.XR.XRSettings.showDeviceView = false;
         loadImage.enabled = false;
+        Loadingcanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -153,6 +155,8 @@ public class MainMenuButton : MonoBehaviour
         // If the new scene has started loading...
         if (loadScene == true)
         {
+            Mainmenucanvas.enabled = false;
+            Loadingcanvas.enabled = true;
             // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
             //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
             loadImage.color = new Color(loadImage.color.r, loadImage.color.g, loadImage.color.b, Mathf.PingPong(Time.time, 1));
@@ -192,21 +196,21 @@ public class MainMenuButton : MonoBehaviour
 
         switch (buttons[indexX/*, indexY*/].gameObject.name)
         {
-            case "coopvsai":
+            case "start":
                 {
                     if (buttons[indexX].transform.position.x < originalPos.x + optionOffset)
                         buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
                 }
                 break;
 
-            case "pvp":
+            case "tutorial":
                 {
                     if (buttons[indexX].transform.position.x < originalPos2.x + optionOffset)
                         buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
                 }
                 break;
 
-            case "settings":
+            case "quit":
                 {
                     if (buttons[indexX].transform.position.x < originalPos3.x + optionOffset)
                         buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
@@ -229,27 +233,28 @@ public class MainMenuButton : MonoBehaviour
             return;
         switch (buttons[indexX/*, indexY*/].gameObject.name)
         {
-            case "coopvsai":
+            case "start":
                 {
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
-                    scene = "Week_3Merge";
+                    scene = "Ryan_Prototype";
                     //SceneManager.LoadScene("PC_Build_Wilson");
 
                 }
                 break;
 
-            case "pvp":
+            case "tutorial":
                 {
                     scene = "Ryan_Prototype";
                 }
                 break;
 
-            case "settings":
+            case "quit":
                 {
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Achievement_Scene");
-                    scene = "Achievement_Scene";
+                    //scene = "Achievement_Scene";
+                    Application.Quit();
                 }
                 break;
 
@@ -272,19 +277,19 @@ public class MainMenuButton : MonoBehaviour
             return;
         switch (buttons[indexX/*, indexY*/].gameObject.name)
         {
-            case "coopvsai":
+            case "start":
                 {
                     text1.SetActive(true);
                 }
                 break;
 
-            case "pvp":
+            case "tutorial":
                 {
                     text2.SetActive(true);
                 }
                 break;
 
-            case "settings":
+            case "quit":
                 {
                     text3.SetActive(true);
                 }

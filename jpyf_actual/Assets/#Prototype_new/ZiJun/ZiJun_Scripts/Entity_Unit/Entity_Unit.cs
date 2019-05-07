@@ -581,6 +581,9 @@ public class Entity_Unit : MonoBehaviour
         if (GetHealthStat() <= 0)
             return;
 
+        if (this.GetComponent<Force_Field>() && this.GetComponent<Force_Field>().GetIsActive())
+            return;
+
         gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1
         Unit_Stats.TakeDamage((_damage - Unit_Stats.GetDef() < 1) ? 1f : _damage - Unit_Stats.GetDef());

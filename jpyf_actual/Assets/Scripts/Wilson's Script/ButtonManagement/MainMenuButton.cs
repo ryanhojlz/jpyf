@@ -241,7 +241,7 @@ public class MainMenuButton : MonoBehaviour
 
             case "pvp":
                 {
-
+                    scene = "Ryan_Prototype";
                 }
                 break;
 
@@ -301,9 +301,10 @@ public class MainMenuButton : MonoBehaviour
     // The coroutine runs on its own at the same time as Update() and takes an integer indicating which scene to load.
     IEnumerator LoadNewScene()
     {
+        //float loadTime = 0f;
         // This line waits for 3 seconds before executing the next line in the coroutine.
         // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(3);
 
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
@@ -311,7 +312,10 @@ public class MainMenuButton : MonoBehaviour
         // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
         while (!async.isDone)
         {
+            //loadTime += Time.deltaTime;
+            //Debug.Log("Time Taken to load : " + loadTime);
             yield return null;
+            //Debug.Log("Time Taken to load : 2 . " + loadTime);
         }
     }
 }

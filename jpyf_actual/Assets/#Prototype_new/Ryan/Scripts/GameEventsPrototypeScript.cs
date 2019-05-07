@@ -39,11 +39,13 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Tutorial Objectives
     // Wood material introduction
     public Transform tutorialObjective_1 = null;
-    // Bomb Objective
+    // Cart Objective
     public Transform tutorialObjective_2 = null;
-    
+    // Bomb Objective
     public Transform tutorialObjective_3 = null;
+    // Wall Objective
     public Transform tutorialObjective_4 = null;
+    // First Shrine Encounter
     public Transform tutorialObjective_5 = null;
 
     private void Awake()
@@ -87,6 +89,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         tutorialObjective_2 = GameObject.Find("TutorialObjective_2").transform;
         // Tutorial Objective 3 // Bombs 
         tutorialObjective_3 = GameObject.Find("TutorialObjective_3").transform;
+        // Tutorial Objective 4 // Wall
+        tutorialObjective_4 = GameObject.Find("TutorialObjective_4").transform;
+        // Tutorial Objective 5 // First shrine encounter
+        tutorialObjective_5 = GameObject.Find("TutorialObjective_5").transform;
 
     }
 
@@ -111,7 +117,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     }
 
-    // Hardcode Tutorial
+    // Welcome to my terrible
+    // Hardcoded Tutorial
     void UpdateTutorial()
     {
         timer_4外人.text = "" + tutorial_timer;
@@ -171,20 +178,46 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // When payload reaches a certain distance
                 if (payload_ref.position.z > 1.5f)
                 {
-                    subtitles_4外人.text = "There is a wall infront use a bomb to destroy it";
+                    subtitles_4外人.text = "There is a wall infront grab a bomb to destroy it";
                     subtitles_4VR.text = "Wait for P2 to destroy it";
+                    Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_3);
                 }
                 else
                 {
+                    Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_2);
                     // When payload still stationary
                     subtitles_4外人.text = "Stand in the cart radius to push the cart foward";
                     subtitles_4VR.text = "You require P2 to push the cart foward";
                 }
+
+                if (PickupHandlerScript.Instance.currentObject)
+                {
+                    // When u pickup the bomb
+                    if (PickupHandlerScript.Instance.currentObject.GetComponent<bomb_script>())
+                    {
+                        ++Tutorial;
+                    }
+                }
                 break;
             case 3:
-                
-
+                if (!tutorialObjective_4)
+                {
+                    ++Tutorial;
+                }
+                else
+                {
+                    // Destory the wall
+                    subtitles_4外人.text = "Destroy the wall with a bomb";
+                    Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_4);
+                }
                 break;
+            case 4:
+                if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
+                {
+                    subtitles_4外人.text = "awdawdwad";
+                }
+                break;
+
         }
 
         if (ShowSubtitles)

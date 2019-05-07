@@ -209,7 +209,7 @@ public class bomb_script : MonoBehaviour
     public void Movement(Vector3 Direction, float speed, bool canMove)
     {
         //Debug.Log(Direction * speed * Time.deltaTime);
-        Debug.Log(canMove);
+        //Debug.Log(canMove);
         if(canMove)
             this.transform.localPosition = this.transform.localPosition + (Direction * speed * Time.deltaTime);
 

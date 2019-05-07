@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class GameEventsPrototypeScript : MonoBehaviour
 {
+    // Singleton
     public static GameEventsPrototypeScript Instance = null;
-
     // Milestone / Blockade references
     public GameObject[] Milestones;
+
+
+    // Payload reference
+    public Transform payload_ref = null;
 
     // Triggers
     public int Tutorial = 0;
@@ -29,19 +31,20 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // VR Subtitless
     public TextMesh subtitles_4VR = null;
     
-
     public Transform panel = null;
     public float f_difficulty = 0;
     public bool TileEvent_Start = false;
     public bool ShowSubtitles = false;
 
     // Tutorial Objectives
+    // Wood material introduction
     public Transform tutorialObjective_1 = null;
+    // Bomb Objective
     public Transform tutorialObjective_2 = null;
+    
     public Transform tutorialObjective_3 = null;
     public Transform tutorialObjective_4 = null;
     public Transform tutorialObjective_5 = null;
-
 
     private void Awake()
     {
@@ -57,6 +60,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        // Payload ref assigning 
+        payload_ref = GameObject.Find("PayLoad").transform;
+        // Easy mode
+        BabySit = true;
         // Assigning milestones
         Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
@@ -73,18 +80,38 @@ public class GameEventsPrototypeScript : MonoBehaviour
         Objective3 = Milestones[Milestones.Length - 3];
         Objective4 = Milestones[Milestones.Length - 4];
 
-        BabySit = true;
+
+        // Tutorial Objective 1 // Resource Collection
         tutorialObjective_1 = GameObject.Find("TutorialObjective_1").transform;
+        // Tutorial Objective 2 // Moving the Cart
+        tutorialObjective_2 = GameObject.Find("TutorialObjective_2").transform;
+        // Tutorial Objective 3 // Bombs 
+        tutorialObjective_3 = GameObject.Find("TutorialObjective_3").transform;
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         BabySitConstraints();
         UpdateTutorial();
     }
+    
+    // Game was to hard nuff sad
+    void BabySitConstraints()
+    {
+        if (Objective4 == null)
+        {
+            BabySit = false;
+        }
+        if (!BabySit)
+            SpawnHandlerScript.Instance.spawnEnemy = true;
+        else if (BabySit)
+            SpawnHandlerScript.Instance.spawnEnemy = false;
 
+    }
 
+    // Hardcode Tutorial
     void UpdateTutorial()
     {
         timer_4外人.text = "" + tutorial_timer;
@@ -99,16 +126,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
                 if (tutorial_timer > 35)
                 {
-                    subtitles_4外人.text = "Push the old mans cart";
-                    subtitles_4VR.text = "You are old and \n you need your minion to push the cart";
+                    subtitles_4外人.text = "Objective Push P1's cart";
+                    subtitles_4VR.text = "You are P1 and \n you need P2 to bring you to the other side";
                 }
                 else if (tutorial_timer > 30)
                 {
                     subtitles_4外人.text = "The Cart is Damaged and you have to help repair it so you can move onward";
                     subtitles_4VR.text = "The Cart is Damaged and you have to repair it \n so you can move onward \n" +
-                        "Wait for your minion to bring resources to you";
+                        "Wait for P2 to bring resources to you";
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_1);
-                    tutorial_timer = 20;
                     ++Tutorial;
                 }
                 break;
@@ -119,22 +145,45 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 {
                     if (tutorialObjective_1.childCount < 3)
                     {
-                        subtitles_4外人.text = "Collect the wood and throw back into the cart, Wait for the old man to repair with the materials";
+                        subtitles_4外人.text = "Collect the wood and throw back into the cart, Wait for the P1 to repair with the materials";
+                    }
+                    if (tutorialObjective_1.childCount == 0)
+                    {
+
+                        Destroy(tutorialObjective_1.gameObject);
                     }
                 }
+
                 if (Stats_ResourceScript.Instance.m_Minerals > 0)
                 {
+                    // When you get enough materials change text
                     subtitles_4VR.text = "You have gained some materials, \n" +
                         " use the repair tool \n " +
                         "hammer the blue object below your drum";
                 }
-                if (Stats_ResourceScript.Instance.m_CartHP >= 100)
+                if (Stats_ResourceScript.Instance.m_CartHP >= 20)
                 {
                     ++Tutorial;
                 }
                 break;
             case 2:
+                // Wall tutorials
+                // When payload reaches a certain distance
+                if (payload_ref.position.z > 1.5f)
+                {
+                    subtitles_4外人.text = "There is a wall infront use a bomb to destroy it";
+                    subtitles_4VR.text = "Wait for P2 to destroy it";
+                }
+                else
+                {
+                    // When payload still stationary
+                    subtitles_4外人.text = "Stand in the cart radius to push the cart foward";
+                    subtitles_4VR.text = "You require P2 to push the cart foward";
+                }
+                break;
+            case 3:
                 
+
                 break;
         }
 
@@ -149,23 +198,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
             panel.gameObject.SetActive(false);
         }
 
-    }
-
-
-        // Game was to hard nuff sad
-        void BabySitConstraints()
-    {
-        if (Objective4 == null)
-        {
-            BabySit = false;
-        }
-        if (!BabySit)
-            SpawnHandlerScript.Instance.spawnEnemy = true;
-        else if (BabySit)
-            SpawnHandlerScript.Instance.spawnEnemy = false;
 
 
 
     }
-
 }

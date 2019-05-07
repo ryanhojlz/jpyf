@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class PickupHandlerScript : MonoBehaviour
 {
+
+    public static PickupHandlerScript Instance = null;
+
     // This handler is used to prevent picking up multiple objects
     public Object_ControlScript objHandler = null;
     public Transform nearest_pickup_object = null;
@@ -12,9 +15,16 @@ public class PickupHandlerScript : MonoBehaviour
     Vector3 offset = new Vector3(0, 1.5f, 0);
     Vector3 throwDirection = Vector3.zero;
 
+    private void Awake()
+    {
+        if (Instance)
+            Destroy(this.gameObject);
+        else if (!Instance)
+            Instance = this;
+    }
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         objHandler = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
 	}
@@ -178,6 +188,12 @@ public class PickupHandlerScript : MonoBehaviour
             nearest_pickup_object = other.transform;
         }
 
+    }
+
+    // Return nearest object
+    public Transform ReturnNearestObject()
+    {
+        return nearest_pickup_object;
     }
 
     //private void OnTriggerExit(Collider other)

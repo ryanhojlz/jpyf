@@ -43,11 +43,6 @@ public class PayloadMovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
-    }
-
-    private void FixedUpdate()
-    {
         if (playerInsideCart)
         {
             if (!tutorial_bool)
@@ -60,7 +55,6 @@ public class PayloadMovementScript : MonoBehaviour
                 {
                     // Assign velocity
                     payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
-
                     // Assign velocity to clamp
                     capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
                     capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
@@ -70,17 +64,27 @@ public class PayloadMovementScript : MonoBehaviour
                     //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
                 }
             }
-            
         }
         else if (!playerInsideCart)
         {
             payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
+        if (Push_CartScript.Instance.m_stunDuration > 0)
+        {
+            payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
+
         // Debug Text
         GameObject.Find("Text4").GetComponent<Text>().text = "" + payloadObject.GetComponent<Rigidbody>().velocity;
         // Dangerous
         playerInsideCart = false;
+    }
+
+    private void FixedUpdate()
+    {
+       
 
     }
 

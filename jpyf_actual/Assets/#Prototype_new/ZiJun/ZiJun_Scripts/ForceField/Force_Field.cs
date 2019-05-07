@@ -10,11 +10,12 @@ public class Force_Field : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        m_ForceField = transform.Find("Force_Field").gameObject;
+        m_ForceField = transform.GetChild(transform.childCount - 1).gameObject;
+        //m_ForceField = transform.Find("Force_Field").gameObject;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         if (!m_ForceField)
             return;

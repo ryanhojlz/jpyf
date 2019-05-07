@@ -57,8 +57,8 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "PayLoad")
-            Debug.Log("Why u go out? : " + other.name);
+        //if(other.name == "PayLoad")
+            //Debug.Log("Why u go out? : " + other.name);
 
         if (Unit.GetComponent<Entity_Unit>())
         {

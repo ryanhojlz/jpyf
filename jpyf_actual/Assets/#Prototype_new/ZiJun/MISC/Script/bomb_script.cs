@@ -51,7 +51,7 @@ public class bomb_script : MonoBehaviour
         {
             Fire = this.transform.GetChild(0).GetChild(1).gameObject;
 
-            Debug.Log(Fire);
+            //Debug.Log(Fire);
 
             if (Fire)
             {

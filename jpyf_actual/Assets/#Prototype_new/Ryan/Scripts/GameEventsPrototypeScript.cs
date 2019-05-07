@@ -181,7 +181,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // When payload reaches a certain distance
                 if (payload_ref.position.z > 1.5f)
                 {
-                    Debug.Log("???");
                     subtitles_4外人.text = "There is a wall infront grab a bomb to destroy it";
                     subtitles_4VR.text = "Wait for P2 to destroy it";
                     tutorialObjective_3.gameObject.SetActive(true);

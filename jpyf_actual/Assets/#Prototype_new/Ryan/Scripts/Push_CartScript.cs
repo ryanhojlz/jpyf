@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Push_CartScript : MonoBehaviour
 {
+    // Everything is becoming a singleton at this point i have no time
+    public static Push_CartScript Instance = null;
     // The actual Cart
     public Transform m_CartParent = null;
     // Player 2
@@ -30,9 +32,25 @@ public class Push_CartScript : MonoBehaviour
     // Game Handler
     public Stats_ResourceScript m_handler = null;
 
+
+    private void Awake()
+    {
+
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
+
     // Use this for initialization
     void Start()
     {
+
         // Parent finding
         m_CartParent = transform.parent.transform.parent;
         // Object Controller

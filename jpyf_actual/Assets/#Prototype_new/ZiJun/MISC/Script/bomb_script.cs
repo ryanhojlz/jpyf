@@ -34,11 +34,14 @@ public class bomb_script : MonoBehaviour
     public bool canMove = true;
     bool spawnFromSpawner = false;
 
+    Transform Explosion = null;
+
     //float distanceToDespawn = 100f;
 
     // Use this for initialization
     void Start ()
     {
+        Explosion = this.transform.Find("Bomb_Explosion");
         //State = Bomb_state.DORMANT;
         State = Bomb_state.DORMANT;
 
@@ -71,7 +74,7 @@ public class bomb_script : MonoBehaviour
         }
         else
         {
-            if (this.transform.localScale.x > 10)
+            if (Explosion.localScale.x > 10)
             {
                 Destroy(this.gameObject);
             }
@@ -107,9 +110,8 @@ public class bomb_script : MonoBehaviour
                     canMove = false;
 
                     //Debug.Log("Came here");
-                    this.GetComponent<MeshRenderer>().enabled = true;
                     this.GetComponent<Rigidbody>().isKinematic = true;
-                    this.transform.localScale += Expending_Scale * expending_speed * Time.deltaTime;
+                    Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                 }
                 break;
 
@@ -135,6 +137,9 @@ public class bomb_script : MonoBehaviour
 
             foreach (Transform child in this.transform)
             {
+                if (child.name == "Bomb_Explosion")
+                    continue;
+
                 Destroy(child.gameObject);
             }
         }
@@ -152,10 +157,19 @@ public class bomb_script : MonoBehaviour
     //    }
     //}
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        if (!other.isTrigger)
+            return;
+
         if (State == Bomb_state.EXPLOSION)
         {
+            if (other.GetComponent<Force_Field>() && other.GetComponent<Force_Field>().GetIsActive())
+            {
+                other.GetComponent<Force_Field>().SetForceField(false);
+                return;
+            }
+
             Entity_Unit unit = other.GetComponent<Entity_Unit>();
             Wall_Script wall = other.GetComponent<Wall_Script>();
             if (unit)
@@ -183,6 +197,38 @@ public class bomb_script : MonoBehaviour
             State = Bomb_state.ACTIVE;
         }
     }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (State == Bomb_state.EXPLOSION)
+    //    {
+    //        Entity_Unit unit = other.GetComponent<Entity_Unit>();
+    //        Wall_Script wall = other.GetComponent<Wall_Script>();
+    //        if (unit)
+    //        {
+    //            if (unit.GetHealthStat() > 0)
+    //            {
+    //                unit.TakeDamage(unit.GetMaxHealthStat());
+    //            }
+    //        }
+    //        else if (wall)
+    //        {
+    //            if (wall.GetHealth() > 0)
+    //            {
+    //                wall.TakeDamage((int)wall.GetMaxHealth());
+    //            }
+    //        }
+    //        //If it hits payload
+    //        else if (other.tag == "Payload" && !save)
+    //        {
+    //            Stats_ResourceScript.Instance.Cart_TakeDmg(2);
+    //        }
+    //    }
+    //    else if (other.tag == "Payload" || other.tag == "BombStopper")
+    //    {
+    //        State = Bomb_state.ACTIVE;
+    //    }
+    //}
 
     public void SetBombState_Active()
     {

@@ -38,7 +38,11 @@ public class Entity_Tengu : Entity_Unit
     Transform Payload_Position = null;
 
     Vector3 FlyPos = Vector3.zero;
+
     float flyOffset = 4f;
+    float despawnAfter = 5f;
+
+    float previousTimeFlyAway = 0f;
 
     Tengu_Warning warningHandler;
 
@@ -57,6 +61,8 @@ public class Entity_Tengu : Entity_Unit
 
     AtkPlayer AttackPlayerSeq = AtkPlayer.GRAB;//Initing it to be grabbing player
     AtkPayload AttackPayloadSeq = AtkPayload.ATTACK;
+
+    bool m_flyAway = false;
 
     //Override functions
     public override void SelfStart()
@@ -162,27 +168,28 @@ public class Entity_Tengu : Entity_Unit
             }
         }
 
+        if (m_flyAway)
+        {
+            FlyAway();
+
+            if (previousTimeFlyAway + despawnAfter < Time.time)
+            {
+                Dead();
+            }
+        }
+
         //Debug.Log("This one : " + this.name + " : " + GetTarget());
         //Debug.Log("This one : " + this.name + " : isGrabbing - " + isGrabbing);
 
-        if ((!HoldUnit || !HoldUnit.activeSelf || resource.m_P2_hp <= 0) && isGrabbing)//This will run if it used to be grabbing something but now not
+        if ((!HoldUnit || !HoldUnit.activeSelf || (GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
-            //if (HoldUnit)
-            //{
-            //    HoldUnit.transform.parent = null; // Unparent
-            //    HoldUnit.GetComponent<Rigidbody>().isKinematic = false; // make gravity true so that the target drop to the ground after tengu dies
-            //}
-            //HoldUnit = null;
-            //SetStillAttacking(false);
-            //SetTarget(null);
-            //AttackPlayerSeq = AtkPlayer.GRAB;
-            ////this.transform.position = GetOriginalPosition();
-            //isGrabbing = false;
-            //SetInAttackRange(false);
-            //isAttacking = false;
-
-            //GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>().SetGropper(null);
+            if ((GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0)))
+            {
+                m_flyAway = true;
+                previousTimeFlyAway = Time.time;
+            }
             Reset(true);
+            
         }
 
         //if (!HoldUnit)//This will run if it used to be grabbing something but now not
@@ -243,7 +250,10 @@ public class Entity_Tengu : Entity_Unit
         isGrabbing = false;
         SetInAttackRange(false);
         isAttacking = false;
-        ReturnToOrigin = true;
+        if (!m_flyAway)
+        {
+            ReturnToOrigin = true;
+        }
 
         if (Grope)
         {
@@ -521,6 +531,11 @@ public class Entity_Tengu : Entity_Unit
         //Debug.Log(Mathf.Atan2(_lookRotation.y, _lookRotation.x));
         //Debug.Log("Got come in leh");
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 120);
+    }
+
+    private void FlyAway()
+    {
+        this.transform.position += this.transform.up * 10 * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)

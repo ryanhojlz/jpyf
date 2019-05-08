@@ -36,10 +36,31 @@ public class Mini_Game : MonoBehaviour
 
     Object_ControlScript objControl = null;
 
+    public static Mini_Game Instance = null;
+
+    public List<Object_Breaking> m_OB_list = new List<Object_Breaking>();
+
+    //For checking
+    int index = -1;
+    float nearest = float.MaxValue;
+    float dist = 0;
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+   
     // Use this for initialization
     void Start()
     {
-        
         Player = GameObject.Find("PS4_Player");
         objControl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
         //QTEstart();
@@ -52,6 +73,12 @@ public class Mini_Game : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (Object_ControlScript.Instance.checkCanGatherItem)
+        {
+            Debug.Log("Got Come in");
+            QTEstart(FindNearestInList());
+        }
+
         if (!isActiveQTE)
         {
             Manager.SetActive(false);// = false;
@@ -122,6 +149,14 @@ public class Mini_Game : MonoBehaviour
     public void QTEstart(Object_Breaking other)
     {
         // If player carrying object
+
+        Debug.Log("Name : " + other);
+
+        if (!other)
+            return;
+
+        Debug.Log("Hehe its working till here");
+
         if (PickupHandlerScript.Instance.ReturnCurrentObject() == null)
         {
             if (other && !isActiveQTE)
@@ -150,5 +185,50 @@ public class Mini_Game : MonoBehaviour
     public void BreakObject()
     {
         sourceCurrentAmount += powerHit;
+    }
+
+    public void AddToList(Object_Breaking obj)
+    {
+        if (!m_OB_list.Contains(obj))
+        {
+            m_OB_list.Add(obj);
+        }
+    }
+
+    public void RemoveFromList(Object_Breaking obj)
+    {
+        if (m_OB_list.Contains(obj))
+        {
+            m_OB_list.Remove(obj);
+        }
+    }
+
+    private Object_Breaking FindNearestInList()
+    {
+        index = -1;
+        nearest = float.MaxValue;
+
+        for (int i = 0; i < m_OB_list.Count; ++i)
+        {
+            dist = (Player.transform.position - m_OB_list[i].transform.position).magnitude;
+            if (dist < nearest)
+            {
+                nearest = dist;
+                index = i;
+            }
+        }
+
+        if (index < 0)
+            return null;
+
+        return m_OB_list[index];
+    }
+
+    public Transform GetNearestBreakingObj()
+    {
+        if(FindNearestInList())
+            return FindNearestInList().transform;
+
+        return null;
     }
 }

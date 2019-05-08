@@ -27,7 +27,7 @@ public class Follow_Objective : MonoBehaviour
     public static Follow_Objective Instance = null;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -37,6 +37,18 @@ public class Follow_Objective : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    void Start()
+    {
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(this);
+        //}
 
         resourceHandler = Stats_ResourceScript.Instance;
         //target = GameObject.Find("PayLoad").transform;

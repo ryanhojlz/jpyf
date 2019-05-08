@@ -133,7 +133,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
         // Assign Values Initial game init
         m_P2_hp = m_P2_hpCap;
-        m_P2_hp = 0;
+        //m_P2_hp = 0;
         m_CartHP = 0;
         m_LanternHp = 100;
         m_Minerals = 0;

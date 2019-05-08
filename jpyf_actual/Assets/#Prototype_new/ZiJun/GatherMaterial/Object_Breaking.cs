@@ -20,10 +20,14 @@ public class Object_Breaking : MonoBehaviour
 
     List<GameObject> WithinRange = new List<GameObject>();
 
+    Mini_Game minigame = null;
     // Use this for initialization
     void Start()
     {
+        minigame = Mini_Game.Instance;
+
         m_powerPerHit = 25;
+        Debug.Log("Hi this time i got come in liao");
     }
 
     // Update is called once per frame
@@ -38,10 +42,10 @@ public class Object_Breaking : MonoBehaviour
         //    CollectMaterial();
         //}
 
-        if (Object_ControlScript.Instance.checkCanGatherItem)
-        {
-            CollectMaterial();
-        }
+        //if (Object_ControlScript.Instance.checkCanGatherItem)
+        //{
+        //    CollectMaterial();
+        //}
 
 
         if (m_successGather)
@@ -53,19 +57,25 @@ public class Object_Breaking : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player2")
-        {
-            //WithinRange
-            m_Player = true;
-        }
+        //if (other.tag == "Player2")
+        //{
+        //    //WithinRange
+        //    m_Player = true;
+        //}
+
+        if(other.GetComponent<PickupHandlerScript>())
+            minigame.AddToList(this);
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player2")
-        {
-            m_Player = false;
-        }
+        //if (other.tag == "Player2")
+        //{
+        //    m_Player = false;
+        //}
+        if (other.GetComponent<PickupHandlerScript>())
+            minigame.RemoveFromList(this);
     }
 
     public virtual void CollectMaterial()
@@ -88,7 +98,7 @@ public class Object_Breaking : MonoBehaviour
                 Pickup_Scripts item = Instantiate(ObjPrefeb);
                 item.transform.position = transform.position;
             }
-
+            minigame.RemoveFromList(this);
             Destroy(this.gameObject);
         }
         else

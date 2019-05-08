@@ -12,7 +12,7 @@ public class RangeAttackScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        Ammo = 15;
+        Ammo = 10;
         AmmoCap = Ammo;
     }
 	
@@ -31,7 +31,18 @@ public class RangeAttackScript : MonoBehaviour
         }
         else if (Ammo > AmmoCap)
         {
-            Ammo = 15;
+            Ammo = 10;
+        }
+
+        if (Ammo <= 0)
+        {
+            if (!transform.GetChild(0).gameObject.activeInHierarchy)
+                transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            if (transform.GetChild(0).gameObject.activeInHierarchy)
+                transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

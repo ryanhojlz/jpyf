@@ -50,6 +50,12 @@ public class AI_Movement : MonoBehaviour
             m_targetPos = Self.GetComponent<Entity_Unit>().GetTarget();//Finding Self own target
         }
 
+        //// Experimental code
+        //if (!m_agent.pathPending)
+        //{
+            
+        //}
+
         //Constantly changing target position
         if (m_targetPos)
         {

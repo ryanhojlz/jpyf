@@ -538,7 +538,7 @@ MonoBehaviour:
   Attack_Speed_Stat: 0.5
   Attack_Range_Stat: 5
   Chase_Range_Stat: 10
-  Move_Speed_Stat: 2
+  Move_Speed_Stat: 5
   Projectile_Prefeb: {fileID: 0}
   UnitsInRange: []
   healthBar: {fileID: 114883078689799876}
@@ -546,7 +546,7 @@ MonoBehaviour:
   Summoning_timer: 0
   Take_Damage_timer: 0
   AttackSound: {fileID: 0}
-  flyspeed: 1.2
+  flyspeed: 10
   hoverspeed: 3
 --- !u!114 &114868180134927620
 MonoBehaviour:

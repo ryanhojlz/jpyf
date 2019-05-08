@@ -71,7 +71,7 @@ public class VelocityCheckScript : MonoBehaviour
         // Velocity Check calculation
         newPos = this.transform.position;
         // Use magnitude here bcos can get negative value;
-        VelocityCheck_AxisX();
+        //VelocityCheck_AxisX();
         VelocityCheck_AxisY();
         oldPos = newPos;
 
@@ -198,11 +198,12 @@ public class VelocityCheckScript : MonoBehaviour
     // Reload action
     void ReloadAction()
     {
-        if (shakeCounter >= 5)
-        {
+        //transform.GetChild(0).transform.GetComponent<Light>().intensity = 1 * (shakeCounter / 6);
+        if (shakeCounter >= 6)
+        {   
             //Debug.Log("Reload");
             shakeCounter = 0;
-            GetComponent<RangeAttackScript>().Ammo = 15;
+            GetComponent<RangeAttackScript>().Ammo = 10;
         }
     }
 

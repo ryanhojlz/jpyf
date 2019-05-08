@@ -190,7 +190,7 @@ public class Object_ControlScript : MonoBehaviour
             tempVelocity.x = Mathf.Clamp(tempVelocity.x, -8, 8);
            
             tempVelocity.z = Mathf.Clamp(tempVelocity.z, -8, 8);
-            GameObject.Find("Text3").GetComponent<Text>().text = "" + tempVelocity;
+            //GameObject.Find("Text3").GetComponent<Text>().text = "" + tempVelocity;
             //Debug.Log("ufbuiawd " + (tempVelocity));
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
 

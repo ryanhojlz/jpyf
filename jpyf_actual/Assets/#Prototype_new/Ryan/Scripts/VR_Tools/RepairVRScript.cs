@@ -26,7 +26,7 @@ public class RepairVRScript : MonoBehaviour {
         // dis debug stuff
         if (Input.GetKeyDown(KeyCode.U))
         {
-            handler.m_CartHP += 5;
+            handler.m_CartHP += 2;
         }
 
         //if (repairTick >= 3)

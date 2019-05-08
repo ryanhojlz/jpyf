@@ -42,7 +42,7 @@ public class MultiToolScript : GrabbableObject
 
         ListOfTools[0].gameObject.SetActive(false);
         ListOfTools[1].gameObject.SetActive(false);
-        ListOfTools[2].gameObject.SetActive(false);
+        //ListOfTools[2].gameObject.SetActive(false);
 
     }
 
@@ -130,7 +130,7 @@ public class MultiToolScript : GrabbableObject
             {
                 if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonUse))
                 {
-
+                    ListOfTools[2].transform.GetChild(0).GetComponent<RangeAttackScript>().SpawnBullet();
                 }
             }
             

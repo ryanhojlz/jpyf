@@ -23,6 +23,15 @@ public class Statistics : MonoBehaviour
     {
         public int number_win;
         public int number_lose;
+        public int number_of_times_bombed;
+        public int number_of_nurikabe_killed;
+        public int number_of_tanuki_killed;
+        public int number_of_tengu_killed;
+        public int number_of_times_p1_is_saved;
+        public int number_of_times_p2_is_saved;
+        public int number_of_times_p1_died;
+        public int number_of_times_p2_died;
+        public int number_of_times_items_gathered;
         public float playTime;
 
         public int Hour;
@@ -32,6 +41,21 @@ public class Statistics : MonoBehaviour
 
     public StatisticsData Data = new StatisticsData();
 
+    public static Statistics Instance = null;
+
+    private void Awake()
+    {
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+    }
     // Use this for initialization
     void Start()
     {
@@ -115,6 +139,51 @@ public class Statistics : MonoBehaviour
     public void incrementLose()
     {
         Data.number_lose++;
+    }
+
+    public void incrementTimesBombed()
+    {
+        Data.number_of_times_bombed++;
+    }
+
+    public void incrementNurikabeKilled()
+    {
+        Data.number_of_nurikabe_killed++;
+    }
+
+    public void incrementTanukiKilled()
+    {
+        Data.number_of_tanuki_killed++;
+    }
+
+    public void incrementTenguKilled()
+    {
+        Data.number_of_tengu_killed++;
+    }
+
+    public void incrementP1Saved()
+    {
+        Data.number_of_times_p1_is_saved++;
+    }
+
+    public void incrementP2Saved()
+    {
+        Data.number_of_times_p2_is_saved++;
+    }
+
+    public void incrementP1Died()
+    {
+        Data.number_of_times_p1_died++;
+    }
+
+    public void incrementP2Died()
+    {
+        Data.number_of_times_p2_died++;
+    }
+
+    public void incrementItemGathered()
+    {
+        Data.number_of_times_items_gathered++;
     }
 
     public void SetWin(int value)

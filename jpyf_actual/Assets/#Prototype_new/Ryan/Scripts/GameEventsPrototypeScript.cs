@@ -56,6 +56,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public Transform tutorialObjective_4 = null;
     // First Shrine Encounter
     public Transform tutorialObjective_5 = null;
+    // Enemy Shield 
+    public Transform tutorialObjective_6 = null;
+
+
 
     private void Awake()
     {
@@ -112,7 +116,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
         // Bomb tutorial
         Bomb_Tutorial[0] = GameObject.Find("Bomb_Tutorial_1").transform;
-        Bomb_Tutorial[1] = GameObject.Find("Bomb_Tutorial_1").transform;
+        Bomb_Tutorial[1] = GameObject.Find("Bomb_Tutorial_2").transform;
+        tutorialObjective_6 = GameObject.Find("TutorialObjective_6").transform;
 
     }
 
@@ -259,14 +264,23 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 break;
             case 5:
+                // Bomb shield tutorial
                 if (payload_ref.transform.position.z > 30)
                 {
+                    Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_6);
+
                     ShowSubtitles = true;
                     subtitles_4外人.text = "Some enemies have shields and need to be broken down by bombs";
                     subtitles_4VR.text = "Some enemies have shields and need to be broken down by bombs";
                 }
+                if (tutorialObjective_6.transform.childCount <= 0)
+                {
+                    ++Tutorial;
+                }
                 break;
-               
+            case 6:
+                // 
+                break;
         }
 
         if (ShowSubtitles)

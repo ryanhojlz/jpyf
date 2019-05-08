@@ -157,7 +157,7 @@ public class Push_CartScript : MonoBehaviour
 
             if (m_stunDuration > 0)
             {
-                
+
                 m_stunDuration -= 1 * Time.deltaTime;
                 return;
             }
@@ -179,6 +179,19 @@ public class Push_CartScript : MonoBehaviour
                 m_CartParent.transform.position += (m_CartMoveDirection * cartspeed);
             }
 
+        }
+        else
+        { 
+            if (m_stunDuration > 0)
+            {
+
+                m_stunDuration -= 1 * Time.deltaTime;
+                return;
+            }
+            else
+            {
+                m_stunDuration = 0;
+            }
         }
     }
 

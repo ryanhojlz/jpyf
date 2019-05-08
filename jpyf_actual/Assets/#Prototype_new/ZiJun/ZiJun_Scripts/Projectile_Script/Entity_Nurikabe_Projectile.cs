@@ -10,11 +10,9 @@ public class Entity_Nurikabe_Projectile : Entity_Projectile
     public override void HitCart(Collider other)
     {
         //Debug.Log("Nuri Hit");
-        GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)(m_dmg));
-        //Add stun Effects here (Once have) (Make speed 0)
-        GameObject.Find("Back").GetComponent<Push_CartScript>().debuffDuration = 0.2f;
-        GameObject.Find("Back").GetComponent<Push_CartScript>().m_SpeedDebuff = 3;
-
+        //        GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>().Cart_TakeDmg((int)(m_dmg));
+        Stats_ResourceScript.Instance.Cart_TakeDmg((int)m_dmg);
+        Push_CartScript.Instance.m_stunDuration = 0.4f;
     }
 
     public override void HitPlayer(Collider other)

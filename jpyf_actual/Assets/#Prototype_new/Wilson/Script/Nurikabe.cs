@@ -56,7 +56,8 @@ public class Nurikabe : Entity_Unit
                 {
                     Projectile.SetDirection(Target.position, this.transform.position);
                 }
-                Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
+                Projectile.SetSpeed(6);
+                //Projectile.SetSpeed(GetAttackRangeStat() / lifeTime);
                 Projectile.SetLifeTime(lifeTime);
                 Projectile.SetDamage(GetAttackStat());
                 //SetStillAttacking(true);

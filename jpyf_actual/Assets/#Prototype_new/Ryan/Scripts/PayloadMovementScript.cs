@@ -48,43 +48,48 @@ public class PayloadMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInsideCart)
-        {
-            if (!tutorial_bool)
-                return;
-
-            if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
-            {
-                // Move Payload
-                if (Stats_ResourceScript.Instance.m_CartHP >= 50)
-                {
-                    // Assign velocity
-                    payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
-                    // Assign velocity to clamp
-                    capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
-                    capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
-                    // Reassign Velocity
-                    payloadObject.GetComponent<Rigidbody>().velocity = capZVelocity;
-
-                    //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
-                }
-            }
-            else
-            {
-                payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
-        }
-        else if (!playerInsideCart)
-        {
-            payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
+        GameObject.Find("Text5").GetComponent<Text>().text = "" + Push_CartScript.Instance.m_stunDuration;
 
         if (Push_CartScript.Instance.m_stunDuration > 0)
         {
+            
             payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+        else
+        {
 
+            if (playerInsideCart)
+            {
+                if (!tutorial_bool)
+                    return;
 
+                if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
+                {
+                    // Move Payload
+                    if (Stats_ResourceScript.Instance.m_CartHP >= 50)
+                    {
+                        // Assign velocity
+                        payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
+                        // Assign velocity to clamp
+                        capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
+                        capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
+                        // Reassign Velocity
+                        payloadObject.GetComponent<Rigidbody>().velocity = capZVelocity;
+
+                        //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
+            }
+            else if (!playerInsideCart)
+            {
+                payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+
+        }
 
         // Debug Text
         GameObject.Find("Text4").GetComponent<Text>().text = "" + payloadObject.GetComponent<Rigidbody>().velocity;

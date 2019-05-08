@@ -177,8 +177,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (Stats_ResourceScript.Instance.m_Minerals > 0)
                 {
                     // When you get enough materials change text
-                    subtitles_4VR.text = "You have gained some materials, \n" +
-                        " use the repair tool \n " +
+                    subtitles_4VR.text = "You have gained some materials,\n" +
+                        "Grab the tool on the left & press square \n " +
                         "hammer the blue object below your drum";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
@@ -231,6 +231,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 {
                     if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
                     {
+                        subtitles_4VR.text = "Swap Grab the tool on the left of you \n" +
+                            "& Press Triangle on the controller";
                         subtitles_4外人.text = "Enemies will start spawning, you can grab them on throw them towards the P1 view";
                     }
                     else

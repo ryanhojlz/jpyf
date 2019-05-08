@@ -25,12 +25,17 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public GameObject Objective3 = null;
     public GameObject Objective4 = null;
 
-    // References
+    // Text References
+    // Subtitles
     public Text subtitles_4外人 = null;
+    // Timer if any need
     public Text timer_4外人 = null;
     // VR Subtitless
     public TextMesh subtitles_4VR = null;
-    
+
+    // Tutorial Index // To show on screen what tutorial i am at mainly for debugging
+    public Text index_text = null;
+    // Panel
     public Transform panel = null;
     public float f_difficulty = 0;
     public bool TileEvent_Start = false;
@@ -74,6 +79,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         timer_4外人 = panel.GetChild(1).GetComponent<Text>();
         // Subtitles for VR
         subtitles_4VR = GameObject.Find("VRTEXT_UI").GetComponent<TextMesh>();
+        // Assigning text for debug
+        index_text = GameObject.Find("TutorialNumber").GetComponent<Text>();
+
 
 
         // Assign Objectives
@@ -125,6 +133,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     void UpdateTutorial()
     {
         timer_4外人.text = "" + tutorial_timer;
+
+        index_text.text = "Tutorial  " + Tutorial;
         // Change the subtitles etc
         switch (Tutorial)
         {
@@ -199,7 +209,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     // When u pickup the bomb
                     if (PickupHandlerScript.Instance.currentObject.GetComponent<bomb_script>())
                     {
-                        Destroy(tutorialObjective_3.gameObject);
                         ++Tutorial;
                     }
                 }
@@ -207,6 +216,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             case 3:
                 if (!tutorialObjective_4)
                 {
+                    Destroy(tutorialObjective_3.gameObject);
                     ++Tutorial;
                 }
                 else
@@ -235,7 +245,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 break;
             case 5:
-
+                
                 break;
                
         }

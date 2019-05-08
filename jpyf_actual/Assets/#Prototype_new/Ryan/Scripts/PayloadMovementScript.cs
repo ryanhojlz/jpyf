@@ -43,6 +43,11 @@ public class PayloadMovementScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+
+    }
+
+    private void FixedUpdate()
+    {
         if (playerInsideCart)
         {
             if (!tutorial_bool)
@@ -64,6 +69,10 @@ public class PayloadMovementScript : MonoBehaviour
                     //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
                 }
             }
+            else
+            {
+                payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
         }
         else if (!playerInsideCart)
         {
@@ -76,15 +85,11 @@ public class PayloadMovementScript : MonoBehaviour
         }
 
 
+
         // Debug Text
         GameObject.Find("Text4").GetComponent<Text>().text = "" + payloadObject.GetComponent<Rigidbody>().velocity;
         // Dangerous
         playerInsideCart = false;
-    }
-
-    private void FixedUpdate()
-    {
-       
 
     }
 

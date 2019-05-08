@@ -36,11 +36,19 @@ public class Unit_TakeDamage_State : IState
         //    m_user.ReturnPreviousState();
         //}
 
-
-        if (m_user.GetComponent<AnimationScript>().AnimatorObj.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        if ((m_user.GetComponent<AnimationScript>()))
+        {
+            if (m_user.GetComponent<AnimationScript>().AnimatorObj.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            {
+                m_user.ChangeState("chase");
+            }
+        }
+        else
         {
             m_user.ChangeState("chase");
         }
+
+
     }
 
     public void Exit()

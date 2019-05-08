@@ -159,7 +159,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         switch (Tutorial)
         {
             case -1:
+                if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
+                {
 
+                }
                 break;
             case 0:
                 // Introduction
@@ -292,24 +295,26 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
             case 6:
                 // If 2nd shrine encounter
-                if (!tutorialObjective_7)
+                if (tutorialObjective_7)
                 {
                     ShowSubtitles = true;
                     subtitles_4外人.text = "Tengus will grab you be careful";
                     subtitles_4VR.text = "Tengus will grab P1\n" +
                         "Press the Circle Button for Staff";
-                }
-                else
-                {
                     if (tutorialObjective_7.childCount <= 0)
                     {
+                        ShowSubtitles = false;
                         Destroy(this.tutorialObjective_7.gameObject);
+                        ++Tutorial;
                     }
-                    ++Tutorial;
                 }
                 break;
             case 7:
+                if (!Objective3)
+                {
 
+                }
+                
                 break;
         }
 

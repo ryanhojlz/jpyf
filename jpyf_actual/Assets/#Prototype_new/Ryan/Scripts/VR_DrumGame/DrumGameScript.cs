@@ -92,8 +92,7 @@ public class DrumGameScript : MonoBehaviour
             v_indicatorPos = m_beatIndicator.transform.localPosition;
 
             // Update Indicator
-            UpdateIndicator();
-            
+            UpdateIndicator();            
         }
         else if (!b_miniGamePlay) // if not minigame in play
         {
@@ -114,13 +113,14 @@ public class DrumGameScript : MonoBehaviour
             b_miniGamePlay = true;
             f_activity_timer = 10;
             OnOffUI(true);
-
+            Stats_ResourceScript.Instance.Player2_TakeDmg(-10);
             // Play particle effect
             particleFeedback.GetComponent<ParticleSystem>().Play();
             // When i sucessfull hit has been detected
             if (b_insideLeft)
             {
                 //Debug.Log("SWITCH TO RIGHT");
+
                 ProcessGameHit();
                 b_translateRight = true;
             }

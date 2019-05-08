@@ -30,7 +30,6 @@ public class PayloadMovementScript : MonoBehaviour
         else if (Instance)
             Destroy(this.gameObject);
 
-
         payloadObject = transform.parent;
         player2 = GameObject.Find("PS4_Player").transform;
     }

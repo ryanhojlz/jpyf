@@ -210,6 +210,12 @@ public class PickupHandlerScript : MonoBehaviour
         return nearest_pickup_object;
     }
 
+    // Returns currently held object
+    public Transform ReturnCurrentObject()
+    {
+        return currentObject;
+    }
+
     //private void OnTriggerExit(Collider other)
     //{
     //    // If its the only object i can pickup

@@ -247,7 +247,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 break;
             case 5:
-                
+                if (payload_ref.transform.position.z > 30)
+                {
+                    subtitles_4VR.text = "Some enemies have shields and need to be broken down by bombs";
+                }
                 break;
                
         }

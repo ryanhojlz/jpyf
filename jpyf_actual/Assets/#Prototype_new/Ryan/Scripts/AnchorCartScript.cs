@@ -19,6 +19,7 @@ public class AnchorCartScript : MonoBehaviour
         m_payLoad = GameObject.Find("PayLoad").transform;
         m_anchorPoint = transform.position;
         m_anchorPoint.y = 0;
+        m_anchorPoint.y = 0;
         handler_ctrl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
     }
 	

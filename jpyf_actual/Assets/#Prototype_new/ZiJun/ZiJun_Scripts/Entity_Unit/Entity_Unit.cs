@@ -718,7 +718,8 @@ public class Entity_Unit : MonoBehaviour
         //used to check if it is being grabbed
         if (this.transform.parent && this.transform.parent.parent)
         {
-            Stun();
+            if (this.transform.parent.parent.GetComponent<PickupHandlerScript>())
+                Stun();
         }
     }
 

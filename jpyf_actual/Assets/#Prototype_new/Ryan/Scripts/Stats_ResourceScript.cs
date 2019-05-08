@@ -379,19 +379,19 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             case 1: // Souls
                 m_Souls += 20;
-                Destroy(item);
+                //Destroy(item);
                 break;
             case 2: // Minerals
                 m_Minerals += 30;
-                Destroy(item);
+                //Destroy(item);
                 break;
             case 3: // Small Souls
                 m_Souls += 10;
-                Destroy(item);
+                //Destroy(item);
                 break;
             case 4:
                 m_Souls += 40;
-                Destroy(item);
+                //Destroy(item);
                 break;
 
         }

@@ -168,7 +168,7 @@ public class Tile_EventScript : MonoBehaviour
         //}
 
 
-        if (GameEventsPrototypeScript.Instance.Tutorial <= 6)
+        if (GameEventsPrototypeScript.Instance.Tutorial <= 5)
         {
             GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
             go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);

@@ -17,10 +17,14 @@ public class PickupHandlerScript : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance)
-            Destroy(this.gameObject);
-        else if (!Instance)
+        if (!Instance)
+        {
             Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Use this for initialization

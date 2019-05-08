@@ -76,8 +76,8 @@ public class VelocityCheckScript : MonoBehaviour
         oldPos = newPos;
 
         ReloadAction();
-        HealingAction();
-        DebugFunc();
+        //HealingAction();
+        //DebugFunc();
     }
     // PC Debugg func
     void DebugFunc()

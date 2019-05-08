@@ -56,9 +56,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public Transform tutorialObjective_4 = null;
     // First Shrine Encounter
     public Transform tutorialObjective_5 = null;
-    // Enemy Shield 
+    // Enemy Shield Tutorial
     public Transform tutorialObjective_6 = null;
-
+    // Tengu tutorial
+    public Transform tutorialObjective_7 = null;
 
 
     private void Awake()
@@ -89,7 +90,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         subtitles_4VR = GameObject.Find("VRTEXT_UI").GetComponent<TextMesh>();
         // Assigning text for debug
         index_text = GameObject.Find("TutorialNumber").GetComponent<Text>();
-
+       
 
 
         // Assign Objectives
@@ -118,6 +119,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         Bomb_Tutorial[0] = GameObject.Find("Bomb_Tutorial_1").transform;
         Bomb_Tutorial[1] = GameObject.Find("Bomb_Tutorial_2").transform;
         tutorialObjective_6 = GameObject.Find("TutorialObjective_6").transform;
+
+        // Tengu Tutorial
+        tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
     }
 
@@ -243,6 +247,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 break;
             case 4:
+                // First shrine encounter
                 if (tutorialObjective_5)
                 {
                     if (tutorialObjective_5.parent.GetComponent<Tile_EventScript>().b_eventStart)
@@ -275,11 +280,22 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 if (tutorialObjective_6.transform.childCount <= 0)
                 {
+                    ShowSubtitles = false;
+                    Destroy(Bomb_Tutorial[0].gameObject);
+                    Destroy(Bomb_Tutorial[1].gameObject);
+
                     ++Tutorial;
                 }
                 break;
             case 6:
-                // 
+                // If 2nd shrine encounter
+                if (!tutorialObjective_7)
+                {
+                    ShowSubtitles = true;
+                    subtitles_4外人.text = "Tengus will grab you be careful";
+                    subtitles_4VR.text = "Tengus will grab P1\n" +
+                        "Press the Circle Button for Staff";
+                }
                 break;
         }
 

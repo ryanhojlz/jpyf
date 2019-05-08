@@ -122,7 +122,7 @@ public class Mini_Game : MonoBehaviour
     public void QTEstart(Object_Breaking other)
     {
         // If player carrying object
-        if (!Player.GetComponent<PickupHandlerScript>().ReturnCurrentObject())
+        if (PickupHandlerScript.Instance.ReturnCurrentObject() == null)
         {
             if (other && !isActiveQTE)
             {

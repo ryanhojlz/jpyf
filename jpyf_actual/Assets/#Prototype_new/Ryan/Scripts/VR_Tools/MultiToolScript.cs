@@ -42,10 +42,12 @@ public class MultiToolScript : GrabbableObject
 
         ListOfTools[0].gameObject.SetActive(false);
         ListOfTools[1].gameObject.SetActive(false);
+        ListOfTools[2].gameObject.SetActive(false);
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         PositionResetCode();
         ProcessSwapping();
@@ -99,24 +101,39 @@ public class MultiToolScript : GrabbableObject
             {
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(false);
+                ListOfTools[2].gameObject.SetActive(false);
             }
             // Circle button
             if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonConfirm))
             {
-
+                ListOfTools[0].gameObject.SetActive(false);
+                ListOfTools[1].gameObject.SetActive(false);
+                ListOfTools[2].gameObject.SetActive(true);
             }
             // Square button // Change to hammer
             if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonSquare))
             {
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(true);
+                ListOfTools[2].gameObject.SetActive(false);
+
             }
             // Triangle button // Change to weapon
             if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonTriangle))
             {
                 ListOfTools[0].gameObject.SetActive(true);
                 ListOfTools[1].gameObject.SetActive(false);
+                ListOfTools[2].gameObject.SetActive(false);
             }
+
+            if (ListOfTools[2].gameObject.activeInHierarchy)
+            {
+                if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonUse))
+                {
+
+                }
+            }
+            
         }
         
 #endif

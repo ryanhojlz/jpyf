@@ -28,7 +28,7 @@ public class VR_PickUpHandlerScript : MonoBehaviour
             particlesReference.GetComponent<ParticleSystem>().Play();
             // Put effect here
             handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
     }
 

@@ -250,7 +250,7 @@ public class Object_ControlScript : MonoBehaviour
         // Kun Hua wants to jump so i give him
         if (Controller.ReturnCrossPress())
         {
-            dash = true;
+            //dash = true;
             //jump = true;
         }
 

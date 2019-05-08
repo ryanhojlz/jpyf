@@ -121,18 +121,23 @@ public class Mini_Game : MonoBehaviour
 
     public void QTEstart(Object_Breaking other)
     {
-        if (other && !isActiveQTE)
+        // If player carrying object
+        if (!Player.GetComponent<PickupHandlerScript>().ReturnCurrentObject())
         {
-            objBreak = other;
-            isActiveQTE = true;
-            currentTime = other.GetTimeLimit();
-            maxTimeLimit = other.GetTimeLimit();
+            if (other && !isActiveQTE)
+            {
+                objBreak = other;
+                isActiveQTE = true;
+                currentTime = other.GetTimeLimit();
+                maxTimeLimit = other.GetTimeLimit();
 
-            sourceCurrentAmount = other.GetMaxSpamPoint() * 0.5f;
-            sourceMaxAmount = other.GetMaxSpamPoint();
+                sourceCurrentAmount = other.GetMaxSpamPoint() * 0.5f;
+                sourceMaxAmount = other.GetMaxSpamPoint();
 
-            powerHit = other.GetPowerPerHit();
+                powerHit = other.GetPowerPerHit();
+            }
         }
+        
         
     }
 

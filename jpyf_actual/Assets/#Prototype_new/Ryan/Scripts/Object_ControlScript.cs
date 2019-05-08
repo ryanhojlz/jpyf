@@ -178,12 +178,18 @@ public class Object_ControlScript : MonoBehaviour
         {
             CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
             //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
-            
-            CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 150) * Time.deltaTime);
+            //if (tempVelocity.x != 0 && tempVelocity.z != 0)
+            //    CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
+            //else
+            //    CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+
+            CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
+
+
             tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
-            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -10, 10);
+            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -8, 8);
            
-            tempVelocity.z = Mathf.Clamp(tempVelocity.z, -10, 10);
+            tempVelocity.z = Mathf.Clamp(tempVelocity.z, -8, 8);
             GameObject.Find("Text3").GetComponent<Text>().text = "" + tempVelocity;
             //Debug.Log("ufbuiawd " + (tempVelocity));
             CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;

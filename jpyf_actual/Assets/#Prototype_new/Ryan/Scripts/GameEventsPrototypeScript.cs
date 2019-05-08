@@ -41,6 +41,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public bool TileEvent_Start = false;
     public bool ShowSubtitles = false;
 
+
+    // Transform Link
+    public Transform[] Bomb_Tutorial = new Transform[2];
+
     // Tutorial Objectives
     // Wood material introduction
     public Transform tutorialObjective_1 = null;
@@ -105,7 +109,14 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Tutorial Objective 5 // First shrine encounter
         tutorialObjective_5 = GameObject.Find("TutorialObjective_5").transform;
 
+
+        // Bomb tutorial
+        Bomb_Tutorial[0] = GameObject.Find("Bomb_Tutorial_1").transform;
+        Bomb_Tutorial[1] = GameObject.Find("Bomb_Tutorial_1").transform;
+
     }
+
+
 
     // Update is called once per frame
     void Update ()
@@ -244,11 +255,14 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 {
                     // Wall has been destroyed on to the next tutorial
                     ++Tutorial;
+                    ShowSubtitles = false;
                 }
                 break;
             case 5:
                 if (payload_ref.transform.position.z > 30)
                 {
+                    ShowSubtitles = true;
+                    subtitles_4外人.text = "Some enemies have shields and need to be broken down by bombs";
                     subtitles_4VR.text = "Some enemies have shields and need to be broken down by bombs";
                 }
                 break;

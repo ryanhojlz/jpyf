@@ -9,7 +9,7 @@ public class PayloadMovementScript : MonoBehaviour
 
     // Singleton
     public static PayloadMovementScript Instance = null;
-    private Transform payloadObject = null;
+    public Transform payloadObject = null;
     private Transform player2 = null;
 
     // Trigger bool
@@ -56,8 +56,7 @@ public class PayloadMovementScript : MonoBehaviour
             payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         else
-        {
-
+        { 
             if (playerInsideCart)
             {
                 if (!tutorial_bool)

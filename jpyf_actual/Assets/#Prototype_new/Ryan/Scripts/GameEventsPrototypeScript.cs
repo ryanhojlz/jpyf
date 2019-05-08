@@ -158,6 +158,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Change the subtitles etc
         switch (Tutorial)
         {
+            case -1:
+
+                break;
             case 0:
                 // Introduction
                 // Text timer
@@ -296,6 +299,17 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     subtitles_4VR.text = "Tengus will grab P1\n" +
                         "Press the Circle Button for Staff";
                 }
+                else
+                {
+                    if (tutorialObjective_7.childCount <= 0)
+                    {
+                        Destroy(this.tutorialObjective_7.gameObject);
+                    }
+                    ++Tutorial;
+                }
+                break;
+            case 7:
+
                 break;
         }
 

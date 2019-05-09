@@ -49,9 +49,14 @@ public class PayloadMovementScript : MonoBehaviour
     {
         GameObject.Find("Text5").GetComponent<Text>().text = "" + Push_CartScript.Instance.m_stunDuration;
 
-        if (Push_CartScript.Instance.m_stunDuration > 0)
+
+        if (GameEventsPrototypeScript.Instance.b_bigExplain)
         {
-            
+            return;
+        }
+
+        if (Push_CartScript.Instance.m_stunDuration > 0)
+        {            
             payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         else

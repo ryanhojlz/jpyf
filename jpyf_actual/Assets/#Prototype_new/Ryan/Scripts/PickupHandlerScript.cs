@@ -196,18 +196,20 @@ public class PickupHandlerScript : MonoBehaviour
         {
             nearest_pickup_object = other.transform;
         }
-
-        if (other.GetComponent<Entity_Unit>())
-        {
-            if (other.GetComponent<Entity_Unit>().GetHealthStat() > 0)
-                nearest_pickup_object = other.transform.parent;
-        }
-
+        
         if (other.GetComponent<bomb_script>())
         {
             nearest_pickup_object = other.transform;
         }
-
+        if (other.GetComponent<Entity_Unit>())
+        {
+            if (other.GetComponent<Entity_Unit>().isSpawning())
+            {
+                return;
+            }
+            else if (other.GetComponent<Entity_Unit>().GetHealthStat() > 0)
+                nearest_pickup_object = other.transform.parent;
+        }
     }
 
     // Return nearest object

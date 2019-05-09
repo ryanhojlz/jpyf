@@ -162,10 +162,7 @@ public class GameEventsManager : MonoBehaviour
         }
     }
 
-
-
-
-
+    
     // These are planned when the nexus objects are in 
     // For readability instead of seeing hp -= damage;
     // Plus Minus function for damage

@@ -63,7 +63,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Tengu tutorial
     public Transform tutorialObjective_7 = null;
 
-
+    public bool b_bigExplain = false;
     // Pause Func
     bool b_isPaused = false;
 
@@ -199,7 +199,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 {
                     tutorial_timer -= 1 * Time.deltaTime;
                 }
-                if (tutorial_timer > 40)
+                if (tutorial_timer > 44)
                 {                  
                     subtitles_4外人.text = "You are dead in need to be revived";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
@@ -345,14 +345,43 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     {
                         ShowSubtitles = false;
                         Destroy(this.tutorialObjective_7.gameObject);
+                        tutorial_timer = 50;
+
                         ++Tutorial;
                     }
                 }                
                 break;
             case 7:
-                if (!Objective3)
+                if (!Objective2)
                 {
-                    
+                    b_bigExplain = true;
+                    ShowSubtitles = true;
+                    tutorial_timer -= 1 * Time.deltaTime;
+                    if (tutorial_timer > 45)
+                    {
+                        subtitles_4外人.text = "Congrats on clearing basic tutorial";
+                        subtitles_4VR.text = "Congrats on clearing basic tutorial";
+                    }
+                    else if (tutorial_timer > 40)
+                    {
+                        subtitles_4外人.text = "From here on the lantern will start depleting";
+                        subtitles_4VR.text = "From here on the lantern will start depleting";
+                    }
+                    else if (tutorial_timer > 35)
+                    {
+                        subtitles_4外人.text = "If the lantern dies out a timer will start ticking ";
+                        subtitles_4VR.text = "If the lantern dies out a timer will start ticking";
+                    }
+                    else if (tutorial_timer > 30)
+                    {
+                        subtitles_4外人.text = "Once the timer reaches 0 P1 & P2 lose";
+                        subtitles_4VR.text = "Once the timer reaches 0 P1 & P2 lose";
+                    }
+                    else if (tutorial_timer > 25)
+                    {
+                        subtitles_4外人.text = "Once the timer reaches 0 P1 & P2 lose";
+                        subtitles_4VR.text = "Once the timer reaches 0 P1 & P2 lose";
+                    }
                 }
                 break;
         }
@@ -403,5 +432,12 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+    }
+
+
+    // Lose Condition
+    void ProcessWinLoseCondition()
+    {
+        //if (Ins)
     }
 }

@@ -181,7 +181,10 @@ public class Entity_Tengu : Entity_Unit
         //Debug.Log("This one : " + this.name + " : " + GetTarget());
         //Debug.Log("This one : " + this.name + " : isGrabbing - " + isGrabbing);
 
-        if ((!HoldUnit || !HoldUnit.activeSelf || (GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
+        if ((!HoldUnit 
+            || !HoldUnit.activeSelf 
+            || ((GetTarget() && GetTarget().tag == "Player2") 
+            && (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
             if ((GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0)))
             {

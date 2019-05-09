@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit_StateMachine
 {
+    Queue<IState> StateQList = new Queue<IState>();
 
     private class StateList
     {

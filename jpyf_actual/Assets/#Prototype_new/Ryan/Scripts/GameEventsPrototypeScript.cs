@@ -15,6 +15,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public Transform payload_ref = null;
 
     // Triggers
+    // Tutorial 0 for debugging side
+    // Tutorial -1 for actual tutorial
     public int Tutorial = 0;
     float tutorial_timer = 40;
 
@@ -123,6 +125,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Tengu Tutorial
         tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
+
+        if (Tutorial == -1)
+        {
+            Stats_ResourceScript.Instance.m_P2_hp = 0;
+        }
     }
 
 
@@ -155,6 +162,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         timer_4外人.text = "" + tutorial_timer;
 
         index_text.text = "Tutorial  " + Tutorial;
+
+        
+        
         // Change the subtitles etc
         switch (Tutorial)
         {

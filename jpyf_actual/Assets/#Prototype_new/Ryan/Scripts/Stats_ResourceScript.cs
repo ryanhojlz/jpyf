@@ -135,7 +135,7 @@ public class Stats_ResourceScript : MonoBehaviour
         m_P2_hp = m_P2_hpCap;
         //m_P2_hp = 0;
         m_CartHP = 0;
-        m_LanternHp = 100;
+        m_LanternHp = 0;
         m_Minerals = 0;
         m_Souls = 0;
         m_LanternTimerTickReference = m_LanternTimerTick;

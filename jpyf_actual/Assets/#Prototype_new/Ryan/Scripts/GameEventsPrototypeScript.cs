@@ -84,6 +84,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
 
 
+
     private void Awake()
     {
 
@@ -161,10 +162,14 @@ public class GameEventsPrototypeScript : MonoBehaviour
     {
         // Pause
         ProcessPause();
+        ProcessWinLoseCondition();
         // To be removed later
         BabySitConstraints();
         // Tutorial Updates etc
         UpdateTutorial();
+
+
+        
     }
     
     // Game was to hard nuff sad
@@ -493,5 +498,13 @@ public class GameEventsPrototypeScript : MonoBehaviour
             }
         }
 
+    }
+
+
+
+    public float ReturnAlpha()
+    {
+        float alpha = 255 - (255 * (losingTimer / ref_losingTimer));
+        return alpha;
     }
 }

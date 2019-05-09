@@ -8,10 +8,14 @@ public class LanternGauge : MonoBehaviour
     public Image blackImage;
     Color variable;
     Color Original;
+
+    Color temp;
     bool reverse = false;
 
     public float speed = 3f;
     float offset = 0.1f;
+
+    float alpha = 0f;
     // Use this for initialization
 
     Stats_ResourceScript ForPlayer = null;
@@ -21,7 +25,7 @@ public class LanternGauge : MonoBehaviour
     void Start()
     {
         Original = blackImage.color;
-        Original.a = 0.5f;
+        Original.a = 0.5f/*GameEventsPrototypeScript.Instance.ReturnAlpha()*/;
         variable = blackImage.color;
         variable.a = 0f;
 
@@ -60,25 +64,37 @@ public class LanternGauge : MonoBehaviour
 
     void Fade()
     {
-        if (!reverse)
-        {
-            blackImage.color = Color.Lerp(blackImage.color, variable, Time.deltaTime * speed);
+        //if (!reverse)
+        //{
+        //    blackImage.color = Color.Lerp(blackImage.color, variable, Time.deltaTime * speed);
 
-            if (blackImage.color.a <= variable.a + offset)
-            {
-                Debug.Log("Got come in");
-                reverse = true;
-            }
-        }
-        else
-        {
-            blackImage.color = Color.Lerp(blackImage.color, Original, Time.deltaTime * speed);
+        //    if (blackImage.color.a <= variable.a + offset)
+        //    {
+        //        Debug.Log("Got come in");
+        //        reverse = true;
+        //    }
+        //}
+        //else
+        //{
+        //blackImage.color = Color.Lerp(blackImage.color, Original, Time.deltaTime * speed);
 
-            if (blackImage.color.a >= Original.a - offset)
-            {
-                Debug.Log("Got come in");
-                reverse = false;
-            }
-        }
+        //if (blackImage.color.a >= Original.a - offset)
+        //{
+        //Debug.Log("Got come in");
+        //reverse = false;
+        //}
+        //}
+
+        alpha += Time.deltaTime;
+
+        blackImage.color = ChangeAlpha(GameEventsPrototypeScript.Instance.ReturnAlpha());
+    }
+
+    public Color ChangeAlpha(float value)
+    {
+        temp = blackImage.color;
+        temp.a = value;
+
+        return temp;
     }
 }

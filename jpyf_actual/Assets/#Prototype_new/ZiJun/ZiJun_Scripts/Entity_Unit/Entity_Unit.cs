@@ -744,6 +744,20 @@ public class Entity_Unit : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (transform.parent.parent == null && !transform.parent.GetComponent<NavMeshAgent>().enabled)
+        {
+            if (other.tag == "floor")
+            {
+                transform.parent.GetComponent<NavMeshAgent>().enabled = true;
+                transform.parent.GetComponent<AI_Movement>().enabled = true;
+                transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                transform.parent.GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
+    }
+
 
     void UpdateInspector()
     {

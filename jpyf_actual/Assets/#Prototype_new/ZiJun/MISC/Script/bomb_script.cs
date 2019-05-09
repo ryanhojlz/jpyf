@@ -176,7 +176,7 @@ public class bomb_script : MonoBehaviour
             {
                 if (unit.GetHealthStat() > 0)
                 {
-                    unit.TakeDamage(unit.GetMaxHealthStat());
+                    //unit.TakeDamage(unit.GetMaxHealthStat());
                     unit.ChangeState("stun");
                 }
             }

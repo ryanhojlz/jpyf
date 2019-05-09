@@ -93,7 +93,7 @@ public class Prompt_Key : MonoBehaviour
             return;
         }
 
-        if (!haveObjective || !target)
+        if (!haveObjective || !target || target.GetComponent<Entity_Tengu>())
         {
             SetAlpha(0);
             return;

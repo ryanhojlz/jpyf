@@ -710,6 +710,16 @@ public class Entity_Unit : MonoBehaviour
         this.sm.ChangeState("stun");
     }
 
+    public bool isSpawning()
+    {
+        if (this.sm.GetCurrentStateName() == "summon")
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public bool GetinstantChasePlayer()
     {
         return instantChasePlayer;

@@ -64,6 +64,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public Transform tutorialObjective_7 = null;
 
 
+    // Pause Func
+    bool b_isPaused = false;
+
+
     private void Awake()
     {
 
@@ -137,7 +141,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        // Pause
+        ProcessPause();
+        // To be removed later
         BabySitConstraints();
+        // Tutorial Updates etc
         UpdateTutorial();
     }
     
@@ -363,5 +371,37 @@ public class GameEventsPrototypeScript : MonoBehaviour
         
 
 
+    }
+
+    // Shetty pause func
+    // Its placed like this so i can put on varios keypress
+    void PauseFunc()
+    {
+        if (b_isPaused)
+        {
+            b_isPaused = false;
+        }
+        else if (!b_isPaused)
+        {
+            b_isPaused = true;
+        }
+    }
+
+    // Actual pausing
+    void ProcessPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseFunc();
+        }
+        
+        if (b_isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }

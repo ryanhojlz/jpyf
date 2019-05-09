@@ -147,7 +147,7 @@ public class Stats_ResourceScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        PauseGame();
+        //PauseGame();
         PS4_UI();
         PSVR_UI();
         

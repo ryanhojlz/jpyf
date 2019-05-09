@@ -68,6 +68,22 @@ public class GameEventsPrototypeScript : MonoBehaviour
     bool b_isPaused = false;
 
 
+    // Win lose stuff
+    enum WINLOSE
+    {
+        neutral,
+        win,
+        lose
+    }
+    WINLOSE condition = WINLOSE.neutral;
+
+    // Losing timer
+    float losingTimer = 10;
+    // Resetter variable
+    float ref_losingTimer = 10;
+
+
+
     private void Awake()
     {
 
@@ -134,6 +150,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             Stats_ResourceScript.Instance.m_P2_hp = 0;
         }
+
+
     }
 
 
@@ -382,6 +400,18 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         subtitles_4外人.text = "Once the timer reaches 0 P1 & P2 lose";
                         subtitles_4VR.text = "Once the timer reaches 0 P1 & P2 lose";
                     }
+                    else if (tutorial_timer > 20)
+                    {
+                        subtitles_4外人.text = "You can collect lantern fuel by breaking lanterns in the world";
+                        subtitles_4VR.text = "You can replenish lantern fuel by breaking lanterns and throwing the resources back to the cart";
+                    }
+                    else if (tutorial_timer > 15)
+                    {
+                        ShowSubtitles = false;
+                        Stats_ResourceScript.Instance.m_StartLanternTick = true;
+                        ++Tutorial;
+                    }
+                       
                 }
                 break;
         }
@@ -438,6 +468,30 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Lose Condition
     void ProcessWinLoseCondition()
     {
-        //if (Ins)
+        //if neutral havent win lose
+        if (condition == WINLOSE.neutral)
+        {
+            if (Stats_ResourceScript.Instance.m_LanternHp < 0)
+            {
+                losingTimer -= 1 * Time.deltaTime;
+                if (losingTimer <= 0)
+                {
+                    condition = WINLOSE.lose;
+                }
+            }
+            else
+            {
+                // When lantern hp not 0 
+                if (losingTimer < ref_losingTimer)
+                {
+                    losingTimer += 1 * Time.deltaTime;
+                    if (losingTimer > ref_losingTimer)
+                    {
+                        losingTimer = ref_losingTimer;
+                    }
+                }
+            }
+        }
+
     }
 }

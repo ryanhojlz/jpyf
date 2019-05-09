@@ -153,10 +153,12 @@ public class PickupHandlerScript : MonoBehaviour
             // If object is an enemy unit
             if (currentObject.GetComponent<AI_Movement>())
             {
-                // Set nav mesh false
-                currentObject.GetComponent<AI_Movement>().enabled = false;
-                currentObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentObject.GetComponent<NavMeshAgent>().enabled = false;
+                
+                    // Set nav mesh false
+                    currentObject.GetComponent<AI_Movement>().enabled = false;
+                    currentObject.GetComponent<Rigidbody>().isKinematic = true;
+                    currentObject.GetComponent<NavMeshAgent>().enabled = false;
+                
             }
             // If its a normal item
             if (currentObject.GetComponent<Pickup_Scripts>())
@@ -197,8 +199,8 @@ public class PickupHandlerScript : MonoBehaviour
 
         if (other.GetComponent<Entity_Unit>())
         {
-            // This is occuring 
-            nearest_pickup_object = other.transform.parent;
+            if (other.GetComponent<Entity_Unit>().GetHealthStat() > 0)
+                nearest_pickup_object = other.transform.parent;
         }
 
         if (other.GetComponent<bomb_script>())

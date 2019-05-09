@@ -53,22 +53,25 @@ public class UI_FeedbackScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        
+        // Triangle
         if (InteractTrue[0])
             TextUI[0].color = color_default;
         else if (!InteractTrue[0])
             TextUI[0].color = greyed_out;
 
+        // Square
         if (InteractTrue[1])
             TextUI[1].color = color_default;
         else if (!InteractTrue[1])
             TextUI[1].color = greyed_out;
 
+        // Circle
         if (InteractTrue[2])
             TextUI[2].color = color_default;
         else if (!InteractTrue[2])
             TextUI[2].color = greyed_out;
 
+        // Cross
         if (InteractTrue[3])
             TextUI[3].color = color_default;
         else if (!InteractTrue[3])

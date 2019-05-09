@@ -63,10 +63,6 @@ public class Follow_Objective : MonoBehaviour
         if (!this.GetComponent<Image>())
             return;
 
-        
-
-
-
 
         if (!haveObjective || !target)
         {

@@ -42,12 +42,12 @@ public class Alert : MonoBehaviour
         //tmp.a -= 1.5f * Time.deltaTime;
         //spriteRenderer.color = tmp;
 
-        Debug.Log("Hi1");
-        Debug.Log(this.transform.GetChild(0));
-        Debug.Log(this.transform.GetChild(1));
+        //Debug.Log("Hi1");
+        //Debug.Log(this.transform.GetChild(0));
+        //Debug.Log(this.transform.GetChild(1));
         if (TargetObject.GetComponent<Entity_Unit>())
         {
-            Debug.Log("Hi2");
+            //Debug.Log("Hi2");
 
             if (TargetObject.GetComponent<Entity_Unit>().GetTarget() && TargetObject.GetComponent<Entity_Unit>().GetTarget() != TargetedObject)
             {
@@ -63,7 +63,7 @@ public class Alert : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer < 0)
         {
-            Debug.Log("Hi3");
+            //Debug.Log("Hi3");
             this.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             this.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
         }

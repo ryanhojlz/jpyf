@@ -84,6 +84,9 @@ public class Stats_ResourceScript : MonoBehaviour
     //
     public static Stats_ResourceScript Instance = null;
 
+    bool pauseGame = false;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -144,6 +147,7 @@ public class Stats_ResourceScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        PauseGame();
         PS4_UI();
         PSVR_UI();
         
@@ -261,6 +265,24 @@ public class Stats_ResourceScript : MonoBehaviour
             m_CartHP = 0;
         }
 
+    }
+
+    void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseGame)
+            {
+                pauseGame = false;
+                Time.timeScale = 0;
+            }
+            else if (!pauseGame)
+            {
+                pauseGame = true;
+                Time.timeScale = 1;
+            }
+        }
+        
     }
 
     void LanternGameplay()

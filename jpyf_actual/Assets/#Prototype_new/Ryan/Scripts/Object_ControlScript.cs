@@ -183,18 +183,15 @@ public class Object_ControlScript : MonoBehaviour
             //else
             //    CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
 
-            CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
+            // Add force way
+            //CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
+            //tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+            //tempVelocity.x = Mathf.Clamp(tempVelocity.x, -8, 8);
+            //tempVelocity.z = Mathf.Clamp(tempVelocity.z, -8, 8);
+            //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
 
-
-            tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
-            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -8, 8);
-           
-            tempVelocity.z = Mathf.Clamp(tempVelocity.z, -8, 8);
-            //GameObject.Find("Text3").GetComponent<Text>().text = "" + tempVelocity;
-            //Debug.Log("ufbuiawd " + (tempVelocity));
-            CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
-
-            //CurrentObj.transform.position += tempVelocity * Time.deltaTime;
+            // Snappy way
+            CurrentObj.transform.position += tempVelocity * Time.deltaTime;
         }
         //if (Gropper)
         //{

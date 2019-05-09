@@ -34,7 +34,10 @@ public class MainMenuButton : MonoBehaviour
     Vector3 originalPos3;
     Vector3 originalPos4;
 
-    float optionOffset = 100;
+    float optionOffset = Screen.width * 0.1f;
+
+    float ScreenWidth = Screen.width;
+    float ScreenHeight = Screen.height;
 
     public bool TitlescreenDisplay = true;
 
@@ -46,6 +49,9 @@ public class MainMenuButton : MonoBehaviour
     private string scene;
     //private Text loadingText;
     public Image loadImage;
+
+    float speed = 500f;
+    float valueToStop = 0.001f;
 
     // Use this for initialization
     void Start()
@@ -60,10 +66,10 @@ public class MainMenuButton : MonoBehaviour
         text2 = GameObject.Find("Text2");
         text3 = GameObject.Find("Text3");
         text4 = GameObject.Find("Text4");
-        originalPos = buttons[0].transform.position;
-        originalPos2 = buttons[1].transform.position;
-        originalPos3 = buttons[2].transform.position;
-        originalPos4 = buttons[3].transform.position;
+        originalPos = buttons[0].GetComponent<RectTransform>().anchoredPosition;
+        originalPos2 = buttons[1].GetComponent<RectTransform>().anchoredPosition;
+        originalPos3 = buttons[2].GetComponent<RectTransform>().anchoredPosition;
+        originalPos4 = buttons[3].GetComponent<RectTransform>().anchoredPosition;
         UnityEngine.XR.XRSettings.showDeviceView = false;
         loadImage.enabled = false;
         Loadingcanvas.enabled = false;
@@ -73,7 +79,7 @@ public class MainMenuButton : MonoBehaviour
     void Update()
     {
         Debug.Log(buttons[indexX/*, indexY*/].gameObject.name);
-
+        optionOffset = Screen.width * 0.1f;
         text1.SetActive(false);
         text2.SetActive(false);
         text3.SetActive(false);
@@ -119,22 +125,37 @@ public class MainMenuButton : MonoBehaviour
                 EnterSelected();
             }
         }
-
-        if (originalPos != buttons[0].transform.position && buttons[indexX] != buttons[0])
+        //if (indexX != 0)
+        //{
+        //    //buttons[0].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        //}
+        //if (indexX != 1)
+        //{
+        //    //buttons[1].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        //}
+        //if (indexX != 2)
+        //{
+        //    //buttons[2].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        //}
+        //if (indexX != 3)
+        //{
+        //    //buttons[3].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        //}
+        if (buttons[indexX] != buttons[0])
         {
-            buttons[0].transform.position = originalPos;
+            buttons[0].GetComponent<RectTransform>().anchoredPosition = originalPos;
         }
-        if (originalPos != buttons[1].transform.position && buttons[indexX] != buttons[1])
+        if (buttons[indexX] != buttons[1])
         {
-            buttons[1].transform.position = originalPos2;
+            buttons[1].GetComponent<RectTransform>().anchoredPosition = originalPos2;
         }
-        if (originalPos != buttons[2].transform.position && buttons[indexX] != buttons[2])
+        if (buttons[indexX] != buttons[2])
         {
-            buttons[2].transform.position = originalPos3;
+            buttons[2].GetComponent<RectTransform>().anchoredPosition = originalPos3;
         }
-        if (originalPos != buttons[3].transform.position && buttons[indexX] != buttons[3])
+        if (buttons[indexX] != buttons[3])
         {
-            buttons[3].transform.position = originalPos4;
+            buttons[3].GetComponent<RectTransform>().anchoredPosition = originalPos4;
         }
 
         //Debug.Log(TitlescreenDisplay);
@@ -193,34 +214,121 @@ public class MainMenuButton : MonoBehaviour
             return;
 
         Vector3 currButtonPos = buttons[indexX].transform.position;
+        //float value = 0.001f;
+
 
         switch (buttons[indexX/*, indexY*/].gameObject.name)
         {
             case "start":
                 {
-                    if (buttons[indexX].transform.position.x < originalPos.x + optionOffset)
-                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    ////if (buttons[indexX].transform.position.x < originalPos.x + optionOffset)
+                    ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    //Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    //Debug.Log(temp);
+                    //if (buttons[indexX].GetComponent<RectTransform>().position.x 
+                    //    - buttons[indexX].GetComponent<RectTransform>().rect.width
+                    //    * buttons[indexX].GetComponent<RectTransform>().localScale.x 
+                    //    < Screen.width * 0.25)
+                    //{
+                    //    temp.x += speed * Time.deltaTime;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+
+                    Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
+                    {
+                        temp.x += speed * Time.deltaTime;
+                        buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    }
+                    //else
+                    //{
+                    //    temp.x = originalPos.x + Screen.width * valueToStop + buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
                 }
                 break;
 
             case "tutorial":
                 {
-                    if (buttons[indexX].transform.position.x < originalPos2.x + optionOffset)
-                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    ////if (buttons[indexX].transform.position.x < originalPos2.x + optionOffset)
+                    ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    //Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    //if (buttons[indexX].GetComponent<RectTransform>().position.x 
+                    //    - buttons[indexX].GetComponent<RectTransform>().rect.width
+                    //    * buttons[indexX].GetComponent<RectTransform>().localScale.x 
+                    //    < Screen.width * 0.25)
+                    //{
+                    //    temp.x += speed * Time.deltaTime;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+                    Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
+                    {
+                        temp.x += speed * Time.deltaTime;
+                        buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    }
+                    //else
+                    //{
+                    //    temp.x = originalPos.x + Screen.width * valueToStop + buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
                 }
                 break;
 
             case "quit":
                 {
-                    if (buttons[indexX].transform.position.x < originalPos3.x + optionOffset)
-                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    ////if (buttons[indexX].transform.position.x < originalPos3.x + optionOffset)
+                    ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    //Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    //if (buttons[indexX].GetComponent<RectTransform>().position.x 
+                    //    - buttons[indexX].GetComponent<RectTransform>().rect.width
+                    //    * buttons[indexX].GetComponent<RectTransform>().localScale.x 
+                    //    < Screen.width * 0.25)
+                    //{
+                    //    temp.x += speed * Time.deltaTime;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+                    Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
+                    {
+                        temp.x += speed * Time.deltaTime;
+                        buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    }
+                    //else
+                    //{
+                    //    temp.x = originalPos.x + Screen.width * valueToStop + buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
                 }
                 break;
 
             case "credits":
                 {
-                    if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
-                        buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+                    ////if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
+                    ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+
+
+                    //Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    //if (buttons[indexX].GetComponent<RectTransform>().position.x
+                    //    - buttons[indexX].GetComponent<RectTransform>().rect.width
+                    //    * buttons[indexX].GetComponent<RectTransform>().localScale.x
+                    //    < Screen.width * 0.25)
+                    //{
+                    //    temp.x += speed * Time.deltaTime;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+                    Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
+                    {
+                        temp.x += speed * Time.deltaTime;
+                        buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    }
+                    //else
+                    //{
+                    //    temp.x = originalPos.x + Screen.width * valueToStop + buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+
                 }
                 break;
         }

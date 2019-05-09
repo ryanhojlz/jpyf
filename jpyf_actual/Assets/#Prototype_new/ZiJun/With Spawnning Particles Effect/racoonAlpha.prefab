@@ -1385,7 +1385,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509585770867316}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.140724, y: 17.092455, z: -1.9066076}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4905212693354696}
@@ -3109,6 +3109,7 @@ MonoBehaviour:
   statename: 
   Summoning_timer: 3
   Take_Damage_timer: 3
+  StunEffect: {fileID: 0}
   AttackSound: {fileID: 0}
 --- !u!114 &114968998549192548
 MonoBehaviour:

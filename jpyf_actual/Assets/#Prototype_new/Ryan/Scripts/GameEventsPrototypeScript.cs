@@ -78,9 +78,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
     WINLOSE condition = WINLOSE.neutral;
 
     // Losing timer
-    float losingTimer = 10;
+    public float losingTimer = 10;
     // Resetter variable
-    float ref_losingTimer = 10;
+    public float ref_losingTimer = 10;
 
 
 

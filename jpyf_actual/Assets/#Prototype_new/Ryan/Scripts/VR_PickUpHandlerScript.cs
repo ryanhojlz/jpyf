@@ -28,6 +28,7 @@ public class VR_PickUpHandlerScript : MonoBehaviour
             particlesReference.GetComponent<ParticleSystem>().Play();
             // Put effect here
             handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
+            
             Destroy(other.gameObject);
         }
     }
@@ -35,6 +36,6 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     void spawnEffect(Vector3 position)
     {
         Instantiate(particles_prefeb, position, Quaternion.identity);
-        Debug.Log("Entered spawneffect");
+        //Debug.Log("Entered spawneffect");
     }
 }

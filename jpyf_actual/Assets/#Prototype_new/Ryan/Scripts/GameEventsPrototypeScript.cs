@@ -476,7 +476,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         //if neutral havent win lose
         if (condition == WINLOSE.neutral)
         {
-            if (Stats_ResourceScript.Instance.m_LanternHp < 0)
+            if (Stats_ResourceScript.Instance.m_LanternHp <= 0)
             {
                 losingTimer -= 1 * Time.deltaTime;
                 if (losingTimer <= 0)
@@ -500,11 +500,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     }
 
-
-
     public float ReturnAlpha()
     {
-        float alpha = 255 - (255 * (losingTimer / ref_losingTimer));
+        float alpha = 1.0f * ((ref_losingTimer - losingTimer) / ref_losingTimer);
         return alpha;
     }
 }

@@ -18,7 +18,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Tutorial 0 for debugging side
     // Tutorial -1 for actual tutorial
     public int Tutorial = 0;
-    float tutorial_timer = 40;
+    float tutorial_timer = 45;
 
     // Tutorial Boolean
     public bool BabySit = false;
@@ -83,7 +83,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Easy mode
         BabySit = true;
         // Assigning milestones
-        Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
+        //Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
         subtitles_4外人 = GameObject.Find("Subtitles").GetComponent<Text>();
         panel = subtitles_4外人.transform.parent;
@@ -96,10 +96,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
 
         // Assign Objectives
-        Objective1 = Milestones[Milestones.Length - 1];
-        Objective2 = Milestones[Milestones.Length - 2];
-        Objective3 = Milestones[Milestones.Length - 3];
-        Objective4 = Milestones[Milestones.Length - 4];
+        //Objective1 = Milestones[Milestones.Length - 1];
+        //Objective2 = Milestones[Milestones.Length - 2];
+        //Objective3 = Milestones[Milestones.Length - 3];
+        //Objective4 = Milestones[Milestones.Length - 4];
 
 
         // Tutorial Objective 1 // Resource Collection
@@ -126,7 +126,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
 
-        if (Tutorial == -1)
+        if (Tutorial == 0)
         {
             Stats_ResourceScript.Instance.m_P2_hp = 0;
         }
@@ -168,19 +168,37 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Change the subtitles etc
         switch (Tutorial)
         {
-            case -1:
-                if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
-                {
-
-                }
-                break;
+            //case -1:
+            //    // Introduction on how to heal the player
+            //    if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
+            //    {
+            //        ++Tutorial;
+            //    }
+            //    else
+            //    {
+            //        ShowSubtitles = true;
+            //        subtitles_4外人.text = "You are dead in need to be revived";
+            //        subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
+            //            "Press the right trigger of your controller";
+            //    }
+            //    break;
             case 0:
                 // Introduction
-                // Text timer
-                tutorial_timer -= 1 * Time.deltaTime;
                 ShowSubtitles = true;
+                // Text timer
 
-                if (tutorial_timer > 35)
+                if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
+                {
+                    tutorial_timer -= 1 * Time.deltaTime;
+                }
+                if (tutorial_timer > 40)
+                {                  
+                    subtitles_4外人.text = "You are dead in need to be revived";
+                    subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
+                        "Press the right trigger of your controller";
+                    
+                }                
+                else if (tutorial_timer > 35)
                 {
                     subtitles_4外人.text = "Objective Push P1's cart";
                     subtitles_4VR.text = "You are P1 and \n you need P2 to bring you to the other side";
@@ -199,7 +217,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // Teach the player how to collect resources
                 if (tutorialObjective_1)
                 {
-                    if (tutorialObjective_1.childCount < 3)
+                    if (tutorialObjective_1.childCount >= 3)
                     {
                         subtitles_4外人.text = "Collect the wood and throw back into the cart, Wait for the P1 to repair with the materials";
                     }
@@ -299,32 +317,35 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     ShowSubtitles = false;
                     Destroy(Bomb_Tutorial[0].gameObject);
                     Destroy(Bomb_Tutorial[1].gameObject);
-
+                    Destroy(tutorialObjective_6.gameObject);
                     ++Tutorial;
                 }
                 break;
             case 6:
                 // If 2nd shrine encounter
-                if (tutorialObjective_7)
+
+                if (!Objective2)
                 {
-                    ShowSubtitles = true;
-                    subtitles_4外人.text = "Tengus will grab you be careful";
-                    subtitles_4VR.text = "Tengus will grab P1\n" +
-                        "Press the Circle Button for Staff";
+                    if (tutorialObjective_7)
+                    {
+                        ShowSubtitles = true;
+                        subtitles_4外人.text = "Tengus will grab you be careful";
+                        subtitles_4VR.text = "Tengus will grab P1\n" +
+                            "Press the Circle Button for Staff";
+                    }
                     if (tutorialObjective_7.childCount <= 0)
                     {
                         ShowSubtitles = false;
                         Destroy(this.tutorialObjective_7.gameObject);
                         ++Tutorial;
                     }
-                }
+                }                
                 break;
             case 7:
                 if (!Objective3)
                 {
-
+                    
                 }
-                
                 break;
         }
 
@@ -339,7 +360,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             panel.gameObject.SetActive(false);
         }
 
-
+        
 
 
     }

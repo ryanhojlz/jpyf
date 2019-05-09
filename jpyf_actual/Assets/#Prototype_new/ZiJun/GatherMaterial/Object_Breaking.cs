@@ -27,7 +27,7 @@ public class Object_Breaking : MonoBehaviour
         minigame = Mini_Game.Instance;
 
         m_powerPerHit = 25;
-        Debug.Log("Hi this time i got come in liao");
+        //Debug.Log("Hi this time i got come in liao");
     }
 
     // Update is called once per frame

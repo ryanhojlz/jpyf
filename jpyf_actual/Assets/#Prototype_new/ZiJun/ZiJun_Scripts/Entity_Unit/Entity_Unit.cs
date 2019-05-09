@@ -188,7 +188,7 @@ public class Entity_Unit : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            TakeDamage(1);
+                TakeDamage(1);
         }
 
         SelfUpdate();

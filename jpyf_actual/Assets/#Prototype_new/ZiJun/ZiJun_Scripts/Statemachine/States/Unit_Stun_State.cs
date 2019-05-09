@@ -30,7 +30,7 @@ public class Unit_Stun_State : IState
     public void Execute()
     {
         CountDownTImer -= Time.deltaTime;
-
+        m_user.StopMoving();
         if (CountDownTImer < 0f)
         {
             //Debug.Log("Finish_Stun");

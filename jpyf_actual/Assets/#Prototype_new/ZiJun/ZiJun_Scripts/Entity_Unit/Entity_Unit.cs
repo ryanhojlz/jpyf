@@ -80,6 +80,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected float Take_Damage_timer = 0f;
 
+    [SerializeField]
+    protected GameObject StunEffect = null;
+
     protected Transform Target;
 
 
@@ -128,9 +131,12 @@ public class Entity_Unit : MonoBehaviour
 
 
     }
-    void Start ()
+    void Start()
     {
+        StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
+        StunEffect.SetActive(false);
 
+        Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
         Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;
         ChangeState("summon");
@@ -153,9 +159,9 @@ public class Entity_Unit : MonoBehaviour
         daynightInstance = DayNightCycle.Instance;
         SelfStart();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         //Debug.Log("Day : " + daynightInstance.isDaytime);
         //Debug.Log("Hi from Entity_Unit Script");
@@ -190,7 +196,7 @@ public class Entity_Unit : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-                TakeDamage(1);
+            TakeDamage(1);
         }
 
         SelfUpdate();
@@ -209,6 +215,8 @@ public class Entity_Unit : MonoBehaviour
 
         UpdateisParented();
         UpdateInspector();
+
+        CheckToStun();
 
     }
 
@@ -236,7 +244,7 @@ public class Entity_Unit : MonoBehaviour
     public void SetChaseRangeStat(float _chaserange) { Unit_Stats.SetChaseRange(_chaserange); }
     public void SetMaxHealthStat(float _maxhealth) { Unit_Stats.SetMaxHealth(_maxhealth); }
     public void SetTarget(Transform _Target) { Target = _Target; }
-    public void SetAttackRangeStat(float _atkRange) { Unit_Stats.SetAtkRange(_atkRange);  }
+    public void SetAttackRangeStat(float _atkRange) { Unit_Stats.SetAtkRange(_atkRange); }
     public void SetInAttackRange(bool _InAtkRange) { m_InAtkRange = _InAtkRange; }
     public void SetHitPoint(Vector3 _hit) { m_HitPoint = _hit; }
     public void SetStillAttacking(bool _stillAttacking) { stillAttacking = _stillAttacking; }
@@ -299,7 +307,7 @@ public class Entity_Unit : MonoBehaviour
 
                     }
                 }
-                
+
             }
 
             countdown = atkcooldown;
@@ -610,7 +618,7 @@ public class Entity_Unit : MonoBehaviour
 
     public void RemoveFromUnitsInRange(GameObject Unit)
     {
-        if(Target)
+        if (Target)
             if (Target.gameObject == Unit)
                 Target = null;
 
@@ -708,6 +716,41 @@ public class Entity_Unit : MonoBehaviour
     public void Stun()
     {
         this.sm.ChangeState("stun");
+    }
+
+    //public bool isStun()
+    //{
+    //    if (this.sm.GetCurrentStateName() == "stun")
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    public void CheckToStun()
+    {
+        if (isStun())
+        {
+            SetStunFeedback(true);
+        }
+        else
+        {
+            SetStunFeedback(false);
+        }
+    }
+
+    public bool isStun()
+    {
+        if (sm.GetCurrentStateName() == "stun")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SetStunFeedback(bool onOff)
+    {
+        StunEffect.SetActive(onOff);
     }
 
     public bool isSpawning()

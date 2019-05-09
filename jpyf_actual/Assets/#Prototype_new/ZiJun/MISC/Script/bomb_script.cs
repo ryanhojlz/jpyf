@@ -47,17 +47,17 @@ public class bomb_script : MonoBehaviour
 
         Expending_Scale.Set(1, 1, 1);
 
-        if (this.transform.childCount > 0)
-        {
-            Fire = this.transform.GetChild(0).GetChild(1).gameObject;
+        //if (this.transform.childCount > 0)
+        //{
+        //    Fire = this.transform.GetChild(0).GetChild(1).gameObject;
 
-            //Debug.Log(Fire);
+        //    //Debug.Log(Fire);
 
-            if (Fire)
-            {
-                Fire.SetActive(false);
-            }
-        }
+        //    if (Fire)
+        //    {
+        //        Fire.SetActive(false);
+        //    }
+        //}
 
     }
 	

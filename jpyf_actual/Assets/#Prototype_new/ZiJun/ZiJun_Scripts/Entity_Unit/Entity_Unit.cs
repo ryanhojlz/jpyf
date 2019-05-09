@@ -128,9 +128,8 @@ public class Entity_Unit : MonoBehaviour
         SetChaseRangeStat(Chase_Range_Stat);
         AddState();
 
-
-
     }
+
     void Start()
     {
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;

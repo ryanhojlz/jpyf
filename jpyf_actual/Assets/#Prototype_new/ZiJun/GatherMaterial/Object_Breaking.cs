@@ -97,6 +97,9 @@ public class Object_Breaking : MonoBehaviour
 
                 Pickup_Scripts item = Instantiate(ObjPrefeb);
                 item.transform.position = transform.position;
+                var temppos = item.transform.position;
+                temppos.y += item.GetComponent<Collider>().bounds.size.y / 2;
+                item.transform.position = temppos;
             }
             minigame.RemoveFromList(this);
             Destroy(this.gameObject);

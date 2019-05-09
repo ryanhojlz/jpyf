@@ -56,6 +56,9 @@ public class Object_ControlScript : MonoBehaviour
 
     public bool dash = false;
 
+    public bool isGrounded = true;
+
+
     // Object that grabs the player away
     public Transform Gropper = null;
 
@@ -64,7 +67,7 @@ public class Object_ControlScript : MonoBehaviour
 
     private void Awake()
     {
-
+        isGrounded = true;
         if (Instance == null)
         {
             Instance = this;
@@ -99,11 +102,20 @@ public class Object_ControlScript : MonoBehaviour
     private void FixedUpdate()
     {
         ObjectMovement();
+        
     }
 
     void ObjectMovement()
     {
-
+        if (isGrounded)
+        {
+            if (jump)
+            {
+                CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
+                isGrounded = false;
+            }
+        }
+        
         // Update Debuff speed
         if (m_debuffDuration > 0)
         {
@@ -210,8 +222,8 @@ public class Object_ControlScript : MonoBehaviour
         pickup = false;
         checkCart = false;
         checkCanGatherItem = false;
-        dash = false;
-        //jump = false;
+        //dash = false;
+        jump = false;
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -277,7 +289,7 @@ public class Object_ControlScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            dash = true;
+            jump = true;
         }
 
 #endif

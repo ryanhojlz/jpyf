@@ -225,7 +225,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 if (tutorial_timer > 44)
                 {                  
-                    subtitles_4外人.text = "You are dead in need to be revived";
+                    subtitles_4外人.text = "You are dead. Please wait to be revived";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
                         "Press the right trigger of your controller";
                     
@@ -376,7 +376,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }                
                 break;
             case 7:
-                if (!Objective2)
+                if (!Objective3)
                 {
                     b_bigExplain = true;
                     ShowSubtitles = true;
@@ -408,14 +408,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     }
                     else if (tutorial_timer > 20)
                     {
-                        subtitles_4外人.text = "You can collect lantern fuel by breaking lanterns in the world";
-                        subtitles_4VR.text = "You can replenish lantern fuel by breaking lanterns and throwing the resources back to the cart";
+                        subtitles_4VR.text = "You can refuel by throwing candles\n into the flaming pot";
+                        subtitles_4外人.text = "You can replenish lantern fuel by breaking lanterns and throwing the resources back to the cart";
                     }
                     else if (tutorial_timer > 15)
                     {
                         ShowSubtitles = false;
                         Stats_ResourceScript.Instance.m_StartLanternTick = true;
                         ++Tutorial;
+                        b_bigExplain = false;
                     }
                        
                 }

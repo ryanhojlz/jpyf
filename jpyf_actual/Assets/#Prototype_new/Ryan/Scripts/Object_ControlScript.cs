@@ -107,14 +107,7 @@ public class Object_ControlScript : MonoBehaviour
 
     void ObjectMovement()
     {
-        if (isGrounded)
-        {
-            if (jump)
-            {
-                CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
-                isGrounded = false;
-            }
-        }
+
         
         // Update Debuff speed
         if (m_debuffDuration > 0)
@@ -166,6 +159,15 @@ public class Object_ControlScript : MonoBehaviour
         {
             tempVelocity.x = 0;
             tempVelocity.z = 0;
+        }
+
+        if (isGrounded)
+        {
+            if (jump)
+            {
+                CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
+                isGrounded = false;
+            }
         }
 
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
@@ -259,7 +261,6 @@ public class Object_ControlScript : MonoBehaviour
         // Kun Hua wants to jump so i give him
         if (Controller.ReturnCrossPress())
         {
-            //dash = true;
             jump = true;
         }
 

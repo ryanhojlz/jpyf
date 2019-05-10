@@ -5,8 +5,22 @@ using UnityEngine;
 public class GlobalAchievementManager : MonoBehaviour
 {
     public List<Achievement> ListOfAchievements = new List<Achievement>();
+
+    public static GlobalAchievementManager Instance = null;
+
+    public Transform Canvas;
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         DontDestroyOnLoad(transform.gameObject);
     }
     private void Start()
@@ -23,5 +37,10 @@ public class GlobalAchievementManager : MonoBehaviour
     public void AddAchievement(Achievement achi)
     {
         ListOfAchievements.Add(achi);
+    }
+
+    public void SetCanvas(Transform canvas)
+    {
+        Canvas = canvas;
     }
 }

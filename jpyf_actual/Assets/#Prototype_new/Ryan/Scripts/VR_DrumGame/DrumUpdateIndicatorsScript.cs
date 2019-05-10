@@ -11,7 +11,7 @@ public class DrumUpdateIndicatorsScript : MonoBehaviour
     void Start()
     {
         beatIndicator = GameObject.Find("BeatIndicator").transform;
-        drumHandler = GameObject.Find("DrumModel").GetComponent<DrumGameScript>();
+        drumHandler = GameObject.Find("RepairSpot").GetComponent<DrumGameScript>();
     }
 
     //// Update is called once per frame

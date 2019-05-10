@@ -135,7 +135,7 @@ public class Entity_Unit : MonoBehaviour
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
         StunEffect.SetActive(false);
 
-        Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
+        //Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
         Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;
         ChangeState("summon");
@@ -569,7 +569,7 @@ public class Entity_Unit : MonoBehaviour
         sm.AddState("chase", new Unit_Chase_State(this));
         //sm.AddState("chase_cart", new Unit_ChaseCart_State(this));
         sm.AddState("dead", new Unit_Dead_State(this));
-        sm.AddState("stun", new Unit_Stun_State(this, 5f));
+        sm.AddState("stun", new Unit_Stun_State(this, 2f));
         sm.AddState("roam", new Unit_Roam_State(this));
         sm.AddState("afk", new Unit_AFK_State(this));
         sm.AddState("takedamage", new Unit_TakeDamage_State(this));

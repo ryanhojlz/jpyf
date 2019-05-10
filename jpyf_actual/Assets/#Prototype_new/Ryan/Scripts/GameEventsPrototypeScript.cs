@@ -265,7 +265,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     // When you get enough materials change text
                     subtitles_4VR.text = "You have gained some materials,\n" +
                         "Grab the tool on the left & press square \n " +
-                        "hammer the blue object below your drum";
+                        "hammer the drum";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
                 { 

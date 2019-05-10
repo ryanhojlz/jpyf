@@ -66,6 +66,8 @@ public class Statistics : MonoBehaviour
         Data.Hour = 0;
         Data.Min = 0;
         Data.Sec = 0f;
+
+        Debug.Log(Data.number_win);
     //StatisticsData statisticsData = new StatisticsData();
     //Data.number_win = 50;
     //Data.number_lose = 10;
@@ -103,6 +105,11 @@ public class Statistics : MonoBehaviour
         {
             Data.Hour += 1;
             Data.Min = 0;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            incrementWin();
         }
     }
 

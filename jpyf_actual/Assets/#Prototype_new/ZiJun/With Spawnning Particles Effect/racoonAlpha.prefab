@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4127569136565998}
   - component: {fileID: 114468525758044494}
   m_Layer: 0
-  m_Name: Stun_Feedback (1)
+  m_Name: Stun_Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,7 +1385,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509585770867316}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 68.57848, y: -0.88, z: 10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4905212693354696}
@@ -1530,7 +1530,7 @@ Transform:
   - {fileID: 4392873335596514}
   - {fileID: 4126090525697630}
   m_Father: {fileID: 4905212693354696}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4134957155245376
 Transform:
@@ -1933,7 +1933,7 @@ Transform:
   - {fileID: 4134957155245376}
   - {fileID: 4502852267316922}
   m_Father: {fileID: 4905212693354696}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4473896341202616
 Transform:
@@ -2400,8 +2400,8 @@ Transform:
   - {fileID: 4590350304305804}
   - {fileID: 4651534361427750}
   - {fileID: 4963316034441816}
-  - {fileID: 4127569136565998}
   - {fileID: 4452817958123232}
+  - {fileID: 4127569136565998}
   - {fileID: 4065395168074684}
   m_Father: {fileID: 4014836315818520}
   m_RootOrder: 0

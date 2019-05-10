@@ -45,12 +45,14 @@ public class SpawnManager : MonoBehaviour
     public GameObject SpawnObject(int id, bool idle)
     {
         reuseable = Instantiate(SpawnList[id]);
+        reuseable.GetComponent<Entity_Unit>().SetisIdle(idle);
         return reuseable;
     }
 
     public GameObject SpawnObject(int id, Vector3 pos, Quaternion rot, Transform parent, bool idle)
     {
         reuseable = Instantiate(SpawnList[id], pos, rot, parent);
+        reuseable.GetComponent<Entity_Unit>().SetisIdle(idle);
         return reuseable;
     }
 }

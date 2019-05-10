@@ -17,11 +17,10 @@ public class MainMenuButton : MonoBehaviour
     public GameObject settings;
     public GameObject credits;
 
-    //public GameObject highlighted;
-
     public Canvas Titlescreencanvas;
     public Canvas Mainmenucanvas;
     public Canvas Loadingcanvas;
+    public Canvas Statscanvas;
 
     GameObject titleScreen;
     GameObject text1;
@@ -56,7 +55,6 @@ public class MainMenuButton : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //buttons = new Transform[1][1];
         buttons[0] = coopvsai;
         buttons[1] = pvp;
         buttons[2] = settings;
@@ -73,6 +71,7 @@ public class MainMenuButton : MonoBehaviour
         UnityEngine.XR.XRSettings.showDeviceView = false;
         loadImage.enabled = false;
         Loadingcanvas.enabled = false;
+        Statscanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -86,9 +85,7 @@ public class MainMenuButton : MonoBehaviour
         text4.SetActive(false);
         MessageDisplay();
         SelectedOptions();
-        //highlighted.gameObject.transform.position = buttons[indexX/*, indexY*/].gameObject.transform.position;
-
-        //highlighted.transform.position = new Vector3(buttons[indexX].transform.position.x + ((buttons[indexX].GetComponent<RectTransform>().rect.width * buttons[indexX].transform.lossyScale.x * 0.5f)) + (highlighted.GetComponent<RectTransform>().rect.width * highlighted.transform.lossyScale.x * 0.5f), buttons[indexX].transform.position.y, buttons[indexX].transform.position.z);
+        
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveUp();
@@ -125,22 +122,6 @@ public class MainMenuButton : MonoBehaviour
                 EnterSelected();
             }
         }
-        //if (indexX != 0)
-        //{
-        //    //buttons[0].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        //}
-        //if (indexX != 1)
-        //{
-        //    //buttons[1].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        //}
-        //if (indexX != 2)
-        //{
-        //    //buttons[2].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        //}
-        //if (indexX != 3)
-        //{
-        //    //buttons[3].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        //}
         if (buttons[indexX] != buttons[0])
         {
             buttons[0].GetComponent<RectTransform>().anchoredPosition = originalPos;
@@ -370,7 +351,8 @@ public class MainMenuButton : MonoBehaviour
                 {
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("PC_Build");
-                    scene = "PC_Build";
+                    //scene = "PC_Build";
+                    Statscanvas.enabled = true;
                 }
                 break;
 

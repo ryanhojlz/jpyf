@@ -260,7 +260,7 @@ public class Object_ControlScript : MonoBehaviour
         if (Controller.ReturnCrossPress())
         {
             //dash = true;
-            //jump = true;
+            jump = true;
         }
 
         

@@ -62,6 +62,8 @@ public class Stats_ResourceScript : MonoBehaviour
     // Digetic UI
     public Transform digetic_cart_healthbar_ui = null;
     public Transform digetic_lantern_ui = null;
+    public Transform digetic_p2_health_ui = null;
+
     
     public Transform digetic_mineral_ui = null;
     public Transform digetic_soul_ui = null;
@@ -102,8 +104,8 @@ public class Stats_ResourceScript : MonoBehaviour
     void Start ()
     {        
         /// Resources
-        soulText = GameObject.Find("Soul_Text").GetComponent<Text>();
-        mineralText = GameObject.Find("Mineral_Text").GetComponent<Text>();
+        //soulText = GameObject.Find("Soul_Text").GetComponent<Text>();
+        //mineralText = GameObject.Find("Mineral_Text").GetComponent<Text>();
 
         // Health UI
         healthbar_ui = GameObject.Find("P2_HealthBar").transform;
@@ -120,6 +122,7 @@ public class Stats_ResourceScript : MonoBehaviour
         // Digetic UI
         digetic_cart_healthbar_ui = GameObject.Find("DigeticHealthBar").transform;
         digetic_lantern_ui = GameObject.Find("DigeticLampBar").transform;
+        digetic_p2_health_ui = GameObject.Find("DigeticPlayer2HP").transform;
 
         // Digetic UI
         digetic_mineral_ui = GameObject.Find("DigeticMineralBar").transform;
@@ -162,8 +165,8 @@ public class Stats_ResourceScript : MonoBehaviour
     void PS4_UI()
     {
         /// Update UI Text Information
-        soulText.text = "Souls : " + m_Souls;
-        mineralText.text = "Minerals : " + m_Minerals;
+        //soulText.text = "Souls : " + m_Souls;
+        //mineralText.text = "Minerals : " + m_Minerals;
 
         /// Update HP UI
         healthbar_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_P2_hp / (float)m_P2_hpCap);
@@ -198,6 +201,8 @@ public class Stats_ResourceScript : MonoBehaviour
         // Update Mineral UI
         digetic_soul_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_Souls / (float)m_SoulsCap);
 
+        // Update HP uI
+        digetic_p2_health_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_P2_hp / (float)m_P2_hpCap);
 
     }
 

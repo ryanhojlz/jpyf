@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip TNK_attack;
     public AudioClip NRKB_attack;
     public AudioClip TNG_attack;
+    public AudioClip Get_Damage;
+    public AudioClip Pickup_Item;
+    public AudioClip Use_Item;
     //List<AudioFile> AudioList;
 
     //// Use this for initialization

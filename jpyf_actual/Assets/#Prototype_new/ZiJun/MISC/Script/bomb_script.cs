@@ -16,6 +16,9 @@ public class bomb_script : MonoBehaviour
 
     Bomb_state State;
 
+    [SerializeField]
+    GameObject ExplosionParticles = null;
+
     public Collider Collider = null;
 
     Vector3 Expending_Scale = Vector3.zero;
@@ -109,6 +112,9 @@ public class bomb_script : MonoBehaviour
 
                     canMove = false;
 
+                    if (ExplosionParticles)
+                        ExplosionParticles.SetActive(true);
+
                     //Debug.Log("Came here");
                     this.GetComponent<Rigidbody>().isKinematic = true;
                     Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
@@ -177,7 +183,8 @@ public class bomb_script : MonoBehaviour
                 if (unit.GetHealthStat() > 0)
                 {
                     //unit.TakeDamage(unit.GetMaxHealthStat());
-                    unit.ChangeState("stun");
+                    if(!unit.GetComponent<Entity_Tengu>())
+                        unit.ChangeState("stun");
                 }
             }
             else if (wall)

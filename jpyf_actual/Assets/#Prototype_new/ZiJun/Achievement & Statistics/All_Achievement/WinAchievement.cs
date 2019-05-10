@@ -11,6 +11,7 @@ public class WinAchievement : Achievement
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log(Achievement_name);
         //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
         //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
         if (!GameObject.Find("StatsManager"))

@@ -135,7 +135,7 @@ public class Entity_Unit : MonoBehaviour
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
         StunEffect.SetActive(false);
 
-        Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
+        //Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
         Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;
         ChangeState("summon");

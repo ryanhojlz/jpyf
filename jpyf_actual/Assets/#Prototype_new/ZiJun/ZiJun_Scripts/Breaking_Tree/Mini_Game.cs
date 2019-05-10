@@ -45,6 +45,8 @@ public class Mini_Game : MonoBehaviour
     float nearest = float.MaxValue;
     float dist = 0;
 
+    Vector3 OriPos = Vector3.zero;
+
 
     private void Awake()
     {
@@ -148,11 +150,19 @@ public class Mini_Game : MonoBehaviour
 
         }
 
+        //if (Player && isActiveQTE)
+        //{
+        //    if (Player.GetComponent<Rigidbody>())
+        //        if (Player.GetComponent<Rigidbody>().velocity.magnitude > 1f)
+        //            isActiveQTE = false;
+        //}
+
         if (Player && isActiveQTE)
         {
-            if (Player.GetComponent<Rigidbody>())
-                if (Player.GetComponent<Rigidbody>().velocity.magnitude > 1f)
-                    isActiveQTE = false;
+            if ((Player.transform.position - OriPos).magnitude > 0.1f)
+            {
+                isActiveQTE = false;
+            }
         }
     }
 
@@ -168,6 +178,8 @@ public class Mini_Game : MonoBehaviour
             return;
 
         }
+
+        OriPos = Player.transform.position;
 
         //Debug.Log("Hehe its working till here");
         UI_FeedbackScript.Instance.InteractTrue[0] = true;

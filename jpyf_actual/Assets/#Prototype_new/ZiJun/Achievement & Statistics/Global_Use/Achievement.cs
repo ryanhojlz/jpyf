@@ -23,22 +23,43 @@ public class Achievement : MonoBehaviour
 
     bool Added = false;
 
+    Transform Canvas = null;
+
+    //public static Achievement Instance = null;
+
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
+
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(this);
+        //}
+
     }
     // Use this for initialization
     void Start ()
     {
+        //Debug.Log("Came here");
         //this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
         this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
         LoadAchievement();
+        //if (GameObject.Find("UI"))
+        //{
+        //    if (GameObject.Find("UI").transform.Find("Canvas"))
+        //    {
+        //        Canvas = GameObject.Find("UI").transform.Find("Canvas");
+        //    }
+        //}
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-
 	}
 
     public void SaveAchievement()
@@ -63,33 +84,36 @@ public class Achievement : MonoBehaviour
         return hasDone;
     }
 
+    public void SetCanvas(Transform canvas)
+    {
+        Canvas = canvas;
+    }
+
     protected IEnumerator TriggerAchievement()
     {
         hasDone = true;
-
-        if (GameObject.Find("UI"))
+        SetCanvas(GlobalAchievementManager.Instance.Canvas);
+        if (Canvas)
         {
-            if (GameObject.Find("UI").transform.Find("Canvas"))
+            
+            GameObject TempAchievement = Instantiate(Achievement_Panel);
+            TempAchievement.transform.SetParent(Canvas, false);
+            TempAchievement.transform.Find("Achievement_Image");
+            TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
+            TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
+            SaveAchievement();
+            //PlayerPrefs.SetInt(Achievement_name, index);
+            //Image.SetActive(true);
+            //Name.GetComponent<Text>().text = Achievement_name;
+            //Description.GetComponent<Text>().text = Achievement_descriptions;
+            //Panel.SetActive(true);
+            float time = 0;
+            if (TempAchievement.GetComponent<Achievement_Slider>())
             {
-                GameObject TempAchievement = Instantiate(Achievement_Panel);
-                TempAchievement.transform.SetParent(GameObject.Find("UI").transform.Find("Canvas").transform, false);
-                TempAchievement.transform.Find("Achievement_Image");
-                TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
-                TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
-                SaveAchievement();
-                //PlayerPrefs.SetInt(Achievement_name, index);
-                //Image.SetActive(true);
-                //Name.GetComponent<Text>().text = Achievement_name;
-                //Description.GetComponent<Text>().text = Achievement_descriptions;
-                //Panel.SetActive(true);
-                float time = 0;
-                if (TempAchievement.GetComponent<Achievement_Slider>())
-                {
-                    time = TempAchievement.GetComponent<Achievement_Slider>().LifeTime;
-                }
-                yield return new WaitForSeconds(time);
-                Destroy(TempAchievement);
+                time = TempAchievement.GetComponent<Achievement_Slider>().LifeTime;
             }
+            yield return new WaitForSeconds(time);
+            Destroy(TempAchievement);
         }
         
         //Image.SetActive(false);

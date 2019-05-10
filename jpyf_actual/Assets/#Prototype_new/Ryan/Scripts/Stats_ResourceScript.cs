@@ -66,7 +66,6 @@ public class Stats_ResourceScript : MonoBehaviour
     public Transform digetic_mineral_ui = null;
     public Transform digetic_soul_ui = null;
 
-
     // Lantern Light
     public Transform LanternLight = null;
 
@@ -101,9 +100,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
     // Use this for initialization
     void Start ()
-    {
-        
-
+    {        
         /// Resources
         soulText = GameObject.Find("Soul_Text").GetComponent<Text>();
         mineralText = GameObject.Find("Mineral_Text").GetComponent<Text>();
@@ -171,14 +168,19 @@ public class Stats_ResourceScript : MonoBehaviour
         /// Update HP UI
         healthbar_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_P2_hp / (float)m_P2_hpCap);
         healthbartext.text = "HP: " + m_P2_hp;
+        healthbartext.text = "";
+
 
         /// Update Cart UI
         cart_healthbar_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_CartHP / (float)m_CartHpCap);
         cart_healthbar_text.text = "HP Cart: " + m_CartHP;
+        cart_healthbar_text.text = "";
 
         /// Update Lamp UI
         lantern_ui.GetComponent<Image>().fillAmount = 1 * ((float)m_LanternHp / (float)m_LanternHpCap);
         lantern_ui_text.text = "Lantern: " + m_LanternHp;
+        lantern_ui_text.text = "";
+
 
     }
 
@@ -301,8 +303,6 @@ public class Stats_ResourceScript : MonoBehaviour
 
     void LanternGameplay()
     {
-
-
         // Lantern ticks
         if (m_StartLanternTick)
         {
@@ -365,7 +365,7 @@ public class Stats_ResourceScript : MonoBehaviour
 
 
         // Update Light component
-        LanternLight.GetComponent<Light>().intensity = 2.5f * ((float)m_LanternHp / (float)m_LanternHpCap);
+        LanternLight.GetComponent<Light>().intensity = 3.0f * ((float)m_LanternHp / (float)m_LanternHpCap);
     }
     
     public void Cart_TakeDmg(int damage)

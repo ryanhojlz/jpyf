@@ -18,7 +18,6 @@ public class IsGrounded : MonoBehaviour {
     {
         if (other.tag == "floor")
         {
-            Debug.Log("????");
             Object_ControlScript.Instance.isGrounded = true;
         }
     }

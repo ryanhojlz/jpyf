@@ -217,6 +217,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // Introduction
                 ShowSubtitles = true;
                 // Text timer
+                Stats_ResourceScript.Instance.m_LanternHp = 100;
 
                 if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
                 {
@@ -489,7 +490,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // When lantern hp not 0 
                 if (losingTimer < ref_losingTimer)
                 {
+                    
                     losingTimer += 1 * Time.deltaTime;
+
                     if (losingTimer > ref_losingTimer)
                     {
                         losingTimer = ref_losingTimer;

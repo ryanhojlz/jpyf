@@ -99,12 +99,14 @@ public class Prompt_Breaking : MonoBehaviour
         //Debug.Log(target);
 
         if (!target)
-        {
+        {            
             SetAlpha(0);
+            //UI_FeedbackScript.Instance.InteractTrue[0] = false;
             return;
         }
         else
         {
+            //UI_FeedbackScript.Instance.InteractTrue[0] = true;
             SetAlpha(1);
         }
 
@@ -112,7 +114,7 @@ public class Prompt_Breaking : MonoBehaviour
 
         if (target.GetComponent<Entity_Unit>())
         {
-            Debug.Log("Yup is here");
+            //Debug.Log("Yup is here");
 
             offSet = target.position;
             offSet.y += target.GetComponent<CapsuleCollider>().height * target.lossyScale.y;

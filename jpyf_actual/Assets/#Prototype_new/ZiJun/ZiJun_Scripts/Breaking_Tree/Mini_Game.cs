@@ -73,9 +73,19 @@ public class Mini_Game : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+
+        if (m_OB_list.Count > 0)
+        {
+            UI_FeedbackScript.Instance.InteractTrue[0] = true;
+        }
+        else
+        {
+            UI_FeedbackScript.Instance.InteractTrue[0] = false;
+        }
+
         if (Object_ControlScript.Instance.checkCanGatherItem)
         {
-            Debug.Log("Got Come in");
+            //Debug.Log("Got Come in");
             QTEstart(FindNearestInList());
         }
 
@@ -150,13 +160,17 @@ public class Mini_Game : MonoBehaviour
     {
         // If player carrying object
 
-        Debug.Log("Name : " + other);
+        //Debug.Log("Name : " + other);
 
         if (!other)
+        {
+            UI_FeedbackScript.Instance.InteractTrue[0] = false;
             return;
 
-        Debug.Log("Hehe its working till here");
+        }
 
+        //Debug.Log("Hehe its working till here");
+        UI_FeedbackScript.Instance.InteractTrue[0] = true;
         if (PickupHandlerScript.Instance.ReturnCurrentObject() == null)
         {
             if (other && !isActiveQTE)

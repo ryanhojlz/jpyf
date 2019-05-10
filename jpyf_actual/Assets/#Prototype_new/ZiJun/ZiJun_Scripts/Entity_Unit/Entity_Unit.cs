@@ -749,7 +749,8 @@ public class Entity_Unit : MonoBehaviour
 
     public void SetStunFeedback(bool onOff)
     {
-        StunEffect.SetActive(onOff);
+        if(StunEffect)
+            StunEffect.SetActive(onOff);
     }
 
     public bool isSpawning()

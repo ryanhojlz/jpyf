@@ -232,6 +232,7 @@ public class Entity_Unit : MonoBehaviour
     public Vector3 GetHitPoint() { return m_HitPoint; }
     public bool GetStillAttacking() { return stillAttacking; }
     public bool GetisIdle() { return idle; }
+    public void SetisIdle(bool idle) { this.idle = idle; }
     public float GetOriginalMoveSpeed() { return Unit_Stats.GetOriginalMoveSpeed(); }
     public float GetMoveSpeed() { return Unit_Stats.GetMoveSpeed(); }
 
@@ -765,6 +766,11 @@ public class Entity_Unit : MonoBehaviour
     public bool GetinstantChasePlayer()
     {
         return instantChasePlayer;
+    }
+
+    public void SetinstantChasePlayer(bool chaseplayer)
+    {
+        instantChasePlayer = chaseplayer;
     }
 
     private void UpdateisParented()

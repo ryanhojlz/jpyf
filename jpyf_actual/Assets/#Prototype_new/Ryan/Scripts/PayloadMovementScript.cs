@@ -47,7 +47,7 @@ public class PayloadMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GameObject.Find("Text5").GetComponent<Text>().text = "" + Push_CartScript.Instance.m_stunDuration;
+       // GameObject.Find("Text5").GetComponent<Text>().text = "" + Push_CartScript.Instance.m_stunDuration;
 
 
         if (GameEventsPrototypeScript.Instance.b_bigExplain)

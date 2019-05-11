@@ -25,13 +25,17 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     {
         if (other.GetComponent<Pickup_Scripts>())
         {
-            particlesReference.GetComponent<ParticleSystem>().Play();
-            // Put effect here
-            handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
-            
-            Destroy(other.gameObject);
+            if (other.GetComponent<Pickup_Scripts>().id != 5)
+            {
+                particlesReference.GetComponent<ParticleSystem>().Play();
+                // Put effect here
+                handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
+                Destroy(other.gameObject);
+            }
         }
     }
+
+
 
     void spawnEffect(Vector3 position)
     {

@@ -86,6 +86,9 @@ public class MultiToolScript : GrabbableObject
             this.transform.localPosition = localResetPos;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             this.transform.eulerAngles = originalLocalAngles;
+            ListOfTools[0].gameObject.SetActive(false);
+            ListOfTools[1].gameObject.SetActive(false);
+            ListOfTools[2].gameObject.SetActive(false);
             //b_ToolReleased = false;
         }
     }

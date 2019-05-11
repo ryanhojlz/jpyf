@@ -53,10 +53,11 @@ public class Object_ControlScript : MonoBehaviour
     public bool isGathering = false;
 
     public bool jump = false;
-
-    public bool dash = false;
-
     public bool isGrounded = true;
+
+    // Dash attack
+    public bool dashAtk = false;
+    float dashTimer = 0.5f;
 
 
     // Object that grabs the player away
@@ -64,6 +65,7 @@ public class Object_ControlScript : MonoBehaviour
 
     // For moving
     private Vector3 tempVelocity = Vector3.zero;
+    private Vector3 cancelVelocity = Vector3.zero;
 
     private void Awake()
     {
@@ -107,6 +109,8 @@ public class Object_ControlScript : MonoBehaviour
 
     void ObjectMovement()
     {
+        if (GameEventsPrototypeScript.Instance.b_bigExplain)
+            return;
 
         
         // Update Debuff speed
@@ -161,6 +165,7 @@ public class Object_ControlScript : MonoBehaviour
             tempVelocity.z = 0;
         }
 
+        // Dashing
         if (isGrounded)
         {
             if (jump)
@@ -168,8 +173,29 @@ public class Object_ControlScript : MonoBehaviour
                 CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
                 isGrounded = false;
             }
-        }
+            if (dashAtk)
+            {
+                dashTimer -= 1 * Time.deltaTime;
+                CurrentObj.GetComponent<Rigidbody>().velocity = CurrentObj.transform.forward * 20;
 
+                if (jump)
+                {
+                    dashTimer = 0.0f;
+                }
+                if (dashTimer <= 0)
+                {
+                    dashAtk = false;
+                    cancelVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+                    cancelVelocity.z = 0;
+                    cancelVelocity.x = 0;
+                    CurrentObj.GetComponent<Rigidbody>().velocity = cancelVelocity;
+                    dashTimer = 0.5f;
+                }
+
+                
+            }
+        }
+        
         //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
 
         if (handler.playerDead)
@@ -226,6 +252,7 @@ public class Object_ControlScript : MonoBehaviour
         checkCanGatherItem = false;
         //dash = false;
         jump = false;
+        
 
 #if UNITY_PS4
         // Hold square to push cart
@@ -268,10 +295,7 @@ public class Object_ControlScript : MonoBehaviour
 #endif
 
 #if UNITY_EDITOR_WIN
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            pickup = true;
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
@@ -288,42 +312,75 @@ public class Object_ControlScript : MonoBehaviour
             checkCanGatherItem = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.E) && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Gid");
+            dashAtk = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("eeeene");
             jump = true;
         }
 
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("eon");
+            pickup = true;
+        }
+        
+        
+        //if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
+        //{
+        //    float timer = 0;
+        //    // check
+        //    if (timer > 0)
+        //    {
+        //        if(Input.GetKey(KeyCode.E))
+        //        {
+        //            // combo
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (Input.GetKey(KeyCode.Q))
+        //            pickup = true;
+        //        else (Input.GetKey(KeyCode.Space))
+        //            jump = true;
+        //    }
+        //}
+        
+
+
+
+
 #endif
 
-        if (dash == true)
-        {
-            m_dashSpeed = 150;
-        }
-        else
-        {
-            m_dashSpeed = 0;
-        }
         //Debug.Log("Pickup   + " + pickup);
         GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 
     }
 
-
+    // Tengu 
     public void SetGropper(Transform obj)
     {
         Gropper = obj;
     }
 
+    // Set debuff old
     public void SetDebuff(float debuffspeed , float debuffDuration)
     {
         m_playerSpeedDebuff = debuffspeed;
         m_debuffDuration = debuffDuration;
     }
 
+    // Debuff duration old
     public float GetDebuffDuration()
     {
         return m_debuffDuration;
     }
 
+    // Returner
     public float GetDebuffSpeed()
     {
         return m_playerSpeed;

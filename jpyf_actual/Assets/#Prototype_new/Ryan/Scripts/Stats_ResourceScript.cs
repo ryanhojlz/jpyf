@@ -68,6 +68,8 @@ public class Stats_ResourceScript : MonoBehaviour
     public Transform digetic_mineral_ui = null;
     public Transform digetic_soul_ui = null;
 
+    
+
     // Lantern Light
     public Transform LanternLight = null;
 
@@ -424,7 +426,7 @@ public class Stats_ResourceScript : MonoBehaviour
                 //Destroy(item);
                 break;
             case 2: // Minerals
-                m_Minerals += 30;
+                m_Minerals += 20;
                 //Destroy(item);
                 break;
             case 3: // Small Souls

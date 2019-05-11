@@ -31,12 +31,20 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetComponent<Entity_Projectile>())
+    //    {
+    //        //TakeDamage((int)other.GetComponent<Entity_Projectile>().GetDamage());
+    //        Destroy(other.gameObject);
+    //    }
+    //}
+
+    public void OnCollisionEnter(Collision collision)
     {
-        if (other.GetComponent<Entity_Projectile>())
+        if (!Object_ControlScript.Instance.isGrounded)
         {
-            //TakeDamage((int)other.GetComponent<Entity_Projectile>().GetDamage());
-            Destroy(other.gameObject);
+            Object_ControlScript.Instance.isGrounded = true;
         }
     }
 

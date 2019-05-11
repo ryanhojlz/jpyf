@@ -7,7 +7,7 @@ public class Entity_Tanuki : Entity_Unit
     Transform BulletShootFrom = null;
     public override void SelfStart()
     {
-        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_attack;
+        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_attack;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         //UnitThatProduceSound.clip = AttackSound;
 

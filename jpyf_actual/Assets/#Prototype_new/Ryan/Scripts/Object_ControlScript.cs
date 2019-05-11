@@ -89,21 +89,21 @@ public class Object_ControlScript : MonoBehaviour
 
         
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         //Debug.Log("Moving boolean is " + isPushingCart);
         //Debug.Log("Check cart " + checkCart);
-
         Interaction();
-	}
-
-    private void FixedUpdate()
-    {
         ObjectMovement();
-        
+
     }
+
+    //private void FixedUpdate()
+    //{
+       
+    //}
 
     void ObjectMovement()
     {

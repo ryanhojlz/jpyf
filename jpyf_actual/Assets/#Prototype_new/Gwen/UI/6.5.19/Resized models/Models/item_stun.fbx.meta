@@ -9,7 +9,12 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: pPlane26
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cartprops_tex
+    second: {fileID: 2100000, guid: eb28db1d51d4a754382b0f5cf19f1bad, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

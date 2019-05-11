@@ -18,7 +18,7 @@ public class MoveControllerHotkeys
 {
     public static MoveControllerButton buttonGrab = MoveControllerButton.BackTrigger;
     public static MoveControllerButton buttonUse = MoveControllerButton.MiddleButton;
-    public static MoveControllerButton buttonReset = MoveControllerButton.Square;
+    //public static MoveControllerButton buttonReset = MoveControllerButton.Square;
     public static MoveControllerButton buttonConfirm = MoveControllerButton.Circle;
     public static MoveControllerButton buttonSquare = MoveControllerButton.Square;
     public static MoveControllerButton buttonTriangle = MoveControllerButton.Triangle;

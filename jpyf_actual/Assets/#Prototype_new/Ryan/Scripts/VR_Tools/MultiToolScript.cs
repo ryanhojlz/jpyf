@@ -42,7 +42,7 @@ public class MultiToolScript : GrabbableObject
 
         ListOfTools[0].gameObject.SetActive(false);
         ListOfTools[1].gameObject.SetActive(false);
-        //ListOfTools[2].gameObject.SetActive(false);
+        ListOfTools[2].gameObject.SetActive(false);
 
     }
 
@@ -104,25 +104,25 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[2].gameObject.SetActive(false);
             }
             // Circle button
-            if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonConfirm))
+            else if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonConfirm))
             {
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(true);
             }
             // Square button // Change to hammer
-            if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonSquare))
+            else if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonSquare))
             {
-                ListOfTools[0].gameObject.SetActive(false);
-                ListOfTools[1].gameObject.SetActive(true);
+                ListOfTools[0].gameObject.SetActive(true);
+                ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(false);
 
             }
             // Triangle button // Change to weapon
             if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonTriangle))
             {
-                ListOfTools[0].gameObject.SetActive(true);
-                ListOfTools[1].gameObject.SetActive(false);
+                ListOfTools[0].gameObject.SetActive(false);
+                ListOfTools[1].gameObject.SetActive(true);
                 ListOfTools[2].gameObject.SetActive(false);
             }
 

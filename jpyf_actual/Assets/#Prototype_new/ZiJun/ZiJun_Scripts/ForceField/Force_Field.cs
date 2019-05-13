@@ -13,8 +13,6 @@ public class Force_Field : MonoBehaviour
     // Use this for initialization
 	void Start ()
     {
-
-
         m_ForceField = transform.GetChild(transform.childCount - 1).gameObject;
         //m_ForceField = transform.Find("Force_Field").gameObject;
     }

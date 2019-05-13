@@ -36,20 +36,23 @@ public class Unit_Dead_State : IState
         //x_rota_te -= 0.1f;
         //rota_te.y = y_rota_te;
         //rota_te.x = x_rota_te;
-        if (!b_spawnOnce)
-        {
-            if (GameEventsPrototypeScript.Instance.TileEvent_Start)
-                ItemSpawnHandlerScript.Instance.SpawnItem(2, m_user.transform.position);
-            //GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>().SpawnItem(0, m_user.transform.position);
-            b_spawnOnce = true;
-        }
+        
         //m_user.transform.localEulerAngles = rota_te;
         if (CountDownTImer < 0f)
         {
             //Debug.Log("Dead");
             Stats_ResourceScript.Instance.EnemyCount--;
             // Call statistics here @wilson
-            Statistics.Instance.incrementEnemiesKilled();
+            if (Statistics.Instance != null)
+                Statistics.Instance.incrementEnemiesKilled();
+
+            if (!b_spawnOnce)
+            {
+                if (GameEventsPrototypeScript.Instance.TileEvent_Start)
+                    ItemSpawnHandlerScript.Instance.SpawnItem(2, m_user.transform.position);
+                //GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>().SpawnItem(0, m_user.transform.position);
+                b_spawnOnce = true;
+            }
             m_user.Dead();
         }
     }

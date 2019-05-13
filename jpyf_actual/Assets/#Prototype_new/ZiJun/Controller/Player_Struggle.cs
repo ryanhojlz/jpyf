@@ -27,7 +27,7 @@ public class Player_Struggle : MonoBehaviour
     {
         if (Instance.Gropper.GetComponent<Entity_Tengu>())
         {
-            Debug.Log("Got come here");
+            //Debug.Log("Got come here");
             Instance.Gropper.GetComponent<Entity_Tengu>().editHoverSpeed = 1f;
         }
     }

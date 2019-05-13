@@ -48,9 +48,10 @@ public class PickupHandlerScript : MonoBehaviour
             {
                 if (currentObject.transform.GetChild(0).GetComponent<Entity_Unit>().GetHealthStat() <= 0)
                 {
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
-                    currentObject.transform.parent = null;
-                    currentObject = null;
+                    objHandler.throw_item = true;
+                    //currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    //currentObject.transform.parent = null;
+                    //currentObject = null;
                 }
             }
 
@@ -67,6 +68,8 @@ public class PickupHandlerScript : MonoBehaviour
             pickuptimer = pickuptimercap;
         }
 
+
+      
         
 
 

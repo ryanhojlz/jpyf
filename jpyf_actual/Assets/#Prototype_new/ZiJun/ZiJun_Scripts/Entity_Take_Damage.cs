@@ -7,6 +7,8 @@ public class Entity_Take_Damage : MonoBehaviour
     public float countdownTimer = 0.1f;
     Material material = null;
     // Use this for initialization
+
+    Color color = new Color(200f, 0f, 0f);
     void Start()
     {
         Material[] materials;
@@ -26,7 +28,7 @@ public class Entity_Take_Damage : MonoBehaviour
         if (materials.Length > 0)
         {
             material = materials[0];
-            materials[0].color = Color.red;
+            materials[0].color = color;
         }
     }
 

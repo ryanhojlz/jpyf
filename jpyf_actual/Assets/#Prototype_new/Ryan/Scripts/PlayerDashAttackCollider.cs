@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerDashAttackCollider : MonoBehaviour
 {
     ParticleSystem particle = null;
-
+    
     private void Start()
     {
-        
+        particle = transform.GetChild(0).GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -31,9 +31,10 @@ public class PlayerDashAttackCollider : MonoBehaviour
             if (other.gameObject.GetComponent<Force_Field>())
             {
                 other.gameObject.GetComponent<Force_Field>().DecreaseFieldLevel();
-                
             }
+            particle.Play();
         }
+        
       
     }
 

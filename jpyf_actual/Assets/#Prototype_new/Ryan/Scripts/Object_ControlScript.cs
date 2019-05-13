@@ -165,6 +165,42 @@ public class Object_ControlScript : MonoBehaviour
             tempVelocity.z = 0;
         }
 
+        
+        
+        //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
+
+        if (handler.playerDead)
+        {
+            isPushingCart = false;
+            return;
+        }
+
+        if (Gropper)
+        {
+            //handler.Player2_TakeDmg(1);
+            return;
+        }
+        // Movement
+        if (isPushingCart)
+        {
+            CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
+        }
+        else if (!isPushingCart)
+        {
+            CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
+
+            //CurrentObj.GetComponent<Rigidbody>().AddForce(tempVelocity * 40);
+            //tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+            //tempVelocity.x = Mathf.Clamp(tempVelocity.x, -4, 4);
+            //tempVelocity.z = Mathf.Clamp(tempVelocity.z, -4, 4);
+            //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+
+            // Snappy way
+            tempVelocity.x *= 0.8f;
+            tempVelocity.z *= 0.8f;
+            CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+        }
+
         // Dashing
         if (isGrounded)
         {
@@ -192,46 +228,8 @@ public class Object_ControlScript : MonoBehaviour
                     dashTimer = 0.5f;
                 }
 
-                
+
             }
-        }
-        
-        //CurrentObj.GetComponent<Rigidbody>().AddForce(movedir);
-
-        if (handler.playerDead)
-        {
-            isPushingCart = false;
-            return;
-        }
-
-        if (Gropper)
-        {
-            //handler.Player2_TakeDmg(1);
-            return;
-        }
-        // Movement
-        if (isPushingCart)
-        {
-            CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        else if (!isPushingCart)
-        {
-            CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
-            //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
-            //if (tempVelocity.x != 0 && tempVelocity.z != 0)
-            //    CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
-            //else
-            //    CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
-
-            // Add force way
-            //CurrentObj.GetComponent<Rigidbody>().AddForce((tempVelocity * 300) * Time.deltaTime);
-            //tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
-            //tempVelocity.x = Mathf.Clamp(tempVelocity.x, -8, 8);
-            //tempVelocity.z = Mathf.Clamp(tempVelocity.z, -8, 8);
-            //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
-
-            // Snappy way
-            CurrentObj.transform.position += tempVelocity * Time.deltaTime;
         }
         //if (Gropper)
         //{

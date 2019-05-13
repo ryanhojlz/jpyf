@@ -380,6 +380,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             case 7:
                 if (!Objective3)
                 {
+                    Statistics.Instance.SetTutorialComplete();
                     b_bigExplain = true;
                     ShowSubtitles = true;
                     tutorial_timer -= 1 * Time.deltaTime;

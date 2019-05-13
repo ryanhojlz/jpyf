@@ -53,6 +53,7 @@ public class PickupHandlerScript : MonoBehaviour
         // Throws object
         if (objHandler.throw_item)
         {
+            
             if (currentObject)
             {
                 // Drop the current object
@@ -86,7 +87,7 @@ public class PickupHandlerScript : MonoBehaviour
                 throwDirection = this.transform.forward * 22;
                 currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
                 currentObject = null;
-
+                PlayerAnimScript.instance_player.SetTriggerThrow();
             }
         }
 

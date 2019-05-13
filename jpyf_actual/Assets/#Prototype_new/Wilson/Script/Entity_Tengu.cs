@@ -183,11 +183,12 @@ public class Entity_Tengu : Entity_Unit
 
         if ((!HoldUnit 
             || !HoldUnit.activeSelf 
-            || ((GetTarget() && GetTarget().tag == "Player2") 
+            || ((HoldUnit.tag == "Player2") 
             && (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
             if ((GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0)))
             {
+                Debug.Log("Here");
                 m_flyAway = true;
                 previousTimeFlyAway = Time.time;
             }
@@ -328,7 +329,7 @@ public class Entity_Tengu : Entity_Unit
                                 
                             }
                         }
-
+                        Debug.Log("Grabbed");
                         isGrabbing = true;
                         HoldUnit.transform.parent = this.transform;
 

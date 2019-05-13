@@ -37,6 +37,8 @@ public class Statistics : MonoBehaviour
         public int Min;
         public float Sec;
         public string dateTime;
+
+        public bool completedTutorial;
     }
 
     public StatisticsData Data = new StatisticsData();
@@ -66,6 +68,8 @@ public class Statistics : MonoBehaviour
         Data.Hour = 0;
         Data.Min = 0;
         Data.Sec = 0f;
+
+        Data.completedTutorial = false;
 
         Debug.Log(Data.number_win);
     //StatisticsData statisticsData = new StatisticsData();
@@ -196,6 +200,11 @@ public class Statistics : MonoBehaviour
     public void SetLose(int value)
     {
         Data.number_lose = value;
+    }
+
+    public void SetTutorialComplete()
+    {
+        Data.completedTutorial = true;
     }
 
     public void ResetSave()

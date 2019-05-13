@@ -207,6 +207,11 @@ public class Statistics : MonoBehaviour
         Data.completedTutorial = true;
     }
 
+    public bool GetCompletedTutorial()
+    {
+        return Data.completedTutorial;
+    }
+
     public void ResetSave()
     {
         Data.number_win = 0;

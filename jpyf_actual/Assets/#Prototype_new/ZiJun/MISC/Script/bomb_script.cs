@@ -19,6 +19,9 @@ public class bomb_script : MonoBehaviour
     [SerializeField]
     GameObject ExplosionParticles = null;
 
+    [SerializeField]
+    GameObject ExplosionParticles_2 = null;
+
     public Collider Collider = null;
 
     Vector3 Expending_Scale = Vector3.zero;
@@ -112,8 +115,11 @@ public class bomb_script : MonoBehaviour
 
                     canMove = false;
 
-                    if (ExplosionParticles)
+                    if (ExplosionParticles && ExplosionParticles_2)
+                    {
                         ExplosionParticles.SetActive(true);
+                        ExplosionParticles_2.SetActive(true);
+                    }
 
                     //Debug.Log("Came here");
                     this.GetComponent<Rigidbody>().isKinematic = true;

@@ -114,6 +114,13 @@ public class Statistics : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             incrementWin();
+           
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            SetTutorialComplete();
         }
     }
 
@@ -217,6 +224,7 @@ public class Statistics : MonoBehaviour
     {
         Data.number_win = 0;
         Data.number_lose = 0;
+        Data.completedTutorial = false;
         SaveStats();
     }
 

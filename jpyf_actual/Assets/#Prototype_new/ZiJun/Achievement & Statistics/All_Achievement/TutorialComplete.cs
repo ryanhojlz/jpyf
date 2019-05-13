@@ -23,7 +23,7 @@ public class TutorialComplete : Achievement
         if (!GameObject.Find("StatsManager").GetComponent<Statistics>())
             return;
 
-        if (GameObject.Find("StatsManager").GetComponent<Statistics>().GetCompletedTutorial() && !hasDone)//&& TempIndex != index)
+        if ((GameObject.Find("StatsManager").GetComponent<Statistics>().GetCompletedTutorial() && !hasDone))//&& TempIndex != index)
         {
             hasDone = true;
             Debug.Log(Achievement_name + " : " + Achievement_descriptions);

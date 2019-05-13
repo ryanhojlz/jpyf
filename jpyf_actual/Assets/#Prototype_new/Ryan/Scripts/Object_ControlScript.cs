@@ -57,7 +57,7 @@ public class Object_ControlScript : MonoBehaviour
 
     // Dash attack
     public bool dashAtk = false;
-    float dashTimer = 0.5f;
+    float dashTimer = 0.15f;
 
 
     // Object that grabs the player away
@@ -196,9 +196,12 @@ public class Object_ControlScript : MonoBehaviour
             //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
 
             // Snappy way
-            tempVelocity.x *= 0.8f;
-            tempVelocity.z *= 0.8f;
-            CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+            if (!dashAtk)
+            {
+                tempVelocity.x *= 0.8f;
+                tempVelocity.z *= 0.8f;
+                CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+            }
         }
 
         // Dashing
@@ -212,7 +215,7 @@ public class Object_ControlScript : MonoBehaviour
             if (dashAtk)
             {
                 dashTimer -= 1 * Time.deltaTime;
-                CurrentObj.GetComponent<Rigidbody>().velocity = CurrentObj.transform.forward * 20;
+                CurrentObj.GetComponent<Rigidbody>().velocity = CurrentObj.transform.forward * 35;
 
                 if (jump)
                 {
@@ -225,7 +228,7 @@ public class Object_ControlScript : MonoBehaviour
                     cancelVelocity.z = 0;
                     cancelVelocity.x = 0;
                     CurrentObj.GetComponent<Rigidbody>().velocity = cancelVelocity;
-                    dashTimer = 0.5f;
+                    dashTimer = 0.15f;
                 }
 
 
@@ -288,12 +291,18 @@ public class Object_ControlScript : MonoBehaviour
         {
             jump = true;
         }
+        else if (Controller.ReturnCrossPress() && Controller.ReturnR1Down())
+        {
+            dashAtk = true;
+        }
 
-        
+
+
+
 #endif
 
 #if UNITY_EDITOR_WIN
-        
+
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
@@ -312,19 +321,19 @@ public class Object_ControlScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E) && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Gid");
+            //Debug.Log("Gid");
             dashAtk = true;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("eeeene");
+            //Debug.Log("eeeene");
             jump = true;
         }
 
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("eon");
+            //Debug.Log("eon");
             pickup = true;
         }
         

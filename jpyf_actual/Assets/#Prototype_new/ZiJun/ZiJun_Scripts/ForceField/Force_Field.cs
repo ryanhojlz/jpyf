@@ -7,9 +7,14 @@ public class Force_Field : MonoBehaviour
     [SerializeField]
     bool m_isActive = false;
     GameObject m_ForceField = null;
-	// Use this for initialization
+    int i_ForceFieldCounter = 3;
+
+    Color color1, color2;
+    // Use this for initialization
 	void Start ()
     {
+
+
         m_ForceField = transform.GetChild(transform.childCount - 1).gameObject;
         //m_ForceField = transform.Find("Force_Field").gameObject;
     }
@@ -28,6 +33,33 @@ public class Force_Field : MonoBehaviour
         {
             m_ForceField.SetActive(false);
         }
+
+        var color = m_ForceField.GetComponent<Renderer>().material.color;
+        // Update force field level
+        switch (i_ForceFieldCounter)
+        {
+            case 0:
+                SetForceField(false);
+                break;
+            case 1:
+                color.r = 1.0f;
+                color.g = 0.133f;
+                color.b = 0;
+                m_ForceField.GetComponent<Renderer>().material.color = color;
+                break;
+            case 2:
+                color.r = 1.0f;
+                color.g = 0.733f;
+                color.b = 0;
+                m_ForceField.GetComponent<Renderer>().material.color = color;
+                break;
+            case 3:                
+                color.r = 0.134f;
+                color.g = 1;
+                color.b = 0;
+                m_ForceField.GetComponent<Renderer>().material.color = color;
+                break;
+        }
 	}
 
     public void SetForceField(bool active)
@@ -39,4 +71,11 @@ public class Force_Field : MonoBehaviour
     {
         return m_isActive;
     }
+
+    public void DecreaseFieldLevel()
+    {
+        --i_ForceFieldCounter;
+    }
+
+
 }

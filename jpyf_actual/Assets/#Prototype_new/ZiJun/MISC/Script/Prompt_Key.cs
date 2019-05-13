@@ -107,7 +107,7 @@ public class Prompt_Key : MonoBehaviour
 
         if (target.GetComponent<Entity_Unit>())
         {
-            Debug.Log("Yup is here");
+            //Debug.Log("Yup is here");
 
             offSet = target.position;
             offSet.y += target.GetComponent<CapsuleCollider>().height * target.lossyScale.y;

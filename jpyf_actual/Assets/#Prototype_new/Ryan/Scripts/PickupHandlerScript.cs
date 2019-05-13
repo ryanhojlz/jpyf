@@ -15,6 +15,11 @@ public class PickupHandlerScript : MonoBehaviour
     Vector3 offset = new Vector3(0, 1.5f, 0);
     Vector3 throwDirection = Vector3.zero;
 
+    // If object is ai will drop
+    float pickuptimer = 5;
+    float pickuptimercap = 5;
+
+
     private void Awake()
     {
         if (!Instance)
@@ -36,6 +41,7 @@ public class PickupHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        // If is AI
         if (currentObject && currentObject.GetComponent<AI_Movement>())
         {
             if (currentObject.transform.GetChild(0))
@@ -47,7 +53,21 @@ public class PickupHandlerScript : MonoBehaviour
                     currentObject = null;
                 }
             }
+
+            pickuptimer -= 1 * Time.deltaTime;
+            if (pickuptimer <= 0)
+            {
+                pickuptimer = 0;
+                objHandler.throw_item = true;
+            }
+
         }
+        else
+        {
+            pickuptimer = pickuptimercap;
+        }
+
+        
 
 
         // Throws object

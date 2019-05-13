@@ -51,8 +51,13 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
             }
         }
 
-       
-
+        if (Object_ControlScript.Instance.dashAtk)
+        {
+            if (collision.gameObject.GetComponent<Force_Field>())
+            {
+                collision.gameObject.GetComponent<Force_Field>().DecreaseFieldLevel();
+            }
+        }
     }
 
    

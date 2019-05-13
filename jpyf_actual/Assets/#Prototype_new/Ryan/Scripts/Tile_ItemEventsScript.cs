@@ -47,18 +47,6 @@ public class Tile_ItemEventsScript : MonoBehaviour
                     break;
             }
 
-            // Spawned item
-            //random = Random.Range(0, 10);
-            //if (random > 5)
-            //{
-            //    spawnId = 0;
-            //}
-            //else
-            //{
-            //    spawnId = 1;
-            //}
-
-            
             Transform spawneditem = Instantiate(Objects[spawnId]);
             spawneditem.position = m_spawnList[i].transform.position;
             spawneditem.parent = m_spawnList[i].transform;

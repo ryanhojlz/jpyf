@@ -40,7 +40,7 @@ public class ShrineScript : MonoBehaviour
     {
         if (other.GetComponent<Pickup_Scripts>())
         {
-            if (other.GetComponent<Pickup_Scripts>().id == 1)
+            if (other.GetComponent<Pickup_Scripts>().id == 5)
             {
                 tile_event.UpShrineHunger(1);
                 Destroy(other.gameObject);

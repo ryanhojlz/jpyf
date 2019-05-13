@@ -13,10 +13,10 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
 	}
 
     //// Update is called once per frame
-    //void Update ()
-    //   {
-
-    //}
+    void Update()
+    {
+        Debug.Log("wdawdwd " + Object_ControlScript.Instance.isGrounded);
+    }
 
     public void TakeDamage( int damage)
     {
@@ -31,6 +31,7 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
         }
     }
 
+    
     //public void OnTriggerEnter(Collider other)
     //{
     //    if (other.GetComponent<Entity_Projectile>())
@@ -44,8 +45,16 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
     {
         if (!Object_ControlScript.Instance.isGrounded)
         {
-            Object_ControlScript.Instance.isGrounded = true;
+            if (collision.gameObject.tag == "floor")
+            {
+                Object_ControlScript.Instance.isGrounded = true;
+            }
         }
+
+       
+
     }
+
+   
 
 }

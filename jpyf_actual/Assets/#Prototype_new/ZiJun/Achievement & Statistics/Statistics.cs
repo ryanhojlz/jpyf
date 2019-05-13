@@ -24,9 +24,7 @@ public class Statistics : MonoBehaviour
         public int number_win;
         public int number_lose;
         public int number_of_times_bombed;
-        public int number_of_nurikabe_killed;
-        public int number_of_tanuki_killed;
-        public int number_of_tengu_killed;
+        public int number_of_enemies_killed;
         public int number_of_times_p1_is_saved;
         public int number_of_times_p2_is_saved;
         public int number_of_times_p1_died;
@@ -37,6 +35,7 @@ public class Statistics : MonoBehaviour
         public int Hour;
         public int Min;
         public float Sec;
+        public string dateTime;
     }
 
     public StatisticsData Data = new StatisticsData();
@@ -92,7 +91,7 @@ public class Statistics : MonoBehaviour
         //updating value
         //numberWin.text = "" + Data.number_win;
         //numberLose.text = "" + Data.number_lose;
-        //dateTime.text = System.DateTime.Now.ToString();
+        Data.dateTime = System.DateTime.Now.ToString();
         //Debug.Log(dateTime.text);
         Data.Sec += Time.deltaTime;
 
@@ -153,19 +152,9 @@ public class Statistics : MonoBehaviour
         Data.number_of_times_bombed++;
     }
 
-    public void incrementNurikabeKilled()
+    public void incrementEnemiesKilled()
     {
-        Data.number_of_nurikabe_killed++;
-    }
-
-    public void incrementTanukiKilled()
-    {
-        Data.number_of_tanuki_killed++;
-    }
-
-    public void incrementTenguKilled()
-    {
-        Data.number_of_tengu_killed++;
+        Data.number_of_enemies_killed++;
     }
 
     public void incrementP1Saved()

@@ -131,7 +131,7 @@ public class MultiToolScript : GrabbableObject
 
             if (ListOfTools[2].gameObject.activeInHierarchy)
             {
-                if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonUse))
+                if (controllerRef.GetButton(MoveControllerHotkeys.buttonUse))
                 {
                     ListOfTools[2].transform.GetChild(0).GetComponent<RangeAttackScript>().SpawnBullet();
                 }

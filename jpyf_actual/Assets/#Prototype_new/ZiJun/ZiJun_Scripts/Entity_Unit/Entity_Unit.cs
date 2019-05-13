@@ -134,8 +134,6 @@ public class Entity_Unit : MonoBehaviour
         SetMoveSpeed(Move_Speed_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
         SetChaseRangeStat(Chase_Range_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
 
-
-
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
         StunEffect.SetActive(false);
 

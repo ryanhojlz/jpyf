@@ -18,7 +18,7 @@ public class Stats_ResourceScript : MonoBehaviour
     public int m_P2_hpCap = 100;
 
     // Cart health
-    public int m_CartHP= 0;
+    public int m_CartHP= 0; 
     public int m_CartHpCap = 100;
 
     // Lamp Health
@@ -419,6 +419,8 @@ public class Stats_ResourceScript : MonoBehaviour
 
     public void ProcessPickUp(Pickup_Scripts item)
     {
+        // Write statistics below each switch case
+        //@wilson
         switch (item.id)
         {
             case 1: // Souls

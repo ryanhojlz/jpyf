@@ -48,6 +48,8 @@ public class Unit_Dead_State : IState
         {
             //Debug.Log("Dead");
             Stats_ResourceScript.Instance.EnemyCount--;
+            // Call statistics here @wilson
+
             m_user.Dead();
         }
     }

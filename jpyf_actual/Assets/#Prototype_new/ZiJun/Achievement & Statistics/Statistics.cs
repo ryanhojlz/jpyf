@@ -142,6 +142,7 @@ public class Statistics : MonoBehaviour
         return Data.number_lose;
     }
 
+
     public void incrementWin()
     {
         Data.number_win++;

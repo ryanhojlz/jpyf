@@ -15,7 +15,7 @@ public class PS4_PlayerHitboxScript : MonoBehaviour
     //// Update is called once per frame
     void Update()
     {
-        Debug.Log("wdawdwd " + Object_ControlScript.Instance.isGrounded);
+        //Debug.Log("wdawdwd " + Object_ControlScript.Instance.isGrounded);
     }
 
     public void TakeDamage( int damage)

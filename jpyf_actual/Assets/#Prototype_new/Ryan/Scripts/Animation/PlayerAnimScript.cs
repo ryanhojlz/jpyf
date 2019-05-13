@@ -27,7 +27,7 @@ public class PlayerAnimScript : MonoBehaviour
     bool Anim_IsWalkingCarry = false;
 
     // Bool is dead
-    bool Anim_IsDead = false;
+    bool Anim_IsDeadOnce = false;
 
     private void Awake()
     {
@@ -52,13 +52,13 @@ public class PlayerAnimScript : MonoBehaviour
     {
         //DebugFunc();
         UpdateMovementAnim();
-
+        UpdateDeathAnim();
         // Always setting this
         AnimatorObj.SetBool("Anim_IsIdle", Anim_IsIdle);
         AnimatorObj.SetBool("Anim_IsIdleCarry", Anim_IsIdleCarry);
         AnimatorObj.SetBool("Anim_IsWalking", Anim_IsWalking);
         AnimatorObj.SetBool("Anim_IsWalkingCarry", Anim_IsWalkingCarry);
-
+        AnimatorObj.SetBool("Anim_IsNotDead", Anim_IsDeadOnce);
     }
 
 
@@ -117,7 +117,21 @@ public class PlayerAnimScript : MonoBehaviour
         }
     }
 
-
+    void UpdateDeathAnim()
+    {
+        if (Stats_ResourceScript.Instance.m_P2_hp <= 0)
+        {
+            if (!Anim_IsDeadOnce)
+            {
+                AnimatorObj.SetTrigger("Anim_IsDead");
+                Anim_IsDeadOnce = true;
+            }
+        }
+        else if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
+        {
+            Anim_IsDeadOnce = false;
+        }
+    }
 
     // Debug Func
     void DebugFunc()
@@ -150,5 +164,10 @@ public class PlayerAnimScript : MonoBehaviour
             Anim_IsWalkingCarry = true;
             Anim_IsWalking = false;
         }
+    }
+
+    public void SetTriggerThrow()
+    {
+        AnimatorObj.SetTrigger("Anim_ThrowObject");
     }
 }

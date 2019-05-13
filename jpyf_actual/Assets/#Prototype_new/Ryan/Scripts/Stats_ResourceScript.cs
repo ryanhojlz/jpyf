@@ -446,7 +446,7 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             case 1: // Souls
                 m_Souls += 20;
-                Statistics.Instance.incrementItemGathered();
+                Statistics.Instance.incrementSoulsCollected();
                 //Destroy(item);
                 break;
             case 2: // Minerals
@@ -456,7 +456,7 @@ public class Stats_ResourceScript : MonoBehaviour
                 break;
             case 3: // Small Souls
                 m_Souls += 10;
-                Statistics.Instance.incrementItemGathered();
+                Statistics.Instance.incrementSoulsCollected();
                 //Destroy(item);
                 break;
             case 4:

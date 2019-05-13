@@ -30,6 +30,7 @@ public class Statistics : MonoBehaviour
         public int number_of_times_p1_died;
         public int number_of_times_p2_died;
         public int number_of_times_items_gathered;
+        public int soulsCollected;
         public float playTime;
 
         public int Hour;
@@ -175,6 +176,11 @@ public class Statistics : MonoBehaviour
     public void incrementP2Died()
     {
         Data.number_of_times_p2_died++;
+    }
+
+    public void incrementSoulsCollected()
+    {
+        Data.soulsCollected++;
     }
 
     public void incrementItemGathered()

@@ -461,7 +461,7 @@ public class Stats_ResourceScript : MonoBehaviour
                 break;
             case 4:
                 m_Souls += 40;
-                Statistics.Instance.incrementItemGathered();
+                Statistics.Instance.incrementSoulsCollected();
                 //Destroy(item);
                 break;
 

@@ -83,6 +83,8 @@ public class Stats_ResourceScript : MonoBehaviour
     // Enemy Count
     public int EnemyCount = 0;
 
+    // Scaling difficulty
+    public int incrementalDifficulty = 0;
    
     //
     public static Stats_ResourceScript Instance = null;
@@ -331,43 +333,62 @@ public class Stats_ResourceScript : MonoBehaviour
 
         //m_spawnMultiplier = (m_LanternHpCap - m_LanternHp) * 0.01f;
 
+
         // hardcode
-        if (m_LanternHp >= m_LanternHpCap * 0.7f)
-        {
-            m_spawnMultiplier = 0;
-        }
-        else if (m_LanternHp >= m_LanternHpCap * 0.5f)
-        {
-            m_spawnMultiplier = 0.1f;
-        }
-        else if (m_LanternHp >= m_LanternHpCap * 0.2f)
-        {
-            m_spawnMultiplier = 0.15f;
-        }
-        else if (m_LanternHp <= m_LanternHpCap * 0.0f)
-        {
-            m_spawnMultiplier = 0.2f;
-        }
+        // Both if else statement prolly going to obsolete soon since game was to hard the way enemies was spawn
+        // For spawning
+        //if (m_LanternHp >= m_LanternHpCap * 0.7f)
+        //{
+        //    m_spawnMultiplier = 0;
+        //}
+        //else if (m_LanternHp >= m_LanternHpCap * 0.5f)
+        //{
+        //    m_spawnMultiplier = 0.1f;
+        //}
+        //else if (m_LanternHp >= m_LanternHpCap * 0.2f)
+        //{
+        //    m_spawnMultiplier = 0.15f;
+        //}
+        //else if (m_LanternHp <= m_LanternHpCap * 0.0f)
+        //{
+        //    m_spawnMultiplier = 0.2f;
+        //}
 
+        // For spawning 2 
+        //if (m_LanternHp >= m_LanternHpCap * 0.9f)
+        //{
+        //    i_num_enemies_spawn = 0;
+        //}
+        //else if (m_LanternHp >= m_LanternHpCap * 0.7)
+        //{
+        //    i_num_enemies_spawn = 1;
+        //}
+        //else if (m_LanternHp >= m_LanternHpCap * 0.5)
+        //{
+        //    i_num_enemies_spawn = 1;
+        //}
+        //else if (m_LanternHp >= m_LanternHpCap * 0.3)
+        //{
+        //    i_num_enemies_spawn = 3;
+        //}
 
-        if (m_LanternHp >= m_LanternHpCap * 0.9f)
+        // Incremental difficulty
+        if (m_LanternHp >= m_LanternHpCap * 0.8f)
         {
-            i_num_enemies_spawn = 0;
+            incrementalDifficulty = 0;
         }
-        else if (m_LanternHp >= m_LanternHpCap * 0.7)
+        else if (m_LanternHp >= m_LanternHpCap * 0.6f)
         {
-            i_num_enemies_spawn = 1;
+            incrementalDifficulty = 1;
         }
-        else if (m_LanternHp >= m_LanternHpCap * 0.5)
+        else if (m_LanternHp >= m_LanternHpCap * 0.4f)
         {
-            i_num_enemies_spawn = 1;
+            incrementalDifficulty = 2;
         }
-        else if (m_LanternHp >= m_LanternHpCap * 0.3)
+        else if (m_LanternHp >= m_LanternHpCap * 0.0f)
         {
-            i_num_enemies_spawn = 3;
+            incrementalDifficulty = 3;
         }
-        
-
 
 
 

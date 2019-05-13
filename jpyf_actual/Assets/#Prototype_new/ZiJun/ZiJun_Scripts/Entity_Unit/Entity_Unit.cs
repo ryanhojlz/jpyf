@@ -120,11 +120,7 @@ public class Entity_Unit : MonoBehaviour
         SetAttackRangeStat(Attack_Range_Stat);
         SetOriginalMoveSpeed(Move_Speed_Stat);
         SetMoveSpeed(Move_Speed_Stat);
-
-        //Debug.Log("Range Value : " + Range_Stat);
-
         atkcooldown = 1f / GetAttackSpeedStat();
-
         SetChaseRangeStat(Chase_Range_Stat);
         AddState();
 
@@ -132,6 +128,14 @@ public class Entity_Unit : MonoBehaviour
 
     void Start()
     {
+        SetAttackStat(Attack_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
+        SetAttackSpeedStat(Attack_Speed_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
+        SetOriginalMoveSpeed(Move_Speed_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
+        SetMoveSpeed(Move_Speed_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
+        SetChaseRangeStat(Chase_Range_Stat + Stats_ResourceScript.Instance.incrementalDifficulty);
+
+
+
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
         StunEffect.SetActive(false);
 

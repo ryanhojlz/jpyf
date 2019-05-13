@@ -232,12 +232,12 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         "Press the right trigger of your controller";
                     
                 }                
-                else if (tutorial_timer > 35)
+                else if (tutorial_timer > 40)
                 {
                     subtitles_4外人.text = "Objective Push P1's cart";
                     subtitles_4VR.text = "You are P1 and \n you need P2 to bring you to the other side";
                 }
-                else if (tutorial_timer > 30)
+                else if (tutorial_timer > 35)
                 {
                     subtitles_4外人.text = "The Cart is Damaged and you have to help repair it so you can move onward";
                     subtitles_4VR.text = "The Cart is Damaged and you have to repair it \n so you can move onward \n" +
@@ -411,16 +411,22 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     else if (tutorial_timer > 20)
                     {
                         subtitles_4VR.text = "You can refuel by throwing candles\n into the flaming pot";
-                        subtitles_4外人.text = "You can replenish lantern fuel by breaking lanterns and throwing the resources back to the cart";
+                        subtitles_4外人.text = "You can replenish lantern fuel\n by breaking lanterns and throwing the resources back to the cart";
                     }
                     else if (tutorial_timer > 15)
+                    {
+                        subtitles_4VR.text = "Enemies will now do more damage\n the lower the lantern fuel";
+                        subtitles_4外人.text = "Enemies will now do more damage the lower the lantern fuel";
+
+                    }
+                    else if (tutorial_timer > 10)
                     {
                         ShowSubtitles = false;
                         Stats_ResourceScript.Instance.m_StartLanternTick = true;
                         ++Tutorial;
                         b_bigExplain = false;
                     }
-                       
+
                 }
                 break;
         }
@@ -493,7 +499,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 // When lantern hp not 0 
                 if (losingTimer < ref_losingTimer)
                 {
-                    
+
                     losingTimer += 1 * Time.deltaTime;
 
                     if (losingTimer > ref_losingTimer)
@@ -502,6 +508,16 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     }
                 }
             }
+        }
+
+
+        if (condition == WINLOSE.lose)
+        {
+            Debug.Log("Nibba just lost");
+        }
+        else if (condition == WINLOSE.win)
+        {
+            Debug.Log("Nibba just won");
         }
 
     }

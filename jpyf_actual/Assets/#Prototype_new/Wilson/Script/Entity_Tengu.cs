@@ -20,7 +20,11 @@ public class Entity_Tengu : Entity_Unit
 
     //Variables////////////////////////
     public float flyspeed = 10f;
-    public float hoverspeed = 10f;
+    [SerializeField]
+    float hoverspeed = 10f;
+
+    public float editHoverSpeed = 10f;
+
     GameObject HoldUnit = null;
 
     bool TouchedUnit = false;
@@ -45,6 +49,9 @@ public class Entity_Tengu : Entity_Unit
     float previousTimeFlyAway = 0f;
 
     Tengu_Warning warningHandler;
+
+    float strgPrevTime = 0f;
+    float timeDelayStruggle = 1f;
 
     enum AtkPlayer
     {
@@ -83,6 +90,9 @@ public class Entity_Tengu : Entity_Unit
         attackTimer = 1 / this.GetAttackSpeedStat();
 
         Payload_Position = GameObject.Find("PayLoad").transform;
+
+        editHoverSpeed = hoverspeed;
+
     }
 
     public override void SelfUpdate()
@@ -211,6 +221,11 @@ public class Entity_Tengu : Entity_Unit
         //    SetInAttackRange(false);
         //    isAttacking = false;
         //}
+        if (strgPrevTime + timeDelayStruggle < Time.time)
+        {
+            editHoverSpeed = hoverspeed;
+            strgPrevTime = Time.time;
+        }
     }
 
     public override void Attack()
@@ -475,7 +490,10 @@ public class Entity_Tengu : Entity_Unit
 
             dir = (TargetPos - this.transform.position).normalized;
 
-            Vector3 vel = dir * hoverspeed * Time.deltaTime;
+            Vector3 vel = dir * editHoverSpeed * Time.deltaTime;
+
+
+            Debug.Log(vel);
 
             this.transform.position += vel;
 
@@ -499,8 +517,9 @@ public class Entity_Tengu : Entity_Unit
 
             dir = (TargetPos - this.transform.position).normalized;
 
-            Vector3 vel = dir * hoverspeed * Time.deltaTime;
+            Vector3 vel = dir * editHoverSpeed * Time.deltaTime;
 
+            Debug.Log(vel);
 
             this.transform.position += vel;
 
@@ -509,7 +528,7 @@ public class Entity_Tengu : Entity_Unit
 
         //Debug.Log("Testing Sin : " + Mathf.Sin(SinCounter += Time.deltaTime));
         FlyPos = this.transform.position;
-        FlyPos.Set(FlyPos.x, FlyPos.y + (Mathf.Sin(Time.time % 3.45f)) * 0.05f, FlyPos.z);
+        FlyPos.Set(FlyPos.x, FlyPos.y + ((Mathf.Sin(Time.time % 3.45f)) * 0.05f) * editHoverSpeed, FlyPos.z);
 
         if (FlyPos.y > TargetEscape.transform.position.y + flyOffset)
         {
@@ -517,6 +536,8 @@ public class Entity_Tengu : Entity_Unit
         }
         this.transform.position = FlyPos;
         //this.transform.position += new Vector3(0, (Mathf.Sin(Time.time % 3.45f )) * 0.05f, 0);
+
+        //editHoverSpeed = hoverspeed;
 
         return false;
     }

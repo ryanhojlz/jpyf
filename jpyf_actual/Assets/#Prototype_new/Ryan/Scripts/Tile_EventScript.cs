@@ -137,6 +137,15 @@ public class Tile_EventScript : MonoBehaviour
             GameEventsPrototypeScript.Instance.f_difficulty++;
             //Debug.Log("Difficulty " + GameEventsPrototypeScript.Instance.f_difficulty);
             GameEventsPrototypeScript.Instance.TileEvent_Start = false;
+
+            var DestroyList = GameObject.FindObjectsOfType<Pickup_Scripts>();
+            foreach (Pickup_Scripts g in DestroyList)
+            {
+                if (g.id != 5)
+                    continue;
+                GameObject.Destroy(g.gameObject);
+            }
+
             Destroy(this.gameObject);
         }
     }

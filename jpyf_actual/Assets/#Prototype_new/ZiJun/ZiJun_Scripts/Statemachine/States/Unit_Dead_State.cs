@@ -49,7 +49,7 @@ public class Unit_Dead_State : IState
             //Debug.Log("Dead");
             Stats_ResourceScript.Instance.EnemyCount--;
             // Call statistics here @wilson
-
+            Statistics.Instance.incrementEnemiesKilled();
             m_user.Dead();
         }
     }

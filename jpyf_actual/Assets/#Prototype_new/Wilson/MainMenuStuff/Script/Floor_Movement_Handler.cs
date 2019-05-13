@@ -63,7 +63,7 @@ public class Floor_Movement_Handler : MonoBehaviour
                 newPosition.z -= Time.deltaTime * 10;
                 floor[i].transform.position = newPosition;
 
-                if (floor[i].transform.position.z + floor[i].GetComponent<Collider>().bounds.size.z * 0.5f < Camera.transform.position.z)
+                if (floor[i].transform.position.z + floor[i].GetComponent<Collider>().bounds.size.z < Camera.transform.position.z)
                 {
                     Movefloor.Add(floor[i]);
                 }

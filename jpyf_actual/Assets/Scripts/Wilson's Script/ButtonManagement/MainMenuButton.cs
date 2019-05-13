@@ -78,6 +78,7 @@ public class MainMenuButton : MonoBehaviour
     void Update()
     {
         Debug.Log(buttons[indexX/*, indexY*/].gameObject.name);
+
         optionOffset = Screen.width * 0.1f;
         text1.SetActive(false);
         text2.SetActive(false);
@@ -85,7 +86,7 @@ public class MainMenuButton : MonoBehaviour
         text4.SetActive(false);
         MessageDisplay();
         SelectedOptions();
-        
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveUp();
@@ -113,13 +114,16 @@ public class MainMenuButton : MonoBehaviour
             Titlescreencanvas.enabled = true;
             Mainmenucanvas.enabled = false;
         }
-        if (TitlescreenDisplay == false)
+        if (!Statscanvas.enabled)
         {
-            Mainmenucanvas.enabled = true;
-            Titlescreencanvas.enabled = false;
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (TitlescreenDisplay == false)
             {
-                EnterSelected();
+                Mainmenucanvas.enabled = true;
+                Titlescreencanvas.enabled = false;
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                {
+                    EnterSelected();
+                }
             }
         }
         if (buttons[indexX] != buttons[0])
@@ -353,6 +357,7 @@ public class MainMenuButton : MonoBehaviour
                     //SceneManager.LoadScene("PC_Build");
                     //scene = "PC_Build";
                     Statscanvas.enabled = true;
+                    Mainmenucanvas.enabled = false;
                 }
                 break;
 

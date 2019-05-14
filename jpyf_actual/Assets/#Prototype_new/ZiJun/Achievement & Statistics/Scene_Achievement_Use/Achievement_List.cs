@@ -7,6 +7,8 @@ public class Achievement_List : MonoBehaviour
 {
     public RectTransform panel;
 
+    GameObject Canvas = null;
+
     public GameObject Achi_Prefeb;
 
     public List<Achievement> Achievements;
@@ -18,7 +20,7 @@ public class Achievement_List : MonoBehaviour
     {
         Achievements = GameObject.Find("AchievementManager").GetComponent<GlobalAchievementManager>().ListOfAchievements;
 
-        GameObject Canvas = GameObject.Find("Canvas");
+        Canvas = GameObject.Find("Canvas");
 
         for (int i = 1; i < Achievements.Count; ++i)
         {
@@ -89,6 +91,38 @@ public class Achievement_List : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            PanelMoveUp();
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            PanelMoveDown();
+        }
 	}
+
+    void PanelMoveUp()
+    {
+        //if (Achievements.Count > 0)
+        //{
+        //    if (Achievements[Achievements.Count - 1].GetComponent<RectTransform>().anchoredPosition.y
+        //        > Canvas.GetComponent<RectTransform>().rect.height)//If the last
+        //    {
+        //        return;
+        //    }
+        //}
+
+        Debug.Log(Achievements[Achievements.Count - 1].GetComponent<RectTransform>());
+
+        position = panel.GetComponent<RectTransform>().anchoredPosition;
+        position.y += 100 * Time.deltaTime;
+        panel.GetComponent<RectTransform>().anchoredPosition = position;
+    }
+
+    void PanelMoveDown()
+    {
+        position = panel.GetComponent<RectTransform>().anchoredPosition;
+        position.y -= 100 * Time.deltaTime;
+        panel.GetComponent<RectTransform>().anchoredPosition = position;
+    }
 }

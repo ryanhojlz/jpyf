@@ -27,7 +27,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public GameObject Objective1 = null;
     public GameObject Objective2 = null;
     public GameObject Objective3 = null;
-    public GameObject Objective4 = null;
+    //public GameObject Objective4 = null;
 
     // Text References
     // Subtitles

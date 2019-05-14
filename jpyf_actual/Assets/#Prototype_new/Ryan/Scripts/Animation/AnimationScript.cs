@@ -33,7 +33,7 @@ public class AnimationScript : MonoBehaviour
 
         // Setting Booleans to animation parameters in animator
         AnimatorObj.SetBool("Anim_IsIdle", Anim_IsIdle);
-        AnimatorObj.SetBool("Anim_IsDead", Anim_IsDead);
+        //AnimatorObj.SetBool("Anim_IsDead", Anim_IsDead);
         AnimatorObj.SetBool("Anim_IsWalking", Anim_IsWalking);
 
     }

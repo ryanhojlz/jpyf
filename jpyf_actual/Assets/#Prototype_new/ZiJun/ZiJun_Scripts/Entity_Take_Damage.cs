@@ -8,11 +8,10 @@ public class Entity_Take_Damage : MonoBehaviour
     Material material = null;
     // Use this for initialization
 
-    Color color = new Color(200f, 0f, 0f);
+    Color color = new Color(120, 0f, 0f, 100);
     void Start()
     {
         Material[] materials;
-
 
         //materials = this.GetComponent<Renderer>().materials;
         if (!this.GetComponent<Renderer>())
@@ -25,6 +24,7 @@ public class Entity_Take_Damage : MonoBehaviour
         }
 
 
+
         if (materials.Length > 0)
         {
             material = materials[0];
@@ -35,6 +35,9 @@ public class Entity_Take_Damage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+
         countdownTimer -= Time.deltaTime;
         if (countdownTimer < 0f)
         {

@@ -13,6 +13,7 @@ public class Force_Field : MonoBehaviour
     // Use this for initialization
 	void Start ()
     {
+        i_ForceFieldCounter = Random.Range(1, 3);
         m_ForceField = transform.GetChild(transform.childCount - 1).gameObject;
         //m_ForceField = transform.Find("Force_Field").gameObject;
     }

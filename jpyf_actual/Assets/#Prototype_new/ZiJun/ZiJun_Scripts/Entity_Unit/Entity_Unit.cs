@@ -159,6 +159,7 @@ public class Entity_Unit : MonoBehaviour
 
         daynightInstance = DayNightCycle.Instance;
         SelfStart();
+        
     }
 
     // Update is called once per frame

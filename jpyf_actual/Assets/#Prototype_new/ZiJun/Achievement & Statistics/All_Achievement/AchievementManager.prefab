@@ -59,6 +59,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1769095765074610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4876532000491288}
+  - component: {fileID: 114012934887387616}
+  m_Layer: 0
+  m_Name: TutorialComplete
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1898136435697458
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +117,7 @@ Transform:
   - {fileID: 4964036220884638}
   - {fileID: 4858853963509204}
   - {fileID: 4328563732745362}
+  - {fileID: 4876532000491288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,6 +134,19 @@ Transform:
   m_Father: {fileID: 4584080547624644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4876532000491288
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769095765074610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4584080547624644}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4964036220884638
 Transform:
   m_ObjectHideFlags: 1
@@ -130,6 +160,23 @@ Transform:
   m_Father: {fileID: 4584080547624644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114012934887387616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769095765074610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9af50168ef4ee944bd2e823918467c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Achievement_name: New Bird
+  Achievement_descriptions: Completed tutorial for the first time
+  Image: {fileID: 0}
+  Achievement_Panel: {fileID: 1992385709933490, guid: 8dc8ff0419c12cf4b91f194083fb7268,
+    type: 2}
+  index: 3
 --- !u!114 &114203276779537016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListOfAchievements: []
+  Canvas: {fileID: 0}
 --- !u!114 &114370875276584368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff52e69e0bff13e408a3343c3cbc680d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Achievement_name: Second Win
-  Achievement_descriptions: Wining for the Second time
+  Achievement_name: Third Win
+  Achievement_descriptions: Wining for the Third time
   Image: {fileID: 0}
   Achievement_Panel: {fileID: 1992385709933490, guid: 8dc8ff0419c12cf4b91f194083fb7268,
     type: 2}

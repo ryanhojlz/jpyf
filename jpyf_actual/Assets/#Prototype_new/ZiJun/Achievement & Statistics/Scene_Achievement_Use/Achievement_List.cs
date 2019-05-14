@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class Achievement_List : MonoBehaviour
 {
+    public RectTransform panel;
 
     public GameObject Achi_Prefeb;
 
     public List<Achievement> Achievements;
+
+    Vector2 position = Vector2.zero;
 
 	// Use this for initialization
 	void Start ()
@@ -30,6 +33,24 @@ public class Achievement_List : MonoBehaviour
             }
         }
 
+        //for (int i = 0; i < Achievements.Count; ++i)
+        //{
+        //    GameObject TempAchievement = Instantiate(Achi_Prefeb);
+
+        //    if (Achievements[i].GetComponent<Achievement>().GetCompletion())
+        //    {
+        //        TempAchievement.GetComponent<Image>().color = UnityEngine.Color.yellow;
+        //    }
+
+        //    TempAchievement.transform.SetParent(GameObject.Find("Panel").transform, false);
+        //    TempAchievement.transform.position = Canvas.transform.position + new Vector3(0, (Canvas.GetComponent<RectTransform>().rect.height * 0.5f * Canvas.transform.lossyScale.y) - (TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f * TempAchievement.transform.lossyScale.y), 0);
+        //    //TempAchievement.transform.Find("Achi_Image").GetComponent<RawImage>().texture = Achievements[i].GetComponent<Achievement>().Image.texture;
+        //    TempAchievement.transform.Find("Achi_Title").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_name;
+        //    TempAchievement.transform.Find("Achi_Description").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_descriptions;
+
+        //    TempAchievement.transform.position -= new Vector3(0, (TempAchievement.GetComponent<RectTransform>().rect.height * TempAchievement.transform.lossyScale.y) * i, 0);
+        //}
+
         for (int i = 0; i < Achievements.Count; ++i)
         {
             GameObject TempAchievement = Instantiate(Achi_Prefeb);
@@ -40,12 +61,27 @@ public class Achievement_List : MonoBehaviour
             }
 
             TempAchievement.transform.SetParent(GameObject.Find("Panel").transform, false);
-            TempAchievement.transform.position = Canvas.transform.position + new Vector3(0, (Canvas.GetComponent<RectTransform>().rect.height * 0.5f * Canvas.transform.lossyScale.y) - (TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f * TempAchievement.transform.lossyScale.y), 0);
+
+
+            //TempAchievement.transform.position = Canvas.transform.position 
+            //    + new Vector3(0,
+            //    (Canvas.GetComponent<RectTransform>().rect.height * 0.5f * Canvas.transform.lossyScale.y)
+            //    - (TempAchievement.GetComponent<RectTransform>().rect.height
+            //    * 0.5f
+            //    * TempAchievement.transform.lossyScale.y
+            //    ), 0);
+
+            position = TempAchievement.GetComponent<RectTransform>().anchoredPosition;
+            position.x = panel.GetComponent<RectTransform>().rect.width * 0.5f;
+            position.y = panel.GetComponent<RectTransform>().rect.height - TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f;
+            position.y -= TempAchievement.GetComponent<RectTransform>().rect.height * i;
+            TempAchievement.GetComponent<RectTransform>().anchoredPosition = position;
+
             //TempAchievement.transform.Find("Achi_Image").GetComponent<RawImage>().texture = Achievements[i].GetComponent<Achievement>().Image.texture;
             TempAchievement.transform.Find("Achi_Title").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_name;
             TempAchievement.transform.Find("Achi_Description").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_descriptions;
 
-            TempAchievement.transform.position -= new Vector3(0, (TempAchievement.GetComponent<RectTransform>().rect.height * TempAchievement.transform.lossyScale.y) * i, 0);
+            //TempAchievement.transform.position -= new Vector3(0, (TempAchievement.GetComponent<RectTransform>().rect.height * TempAchievement.transform.lossyScale.y) * i, 0);
         }
 
     }

@@ -320,7 +320,8 @@ public class Stats_ResourceScript : MonoBehaviour
             {
                 if (m_CartHP <= 0)
                 {
-                    Lantern_TakeDmg(3);
+                    if (!GameEventsPrototypeScript.Instance.b_enabled_tutorial)
+                        Lantern_TakeDmg(3);
                 }
                 else
                 {

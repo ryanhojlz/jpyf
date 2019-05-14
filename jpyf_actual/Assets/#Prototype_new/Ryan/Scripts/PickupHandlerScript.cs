@@ -68,6 +68,10 @@ public class PickupHandlerScript : MonoBehaviour
             pickuptimer = pickuptimercap;
         }
 
+        if (objHandler.Gropper)
+        {
+            objHandler.throw_item = true;
+        }
 
       
         

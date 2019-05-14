@@ -230,8 +230,10 @@ public class Object_ControlScript : MonoBehaviour
                     CurrentObj.GetComponent<Rigidbody>().velocity = cancelVelocity;
                     dashTimer = 0.15f;
                 }
-
-
+            }
+            else
+            {
+                dashTimer = 0.15f;
             }
         }
         //if (Gropper)
@@ -293,7 +295,20 @@ public class Object_ControlScript : MonoBehaviour
         }
         else if (Controller.ReturnCrossPress() && Controller.ReturnR1Down())
         {
-            dashAtk = true;
+            if (!dashAtk)
+                dashAtk = true;
+        }
+
+
+        // IF tengu grab player disable all actions
+        if (Gropper)
+        {
+            dashAtk = false;
+            jump = false;
+            checkCanGatherItem = false;
+            pickup = false;
+            throw_item = false;
+            pushCart = false;
         }
 
 

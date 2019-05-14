@@ -26,6 +26,9 @@ public class PlayerAnimScript : MonoBehaviour
     bool Anim_IsWalking = false;
     bool Anim_IsWalkingCarry = false;
 
+    // If got caught
+    bool Anim_IsCaught = false;
+
     // Bool is dead
     bool Anim_IsDeadOnce = false;
 
@@ -52,6 +55,7 @@ public class PlayerAnimScript : MonoBehaviour
     {
         //DebugFunc();
         UpdateMovementAnim();
+        UpdateGettingCaught();
         UpdateDeathAnim();
         // Always setting this
         AnimatorObj.SetBool("Anim_IsIdle", Anim_IsIdle);
@@ -59,6 +63,9 @@ public class PlayerAnimScript : MonoBehaviour
         AnimatorObj.SetBool("Anim_IsWalking", Anim_IsWalking);
         AnimatorObj.SetBool("Anim_IsWalkingCarry", Anim_IsWalkingCarry);
         AnimatorObj.SetBool("Anim_IsNotDead", Anim_IsDeadOnce);
+        AnimatorObj.SetBool("Anim_IsCaught", Anim_IsCaught);
+
+
     }
 
 
@@ -117,6 +124,18 @@ public class PlayerAnimScript : MonoBehaviour
         }
     }
 
+    void UpdateGettingCaught()
+    {
+        if (Object_ControlScript.Instance.Gropper)
+        {
+            Anim_IsCaught = true;
+        }
+        else
+        {
+            Anim_IsCaught = false;
+        }
+    }
+
     void UpdateDeathAnim()
     {
         if (Stats_ResourceScript.Instance.m_P2_hp <= 0)
@@ -126,6 +145,7 @@ public class PlayerAnimScript : MonoBehaviour
                 AnimatorObj.SetTrigger("Anim_IsDead");
                 Anim_IsDeadOnce = true;
             }
+
         }
         else if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
         {
@@ -169,5 +189,6 @@ public class PlayerAnimScript : MonoBehaviour
     public void SetTriggerThrow()
     {
         AnimatorObj.SetTrigger("Anim_ThrowObject");
+
     }
 }

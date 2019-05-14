@@ -21,7 +21,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
     float tutorial_timer = 45;
 
     // Tutorial Boolean
-    public bool BabySit = false;
+    public bool b_enabled_tutorial = false;
+
+
     public GameObject Objective1 = null;
     public GameObject Objective2 = null;
     public GameObject Objective3 = null;
@@ -83,8 +85,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public float ref_losingTimer = 10;
 
 
-
-
     private void Awake()
     {
 
@@ -99,10 +99,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //
+        b_enabled_tutorial = true;
+        //Stats_ResourceScript.Instance.m_StartLanternTick = true;
+
+
         // Payload ref assigning 
         payload_ref = GameObject.Find("PayLoad").transform;
         // Easy mode
-        BabySit = true;
+       
         // Assigning milestones
         //Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
@@ -163,30 +168,12 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Pause
         ProcessPause();
         ProcessWinLoseCondition();
-        // To be removed later
-        BabySitConstraints();
         // Tutorial Updates etc
         UpdateTutorial();
-
-
-        
-
         
     }
     
-    // Game was to hard nuff sad
-    void BabySitConstraints()
-    {
-        if (Objective4 == null)
-        {
-            BabySit = false;
-        }
-        if (!BabySit)
-            SpawnHandlerScript.Instance.spawnEnemy = true;
-        else if (BabySit)
-            SpawnHandlerScript.Instance.spawnEnemy = false;
 
-    }
 
     // Welcome to my terrible
     // Hardcoded Tutorial
@@ -424,6 +411,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     {
                         ShowSubtitles = false;
                         Stats_ResourceScript.Instance.m_StartLanternTick = true;
+                        if (b_enabled_tutorial)
+                            b_enabled_tutorial = false;
+                          
                         ++Tutorial;
                         b_bigExplain = false;
                     }

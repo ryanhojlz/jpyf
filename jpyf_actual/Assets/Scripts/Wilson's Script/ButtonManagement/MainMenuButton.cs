@@ -126,6 +126,12 @@ public class MainMenuButton : MonoBehaviour
                 }
             }
         }
+
+        if (Statscanvas.enabled && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Statscanvas.enabled = false;
+            Mainmenucanvas.enabled = true;
+        }
         if (buttons[indexX] != buttons[0])
         {
             buttons[0].GetComponent<RectTransform>().anchoredPosition = originalPos;

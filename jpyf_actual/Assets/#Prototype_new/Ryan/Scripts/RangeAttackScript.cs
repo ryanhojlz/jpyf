@@ -8,8 +8,8 @@ public class RangeAttackScript : MonoBehaviour
     public int Ammo = 0;
     public int AmmoCap = 0;
 
-    private float fireRate = 0.5f;
-    private float fireRateTimer = 0.5f;
+    private float fireRate = 0.1f;
+    private float fireRateTimer = 0.1f;
     private bool canFire = true;
 	// Use this for initialization
 	void Start ()

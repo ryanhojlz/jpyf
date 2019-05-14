@@ -1861,7 +1861,7 @@ GameObject:
   - component: {fileID: 114901738477740688}
   m_Layer: 0
   m_Name: tengu_Tpose
-  m_TagString: Untagged
+  m_TagString: Enemy_Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3133,7 +3133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911827204781392}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: -110.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4590447517798104}
@@ -4094,9 +4094,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Unit: 0
   Piority_Unit: 2
-  idle: 0
+  idle: 1
   instantChasePlayer: 0
-  Health_Stat: 2
+  Health_Stat: 6
   Attack_Stat: 5
   Defence_Stat: 0
   Attack_Speed_Stat: 0.5

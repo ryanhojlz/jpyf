@@ -318,10 +318,20 @@ public class Stats_ResourceScript : MonoBehaviour
             m_LanternTimerTick -= 5 * Time.deltaTime;
             if (m_LanternTimerTick <= 0)
             {
-                Lantern_TakeDmg(1);
+                if (m_CartHP <= 0)
+                {
+                    Lantern_TakeDmg(3);
+                }
+                else
+                {
+                    Lantern_TakeDmg(1);
+                }
                 m_LanternTimerTick = m_LanternTimerTickReference;
             }
         }
+
+        
+
         //else if (!m_StartLanternTick)
         //{
         //    m_startTicking -= 1 * Time.deltaTime;

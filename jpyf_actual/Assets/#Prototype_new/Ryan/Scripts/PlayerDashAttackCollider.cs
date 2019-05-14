@@ -31,8 +31,9 @@ public class PlayerDashAttackCollider : MonoBehaviour
             if (other.gameObject.GetComponent<Force_Field>())
             {
                 other.gameObject.GetComponent<Force_Field>().DecreaseFieldLevel();
+                particle.Play();
+                Object_ControlScript.Instance.dashAtk = false;
             }
-            particle.Play();
         }
         
       

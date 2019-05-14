@@ -40,7 +40,11 @@ public class Nurikabe : Entity_Unit
                 if (AttackSound)
                 {
                     //UnitThatProduceSound.clip = AttackSound;
-                    UnitThatProduceSound.Play();
+                    if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
+                    {
+                        UnitThatProduceSound.Play();
+
+                    }
                 }
 
                 if (!Projectile)

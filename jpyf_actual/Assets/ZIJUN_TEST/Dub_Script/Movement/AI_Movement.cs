@@ -33,6 +33,8 @@ public class AI_Movement : MonoBehaviour
 
     void Start()
     {
+        if (!Self)
+            Self = transform.GetChild(0).gameObject;
        m_agent = this.GetComponent<NavMeshAgent>();
        //FindPayload();
     }

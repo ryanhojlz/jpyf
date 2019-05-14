@@ -493,7 +493,7 @@ public class Entity_Tengu : Entity_Unit
             Vector3 vel = dir * editHoverSpeed * Time.deltaTime;
 
 
-            Debug.Log(vel);
+//            Debug.Log(vel);
 
             this.transform.position += vel;
 

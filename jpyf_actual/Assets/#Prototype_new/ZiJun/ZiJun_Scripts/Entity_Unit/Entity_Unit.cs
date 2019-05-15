@@ -100,6 +100,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected AudioClip AttackSound;
 
+    [SerializeField]
+    protected AudioClip TakeDamageSound;
+
     //For Attack
     protected float atkcooldown = 0f;
     protected float countdown = -1f;
@@ -626,6 +629,12 @@ public class Entity_Unit : MonoBehaviour
 
         if (m_forcefield && m_forcefield.GetIsActive())
             return;
+
+        if (TakeDamageSound)
+        {
+            UnitThatProduceSound.clip = TakeDamageSound;
+            UnitThatProduceSound.Play();
+        }
 
         gameObject.AddComponent<Entity_Take_Damage>();
         //If damage is lower then 1 after minusing defence, Damage dealt is 1

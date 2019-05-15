@@ -8,6 +8,7 @@ public class Entity_Tanuki : Entity_Unit
     public override void SelfStart()
     {
         AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_attack;
+        TakeDamageSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().Get_Damage;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         //UnitThatProduceSound.clip = AttackSound;
 

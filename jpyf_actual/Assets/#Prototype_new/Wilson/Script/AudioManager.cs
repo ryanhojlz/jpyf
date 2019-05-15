@@ -31,6 +31,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip Get_Damage;
     public AudioClip Pickup_Item;
     public AudioClip Use_Item;
+    public AudioClip TitleMusic;
+    public AudioClip MenuSelectSound;
+    public AudioClip MenuSelectedSound;
+    public AudioClip SuccessSound;
+    public AudioClip PlayerShoot;
+    public AudioClip BombSound;
     //List<AudioFile> AudioList;
 
     //// Use this for initialization

@@ -12,5 +12,9 @@ public class PayloadIgnoreCollisionScript : MonoBehaviour
             if (obj.GetComponent<Collider>())
                 Physics.IgnoreCollision(this.GetComponent<Collider>(), obj.GetComponent<Collider>(),true);
         }
+
+        GameObject go = Object_ControlScript.Instance.CurrentObj;
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), go.GetComponent<Collider>(),true);
+
     }
 }

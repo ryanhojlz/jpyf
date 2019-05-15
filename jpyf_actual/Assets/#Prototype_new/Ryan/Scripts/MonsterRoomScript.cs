@@ -43,8 +43,9 @@ public class MonsterRoomScript : MonoBehaviour
             // timer reaches 0;
             if (f_tick_timer <= 0)
             {
+                --i_spawningTicks;
                 SpawnOnEachSpot();
-                if (i_spawningTicks < 1)
+                if (i_spawningTicks > 0)
                 {
                     // Reset timer
                     f_tick_timer = 12.0f;
@@ -70,7 +71,7 @@ public class MonsterRoomScript : MonoBehaviour
             {
                 // First spawn
                 b_start_spawning = true;
-                --i_spawningTicks;
+                //--i_spawningTicks;
                 SpawnOnEachSpot();
             }
         }

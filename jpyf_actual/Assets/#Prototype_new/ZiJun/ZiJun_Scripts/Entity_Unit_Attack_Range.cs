@@ -8,7 +8,7 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
     [SerializeField]
     GameObject Unit;
 
-    float Range;
+    Entity_Unit m_entity_unit = null;
 
     // Use this for initialization
     void Start()
@@ -19,38 +19,46 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
             return;
         }
 
-        if (Unit.GetComponent<Entity_Unit>())
+        m_entity_unit = Unit.GetComponent<Entity_Unit>();
+
+        //if (Unit.GetComponent<Entity_Unit>())
+        //{
+
+        //    Range = Unit.GetComponent<Entity_Unit>().GetAttackRangeStat();
+        //    this.GetComponent<SphereCollider>().radius = Range;
+        //}
+
+        if (m_entity_unit)
         {
-            Range = Unit.GetComponent<Entity_Unit>().GetAttackRangeStat();
-            this.GetComponent<SphereCollider>().radius = Range;
+            this.GetComponent<SphereCollider>().radius = m_entity_unit.GetAttackRangeStat();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Unit.GetComponent<Entity_Unit>())
+        if (m_entity_unit)
         {
-            if (Unit.GetComponent<Entity_Unit>().GetTarget() == null)
+            if (m_entity_unit.GetTarget() == null)
             {
                 //Debug.Log("Target's name : " + Unit.GetComponent<Entity_Unit>().GetTarget().name);
-                Unit.GetComponent<Entity_Unit>().SetInAttackRange(false);
+                m_entity_unit.SetInAttackRange(false);
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (Unit.GetComponent<Entity_Unit>())
+        if (m_entity_unit)
         {
             //if (other.gameObject.name == "PayLoad")
             //{
             //    Debug.Log("Collided's name : " + other.name);
             //}
             //Debug.Log("Collided's name : " + other.name);
-            if (Unit.GetComponent<Entity_Unit>().GetTarget() == other.transform)
+            if (m_entity_unit.GetTarget() == other.transform)
             {
-                Unit.GetComponent<Entity_Unit>().SetInAttackRange(true);
+                m_entity_unit.SetInAttackRange(true);
             }
         }
     }
@@ -60,12 +68,12 @@ public class Entity_Unit_Attack_Range : MonoBehaviour
         //if(other.name == "PayLoad")
             //Debug.Log("Why u go out? : " + other.name);
 
-        if (Unit.GetComponent<Entity_Unit>())
+        if (m_entity_unit)
         {
             //Debug.Log("Collided_exit name : " + other.name);
-            if (Unit.GetComponent<Entity_Unit>().GetTarget() == other.transform)
+            if (m_entity_unit.GetTarget() == other.transform)
             {
-                Unit.GetComponent<Entity_Unit>().SetInAttackRange(false);
+                m_entity_unit.SetInAttackRange(false);
             }
         }
     }

@@ -42,6 +42,8 @@ public class bomb_script : MonoBehaviour
 
     Transform Explosion = null;
 
+    Rigidbody m_rb = null;
+
     //float distanceToDespawn = 100f;
 
     // Use this for initialization
@@ -64,6 +66,7 @@ public class bomb_script : MonoBehaviour
         //        Fire.SetActive(false);
         //    }
         //}
+        m_rb = this.GetComponent<Rigidbody>();
 
     }
 	
@@ -101,8 +104,8 @@ public class bomb_script : MonoBehaviour
                         Fire.SetActive(true);
                     }
                     //this.transform.GetChild(1).gameObject.SetActive(true);
-                    this.GetComponent<Rigidbody>().isKinematic = false;
-                    this.GetComponent<Rigidbody>().useGravity = true;
+                    m_rb.isKinematic = false;
+                    m_rb.useGravity = true;
                 }
                 break;
 
@@ -122,7 +125,7 @@ public class bomb_script : MonoBehaviour
                     }
 
                     //Debug.Log("Came here");
-                    this.GetComponent<Rigidbody>().isKinematic = true;
+                    m_rb.isKinematic = true;
                     Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                 }
                 break;

@@ -47,6 +47,9 @@ public class Prompt_Breaking : MonoBehaviour
 
     Mini_Game minigame = null;
 
+    //For optimisation
+    RectTransform m_rectTransform = null;
+
     // Use this for initialization
     private void Awake()
     {
@@ -70,6 +73,8 @@ public class Prompt_Breaking : MonoBehaviour
         this.GetComponent<Image>().sprite = Triangle;
         //this.GetComponent<Image>().sprite = low_hp;
         //canvas 
+
+        m_rectTransform = this.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -143,8 +148,8 @@ public class Prompt_Breaking : MonoBehaviour
         thisXscale = this.transform.lossyScale.x;
         thisYscale = this.transform.lossyScale.y;
 
-        this_width = this.GetComponent<RectTransform>().rect.width * thisXscale;
-        this_height = this.GetComponent<RectTransform>().rect.height * thisYscale;
+        this_width = m_rectTransform.rect.width * thisXscale;
+        this_height = m_rectTransform.rect.height * thisYscale;
 
     }
 

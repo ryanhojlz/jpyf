@@ -47,6 +47,9 @@ public class Prompt_Key : MonoBehaviour
     //Void
     Transform tempTargetHolder = null;
 
+    //For optimisation
+    RectTransform m_rectTransform = null;
+
     // Use this for initialization
     void Start()
     {
@@ -65,6 +68,9 @@ public class Prompt_Key : MonoBehaviour
         //target = GameObject.Find("PayLoad").transform;
         cam = GameObject.Find("ControllerCam").GetComponent<Camera>();
         this.GetComponent<Image>().sprite = Circle;
+
+
+        m_rectTransform = this.GetComponent<RectTransform>();
         //this.GetComponent<Image>().sprite = low_hp;
         //canvas 
     }
@@ -136,8 +142,8 @@ public class Prompt_Key : MonoBehaviour
         thisXscale = this.transform.lossyScale.x;
         thisYscale = this.transform.lossyScale.y;
 
-        this_width = this.GetComponent<RectTransform>().rect.width * thisXscale;
-        this_height = this.GetComponent<RectTransform>().rect.height * thisYscale;
+        this_width = m_rectTransform.rect.width * thisXscale;
+        this_height = m_rectTransform.rect.height * thisYscale;
 
     }
 

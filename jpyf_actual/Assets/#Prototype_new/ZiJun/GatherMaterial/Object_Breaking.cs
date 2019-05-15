@@ -33,21 +33,6 @@ public class Object_Breaking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_Player)
-        {
-           // Debug.Log("I AM INSIDE");
-        }
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    CollectMaterial();
-        //}
-
-        //if (Object_ControlScript.Instance.checkCanGatherItem)
-        //{
-        //    CollectMaterial();
-        //}
-
-
         if (m_successGather)
         {
             SpawnObject();
@@ -57,23 +42,12 @@ public class Object_Breaking : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.tag == "Player2")
-        //{
-        //    //WithinRange
-        //    m_Player = true;
-        //}
-
         if(other.GetComponent<PickupHandlerScript>())
             minigame.AddToList(this);
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.tag == "Player2")
-        //{
-        //    m_Player = false;
-        //}
         if (other.GetComponent<PickupHandlerScript>())
             minigame.RemoveFromList(this);
     }
@@ -91,9 +65,7 @@ public class Object_Breaking : MonoBehaviour
         if (ObjPrefeb)
         {
             for (int i = 0; i < m_totalResource; ++i)
-            {
-                //ItemSpawnHandlerScript tempObj = GameObject.Find("ItemSpawnPoint").GetComponent<ItemSpawnHandlerScript>();
-                //tempObj.SpawnItem(this.gameObject.transform.position);                
+            {           
 
                 Pickup_Scripts item = Instantiate(ObjPrefeb);
                 item.transform.position = transform.position;

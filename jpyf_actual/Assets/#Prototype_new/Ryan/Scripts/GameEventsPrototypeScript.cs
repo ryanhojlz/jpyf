@@ -359,15 +359,14 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         ShowSubtitles = false;
                         Destroy(this.tutorialObjective_7.gameObject);
                         tutorial_timer = 50;
-
+                        Statistics.Instance.SetTutorialComplete();
                         ++Tutorial;
                     }
                 }                
                 break;
             case 7:
                 if (!Objective3)
-                {
-                    Statistics.Instance.SetTutorialComplete();
+                {                     
                     b_bigExplain = true;
                     ShowSubtitles = true;
                     tutorial_timer -= 1 * Time.deltaTime;

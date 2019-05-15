@@ -90,29 +90,30 @@ public class PickupHandlerScript : MonoBehaviour
                 // If object is an items
                 if (currentObject.GetComponent<Pickup_Scripts>())
                 {
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    //currentObject.GetComponent<Rigidbody>().isKinematic = false;
                     currentObject.GetComponent<BoxCollider>().enabled = true;
                 }
                 // If thrown object is enemy
-                if (currentObject.GetComponent<AI_Movement>())
-                {
-                    //currentObject.GetComponent<NavMeshAgent>().enabled = true;
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
-                    //currentObject.GetComponent<AI_Movement>().enabled = true;
-                }
+                //if (currentObject.GetComponent<AI_Movement>())
+                //{
+                //    //currentObject.GetComponent<NavMeshAgent>().enabled = true;
+                //    //currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                //    //currentObject.GetComponent<AI_Movement>().enabled = true;
+                //}
 
                 if (currentObject.GetComponent<bomb_script>())
                 {
                     //currentObject.GetComponent<NavMeshAgent>().enabled = true;
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    //currentObject.GetComponent<Rigidbody>().isKinematic = false;
                     currentObject.GetComponent<SphereCollider>().enabled = true;
                     currentObject.GetComponent<bomb_script>().SetBombState_Active();
                     //currentObject.GetComponent<AI_Movement>().enabled = true;
                 }
 
+                currentObject.GetComponent<Rigidbody>().isKinematic = false;
 
                 throwDirection = this.transform.forward * 22;
-                currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1000);
+                currentObject.GetComponent<Rigidbody>().AddForce(throwDirection * 1700);
                 currentObject = null;
                 PlayerAnimScript.instance_player.SetTriggerThrow();
             }

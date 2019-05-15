@@ -312,32 +312,16 @@ public class Object_ControlScript : MonoBehaviour
         {
             jump = true;
         }
-        else if (Controller.ReturnCrossPress() && Controller.ReturnR1Down())
+        if (Controller.ReturnR1Press())
         {
-            if (!dashAtk)
-                dashAtk = true;
+            dashAtk = true;
         }
 
 
-        // IF tengu grab player disable all actions
-        if (Gropper)
-        {
-            dashAtk = false;
-            jump = false;
-            checkCanGatherItem = false;
-            pickup = false;
-            throw_item = false;
-            pushCart = false;
-        }
-
-
-
-
+        
 #endif
 
 #if UNITY_EDITOR_WIN
-
-
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             throw_item = true;
@@ -370,33 +354,19 @@ public class Object_ControlScript : MonoBehaviour
             //Debug.Log("eon");
             pickup = true;
         }
-        
-        
-        //if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Space))
-        //{
-        //    float timer = 0;
-        //    // check
-        //    if (timer > 0)
-        //    {
-        //        if(Input.GetKey(KeyCode.E))
-        //        {
-        //            // combo
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (Input.GetKey(KeyCode.Q))
-        //            pickup = true;
-        //        else (Input.GetKey(KeyCode.Space))
-        //            jump = true;
-        //    }
-        //}
-        
-
-
-
 
 #endif
+
+        // IF tengu grab player disable all actions
+        if (Gropper)
+        {
+            dashAtk = false;
+            jump = false;
+            checkCanGatherItem = false;
+            pickup = false;
+            throw_item = false;
+            pushCart = false;
+        }
 
         //Debug.Log("Pickup   + " + pickup);
         GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 

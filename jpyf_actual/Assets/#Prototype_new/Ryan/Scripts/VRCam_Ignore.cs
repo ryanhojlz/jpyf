@@ -9,7 +9,9 @@ public class VRCam_Ignore : MonoBehaviour {
 	void Start ()
     {
         UnityEngine.XR.XRSettings.showDeviceView = false;
-        UnityEngine.XR.XRSettings.eyeTextureResolutionScale = 1;
+        UnityEngine.XR.XRSettings.eyeTextureResolutionScale = 0; 
+        XRSettings.enabled = true;
+
     }
 
     // Update is called once per frame

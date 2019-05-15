@@ -110,6 +110,15 @@ public class Entity_Unit : MonoBehaviour
     protected Stats_ResourceScript resource = null;
     // Use this for initialization
 
+    //For optimisation
+
+    private NavMeshAgent p_agent = null;
+    private AI_Movement p_ai_Movement = null;
+    private Rigidbody p_rb = null;
+
+    private Force_Field m_forcefield = null;
+    private AnimationScript m_animation = null;
+
     private void Awake()
     {
         SetHealthStat(Health_Stat);
@@ -158,6 +167,27 @@ public class Entity_Unit : MonoBehaviour
         //}
 
         daynightInstance = DayNightCycle.Instance;
+
+        //Optimizing code
+
+        //accessing the parent's navmesh agent
+        if (this.transform.parent) 
+           p_agent = this.transform.parent.GetComponent<NavMeshAgent>();
+
+        //accessing the parent's navmesh agent movement
+        if (this.transform.parent)
+            p_ai_Movement = this.transform.parent.GetComponent<AI_Movement>();
+
+        //accessing the parent's rigidbody
+        if (this.transform.parent)
+            p_rb = transform.parent.GetComponent<Rigidbody>();
+
+        //Getting force field
+        m_forcefield = this.GetComponent<Force_Field>();
+
+        //Getting animation stuff
+        m_animation = GetComponent<AnimationScript>();
+
         SelfStart();
         
     }
@@ -268,18 +298,18 @@ public class Entity_Unit : MonoBehaviour
         if (countdown < 0)
         {
             // Animation start animation
-            if (GetComponent<AnimationScript>())
+            if (m_animation)
             {
-                GetComponent<AnimationScript>().SetAnimTrigger(0);
+                m_animation.SetAnimTrigger(0);
             }
 
             float lifeTime = 1f;//Temporary hard coding it here
                                 //DO shooting projectile here
             if (Projectile_Prefeb)
             {
-                if (GetComponent<AnimationScript>())
+                if (m_animation)
                 {
-                    if (GetComponent<AnimationScript>().Sync_Projectile())
+                    if (m_animation.Sync_Projectile())
                     {
                         GameObject bulletGO = (GameObject)Instantiate(Projectile_Prefeb, this.transform.position, this.transform.rotation);
                         Entity_Projectile Projectile = bulletGO.GetComponent<Entity_Projectile>();
@@ -594,7 +624,7 @@ public class Entity_Unit : MonoBehaviour
         if (GetHealthStat() <= 0)
             return;
 
-        if (this.GetComponent<Force_Field>() && this.GetComponent<Force_Field>().GetIsActive())
+        if (m_forcefield && m_forcefield.GetIsActive())
             return;
 
         gameObject.AddComponent<Entity_Take_Damage>();
@@ -643,15 +673,15 @@ public class Entity_Unit : MonoBehaviour
     public void StopMoving()
     {
         if (this.transform.parent)
-            if (this.transform.parent.GetComponent<AI_Movement>())
-                this.transform.parent.GetComponent<AI_Movement>().StopMoving();
+            if (p_ai_Movement)
+                p_ai_Movement.StopMoving();
     }
 
     public void StartMoving()
     {
         if (this.transform.parent)
-            if (this.transform.parent.GetComponent<AI_Movement>())
-                this.transform.parent.GetComponent<AI_Movement>().StartMoving();
+            if (p_ai_Movement)
+                p_ai_Movement.StartMoving();
     }
 
     public void MoveToTargetedPosition(Vector3 _target)
@@ -661,33 +691,32 @@ public class Entity_Unit : MonoBehaviour
             if (!this.transform.parent)
                 return;
 
-            if (!this.transform.parent.GetComponent<AI_Movement>())
+            if (!p_ai_Movement)
                 return;
 
             Vector3 MoveTo = _target;
             MoveTo.y = this.transform.parent.transform.position.y;
-            this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
+            p_ai_Movement.SetTargetPosition(MoveTo);
         }
         else
         {
             Vector3 MoveTo = PlayerTransform.position;
             MoveTo.y = this.transform.parent.transform.position.y;
-            this.transform.parent.GetComponent<AI_Movement>().SetTargetPosition(MoveTo);
+            p_ai_Movement.SetTargetPosition(MoveTo);
         }
     }
 
     public void ChangeAgentPosition(Vector3 pos)
     {
         if (this.transform.parent)
-            if (this.transform.parent.GetComponent<AI_Movement>())
-                this.transform.parent.GetComponent<AI_Movement>().ChangeNavAgentPosition(pos);
+            if (p_ai_Movement)
+                p_ai_Movement.ChangeNavAgentPosition(pos);
     }
 
     public void ChangeAgentMovespeed(float movespeed)
     {
-        if (this.transform.parent)
-            if (this.transform.parent.GetComponent<NavMeshAgent>())
-                this.transform.parent.GetComponent<NavMeshAgent>().speed = movespeed;
+        if (p_agent)
+            p_agent.speed = movespeed;
     }
 
     public void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
@@ -789,17 +818,17 @@ public class Entity_Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!transform.parent.GetComponent<NavMeshAgent>().enabled)
+        if (!p_agent.enabled)
         {
 
             if (transform.parent.parent == null)
             {
                 if (other.tag == "floor")
                 {
-                    transform.parent.GetComponent<NavMeshAgent>().enabled = true;
-                    transform.parent.GetComponent<AI_Movement>().enabled = true;
-                    transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    transform.parent.GetComponent<Rigidbody>().isKinematic = true;
+                    p_agent.enabled = true;
+                    p_ai_Movement.enabled = true;
+                    p_rb.velocity = Vector3.zero;
+                    p_rb.isKinematic = true;
                 }
             }
             
@@ -808,14 +837,14 @@ public class Entity_Unit : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (transform.parent.parent == null && !transform.parent.GetComponent<NavMeshAgent>().enabled)
+        if (transform.parent.parent == null && !p_agent.enabled)
         {
             if (other.tag == "floor")
             {
-                transform.parent.GetComponent<NavMeshAgent>().enabled = true;
-                transform.parent.GetComponent<AI_Movement>().enabled = true;
-                transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                transform.parent.GetComponent<Rigidbody>().isKinematic = true;
+                p_agent.enabled = true;
+                p_ai_Movement.enabled = true;
+                p_rb.velocity = Vector3.zero;
+                p_rb.isKinematic = true;
             }
         }
     }

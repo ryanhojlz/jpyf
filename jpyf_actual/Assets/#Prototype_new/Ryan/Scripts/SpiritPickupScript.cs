@@ -7,13 +7,14 @@ public class SpiritPickupScript : GrabbableObject
     public Stats_ResourceScript handler = null;
     public Transform lanternSpot = null;
     public bool grabbedOnce = false;
-    
+
+    public Rigidbody myRigidBody = null;
 
     private void Start()
     {
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         lanternSpot = GameObject.Find("LanternSpot").transform;
-
+        myRigidBody = GetComponent<Rigidbody>();
     }
 
     public override void OnGrab(MoveController currentController)
@@ -21,7 +22,8 @@ public class SpiritPickupScript : GrabbableObject
         base.OnGrab(currentController);
         grabbedOnce = true;
         this.transform.parent = null;
-        this.GetComponent<Rigidbody>().isKinematic = false;
+        //this.GetComponent<Rigidbody>().isKinematic = false;
+        myRigidBody.isKinematic = false;
     }
 
     public override void OnGrabReleased(MoveController currentController)

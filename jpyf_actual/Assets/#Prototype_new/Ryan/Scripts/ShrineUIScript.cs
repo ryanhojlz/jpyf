@@ -21,7 +21,7 @@ public class ShrineUIScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (transform.parent.parent.parent.GetComponent<Tile_EventScript>().b_eventStart)
+        if (_parent.b_eventStart)
         {
             transform.GetChild(0).gameObject.SetActive(true);        
             gauge.fillAmount = 1 * ((float)_parent.i_shrineHungerMeter / (float)_parent.shrineHungerCap);           

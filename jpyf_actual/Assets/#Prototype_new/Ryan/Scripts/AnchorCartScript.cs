@@ -12,6 +12,8 @@ public class AnchorCartScript : MonoBehaviour
     bool b_startAnchoring = false;
     //
     Object_ControlScript handler_ctrl = null;
+
+    Tile_EventScript eventObj = null;
     
 	// Use this for initialization
 	void Start ()
@@ -21,14 +23,16 @@ public class AnchorCartScript : MonoBehaviour
         m_anchorPoint.y = 0;
         m_anchorPoint.y = 0;
         handler_ctrl = GameObject.Find("PS4_ObjectHandler").GetComponent<Object_ControlScript>();
+        eventObj = transform.parent.GetComponent<Tile_EventScript>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         if (b_startAnchoring)
         {
-            transform.parent.GetComponent<Tile_EventScript>().Start_Event();
+            eventObj.Start_Event();
+            //transform.parent.GetComponent<Tile_EventScript>().Start_Event();
             handler_ctrl.isPushingCart = false;
         }
 	}

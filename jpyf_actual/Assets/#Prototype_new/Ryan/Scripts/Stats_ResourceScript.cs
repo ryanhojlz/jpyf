@@ -91,6 +91,9 @@ public class Stats_ResourceScript : MonoBehaviour
 
     bool pauseGame = false;
 
+    // Feedback handler
+    FeedbackHandler feedback_handler = null;    
+
 
     private void Awake()
     {
@@ -106,7 +109,8 @@ public class Stats_ResourceScript : MonoBehaviour
 
     // Use this for initialization
     void Start ()
-    {        
+    {
+        feedback_handler = GameObject.Find("FeedBackHandler").GetComponent<FeedbackHandler>();
         /// Resources
         //soulText = GameObject.Find("Soul_Text").GetComponent<Text>();
         //mineralText = GameObject.Find("Mineral_Text").GetComponent<Text>();
@@ -409,7 +413,9 @@ public class Stats_ResourceScript : MonoBehaviour
     
     public void Cart_TakeDmg(int damage)
     {
-        GameObject.Find("FeedBackHandler").GetComponent<FeedbackHandler>().HitPayload();
+        //GameObject.Find("FeedBackHandler").GetComponent<FeedbackHandler>().HitPayload();
+        feedback_handler.HitPayload();
+
         // if my supervisor was mr toh he would have just put a plus and parameter would be a minus but not in this house
         m_CartHP -= damage;
         if (m_CartHP < 0)

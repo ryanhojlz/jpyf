@@ -62,12 +62,12 @@ public class DrumGameScript : MonoBehaviour
         // Getting references
         m_pushCartRef = GameObject.Find("PushingObjects").transform.GetChild(2).GetComponent<Push_CartScript>();
         // Pushing UI Activity
-        m_activityUI = GameObject.Find("ActivityBar").transform;
-        m_bar_bufflvl_UI = GameObject.Find("LevelBar").transform;
+        //m_activityUI = GameObject.Find("ActivityBar").transform;
+        //m_bar_bufflvl_UI = GameObject.Find("LevelBar").transform;
         // Beat indicators
-        m_beatIndicator = GameObject.Find("BeatIndicator").transform;
-        m_beatIndicator_left = GameObject.Find("BeatIndicatorLeft").transform;
-        m_beatIndicator_right = GameObject.Find("BeatIndicatorRight").transform;
+        //m_beatIndicator = GameObject.Find("BeatIndicator").transform;
+        //m_beatIndicator_left = GameObject.Find("BeatIndicatorLeft").transform;
+        //m_beatIndicator_right = GameObject.Find("BeatIndicatorRight").transform;
 
         particleFeedback = transform.GetChild(0);
 
@@ -80,26 +80,26 @@ public class DrumGameScript : MonoBehaviour
         // Input shud come on top
         DebuggCodess();
 
-        ActivityDetector();        
+        //ActivityDetector();        
 
         // If minigame in play
         if (b_miniGamePlay)
         {
             // Update ui
-            m_activityUI.GetComponent<Image>().fillAmount = 1 * (f_activity_timer / 10.0f);
-            m_bar_bufflvl_UI.GetComponent<Image>().fillAmount = 1 * ((float)bufflevel / 3.0f);
+            //m_activityUI.GetComponent<Image>().fillAmount = 1 * (f_activity_timer / 10.0f);
+            //m_bar_bufflvl_UI.GetComponent<Image>().fillAmount = 1 * ((float)bufflevel / 3.0f);
 
-            v_indicatorPos = m_beatIndicator.transform.localPosition;
+            //v_indicatorPos = m_beatIndicator.transform.localPosition;
 
             // Update Indicator
-            UpdateIndicator();            
+            //UpdateIndicator();            
         }
         else if (!b_miniGamePlay) // if not minigame in play
         {
-            m_activityUI.parent.gameObject.SetActive(false);
-            OnOffUI(false);
+            //m_activityUI.parent.gameObject.SetActive(false);
+            //OnOffUI(false);
             // Reset values
-            m_beatIndicator.transform.localPosition.Set(0, transform.localPosition.y, transform.localPosition.z);
+            //m_beatIndicator.transform.localPosition.Set(0, transform.localPosition.y, transform.localPosition.z);
             bufflevel = 0;
         }
 
@@ -112,7 +112,7 @@ public class DrumGameScript : MonoBehaviour
             //Debug.Log("Got hitto");
             b_miniGamePlay = true;
             f_activity_timer = 10;
-            OnOffUI(true);
+            //OnOffUI(true);
             Stats_ResourceScript.Instance.Player2_TakeDmg(-10);
             // Play particle effect
             particleFeedback.GetComponent<ParticleSystem>().Play();

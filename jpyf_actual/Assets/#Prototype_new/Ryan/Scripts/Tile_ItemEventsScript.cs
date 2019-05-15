@@ -34,7 +34,7 @@ public class Tile_ItemEventsScript : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    spawnId = 0;
+                    spawnId = 1;
                     break;
                 case 1:
                     spawnId = 1;
@@ -43,7 +43,7 @@ public class Tile_ItemEventsScript : MonoBehaviour
                     spawnId = 0;
                     break;
                 case 3:
-                    spawnId = 1;
+                    spawnId = 0;
                     break;
             }
 

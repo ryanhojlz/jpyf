@@ -189,6 +189,11 @@ public class PS4_ControllerScript : MonoBehaviour
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")));
     }
+
+    public bool ReturnL1Press()
+    {
+        return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")));
+    }
 #endif
 
 

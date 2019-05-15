@@ -36,21 +36,21 @@ public class FadeScreen : MonoBehaviour
             Fade();
             scale.Set(15, 15, 1);
             redImage.rectTransform.localScale = scale;
-            Debug.Log(redImage.rectTransform.localScale);
+            //Debug.Log(redImage.rectTransform.localScale);
         }
         else if (((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.20f) && ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap >= 0.11f))
         {
             Fade();
             scale.Set(13, 13, 1);
             redImage.rectTransform.localScale = scale;
-            Debug.Log(redImage.rectTransform.localScale);
+            //Debug.Log(redImage.rectTransform.localScale);
         }
         else if (((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap <= 0.10f) && ((float)ForPlayer.m_P2_hp / (float)ForPlayer.m_P2_hpCap >= 0f))
         {
             Fade();
             scale.Set(10, 10, 1);
             redImage.rectTransform.localScale = scale;
-            Debug.Log(redImage.rectTransform.localScale);
+            //Debug.Log(redImage.rectTransform.localScale);
         }
         else
         {
@@ -66,7 +66,7 @@ public class FadeScreen : MonoBehaviour
 
             if (redImage.color.a <= variable.a + offset)
             {
-                Debug.Log("Got come in");
+               // Debug.Log("Got come in");
                 reverse = true;
             }
         }
@@ -77,7 +77,7 @@ public class FadeScreen : MonoBehaviour
 
             if (redImage.color.a >= Original.a - offset)
             {
-                Debug.Log("Got come in");
+                //Debug.Log("Got come in");
                 reverse = false;
             }
         }

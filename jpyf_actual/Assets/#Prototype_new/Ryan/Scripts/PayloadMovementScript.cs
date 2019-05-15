@@ -64,7 +64,7 @@ public class PayloadMovementScript : MonoBehaviour
         if (Push_CartScript.Instance.m_stunDuration > 0)
         {
             //payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            payloadRb.velocity = Vector3.zero;
+            //payloadRb.velocity = Vector3.zero;
         }
         else
         { 
@@ -90,12 +90,14 @@ public class PayloadMovementScript : MonoBehaviour
 
                         // new code
                         // Assign Velocity
-                        payloadRb.AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
-                        capZVelocity = payloadRb.velocity;
-                        capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
+                        //payloadRb.AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
+                        //capZVelocity = payloadRb.velocity;
+                        //capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
                         // Reassign Velocity
-                        payloadRb.velocity = capZVelocity;
-
+                        //payloadRb.velocity = capZVelocity;
+                        var pos = payloadObject.transform.position;
+                        pos.z += 1 * Time.deltaTime;
+                        payloadObject.transform.position = pos;
                     }
                 }
                 else

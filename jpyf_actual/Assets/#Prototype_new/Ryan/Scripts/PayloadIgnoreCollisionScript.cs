@@ -10,7 +10,7 @@ public class PayloadIgnoreCollisionScript : MonoBehaviour
         foreach (Transform obj in transform)
         {
             if (obj.GetComponent<Collider>())
-                Physics.IgnoreCollision(this.GetComponent<Collider>(), obj.GetComponent<Collider>());
+                Physics.IgnoreCollision(this.GetComponent<Collider>(), obj.GetComponent<Collider>(),true);
         }
     }
 }

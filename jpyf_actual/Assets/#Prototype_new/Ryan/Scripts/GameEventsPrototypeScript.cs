@@ -421,6 +421,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
         }
 
+   
+
+
         if (ShowSubtitles)
         {
             subtitles_4外人.enabled = true;
@@ -501,13 +504,25 @@ public class GameEventsPrototypeScript : MonoBehaviour
         }
 
 
+        if (payload_ref.transform.position.z >= 350)
+        {
+            if (condition == WINLOSE.neutral)
+                condition = WINLOSE.win;
+        }
+        
+       
+        
+        
+
         if (condition == WINLOSE.lose)
         {
-            Debug.Log("Nibba just lost");
+            WinLoseUIScript.Instance.renderimg = -1;
+            //Debug.Log("Nibba just lost");
         }
         else if (condition == WINLOSE.win)
         {
-            Debug.Log("Nibba just won");
+            WinLoseUIScript.Instance.renderimg = 1;
+            //Debug.Log("Nibba just won");
         }
 
     }
@@ -517,4 +532,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
         float alpha = 1.0f * ((ref_losingTimer - losingTimer) / ref_losingTimer);
         return alpha;
     }
+
+    
 }

@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerDashAttackCollider : MonoBehaviour
 {
     ParticleSystem particle = null;
-    
+    Collider myCollider = null;
     private void Start()
     {
         particle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        myCollider = this.GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -16,11 +17,13 @@ public class PlayerDashAttackCollider : MonoBehaviour
     {
         if (Object_ControlScript.Instance.dashAtk)
         {
-            GetComponent<Collider>().enabled = true;
+           // GetComponent<Collider>().enabled = true;
+            myCollider.enabled = true;
         }
         else
         {
-            GetComponent<Collider>().enabled = false;
+            //GetComponent<Collider>().enabled = false;
+            myCollider.enabled = false;
         }
 	}
 

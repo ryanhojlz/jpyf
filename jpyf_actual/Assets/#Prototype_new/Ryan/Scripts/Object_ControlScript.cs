@@ -67,6 +67,8 @@ public class Object_ControlScript : MonoBehaviour
     private Vector3 tempVelocity = Vector3.zero;
     private Vector3 cancelVelocity = Vector3.zero;
 
+    private Rigidbody objectRb = null;
+
     private void Awake()
     {
         isGrounded = true;
@@ -89,7 +91,8 @@ public class Object_ControlScript : MonoBehaviour
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         m_playerSpeed = 8;
 
-        
+
+        objectRb = CurrentObj.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -129,8 +132,14 @@ public class Object_ControlScript : MonoBehaviour
 
         //CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
 
-        CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
-        CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
+        //CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+        //CurrentObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
+
+        objectRb.constraints = RigidbodyConstraints.FreezeRotationZ;
+        objectRb.constraints = RigidbodyConstraints.FreezeRotationX;
+
+
+
         //CurrentUnit.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
 
         // Set move direction
@@ -139,7 +148,8 @@ public class Object_ControlScript : MonoBehaviour
             , -Controller.axisLeft_y * (m_playerSpeed + m_dashSpeed - m_playerSpeedDebuff));
 
         // Modify velocity
-        tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+        //tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+        tempVelocity = objectRb.velocity;
 
         // Ensure movement based on camera view
         movedir = CameraObj.transform.TransformDirection(movedir);
@@ -182,13 +192,14 @@ public class Object_ControlScript : MonoBehaviour
         }
         // Movement
         if (isPushingCart)
-        {
-            CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
+        {            
+            //CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
+            objectRb.isKinematic = true;
         }
         else if (!isPushingCart)
         {
-            CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
-
+            //CurrentObj.GetComponent<Rigidbody>().isKinematic = false;
+            objectRb.isKinematic = false;
             //CurrentObj.GetComponent<Rigidbody>().AddForce(tempVelocity * 40);
             //tempVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
             //tempVelocity.x = Mathf.Clamp(tempVelocity.x, -4, 4);
@@ -200,7 +211,8 @@ public class Object_ControlScript : MonoBehaviour
             {
                 tempVelocity.x *= 0.8f;
                 tempVelocity.z *= 0.8f;
-                CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+                //CurrentObj.GetComponent<Rigidbody>().velocity = tempVelocity;
+                objectRb.velocity = tempVelocity;
             }
         }
 
@@ -209,14 +221,17 @@ public class Object_ControlScript : MonoBehaviour
         {
             if (jump)
             {
-                CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
+                //CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
+                objectRb.AddForce(Vector3.up * 2500);
+                
                 isGrounded = false;
             }
             if (dashAtk)
             {
                 dashTimer -= 1 * Time.deltaTime;
-                CurrentObj.GetComponent<Rigidbody>().velocity = CurrentObj.transform.forward * 35;
-
+                //CurrentObj.GetComponent<Rigidbody>().velocity = CurrentObj.transform.forward * 35;
+                objectRb.velocity = CurrentObj.transform.forward * 35;
+                
                 if (jump)
                 {
                     dashTimer = 0.0f;
@@ -224,10 +239,14 @@ public class Object_ControlScript : MonoBehaviour
                 if (dashTimer <= 0)
                 {
                     dashAtk = false;
-                    cancelVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+                    //cancelVelocity = CurrentObj.GetComponent<Rigidbody>().velocity;
+                    cancelVelocity = objectRb.velocity;
+
+
                     cancelVelocity.z = 0;
                     cancelVelocity.x = 0;
-                    CurrentObj.GetComponent<Rigidbody>().velocity = cancelVelocity;
+                    //CurrentObj.GetComponent<Rigidbody>().velocity = cancelVelocity;
+                    objectRb.velocity = cancelVelocity;
                     dashTimer = 0.15f;
                 }
             }

@@ -84,9 +84,9 @@ public class PlayerAnimScript : MonoBehaviour
 
     void UpdateMovementAnim()
     {
-        GameObject.Find("Text5").GetComponent<Text>().text = "" + PS4_Object.GetComponent<Rigidbody>().velocity;
-        // Check Walking
-        if (PS4_Object.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        //GameObject.Find("Text5").GetComponent<Text>().text = "" + PS4_Object.GetComponent<Rigidbody>().velocity;
+
+        if (Object_ControlScript.Instance.movedir != Vector3.zero)
         {
             // Boolean 
             Anim_IsIdle = false;
@@ -103,7 +103,7 @@ public class PlayerAnimScript : MonoBehaviour
                 Anim_IsWalking = true;
             }
         }
-        else if (PS4_Object.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        else
         {
             // Boolean
             Anim_IsWalking = false;
@@ -122,6 +122,49 @@ public class PlayerAnimScript : MonoBehaviour
             }
 
         }
+
+
+
+        // Check Walking       
+        //if (PS4_Object.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        //{
+        //    // Boolean 
+        //    Anim_IsIdle = false;
+        //    Anim_IsIdleCarry = false;
+
+        //    if (ReturnIsCarryingObj())
+        //    {
+        //        Anim_IsWalkingCarry = true;
+        //        Anim_IsWalking = false;
+        //    }
+        //    else
+        //    {
+        //        Anim_IsWalkingCarry = false;
+        //        Anim_IsWalking = true;
+        //    }
+        //}
+        //else if (PS4_Object.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        //{
+        //    // Boolean
+        //    Anim_IsWalking = false;
+        //    Anim_IsWalkingCarry = false;
+
+        //    // No velocity = not walking
+        //    if (ReturnIsCarryingObj())
+        //    {
+        //        Anim_IsIdleCarry = true;
+        //        Anim_IsIdle = false;
+        //    }
+        //    else
+        //    {
+        //        Anim_IsIdleCarry = false;
+        //        Anim_IsIdle = true;
+        //    }
+
+        //}
+
+
+
     }
 
     void UpdateGettingCaught()

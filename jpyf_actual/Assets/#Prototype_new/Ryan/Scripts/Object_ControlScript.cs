@@ -369,7 +369,7 @@ public class Object_ControlScript : MonoBehaviour
         }
 
         //Debug.Log("Pickup   + " + pickup);
-        GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 
+        //GameObject.Find("Text").GetComponent<Text>().text = "Pickup " + pickup; 
     }
 
     // Tengu 

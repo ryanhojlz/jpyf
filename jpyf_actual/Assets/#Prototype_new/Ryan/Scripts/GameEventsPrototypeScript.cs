@@ -359,14 +359,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         ShowSubtitles = false;
                         Destroy(this.tutorialObjective_7.gameObject);
                         tutorial_timer = 50;
-                        Statistics.Instance.SetTutorialComplete();
                         ++Tutorial;
                     }
                 }                
                 break;
             case 7:
                 if (!Objective3)
-                {                     
+                {
+                    if (Statistics.Instance != null)
+                        Statistics.Instance.SetTutorialComplete();
                     b_bigExplain = true;
                     ShowSubtitles = true;
                     tutorial_timer -= 1 * Time.deltaTime;
@@ -504,7 +505,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         }
 
 
-        if (payload_ref.transform.position.z >= 350)
+        if (payload_ref.transform.position.z >= 360)
         {
             if (condition == WINLOSE.neutral)
                 condition = WINLOSE.win;

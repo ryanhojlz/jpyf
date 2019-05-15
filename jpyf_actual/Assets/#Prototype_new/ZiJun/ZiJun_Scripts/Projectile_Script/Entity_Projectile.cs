@@ -94,7 +94,7 @@ public class Entity_Projectile : MonoBehaviour
         if (other.tag == "Player2")
         {
             HitPlayer(other);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 

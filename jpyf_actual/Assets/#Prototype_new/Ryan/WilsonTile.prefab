@@ -256,6 +256,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4546002946528974}
+  - component: {fileID: 65807649528928128}
   m_Layer: 0
   m_Name: WilsonTile
   m_TagString: Untagged
@@ -494,9 +495,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880057134157280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.7866673, y: 0, z: 0}
+  m_LocalScale: {x: 0.06666667, y: 1, z: 0.06666667}
   m_Children:
   - {fileID: 4695143009491778}
   - {fileID: 4451431118857650}
@@ -919,3 +920,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761148579987018}
   m_Mesh: {fileID: 4300000, guid: 7e87704cd60676144bf8eff75c986e2c, type: 3}
+--- !u!65 &65807649528928128
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880057134157280}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 1, z: 158.71329}
+  m_Center: {x: 0, y: 0, z: 0.39790344}

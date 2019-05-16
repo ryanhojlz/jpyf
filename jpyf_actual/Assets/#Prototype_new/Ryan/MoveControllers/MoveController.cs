@@ -136,14 +136,17 @@ public class MoveController : MonoBehaviour
     private void ProcessControllerMovement()
     {
 #if UNITY_PS4
+        
         Vector3 pos;
         Tracker.GetTrackedDevicePosition(m_HandleNumber, PlayStationVRSpace.Unity, out pos);
         transform.position = pos + m_Player.transform.position;
-
+        
         Quaternion rot;
         Tracker.GetTrackedDeviceOrientation(m_HandleNumber, PlayStationVRSpace.Unity, out rot);
         transform.rotation = rot;
+
         
+       
 #endif
     }
 
@@ -582,7 +585,6 @@ public class MoveController : MonoBehaviour
         GameObject menuManager = GameObject.Find("ButtonManager");
         if (GetButtonDown(MoveControllerHotkeys.buttonUse))
         {
-            //Debug.Log("HAI DOMO, VARCHURUAL YEWTOOBER KEEZOONAH AEY DES");
             menuManager.GetComponent<MainMenuButton>().EnterSelected();
             menuManager.GetComponent<MainMenuButton>().TitlescreenDisplay = false;
         }
@@ -604,7 +606,7 @@ public class MoveController : MonoBehaviour
             menuManager.GetComponent<MainMenuButton>().MoveRight();
         }
 
-
+        
     }
 
     void CartGame()

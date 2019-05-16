@@ -77,7 +77,7 @@ public class MoveControllerHandler : MonoBehaviour
         Tracker.UnregisterTrackedDevice(primaryHandles[0]);
         Tracker.UnregisterTrackedDevice(secondaryHandles[0]);
 #endif
-
+        
         m_MovePrimaryController.transform.localPosition = Vector3.zero;
         m_MovePrimaryController.transform.localRotation = Quaternion.identity;
         m_MoveSecondaryController.transform.localPosition = Vector3.zero;

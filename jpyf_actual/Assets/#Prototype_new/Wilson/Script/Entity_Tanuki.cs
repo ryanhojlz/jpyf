@@ -15,6 +15,19 @@ public class Entity_Tanuki : Entity_Unit
         BulletShootFrom = this.transform.Find("Bullet_Spawn_Location");
     }
 
+    public override void SelfUpdate()
+    {
+        if (GetisIdle())
+        {
+            m_animation.SetAnim(0);
+        }
+        else
+        {
+            m_animation.SetAnim(1);
+        }
+    }
+
+
     //public override void FindNearestInList()
     //{
     //    float nearest = float.MaxValue;

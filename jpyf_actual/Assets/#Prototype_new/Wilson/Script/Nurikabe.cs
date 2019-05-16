@@ -18,6 +18,16 @@ public class Nurikabe : Entity_Unit
         if (GetStillAttacking())//if it is still attacking
             if (bulletGO == null)//Bullet no longer exist
                 SetStillAttacking(false);//State it is no longer attacking
+
+
+        if (GetisIdle())
+        {
+            m_animation.SetAnim(0);
+        }
+        else
+        {
+            m_animation.SetAnim(1);
+        }
     }
     public override void Attack()
     {

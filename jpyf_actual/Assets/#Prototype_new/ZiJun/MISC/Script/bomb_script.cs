@@ -75,10 +75,9 @@ public class bomb_script : MonoBehaviour
         playExplodingSound = this.GetComponent<AudioSource>();
 
         audioLength = explodingSound.length;
-
         //expending_speed = explosion_Range / audioLength * 2;
 
-        Debug.Log("Bomb : " + explodingSound);
+        //Debug.Log("Bomb : " + explodingSound);
     }
 	
 	// Update is called once per frame

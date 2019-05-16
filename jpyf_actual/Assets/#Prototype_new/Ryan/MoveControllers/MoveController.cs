@@ -143,6 +143,7 @@ public class MoveController : MonoBehaviour
         Quaternion rot;
         Tracker.GetTrackedDeviceOrientation(m_HandleNumber, PlayStationVRSpace.Unity, out rot);
         transform.rotation = rot;
+        
 #endif
     }
 

@@ -163,10 +163,12 @@ public class Object_ControlScript : MonoBehaviour
             // Current experimental
             prevRot = CurrentObj.transform.rotation;
             testTransform = CurrentObj.transform;
+            // Creates a fake angle to look towards
             testTransform.LookAt(movedir, Vector3.up);
             newRotation = Quaternion.LookRotation(movedir, Vector3.up);
             newRotation.x = 0;
             newRotation.z = 0;
+            // Smoothing of rotation
             CurrentObj.transform.rotation = Quaternion.Lerp(prevRot, newRotation, 0.35f);
         }
         else

@@ -44,6 +44,8 @@ public class bomb_script : MonoBehaviour
 
     Rigidbody m_rb = null;
 
+    private AudioClip explodingSound;
+    private AudioSource playExplodingSound;
     //float distanceToDespawn = 100f;
 
     // Use this for initialization
@@ -67,6 +69,10 @@ public class bomb_script : MonoBehaviour
         //    }
         //}
         m_rb = this.GetComponent<Rigidbody>();
+        explodingSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().BombSound;
+        playExplodingSound = this.GetComponent<AudioSource>();
+
+        Debug.Log("Bomb : " + explodingSound);
 
     }
 	
@@ -83,7 +89,7 @@ public class bomb_script : MonoBehaviour
         }
         else
         {
-            if (Explosion.localScale.x > 10)
+            if (Explosion.localScale.x > 10 && !playExplodingSound.isPlaying)
             {
                 Destroy(this.gameObject);
             }
@@ -111,6 +117,7 @@ public class bomb_script : MonoBehaviour
 
             case Bomb_state.EXPLOSION:
                 {
+                    
                     if (Collider && Collider.enabled)
                     {
                         Collider.enabled = false;
@@ -123,7 +130,6 @@ public class bomb_script : MonoBehaviour
                         ExplosionParticles.SetActive(true);
                         ExplosionParticles_2.SetActive(true);
                     }
-
                     //Debug.Log("Came here");
                     m_rb.isKinematic = true;
                     Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
@@ -141,6 +147,11 @@ public class bomb_script : MonoBehaviour
     {
         if (State == Bomb_state.ACTIVE)
         {
+
+            playExplodingSound.clip = explodingSound;
+
+            playExplodingSound.Play();
+
             State = Bomb_state.EXPLOSION;
 
             //if(this.transform.childCount > 0)

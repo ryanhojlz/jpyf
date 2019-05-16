@@ -336,7 +336,7 @@ public class MainMenuButton : MonoBehaviour
                 {
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
-                    scene = "Ryan_Prototype";
+                    scene = "CurrentScene";
                     //SceneManager.LoadScene("PC_Build_Wilson");
 
                 }

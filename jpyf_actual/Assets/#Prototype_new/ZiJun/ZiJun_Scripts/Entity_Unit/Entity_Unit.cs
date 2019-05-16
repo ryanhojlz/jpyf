@@ -120,7 +120,7 @@ public class Entity_Unit : MonoBehaviour
     private Rigidbody p_rb = null;
 
     private Force_Field m_forcefield = null;
-    private AnimationScript m_animation = null;
+    protected AnimationScript m_animation = null;
 
     private void Awake()
     {
@@ -252,7 +252,14 @@ public class Entity_Unit : MonoBehaviour
         UpdateInspector();
 
         CheckToStun();
-
+        //if (idle)
+        //{
+        //    m_animation.SetAnim(0);
+        //}
+        //else
+        //{
+        //    m_animation.SetAnim(1);
+        //}
     }
 
     // Getter 

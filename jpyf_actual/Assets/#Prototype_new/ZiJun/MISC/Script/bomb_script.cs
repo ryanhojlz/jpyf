@@ -25,11 +25,13 @@ public class bomb_script : MonoBehaviour
     public Collider Collider = null;
 
     Vector3 Expending_Scale = Vector3.zero;
+
     public float expending_speed = 5f;
+    float audioLength = 0f;
 
     public bool debugging = false;
 
-    public float explosion_Range = 10f;
+    public float explosion_Range = 100f;
 
     GameObject Fire = null;
 
@@ -72,8 +74,11 @@ public class bomb_script : MonoBehaviour
         explodingSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().BombSound;
         playExplodingSound = this.GetComponent<AudioSource>();
 
-        Debug.Log("Bomb : " + explodingSound);
+        audioLength = explodingSound.length;
 
+        //expending_speed = explosion_Range / audioLength * 2;
+
+        Debug.Log("Bomb : " + explodingSound);
     }
 	
 	// Update is called once per frame
@@ -81,15 +86,15 @@ public class bomb_script : MonoBehaviour
     {
         if (debugging)
         {
-            if (this.transform.localScale.x > 10)
+            if (this.transform.localScale.x > explosion_Range)
             {
                 //Debug.Log("HIIIIII loooo");
-                this.transform.localScale = new Vector3(1, 1, 1);
+                //this.transform.localScale = new Vector3(1, 1, 1);
             }
         }
         else
         {
-            if (Explosion.localScale.x > 10 && !playExplodingSound.isPlaying)
+            if (Explosion.localScale.x > explosion_Range && !playExplodingSound.isPlaying)
             {
                 Destroy(this.gameObject);
             }
@@ -132,7 +137,12 @@ public class bomb_script : MonoBehaviour
                     }
                     //Debug.Log("Came here");
                     m_rb.isKinematic = true;
-                    Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
+                    if (Explosion.localScale.x <= explosion_Range)
+                    {
+                        Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
+                    }
+
+                    Debug.Log(Explosion.localScale.x + " : " + explosion_Range);
                 }
                 break;
 

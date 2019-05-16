@@ -32,31 +32,12 @@ public class Achievement : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
-
-        //if (Instance == null)
-        //{
-        //    Instance = this;
-        //}
-        //else
-        //{
-        //    Destroy(this);
-        //}
-
     }
     // Use this for initialization
     void Start ()
     {
-        //Debug.Log("Came here");
-        //this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
         this.transform.parent.GetComponent<GlobalAchievementManager>().AddAchievement(this);
         LoadAchievement();
-        //if (GameObject.Find("UI"))
-        //{
-        //    if (GameObject.Find("UI").transform.Find("Canvas"))
-        //    {
-        //        Canvas = GameObject.Find("UI").transform.Find("Canvas");
-        //    }
-        //}
     }
 	
 	// Update is called once per frame
@@ -72,7 +53,6 @@ public class Achievement : MonoBehaviour
     public void LoadAchievement()
     {
         //Loading Achievement
-
         hasDone = PlayerPrefs.GetInt(Achievement_name) == 1 ? true : false;
     }
 
@@ -106,11 +86,7 @@ public class Achievement : MonoBehaviour
             TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
             TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
             SaveAchievement();
-            //PlayerPrefs.SetInt(Achievement_name, index);
-            //Image.SetActive(true);
-            //Name.GetComponent<Text>().text = Achievement_name;
-            //Description.GetComponent<Text>().text = Achievement_descriptions;
-            //Panel.SetActive(true);
+
             float time = 0;
             if (TempAchievement.GetComponent<Achievement_Slider>())
             {
@@ -119,11 +95,6 @@ public class Achievement : MonoBehaviour
             yield return new WaitForSeconds(time);
             Destroy(TempAchievement);
         }
-        
-        //Image.SetActive(false);
-        //Name.GetComponent<Text>().text = "";
-        //Description.GetComponent<Text>().text = "";
-        //Panel.SetActive(false);
 
     }
 

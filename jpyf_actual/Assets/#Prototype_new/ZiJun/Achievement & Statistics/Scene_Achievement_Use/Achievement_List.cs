@@ -24,7 +24,6 @@ public class Achievement_List : MonoBehaviour
 
     Vector2 position = Vector2.zero;
 
-	// Use this for initialization
 	void Start ()
     {
         Achievements = GameObject.Find("AchievementManager").GetComponent<GlobalAchievementManager>().ListOfAchievements;
@@ -57,35 +56,21 @@ public class Achievement_List : MonoBehaviour
 
             TempAchievement.transform.SetParent(GameObject.Find("Panel").transform, false);
 
-
-            //TempAchievement.transform.position = Canvas.transform.position 
-            //    + new Vector3(0,
-            //    (Canvas.GetComponent<RectTransform>().rect.height * 0.5f * Canvas.transform.lossyScale.y)
-            //    - (TempAchievement.GetComponent<RectTransform>().rect.height
-            //    * 0.5f
-            //    * TempAchievement.transform.lossyScale.y
-            //    ), 0);
-            
-
             position = TempAchievement.GetComponent<RectTransform>().anchoredPosition;
             position.x = TempAchievement.GetComponent<RectTransform>().rect.width * 0.5f + offsetBetween;
             position.y = TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f + (offsetUpPercentage * Canvas.GetComponent<RectTransform>().rect.height);
             position.x += TempAchievement.GetComponent<RectTransform>().rect.width * i + offsetBetween * i;
             TempAchievement.GetComponent<RectTransform>().anchoredPosition = position;
 
-            //Debug.Log(Achievements[i].GetComponent<Achievement>().Image);
-
             TempAchievement.transform.Find("Achi_Image").GetComponent<Image>().sprite = Achievements[i].GetComponent<Achievement>().Image;
             TempAchievement.transform.Find("Achi_Title").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_name;
             TempAchievement.transform.Find("Achi_Description").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_descriptions;
 
             Achievement_Panels.Add(TempAchievement.GetComponent<RectTransform>());
-            //TempAchievement.transform.position -= new Vector3(0, (TempAchievement.GetComponent<RectTransform>().rect.height * TempAchievement.transform.lossyScale.y) * i, 0);
         }
 
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         if (Input.GetKey(KeyCode.DownArrow))
@@ -105,32 +90,14 @@ public class Achievement_List : MonoBehaviour
             PanelMoveLeft();
         }
 
-        //Debug.Log(panel.anchoredPosition.y);
 	}
 
     void PanelMoveUp()
     {
-        //if (Achievement_Panels.Count > 0)
-        //{
-        //    if (Achievement_Panels[Achievement_Panels.Count - 1].GetComponent<RectTransform>().anchoredPosition.y
-        //        > Canvas.GetComponent<RectTransform>().anchoredPosition.y + Canvas.GetComponent<RectTransform>().rect.height)//If the last
-        //    {
-        //        return;
-        //    }
-
-        //    Debug.Log("This is the achievement panel : " + Achievement_Panels[Achievement_Panels.Count - 1].GetComponent<RectTransform>().anchoredPosition.y);
-        //    Debug.Log("This is Canvas : " + Canvas.GetComponent<RectTransform>().rect.height);
-        //}
-
-        //Debug.Log(Achievements[Achievements.Count - 1].GetComponent<RectTransform>());
-
         if (Achievement_Panels.Count > 0)
         {
             if (Achievement_Panels[Achievement_Panels.Count - 1].position.y - (Achievement_Panels[Achievement_Panels.Count - 1].rect.height * 0.5f) > Canvas.GetComponent<RectTransform>().position.y - Canvas.GetComponent<RectTransform>().rect.height * 0.5f)
                 return;
-
-            //Debug.Log(Achievement_Panels[Achievement_Panels.Count - 1].position.y + " : " + (Canvas.GetComponent<RectTransform>().anchoredPosition.y - Canvas.GetComponent<RectTransform>().rect.height));
-            //Debug.Log(Achievement_Panels[Achievement_Panels.Count - 1].Find("Achi_Title").GetComponent<Text>().text);
         }
 
         position = panel.GetComponent<RectTransform>().anchoredPosition;
@@ -144,9 +111,6 @@ public class Achievement_List : MonoBehaviour
         {
             if (Achievement_Panels[0].position.y + (Achievement_Panels[0].rect.height * 0.5f) < Canvas.GetComponent<RectTransform>().position.y + Canvas.GetComponent<RectTransform>().rect.height * 0.5f)
                 return;
-
-            //Debug.Log(Achievement_Panels[Achievement_Panels.Count - 1].position.y + " : " + (Canvas.GetComponent<RectTransform>().anchoredPosition.y - Canvas.GetComponent<RectTransform>().rect.height));
-            //Debug.Log(Achievement_Panels[Achievement_Panels.Count - 1].Find("Achi_Title").GetComponent<Text>().text);
         }
 
         position = panel.GetComponent<RectTransform>().anchoredPosition;

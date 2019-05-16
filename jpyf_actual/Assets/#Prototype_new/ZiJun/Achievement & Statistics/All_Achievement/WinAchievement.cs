@@ -6,14 +6,9 @@ using UnityEngine.UI;
 public class WinAchievement : Achievement
 {
     public int numberofwins = 0;
-    // Use this for initialization
 
-	// Update is called once per frame
 	void Update ()
     {
-        //Debug.Log(Achievement_name);
-        //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
-        //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
         if (!GameObject.Find("StatsManager"))
             return;
         if (!GameObject.Find("StatsManager").GetComponent<Statistics>())

@@ -5,10 +5,10 @@ using UnityEngine;
 public class TutorialComplete : Achievement
 {
     bool completed = false;
-    // Update is called once per frame
+
     void Update()
     {
-        if (completed && !hasDone)//&& TempIndex != index)
+        if (completed && !hasDone)
         {
             hasDone = true;
             Debug.Log(Achievement_name + " : " + Achievement_descriptions);
@@ -16,8 +16,7 @@ public class TutorialComplete : Achievement
         }
 
         Debug.Log(Achievement_name);
-        //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
-        //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
+
         if (!GameObject.Find("StatsManager"))
             return;
         if (!GameObject.Find("StatsManager").GetComponent<Statistics>())

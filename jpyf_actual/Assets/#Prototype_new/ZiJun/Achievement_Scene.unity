@@ -154,7 +154,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 117406487}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -167,8 +167,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 58e038a828442f147834b5f60acab62f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -181,11 +181,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 117406487}
---- !u!4 &273574506 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4584080547624644, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 279479251}
 --- !u!1001 &279479251
 Prefab:
   m_ObjectHideFlags: 0
@@ -225,6 +220,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114012934887387616, guid: fb27b77414a05b947b1f88e8f9e7893e,
+        type: 2}
+      propertyPath: Image
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e51c1cfb1a440245b82b058f747f9de,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb27b77414a05b947b1f88e8f9e7893e, type: 2}
   m_IsPrefabParent: 0
@@ -298,55 +299,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224767170379695308, guid: d259d5825a213754ab727006ad5e3ce1,
     type: 2}
   m_PrefabInternal: {fileID: 1925742159}
---- !u!1 &914669544
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1769095765074610, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 914669545}
-  - component: {fileID: 914669546}
-  m_Layer: 0
-  m_Name: TutorialComplete (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &914669545
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4876532000491288, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 914669544}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 273574506}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &914669546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114012934887387616, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 914669544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9af50168ef4ee944bd2e823918467c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Achievement_name: New Bird
-  Achievement_descriptions: Completed tutorial for the first time
-  Image: {fileID: 0}
-  Achievement_Panel: {fileID: 1992385709933490, guid: 8dc8ff0419c12cf4b91f194083fb7268,
-    type: 2}
-  index: 4
 --- !u!1 &964250743
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,8 +427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000035286, y: -7.1}
-  m_SizeDelta: {x: 800, y: 464.2}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 449.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1095052080
 MonoBehaviour:
@@ -490,14 +442,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.5439658, b: 0.5439658, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 58e038a828442f147834b5f60acab62f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -511,55 +463,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1095052078}
---- !u!1 &1209853204
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1769095765074610, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1209853205}
-  - component: {fileID: 1209853206}
-  m_Layer: 0
-  m_Name: TutorialComplete (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1209853205
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4876532000491288, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1209853204}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 273574506}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1209853206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114012934887387616, guid: fb27b77414a05b947b1f88e8f9e7893e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1209853204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9af50168ef4ee944bd2e823918467c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Achievement_name: New Bird
-  Achievement_descriptions: Completed tutorial for the first time
-  Image: {fileID: 0}
-  Achievement_Panel: {fileID: 1992385709933490, guid: 8dc8ff0419c12cf4b91f194083fb7268,
-    type: 2}
-  index: 5
 --- !u!1 &1289344284
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,9 @@ public class Achievement : MonoBehaviour
 
     //public GameObject Panel;
 
-    public RawImage Image;
+    //public RawImage Image;
+
+    public Sprite Image;
 
     //public GameObject Name;
 
@@ -95,10 +97,12 @@ public class Achievement : MonoBehaviour
         SetCanvas(GlobalAchievementManager.Instance.Canvas);
         if (Canvas)
         {
+
+            Debug.Log("Got come here");
             
             GameObject TempAchievement = Instantiate(Achievement_Panel);
             TempAchievement.transform.SetParent(Canvas, false);
-            TempAchievement.transform.Find("Achievement_Image");
+            TempAchievement.transform.Find("Achievement_Image").GetComponent<Image>().sprite = Image;
             TempAchievement.transform.Find("Achievement_Title").GetComponent<Text>().text = Achievement_name;
             TempAchievement.transform.Find("Achievement_Description").GetComponent<Text>().text = Achievement_descriptions;
             SaveAchievement();

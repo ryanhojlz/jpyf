@@ -15,6 +15,13 @@ public class Achievement_List : MonoBehaviour
 
     public List<RectTransform> Achievement_Panels = new List<RectTransform>();
 
+    float offsetPercentage = 0.055f;
+    float offsetBetween = 0f;
+
+    float offsetUpPercentage = 0.1f;
+
+    float scrollingspeed = 300f;
+
     Vector2 position = Vector2.zero;
 
 	// Use this for initialization
@@ -23,6 +30,8 @@ public class Achievement_List : MonoBehaviour
         Achievements = GameObject.Find("AchievementManager").GetComponent<GlobalAchievementManager>().ListOfAchievements;
 
         Canvas = GameObject.Find("Canvas");
+
+        offsetBetween = panel.GetComponent<RectTransform>().rect.width * offsetPercentage;
 
         for (int i = 1; i < Achievements.Count; ++i)
         {
@@ -56,17 +65,19 @@ public class Achievement_List : MonoBehaviour
             //    * 0.5f
             //    * TempAchievement.transform.lossyScale.y
             //    ), 0);
+            
 
             position = TempAchievement.GetComponent<RectTransform>().anchoredPosition;
-            position.x = panel.GetComponent<RectTransform>().rect.width * 0.5f;
-            position.y = panel.GetComponent<RectTransform>().rect.height - TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f;
-            position.y -= TempAchievement.GetComponent<RectTransform>().rect.height * i;
+            position.x = TempAchievement.GetComponent<RectTransform>().rect.width * 0.5f + offsetBetween;
+            position.y = TempAchievement.GetComponent<RectTransform>().rect.height * 0.5f + (offsetUpPercentage * Canvas.GetComponent<RectTransform>().rect.height);
+            position.x += TempAchievement.GetComponent<RectTransform>().rect.width * i + offsetBetween * i;
             TempAchievement.GetComponent<RectTransform>().anchoredPosition = position;
 
-            //TempAchievement.transform.Find("Achi_Image").GetComponent<RawImage>().texture = Achievements[i].GetComponent<Achievement>().Image.texture;
+            //Debug.Log(Achievements[i].GetComponent<Achievement>().Image);
+
+            TempAchievement.transform.Find("Achi_Image").GetComponent<Image>().sprite = Achievements[i].GetComponent<Achievement>().Image;
             TempAchievement.transform.Find("Achi_Title").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_name;
             TempAchievement.transform.Find("Achi_Description").GetComponent<Text>().text = Achievements[i].GetComponent<Achievement>().Achievement_descriptions;
-
 
             Achievement_Panels.Add(TempAchievement.GetComponent<RectTransform>());
             //TempAchievement.transform.position -= new Vector3(0, (TempAchievement.GetComponent<RectTransform>().rect.height * TempAchievement.transform.lossyScale.y) * i, 0);
@@ -84,6 +95,14 @@ public class Achievement_List : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             PanelMoveDown();
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            PanelMoveRight();
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            PanelMoveLeft();
         }
 
         //Debug.Log(panel.anchoredPosition.y);
@@ -115,7 +134,7 @@ public class Achievement_List : MonoBehaviour
         }
 
         position = panel.GetComponent<RectTransform>().anchoredPosition;
-        position.y += 100 * Time.deltaTime;
+        position.y += scrollingspeed * Time.deltaTime;
         panel.GetComponent<RectTransform>().anchoredPosition = position;
     }
 
@@ -131,7 +150,33 @@ public class Achievement_List : MonoBehaviour
         }
 
         position = panel.GetComponent<RectTransform>().anchoredPosition;
-        position.y -= 100 * Time.deltaTime;
+        position.y -= scrollingspeed * Time.deltaTime;
+        panel.GetComponent<RectTransform>().anchoredPosition = position;
+    }
+
+    void PanelMoveLeft()
+    {
+        if (Achievement_Panels.Count > 0)
+        {
+            if (Achievement_Panels[Achievement_Panels.Count - 1].position.x + (Achievement_Panels[Achievement_Panels.Count - 1].rect.width * 0.5f) + offsetBetween * 1.1f <= Canvas.GetComponent<RectTransform>().position.x + Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+                return;
+        }
+
+        position = panel.GetComponent<RectTransform>().anchoredPosition;
+        position.x -= scrollingspeed * Time.deltaTime;
+        panel.GetComponent<RectTransform>().anchoredPosition = position;
+    }
+
+    void PanelMoveRight()
+    {
+        if (Achievement_Panels.Count > 0)
+        {
+            if (Achievement_Panels[0].position.x - (Achievement_Panels[0].rect.width * 0.5f) - offsetBetween * 1.1f >= Canvas.GetComponent<RectTransform>().position.x - Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+                return;
+        }
+
+        position = panel.GetComponent<RectTransform>().anchoredPosition;
+        position.x += scrollingspeed * Time.deltaTime;
         panel.GetComponent<RectTransform>().anchoredPosition = position;
     }
 }

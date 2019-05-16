@@ -11,7 +11,12 @@ ModelImporter:
     2300000: lanternhanging2
     3300000: lanternhanging2
     4300000: lanternhanging2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: g1_tex
+    second: {fileID: 2100000, guid: d04b269902998324bb7c534a6ae9ceea, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

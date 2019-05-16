@@ -52,6 +52,10 @@ public class MainMenuButton : MonoBehaviour
     float speed = 500f;
     float valueToStop = 0.001f;
 
+    private AudioClip selectingSound;
+    private AudioClip selectedSound;
+    private AudioSource playSound;
+
     // Use this for initialization
     void Start()
     {
@@ -72,6 +76,9 @@ public class MainMenuButton : MonoBehaviour
         loadImage.enabled = false;
         Loadingcanvas.enabled = false;
         Statscanvas.enabled = false;
+        selectingSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectSound;
+        selectedSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectedSound;
+        playSound = GameObject.Find("MainMenu").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -178,25 +185,41 @@ public class MainMenuButton : MonoBehaviour
     public void MoveUp()
     {
         if (indexX > 0)
+        {
             indexX--;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveDown()
     {
         if (indexX < 3)
+        {
             indexX++;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveLeft()
     {
         if (indexX > 0)
+        {
             indexX--;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveRight()
     {
         if (indexX < 3)
+        {
             indexX++;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void SelectedOptions()
@@ -224,7 +247,6 @@ public class MainMenuButton : MonoBehaviour
                     //    temp.x += speed * Time.deltaTime;
                     //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
                     //}
-
                     Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
                     if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
                     {
@@ -293,7 +315,7 @@ public class MainMenuButton : MonoBehaviour
                 }
                 break;
 
-            case "credits":
+            case "statistics":
                 {
                     ////if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
                     ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
@@ -334,6 +356,8 @@ public class MainMenuButton : MonoBehaviour
         {
             case "start":
                 {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
                     scene = "CurrentScene";
@@ -344,12 +368,16 @@ public class MainMenuButton : MonoBehaviour
 
             case "tutorial":
                 {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     scene = "Ryan_Prototype";
                 }
                 break;
 
             case "quit":
                 {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Achievement_Scene");
                     //scene = "Achievement_Scene";
@@ -357,8 +385,10 @@ public class MainMenuButton : MonoBehaviour
                 }
                 break;
 
-            case "credits":
+            case "statistics":
                 {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("PC_Build");
                     //scene = "PC_Build";
@@ -396,7 +426,7 @@ public class MainMenuButton : MonoBehaviour
                 }
                 break;
 
-            case "credits":
+            case "statistics":
                 {
                     text4.SetActive(true);
                 }

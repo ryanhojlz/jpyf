@@ -1877,6 +1877,7 @@ GameObject:
   - component: {fileID: 82727349702083916}
   - component: {fileID: 114746427878913982}
   - component: {fileID: 114901738477740688}
+  - component: {fileID: 114857548555668488}
   m_Layer: 0
   m_Name: tengu_Tpose
   m_TagString: Enemy_Unit
@@ -4231,6 +4232,7 @@ MonoBehaviour:
   Take_Damage_timer: 0
   StunEffect: {fileID: 1883597551114936}
   AttackSound: {fileID: 8300000, guid: 9476560f17272ff4cbaa8c4142b35635, type: 3}
+  TakeDamageSound: {fileID: 0}
   flyspeed: 10
   hoverspeed: 3
   editHoverSpeed: 3
@@ -4262,6 +4264,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Unit: {fileID: 1939141089720058}
+--- !u!114 &114857548555668488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939141089720058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f643cab587f20544ebbc62a8d30e26b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimatorObj: {fileID: 0}
 --- !u!114 &114901738477740688
 MonoBehaviour:
   m_ObjectHideFlags: 1

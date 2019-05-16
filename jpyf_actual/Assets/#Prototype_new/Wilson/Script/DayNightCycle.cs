@@ -31,6 +31,7 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FuncDebugKey();
         sunRotation = transform.eulerAngles.z;
 
         //dayTimeTimer += Time.deltaTime;
@@ -56,5 +57,23 @@ public class DayNightCycle : MonoBehaviour
     {
         transform.RotateAround(Vector3.zero, Vector3.forward, rotateSpeed * Time.deltaTime);
         transform.LookAt(Vector3.zero);
+    }
+
+    void FuncDebugKey()
+    {
+        if (Input.GetKey(KeyCode.Alpha0))
+            rotateSpeed += 1;
+        else if (Input.GetKey(KeyCode.Alpha9))
+            rotateSpeed -= 1;
+
+
+        if (rotateSpeed < 0)
+        {
+            rotateSpeed = 0;
+        }
+
+        if (Input.GetKey(KeyCode.Alpha8))
+            rotateSpeed = 0;
+        
     }
 }

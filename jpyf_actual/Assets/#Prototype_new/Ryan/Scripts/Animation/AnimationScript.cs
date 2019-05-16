@@ -13,7 +13,6 @@ public class AnimationScript : MonoBehaviour
     bool Anim_IsWalking = false;
     //bool Anim_IsAttacking = false;
     //bool Anim_IsJustSpawned = false;
-
     // Summary of animation states
     /// <summary>
     /// Anim_State_Spawn
@@ -48,6 +47,8 @@ public class AnimationScript : MonoBehaviour
         //AnimatorObj.SetBool("Anim_IsIdle", Anim_IsIdle);
         //AnimatorObj.SetBool("Anim_IsDead", Anim_IsDead);
         //AnimatorObj.SetBool("Anim_IsWalking", Anim_IsWalking);
+
+        
     }
 
     public void DebugFunc()

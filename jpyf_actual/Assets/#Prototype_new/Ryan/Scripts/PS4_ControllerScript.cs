@@ -194,6 +194,8 @@ public class PS4_ControllerScript : MonoBehaviour
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")));
     }
+
+    
 #endif
 
 

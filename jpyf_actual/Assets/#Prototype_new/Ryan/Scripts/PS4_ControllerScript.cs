@@ -21,6 +21,9 @@ public class PS4_ControllerScript : MonoBehaviour
     public float axisRight_x = 0;
     public float axisRight_y = 0;
 
+    public float d_padAxis_x = 0;
+    public float d_padAxis_y = 0;
+
 
     // PS4 OBJECTS
     //public GameObject PS4_OBJECT = null;
@@ -53,6 +56,7 @@ public class PS4_ControllerScript : MonoBehaviour
 	void Update ()
     {
         AxisUpdate();
+        DpadAxisUpdate();
         Buttons();
     }
 
@@ -116,7 +120,6 @@ public class PS4_ControllerScript : MonoBehaviour
 #endif
     }
 
-
     void Buttons()
     {
 #if UNITY_PS4
@@ -157,8 +160,67 @@ public class PS4_ControllerScript : MonoBehaviour
 #endif
     }
 
+    void DpadAxisUpdate()
+    {
 
 #if UNITY_PS4
+
+        // Left stick
+        d_padAxis_x = Input.GetAxis("dpad" + stickID + "horizontal");
+        d_padAxis_y = Input.GetAxis("dpad" + stickID + "vertical");
+#endif
+    }
+
+
+    // A bunch of return functions
+    // For controller input
+#if UNITY_PS4
+
+    // For now mainly using this for menu
+    public bool ReturnDpadLeft()
+    {
+        return (d_padAxis_x <= -0.1);
+    }
+
+    public bool ReturnDpadRight()
+    {
+        return (d_padAxis_x >= 0.1);
+    }
+
+    public bool ReturnDpadUp()
+    {
+        return (d_padAxis_y >= 0.1);
+    }
+
+    public bool ReturnDpadDown()
+    {
+        return (d_padAxis_y <= -0.1);
+    }
+
+    public bool ReturnLeft_AnalogLeft()
+    {
+        return (axisLeft_x <= -0.1);
+    }
+
+    public bool ReturnLeft_AnalogRight()
+    {
+        return (axisLeft_x >= 0.1);
+    }
+
+    public bool ReturnLeft_AnalogUp()
+    {
+        return (axisLeft_y >= 0.1);
+    }
+
+    public bool ReturnLeft_AnalogDown()
+    {
+        return (axisLeft_y <= -0.1);
+    }
+    // For now mainly using this for menu
+
+
+
+    // Bad example of mine sorry
     public bool IsSquareDown()
     {
         return SquareDown;

@@ -75,4 +75,9 @@ public class CartRotateScript : MonoBehaviour
             
         }
     }
+
+    void CartRotation()
+    {
+
+    }
 }

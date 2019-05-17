@@ -16,6 +16,7 @@ public class PS4_MenuStuff : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+#if UNITY_PS4
         if (PS4_ControllerScript.Instance)
         {
             if (PS4_ControllerScript.Instance.ReturnDpadRight())
@@ -49,4 +50,5 @@ public class PS4_MenuStuff : MonoBehaviour
 
         }
 	}
+#endif
 }

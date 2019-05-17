@@ -534,5 +534,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         return alpha;
     }
 
+
+    public bool ReturnPause()
+    {
+        return b_isPaused;
+    }
     
 }

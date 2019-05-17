@@ -219,6 +219,9 @@ public class PS4_ControllerScript : MonoBehaviour
     // For now mainly using this for menu
 
 
+    
+
+
 
     // Bad example of mine sorry
     public bool IsSquareDown()
@@ -239,6 +242,11 @@ public class PS4_ControllerScript : MonoBehaviour
     public bool ReturnSquarePress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
+    }
+
+    public bool ReturnSquareDown()
+    {
+        return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
     }
 
     public bool ReturnTrianglePress()

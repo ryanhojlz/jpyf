@@ -22,6 +22,21 @@ public class CartRotateScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //CartRotation();
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // If cart come inside
+        if (other.gameObject == PayloadMovementScript.Instance.payloadObject.gameObject)
+        {
+            cart = other.gameObject;            
+        }
+    }
+
+    void CartRotation()
+    {
         if (cart)
         {
             if (!toggleonce)
@@ -44,7 +59,7 @@ public class CartRotateScript : MonoBehaviour
                     if (!endtrue)
                         endtrue = true;
                 }
-                
+
             }
             else
             {
@@ -64,20 +79,5 @@ public class CartRotateScript : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // If cart come inside
-        if (other.gameObject == PayloadMovementScript.Instance.payloadObject.gameObject)
-        {
-            cart = other.gameObject;
-            
-        }
-    }
-
-    void CartRotation()
-    {
-
     }
 }

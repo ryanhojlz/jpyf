@@ -71,23 +71,23 @@ public class Statistics : MonoBehaviour
 
         Data.completedTutorial = false;
 
-        Debug.Log(Data.number_win);
-    //StatisticsData statisticsData = new StatisticsData();
-    //Data.number_win = 50;
-    //Data.number_lose = 10;
-    ////string json = JsonUtility.ToJson(statisticsData);
+        //Debug.Log(Data.number_win);
+        //StatisticsData statisticsData = new StatisticsData();
+        //Data.number_win = 50;
+        //Data.number_lose = 10;
+        ////string json = JsonUtility.ToJson(statisticsData);
 
-    //string json = JsonUtility.ToJson(Data);
-    //File.WriteAllText(Application.dataPath + "saveFile.json", json);
-    //string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
+        //string json = JsonUtility.ToJson(Data);
+        //File.WriteAllText(Application.dataPath + "saveFile.json", json);
+        //string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
 
-    //StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
-    //Debug.Log(loadedStatisticsData.number_win);
-    //Debug.Log(loadedStatisticsData.number_lose);
+        //StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
+        //Debug.Log(loadedStatisticsData.number_win);
+        //Debug.Log(loadedStatisticsData.number_lose);
 
-    LoadStats();
+        LoadStats();
 
-        Debug.Log(Data.number_win);
+        //Debug.Log(Data.number_win);
     }
 
     // Update is called once per frame

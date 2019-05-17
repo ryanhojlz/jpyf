@@ -11,11 +11,11 @@ public class TutorialComplete : Achievement
         if (completed && !hasDone)
         {
             hasDone = true;
-            Debug.Log(Achievement_name + " : " + Achievement_descriptions);
+            //Debug.Log(Achievement_name + " : " + Achievement_descriptions);
             StartCoroutine(TriggerAchievement());
         }
 
-        Debug.Log(Achievement_name);
+        //Debug.Log(Achievement_name);
 
         if (!GameObject.Find("StatsManager"))
             return;
@@ -25,7 +25,7 @@ public class TutorialComplete : Achievement
         if ((GameObject.Find("StatsManager").GetComponent<Statistics>().GetCompletedTutorial() && !hasDone))//&& TempIndex != index)
         {
             hasDone = true;
-            Debug.Log(Achievement_name + " : " + Achievement_descriptions);
+            //Debug.Log(Achievement_name + " : " + Achievement_descriptions);
             StartCoroutine(TriggerAchievement());
         }
     }

@@ -17,7 +17,7 @@ public class WinAchievement : Achievement
         if (GameObject.Find("StatsManager").GetComponent<Statistics>().GetWins() >= numberofwins && !hasDone)//&& TempIndex != index)
         {
             hasDone = true;
-            Debug.Log(Achievement_name + " : " + Achievement_descriptions);
+            //Debug.Log(Achievement_name + " : " + Achievement_descriptions);
             StartCoroutine(TriggerAchievement());
         }
 	}

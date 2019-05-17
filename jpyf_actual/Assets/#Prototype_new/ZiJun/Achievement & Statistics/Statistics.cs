@@ -114,8 +114,6 @@ public class Statistics : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             incrementWin();
-           
-
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))

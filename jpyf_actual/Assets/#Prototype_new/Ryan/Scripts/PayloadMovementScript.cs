@@ -27,7 +27,7 @@ public class PayloadMovementScript : MonoBehaviour
 
     // Tutorial Boolen
     public bool tutorial_bool = false;
-
+    public bool isRotating = false;
     private void Awake()
     {
         if (!Instance)
@@ -65,6 +65,7 @@ public class PayloadMovementScript : MonoBehaviour
         {
             //payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             //payloadRb.velocity = Vector3.zero;
+            
         }
         else
         { 
@@ -72,6 +73,11 @@ public class PayloadMovementScript : MonoBehaviour
             {
                 if (!tutorial_bool)
                     return;
+
+                else if (isRotating)
+                {
+                    return;
+                }
 
                 if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
                 {
@@ -96,7 +102,7 @@ public class PayloadMovementScript : MonoBehaviour
                         // Reassign Velocity
                         //payloadRb.velocity = capZVelocity;
                         var pos = payloadObject.transform.position;
-                        pos.z += 1 * Time.deltaTime;
+                        pos += payloadObject.transform.forward * Time.deltaTime;
                         payloadObject.transform.position = pos;
                     }
                 }

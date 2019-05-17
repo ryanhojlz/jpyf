@@ -10,12 +10,13 @@ using UnityEngine.XR;
 
 public class MainMenuButton : MonoBehaviour
 {
-    GameObject[] buttons = new GameObject[4];
+    GameObject[] buttons = new GameObject[5];
 
     public GameObject coopvsai;
     public GameObject pvp;
     public GameObject settings;
     public GameObject credits;
+    public GameObject achievements;
 
     public Canvas Titlescreencanvas;
     public Canvas Mainmenucanvas;
@@ -27,11 +28,13 @@ public class MainMenuButton : MonoBehaviour
     GameObject text2;
     GameObject text3;
     GameObject text4;
+    GameObject text5;
 
     Vector3 originalPos;
     Vector3 originalPos2;
     Vector3 originalPos3;
     Vector3 originalPos4;
+    Vector3 originalPos5;
 
     float optionOffset = Screen.width * 0.1f;
 
@@ -52,38 +55,49 @@ public class MainMenuButton : MonoBehaviour
     float speed = 500f;
     float valueToStop = 0.001f;
 
+    private AudioClip selectingSound;
+    private AudioClip selectedSound;
+    private AudioSource playSound;
+
     // Use this for initialization
     void Start()
     {
         buttons[0] = coopvsai;
         buttons[1] = pvp;
-        buttons[2] = settings;
+        buttons[2] = achievements;
         buttons[3] = credits;
+        buttons[4] = settings;
         titleScreen = GameObject.Find("Titlescreen");
         text1 = GameObject.Find("Text1");
         text2 = GameObject.Find("Text2");
         text3 = GameObject.Find("Text3");
         text4 = GameObject.Find("Text4");
+        text5 = GameObject.Find("Text5");
         originalPos = buttons[0].GetComponent<RectTransform>().anchoredPosition;
         originalPos2 = buttons[1].GetComponent<RectTransform>().anchoredPosition;
         originalPos3 = buttons[2].GetComponent<RectTransform>().anchoredPosition;
         originalPos4 = buttons[3].GetComponent<RectTransform>().anchoredPosition;
+        originalPos5 = buttons[4].GetComponent<RectTransform>().anchoredPosition;
         UnityEngine.XR.XRSettings.showDeviceView = false;
         loadImage.enabled = false;
         Loadingcanvas.enabled = false;
         Statscanvas.enabled = false;
+        selectingSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectSound;
+        selectedSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectedSound;
+        playSound = GameObject.Find("MainMenu").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(buttons[indexX/*, indexY*/].gameObject.name);
+        //Debug.Log(buttons[indexX/*, indexY*/].gameObject.name);
 
         optionOffset = Screen.width * 0.1f;
         text1.SetActive(false);
         text2.SetActive(false);
         text3.SetActive(false);
         text4.SetActive(false);
+        text5.SetActive(false);
         MessageDisplay();
         SelectedOptions();
 
@@ -114,8 +128,8 @@ public class MainMenuButton : MonoBehaviour
             Titlescreencanvas.enabled = true;
             Mainmenucanvas.enabled = false;
         }
-        if (!Statscanvas.enabled)
-        {
+        //if (!Statscanvas.enabled)
+        //{
             if (TitlescreenDisplay == false)
             {
                 Mainmenucanvas.enabled = true;
@@ -125,7 +139,7 @@ public class MainMenuButton : MonoBehaviour
                     EnterSelected();
                 }
             }
-        }
+        //}
 
         if (Statscanvas.enabled && Input.GetKeyDown(KeyCode.Escape))
         {
@@ -148,9 +162,13 @@ public class MainMenuButton : MonoBehaviour
         {
             buttons[3].GetComponent<RectTransform>().anchoredPosition = originalPos4;
         }
+        if (buttons[indexX] != buttons[4])
+        {
+            buttons[4].GetComponent<RectTransform>().anchoredPosition = originalPos5;
+        }
 
         //Debug.Log(TitlescreenDisplay);
-        Debug.Log(scene);
+        //Debug.Log(scene);
         // If the player has pressed the space bar and a new scene is not loading yet...
         if (scene != null && loadScene == false)
         {
@@ -178,25 +196,41 @@ public class MainMenuButton : MonoBehaviour
     public void MoveUp()
     {
         if (indexX > 0)
+        {
             indexX--;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveDown()
     {
-        if (indexX < 3)
+        if (indexX < 4)
+        {
             indexX++;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveLeft()
     {
         if (indexX > 0)
+        {
             indexX--;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void MoveRight()
     {
-        if (indexX < 3)
+        if (indexX < 4)
+        {
             indexX++;
+            playSound.clip = selectingSound;
+            playSound.Play();
+        }
     }
 
     public void SelectedOptions()
@@ -224,7 +258,6 @@ public class MainMenuButton : MonoBehaviour
                     //    temp.x += speed * Time.deltaTime;
                     //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
                     //}
-
                     Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
                     if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
                     {
@@ -293,7 +326,37 @@ public class MainMenuButton : MonoBehaviour
                 }
                 break;
 
-            case "credits":
+            case "statistics":
+                {
+                    ////if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
+                    ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
+
+
+                    //Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    //if (buttons[indexX].GetComponent<RectTransform>().position.x
+                    //    - buttons[indexX].GetComponent<RectTransform>().rect.width
+                    //    * buttons[indexX].GetComponent<RectTransform>().localScale.x
+                    //    < Screen.width * 0.25)
+                    //{
+                    //    temp.x += speed * Time.deltaTime;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+                    Vector2 temp = buttons[indexX].GetComponent<RectTransform>().anchoredPosition;
+                    if (temp.x - buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f < originalPos.x + Screen.width * valueToStop)
+                    {
+                        temp.x += speed * Time.deltaTime;
+                        buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    }
+                    //else
+                    //{
+                    //    temp.x = originalPos.x + Screen.width * valueToStop + buttons[indexX].GetComponent<RectTransform>().rect.width * 0.5f;
+                    //    buttons[indexX].GetComponent<RectTransform>().anchoredPosition = temp;
+                    //}
+
+                }
+                break;
+
+            case "achievements":
                 {
                     ////if (buttons[indexX].transform.position.x < originalPos4.x + optionOffset)
                     ////    buttons[indexX].transform.position = new Vector3(currButtonPos.x += 500 * Time.deltaTime, currButtonPos.y, currButtonPos.z);
@@ -334,7 +397,9 @@ public class MainMenuButton : MonoBehaviour
         {
             case "start":
                 {
-                    Debug.Log("Loading game scene");
+                    playSound.clip = selectedSound;
+                    playSound.Play();
+                    //Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
                     scene = "CurrentScene";
                     //SceneManager.LoadScene("PC_Build_Wilson");
@@ -344,26 +409,37 @@ public class MainMenuButton : MonoBehaviour
 
             case "tutorial":
                 {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     scene = "Ryan_Prototype";
                 }
                 break;
 
             case "quit":
                 {
-                    Debug.Log("Loading game scene");
-                    //SceneManager.LoadScene("Achievement_Scene");
-                    //scene = "Achievement_Scene";
+                    playSound.clip = selectedSound;
+                    playSound.Play();
                     Application.Quit();
                 }
                 break;
 
-            case "credits":
+            case "statistics":
                 {
-                    Debug.Log("Loading game scene");
+                    playSound.clip = selectedSound;
+                    playSound.Play();
+                    //Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("PC_Build");
-                    //scene = "PC_Build";
-                    Statscanvas.enabled = true;
-                    Mainmenucanvas.enabled = false;
+                    scene = "Statistics";
+                    //Statscanvas.enabled = true;
+                    //Mainmenucanvas.enabled = false;
+                }
+                break;
+
+            case "achievements":
+                {
+                    playSound.clip = selectedSound;
+                    playSound.Play();
+                    scene = "Achievement_Scene";
                 }
                 break;
 
@@ -396,9 +472,15 @@ public class MainMenuButton : MonoBehaviour
                 }
                 break;
 
-            case "credits":
+            case "statistics":
                 {
                     text4.SetActive(true);
+                }
+                break;
+
+            case "achievements":
+                {
+                    text5.SetActive(true);
                 }
                 break;
         }

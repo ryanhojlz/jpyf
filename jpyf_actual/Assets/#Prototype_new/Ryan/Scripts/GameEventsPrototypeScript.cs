@@ -214,7 +214,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 if (tutorial_timer > 44)
                 {                  
-                    subtitles_4外人.text = "You are dead. Please wait to be revived";
+                    subtitles_4外人.text = "Wait to be revived";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
                         "Press the right trigger of your controller";
                     

@@ -72,20 +72,18 @@ public class Entity_Unit : MonoBehaviour
     protected Image healthBar;//Put healthbar image inside here (The one that change not prefeb)
 
     [SerializeField]
-    protected string statename;
+    protected string statename;//For show states in inspector
 
     [SerializeField]
-    protected float Summoning_timer = 0f;
+    protected float Summoning_timer = 0f;//Use for the spawning delay (Animation purposes)
 
     [SerializeField]
-    protected float Take_Damage_timer = 0f;
+    protected float Take_Damage_timer = 0f;//Use for taking damage delay (Animation purposes)
 
     [SerializeField]
-    protected GameObject StunEffect = null;
+    protected GameObject StunEffect = null;//Model for stun effect
 
     protected Transform Target;
-
-
 
     protected Entity_Stats Unit_Stats = new Entity_Stats();
 
@@ -149,11 +147,11 @@ public class Entity_Unit : MonoBehaviour
         StunEffect = this.transform.GetChild(this.transform.childCount - 2).gameObject;
         StunEffect.SetActive(false);
 
-        //Debug.Log("Unit : " + this.transform.parent.name + " , Child : " + StunEffect.name);
         Stats_ResourceScript.Instance.EnemyCount++;
         resource = Stats_ResourceScript.Instance;
         ChangeState("summon");
 
+        //Setting piority
         if (Piority_Unit == Piority.PAYLOAD)
         {
             priority = "Payload";//Tag payload
@@ -164,10 +162,6 @@ public class Entity_Unit : MonoBehaviour
         }
 
         PlayerTransform = GameObject.Find("PS4_Player").transform;
-        //if (Random.Range(0f, 1f) < 0.5f)
-        //{
-        //    idle = true;
-        //}
 
         daynightInstance = DayNightCycle.Instance;
 
@@ -198,25 +192,6 @@ public class Entity_Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Day : " + daynightInstance.isDaytime);
-        //Debug.Log("Hi from Entity_Unit Script");
-        //Leave here for Debug purposes only v
-        //if (Debug.isDebugBuild)//Only in debug do we need to change Stats during runtime menually
-        //{
-        //    SetHealthStat(Health_Stat);
-        //    SetAttackStat(Attack_Stat);
-        //    SetDefenceStat(Defence_Stat);
-        //    SetAttackSpeedStat(Attack_Speed_Stat);
-        //    UpdateHealth();//is in taking damage & Healing(If applicable)
-        //}
-        //Debug Purposes only ^
-
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    Stun();
-        //}
-
-        //Debug.Log("Yes yes have is active and not null");
 
         UpdateCheckList();
 
@@ -229,7 +204,7 @@ public class Entity_Unit : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))//Debugging Button
         {
             TakeDamage(1);
         }
@@ -243,7 +218,7 @@ public class Entity_Unit : MonoBehaviour
         {
             ChangeState("dead");
         }
-        //Debug.Log("State machine is " + sm.GetCurrentStateName());
+ 
         sm.ExecuteStateUpdate();//Updating statemachine
         MoveSpeedUpdate();
         statename = sm.GetCurrentStateName();
@@ -252,14 +227,7 @@ public class Entity_Unit : MonoBehaviour
         UpdateInspector();
 
         CheckToStun();
-        //if (idle)
-        //{
-        //    m_animation.SetAnim(0);
-        //}
-        //else
-        //{
-        //    m_animation.SetAnim(1);
-        //}
+        
     }
 
     // Getter 
@@ -376,81 +344,6 @@ public class Entity_Unit : MonoBehaviour
         ChangeAgentMovespeed(GetMoveSpeed());
     }
 
-    //Currently put here since no other special units yet
-    //public virtual void FindNearestInList()
-    //{
-    //    //if (UnitsInRange.Count <= 0)
-    //    //{
-    //    //    Target = null;//If there is nothing in the list, there is no target
-    //    //    return;
-    //    //}
-
-    //    float nearest = float.MaxValue;
-    //    float temp_dist = 0f;
-    //    for (int i = 0; i < UnitsInRange.Count; ++i)
-    //    {
-    //        if (!UnitsInRange[i] || !UnitsInRange[i].activeSelf)
-    //            continue;
-
-    //        temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
-
-    //        if (temp_dist < nearest)
-    //        {
-    //            nearest = temp_dist;
-    //            Target = UnitsInRange[i].transform;
-    //        }
-    //    }
-    //}
-
-    //public virtual void FindNearestInList()
-    //{
-    //    float nearest = float.MaxValue;
-    //    float temp_dist = 0f;
-    //    for (int i = 0; i < UnitsInRange.Count; ++i)
-    //    {
-    //        if (UnitsInRange[i].tag == "Player2")
-    //        {
-    //            if ((int)resource.m_P2_hp <= 0)//Auto skip if player is dead
-    //                continue;
-
-    //            if (UnitsInRange[i].transform.parent != null)
-    //            {
-    //                //if (UnitsInRange[i].transform.parent != this.transform)
-    //                if (UnitsInRange[i].transform.parent.GetComponent<Entity_Tengu>())
-    //                {
-    //                    continue;
-    //                }
-    //            }
-    //        }
-
-    //        temp_dist = (UnitsInRange[i].transform.position - this.transform.position).magnitude;
-
-    //        if (Target && Target.gameObject.activeSelf && (int)resource.m_P2_hp > 0)
-    //        {
-    //            //If the current target is not piority && the currently compared unit is piority
-    //            if (Target.tag != priority && (UnitsInRange[i].tag == priority))
-    //            {
-    //                //Force Assign
-    //                nearest = temp_dist;
-    //                Target = UnitsInRange[i].transform;
-    //                continue;
-    //            }
-    //            //If the current target is piority && the currently compared unit is not piority
-    //            else if (Target.tag == priority && (UnitsInRange[i].tag != priority))
-    //            {
-    //                //Ignore and continue
-    //                continue;
-    //            }
-    //        }
-
-    //        if (temp_dist < nearest)
-    //        {
-    //            nearest = temp_dist;
-    //            Target = UnitsInRange[i].transform;
-    //        }
-    //    }
-    //}
-
     #region use this for playtest
     //For Testing(Attack only Piority)
     public virtual void FindNearestInList()
@@ -507,7 +400,7 @@ public class Entity_Unit : MonoBehaviour
     }
     #endregion
 
-    #region use this for actual game
+    #region use this for actual game (Probally not using it anymore)
     //public virtual void FindNearestInList()
     //{
     //    Debug.Log("Testing_Part_1");
@@ -624,7 +517,7 @@ public class Entity_Unit : MonoBehaviour
 
     }
 
-    public virtual void SelfStart()
+    public virtual void SelfStart()//Same as selfupdate but for start
     {
 
     }
@@ -674,33 +567,32 @@ public class Entity_Unit : MonoBehaviour
         UnitsInRange.Remove(Unit);
     }
 
-    public void UpdateCheckList()
+    public void UpdateCheckList()//Use to check and make sure everything within the list is active/ not null else remove
     {
         for (int i = 0; i < UnitsInRange.Count; ++i)
         {
             if (!UnitsInRange[i].gameObject || !UnitsInRange[i].gameObject.activeSelf || (UnitsInRange[i].tag == "Player2" && (int)resource.m_P2_hp <= 0))
             {
-                //Debug.Log("Hehe");
                 UnitsInRange.Remove(UnitsInRange[i]);
             }
         }
     }
 
-    public void StopMoving()
+    public void StopMoving()//Makes the agent stop moving
     {
         if (this.transform.parent)
             if (p_ai_Movement)
                 p_ai_Movement.StopMoving();
     }
 
-    public void StartMoving()
+    public void StartMoving()//Makes the agent start moving
     {
         if (this.transform.parent)
             if (p_ai_Movement)
                 p_ai_Movement.StartMoving();
     }
 
-    public void MoveToTargetedPosition(Vector3 _target)
+    public void MoveToTargetedPosition(Vector3 _target)//Makes the agent move to a selected position
     {
         if (!instantChasePlayer)
         {
@@ -722,14 +614,14 @@ public class Entity_Unit : MonoBehaviour
         }
     }
 
-    public void ChangeAgentPosition(Vector3 pos)
+    public void ChangeAgentPosition(Vector3 pos)//use to change navmesh agent position (Not used)
     {
         if (this.transform.parent)
             if (p_ai_Movement)
                 p_ai_Movement.ChangeNavAgentPosition(pos);
     }
 
-    public void ChangeAgentMovespeed(float movespeed)
+    public void ChangeAgentMovespeed(float movespeed)//change navmesh agent movement
     {
         if (p_agent)
             p_agent.speed = movespeed;
@@ -740,12 +632,12 @@ public class Entity_Unit : MonoBehaviour
         Target = GameObject.Find("PayLoad").transform;
     }
 
-    public void ChangeState(string name)
+    public void ChangeState(string name)//Used to change state
     {
         sm.ChangeState(name);
     }
 
-    public void ReturnPreviousState()
+    public void ReturnPreviousState()//Used to return to previous state (Careful when using this)
     {
         sm.ChangeToPrevious();
     }
@@ -765,15 +657,6 @@ public class Entity_Unit : MonoBehaviour
     {
         this.sm.ChangeState("stun");
     }
-
-    //public bool isStun()
-    //{
-    //    if (this.sm.GetCurrentStateName() == "stun")
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
 
     public void CheckToStun()
     {

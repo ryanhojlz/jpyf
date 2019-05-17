@@ -5,19 +5,18 @@ using UnityEngine;
 public class TutorialComplete : Achievement
 {
     bool completed = false;
-    // Update is called once per frame
+
     void Update()
     {
-        if (completed && !hasDone)//&& TempIndex != index)
+        if (completed && !hasDone)
         {
             hasDone = true;
-            Debug.Log(Achievement_name + " : " + Achievement_descriptions);
+            //Debug.Log(Achievement_name + " : " + Achievement_descriptions);
             StartCoroutine(TriggerAchievement());
         }
 
-        Debug.Log(Achievement_name);
-        //int TempIndex = PlayerPrefs.GetInt(Achievement_name);
-        //Debug.Log(GameObject.Find("Stats").GetComponent<Statistics>().GetWins());
+        //Debug.Log(Achievement_name);
+
         if (!GameObject.Find("StatsManager"))
             return;
         if (!GameObject.Find("StatsManager").GetComponent<Statistics>())
@@ -26,7 +25,7 @@ public class TutorialComplete : Achievement
         if ((GameObject.Find("StatsManager").GetComponent<Statistics>().GetCompletedTutorial() && !hasDone))//&& TempIndex != index)
         {
             hasDone = true;
-            Debug.Log(Achievement_name + " : " + Achievement_descriptions);
+            //Debug.Log(Achievement_name + " : " + Achievement_descriptions);
             StartCoroutine(TriggerAchievement());
         }
     }

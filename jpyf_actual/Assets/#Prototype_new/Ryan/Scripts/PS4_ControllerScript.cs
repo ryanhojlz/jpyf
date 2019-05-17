@@ -36,11 +36,16 @@ public class PS4_ControllerScript : MonoBehaviour
     // Bool
     public bool SquareDown = false;
 
-    
+    public static PS4_ControllerScript Instance = null;
 
     // Use this for initialization
     void Start ()
     {
+        if (!Instance)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
+
         stickID = playerId + 1;
 	}
 	

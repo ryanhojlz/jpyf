@@ -32,10 +32,13 @@ public class CartSidePushingScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+#if UNITY_PS4
         if (playerEnter)
         {
             if (PS4_ControllerScript.Instance.ReturnSquareDown())
             {
+                Object_ControlScript.Instance.isPushingCart = true;
+                PayloadMovementScript.Instance.cannotMove = true;
                 // If square is pressed
                 if (PS4_ControllerScript.Instance.ReturnLeft_AnalogUp())
                 {
@@ -49,19 +52,26 @@ public class CartSidePushingScript : MonoBehaviour
                     //{
                     //    // Move Left
                     //}
-                    playerrb.velocity = cartRb.velocity = pushingforce;
+                    //playerrb.velocity = cartRb.velocity = pushingforce;
+                    player.transform.position += (Vector3.right * 2) * Time.deltaTime; 
+                    cartRb.transform.position += (Vector3.right * 2) * Time.deltaTime; 
                 }
                 else if (PS4_ControllerScript.Instance.ReturnLeft_AnalogDown())
                 {
-                    playerrb.velocity = cartRb.velocity = -pushingforce;
+                    player.transform.position -= (Vector3.right * 2) * Time.deltaTime; 
+                    cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime; 
+
+                    //playerrb.velocity = cartRb.velocity = -pushingforce;
                 }
 
             }
         }
         else
         {
-
+            Object_ControlScript.Instance.isPushingCart = false;
+            PayloadMovementScript.Instance.cannotMove = true;
         }
+#endif
     }
 
     private void OnTriggerEnter(Collider other)

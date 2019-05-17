@@ -196,7 +196,7 @@ public class Object_ControlScript : MonoBehaviour
         if (isPushingCart)
         {            
             //CurrentObj.GetComponent<Rigidbody>().isKinematic = true;
-            objectRb.isKinematic = true;
+            //objectRb.isKinematic = true;
         }
         else if (!isPushingCart)
         {

@@ -17489,6 +17489,7 @@ GameObject:
   - component: {fileID: 521520171}
   - component: {fileID: 521520170}
   - component: {fileID: 521520169}
+  - component: {fileID: 521520172}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -17563,6 +17564,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 521520167}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &521520172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521520167}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd5fda7b3bdf4ca004ac6adf910b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AxisLR: 0
 --- !u!1 &522888540
 GameObject:
   m_ObjectHideFlags: 0
@@ -42871,6 +42884,46 @@ Prefab:
         type: 2}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
         type: 2}
@@ -72006,7 +72059,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0

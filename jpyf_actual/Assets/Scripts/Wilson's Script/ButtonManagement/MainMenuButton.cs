@@ -128,8 +128,8 @@ public class MainMenuButton : MonoBehaviour
             Titlescreencanvas.enabled = true;
             Mainmenucanvas.enabled = false;
         }
-        if (!Statscanvas.enabled)
-        {
+        //if (!Statscanvas.enabled)
+        //{
             if (TitlescreenDisplay == false)
             {
                 Mainmenucanvas.enabled = true;
@@ -139,7 +139,7 @@ public class MainMenuButton : MonoBehaviour
                     EnterSelected();
                 }
             }
-        }
+        //}
 
         if (Statscanvas.enabled && Input.GetKeyDown(KeyCode.Escape))
         {
@@ -399,7 +399,7 @@ public class MainMenuButton : MonoBehaviour
                 {
                     playSound.clip = selectedSound;
                     playSound.Play();
-                    Debug.Log("Loading game scene");
+                    //Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
                     scene = "CurrentScene";
                     //SceneManager.LoadScene("PC_Build_Wilson");
@@ -427,11 +427,11 @@ public class MainMenuButton : MonoBehaviour
                 {
                     playSound.clip = selectedSound;
                     playSound.Play();
-                    Debug.Log("Loading game scene");
+                    //Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("PC_Build");
-                    //scene = "PC_Build";
-                    Statscanvas.enabled = true;
-                    Mainmenucanvas.enabled = false;
+                    scene = "Statistics";
+                    //Statscanvas.enabled = true;
+                    //Mainmenucanvas.enabled = false;
                 }
                 break;
 

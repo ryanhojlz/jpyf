@@ -15,7 +15,7 @@ public class Achievement_List : MonoBehaviour
 
     public List<RectTransform> Achievement_Panels = new List<RectTransform>();
 
-    float offsetPercentage = 0.055f;
+    float offsetPercentage = 0.050f;
     float offsetBetween = 0f;
 
     float offsetUpPercentage = 0.1f;
@@ -38,6 +38,8 @@ public class Achievement_List : MonoBehaviour
         Canvas = GameObject.Find("Canvas");
 
         offsetBetween = panel.GetComponent<RectTransform>().rect.width * offsetPercentage * panel.GetComponent<RectTransform>().lossyScale.x;
+
+        //offsetBetween = ((Canvas.GetComponent<RectTransform>().rect.width * Canvas.GetComponent<RectTransform>().lossyScale.x) - (Achi_Prefeb.GetComponent<RectTransform>().rect.width * Achi_Prefeb.GetComponent<RectTransform>().transform.lossyScale.x) * 3)) * 0.25f);
 
         for (int i = 1; i < Achievements.Count; ++i)
         {

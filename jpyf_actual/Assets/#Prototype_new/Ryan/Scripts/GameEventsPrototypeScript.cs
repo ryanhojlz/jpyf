@@ -511,10 +511,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 condition = WINLOSE.win;
         }
         
-       
-        
-        
-
         if (condition == WINLOSE.lose)
         {
             WinLoseUIScript.Instance.renderimg = -1;

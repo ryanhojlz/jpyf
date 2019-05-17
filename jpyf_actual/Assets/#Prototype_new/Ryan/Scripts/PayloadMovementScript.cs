@@ -13,10 +13,6 @@ public class PayloadMovementScript : MonoBehaviour
     public Rigidbody payloadRb = null;
 
     private Transform player2 = null;
-
-
-    
-
     // Trigger bool
     public bool playerInsideCart = false;
     // Variable use to modify instead of newing a vector cos vr
@@ -28,6 +24,10 @@ public class PayloadMovementScript : MonoBehaviour
     // Tutorial Boolen
     public bool tutorial_bool = false;
     public bool isRotating = false;
+
+    //what am i doing
+    public bool cannotMove = false;
+
     private void Awake()
     {
         if (!Instance)
@@ -73,11 +73,10 @@ public class PayloadMovementScript : MonoBehaviour
             {
                 if (!tutorial_bool)
                     return;
-
                 else if (isRotating)
-                {
                     return;
-                }
+                else if (cannotMove)
+                    return;
 
                 if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
                 {

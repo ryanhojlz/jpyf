@@ -166,8 +166,8 @@ public class PS4_ControllerScript : MonoBehaviour
 #if UNITY_PS4
 
         // Left stick
-        d_padAxis_x = Input.GetAxis("dpad" + stickID + "horizontal");
-        d_padAxis_y = Input.GetAxis("dpad" + stickID + "vertical");
+        d_padAxis_x = Input.GetAxis("dpad" + stickID + "_horizontal");
+        d_padAxis_y = Input.GetAxis("dpad" + stickID + "_vertical");
 #endif
     }
 
@@ -269,6 +269,8 @@ public class PS4_ControllerScript : MonoBehaviour
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")));
     }
+
+    
 
     
 #endif

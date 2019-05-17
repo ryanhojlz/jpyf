@@ -261,4 +261,36 @@ public class PickupHandlerScript : MonoBehaviour
     //        nearest_pickup_object = null;
     //    }
     //}
+
+    public void SpawnBomb()
+    {
+        if (!nearest_pickup_object)
+            return;
+
+        // Nearest object gone // ReAssign           
+        currentObject = nearest_pickup_object;
+        nearest_pickup_object = null;
+
+        // If item has animation script
+        if (currentObject.GetComponent<ItemAnimation>())
+            currentObject.GetComponent<ItemAnimation>().enabled = false;
+
+
+        if (currentObject.GetComponent<bomb_script>())
+        {
+            currentObject.GetComponent<Rigidbody>().isKinematic = true;
+            currentObject.GetComponent<SphereCollider>().enabled = false;
+            currentObject.GetComponent<bomb_script>().SetPickUp();
+        }
+
+
+        // Parent cos picking up**
+        currentObject.parent = this.transform;
+        currentObject.transform.localPosition = offset;
+
+        // Reset rotations
+        currentObject.localEulerAngles = Vector3.zero;
+
+    }
+
 }

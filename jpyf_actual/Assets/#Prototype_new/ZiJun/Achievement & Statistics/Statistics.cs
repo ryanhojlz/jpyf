@@ -84,7 +84,6 @@ public class Statistics : MonoBehaviour
         //StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
         //Debug.Log(loadedStatisticsData.number_win);
         //Debug.Log(loadedStatisticsData.number_lose);
-
         LoadStats();
 
         //Debug.Log(Data.number_win);
@@ -132,9 +131,19 @@ public class Statistics : MonoBehaviour
     public void LoadStats()
     {
         //Loading stats
-        string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
-        StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
-        Data = loadedStatisticsData;
+        if (System.IO.File.Exists(Application.dataPath + "/saveFile.json"))
+        {
+            string json = File.ReadAllText(Application.dataPath + "/saveFile.json");
+            StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
+            Data = loadedStatisticsData;
+        }
+        else//if the file cannot be found, Create one and assign it
+        {
+            string json = JsonUtility.ToJson(Data);
+            File.WriteAllText(Application.dataPath + "/saveFile.json", json);
+            StatisticsData loadedStatisticsData = JsonUtility.FromJson<StatisticsData>(json);
+            Data = loadedStatisticsData;
+        }
     }
 
     public int GetWins()

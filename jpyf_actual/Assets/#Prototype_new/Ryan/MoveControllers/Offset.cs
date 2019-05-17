@@ -18,15 +18,15 @@ public class Offset : MonoBehaviour {
         //this.transform.position = offset.transform.position;
 
         //Debug.Log(offset.transform.eulerAngles);
-
+#if UNITY_PS4
         if (PS4_ControllerScript.Instance.ReturnL1Press())
         {
             var rotate = this.transform.eulerAngles;
             rotate.y += 20 * Time.deltaTime;
             transform.eulerAngles = rotate;
         }
-    
-        
+#endif
+
     }
 
 }

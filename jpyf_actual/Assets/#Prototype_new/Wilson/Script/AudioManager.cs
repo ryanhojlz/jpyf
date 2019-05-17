@@ -36,6 +36,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip SuccessSound;
     public AudioClip PlayerShoot;
     public AudioClip BombSound;
+    public AudioClip TNK_spawn;
+    public AudioClip NRKB_spawn;
+    public AudioClip TNG_spawn;
+
     //List<AudioFile> AudioList;
 
     //// Use this for initialization

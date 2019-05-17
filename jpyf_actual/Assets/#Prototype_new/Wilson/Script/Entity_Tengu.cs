@@ -82,7 +82,8 @@ public class Entity_Tengu : Entity_Unit
 
         AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_attack;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
-        UnitThatProduceSound.clip = AttackSound;
+
+        SpawnSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_spawn;
 
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
 
@@ -92,6 +93,9 @@ public class Entity_Tengu : Entity_Unit
         Payload_Position = GameObject.Find("PayLoad").transform;
 
         editHoverSpeed = hoverspeed;
+
+        UnitThatProduceSound.clip = SpawnSound;
+        UnitThatProduceSound.Play();
 
     }
 
@@ -383,6 +387,8 @@ public class Entity_Tengu : Entity_Unit
                     {
                         previousAttackTimer = Time.time;
                         handler.Player2_TakeDmg((int)this.GetAttackStat());
+                        UnitThatProduceSound.clip = AttackSound;
+                        UnitThatProduceSound.Play();
                     }
 
                     if (FlyToLeft_Right(moveRight))

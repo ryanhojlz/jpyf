@@ -182,15 +182,15 @@ public class bomb_script : MonoBehaviour
             }
 
             //If it hits payload
-            else if (other.tag == "Payload" && !save)
-            {
-                Stats_ResourceScript.Instance.Cart_TakeDmg(2);
-            }
+            //else if (other.tag == "Payload" && !save)
+            //{
+            //    Stats_ResourceScript.Instance.Cart_TakeDmg(2);
+            //}
         }
-        else if (other.tag == "Payload" || other.tag == "BombStopper")
-        {
-            State = Bomb_state.ACTIVE;
-        }
+        //else if (other.tag == "Payload" || other.tag == "BombStopper")
+        //{
+        //    State = Bomb_state.ACTIVE;
+        //}
     }
 
     public void SetBombState_Active()

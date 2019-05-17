@@ -101,6 +101,6 @@ public class Achievement : MonoBehaviour
     private void OnDestroy()
     {
         Debug.Log("Delete Here after wanting to save");
-        ResetAchievement();
+        //ResetAchievement();
     }
 }

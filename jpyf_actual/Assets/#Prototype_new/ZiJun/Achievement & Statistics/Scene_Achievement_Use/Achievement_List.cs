@@ -24,13 +24,20 @@ public class Achievement_List : MonoBehaviour
 
     Vector2 position = Vector2.zero;
 
+    Color c_achievementCompleted = Color.blue;
+
 	void Start ()
     {
         Achievements = GameObject.Find("AchievementManager").GetComponent<GlobalAchievementManager>().ListOfAchievements;
 
+        c_achievementCompleted.r = 153f / 255f;
+        c_achievementCompleted.g = 69f / 255f;
+        c_achievementCompleted.b = 238f / 255f;
+        c_achievementCompleted.a = 255f / 255f;
+
         Canvas = GameObject.Find("Canvas");
 
-        offsetBetween = panel.GetComponent<RectTransform>().rect.width * offsetPercentage;
+        offsetBetween = panel.GetComponent<RectTransform>().rect.width * offsetPercentage * panel.GetComponent<RectTransform>().lossyScale.x;
 
         for (int i = 1; i < Achievements.Count; ++i)
         {
@@ -51,7 +58,8 @@ public class Achievement_List : MonoBehaviour
 
             if (Achievements[i].GetComponent<Achievement>().GetCompletion())
             {
-                TempAchievement.GetComponent<Image>().color = UnityEngine.Color.yellow;
+                //TempAchievement.GetComponent<Image>().color = UnityEngine.Color.yellow;
+                TempAchievement.GetComponent<Image>().color = c_achievementCompleted;//new Color(153f / 255f, 0, 0);//Color.9945EE;
             }
 
             TempAchievement.transform.SetParent(GameObject.Find("Panel").transform, false);
@@ -73,6 +81,8 @@ public class Achievement_List : MonoBehaviour
 	
 	void Update ()
     {
+        offsetBetween = panel.GetComponent<RectTransform>().rect.width * offsetPercentage * panel.GetComponent<RectTransform>().lossyScale.x;
+
         if (Input.GetKey(KeyCode.DownArrow))
         {
             PanelMoveUp();
@@ -118,11 +128,42 @@ public class Achievement_List : MonoBehaviour
         panel.GetComponent<RectTransform>().anchoredPosition = position;
     }
 
-    void PanelMoveLeft()
+    void Back()
+    {
+
+    }
+
+    //void PanelMoveLeft()
+    //{
+    //    if (Achievement_Panels.Count > 0)
+    //    {
+    //        if (Achievement_Panels[Achievement_Panels.Count - 1].position.x + (Achievement_Panels[Achievement_Panels.Count - 1].rect.width * 0.5f) + offsetBetween * 1.1f <= Canvas.GetComponent<RectTransform>().position.x + Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+    //            return;
+    //    }
+
+    //    position = panel.GetComponent<RectTransform>().anchoredPosition;
+    //    position.x -= scrollingspeed * Time.deltaTime;
+    //    panel.GetComponent<RectTransform>().anchoredPosition = position;
+    //}
+
+    //void PanelMoveRight()
+    //{
+    //    if (Achievement_Panels.Count > 0)
+    //    {
+    //        if (Achievement_Panels[0].position.x - (Achievement_Panels[0].rect.width * 0.5f) - offsetBetween * 1.1f >= Canvas.GetComponent<RectTransform>().position.x - Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+    //            return;
+    //    }
+
+    //    position = panel.GetComponent<RectTransform>().anchoredPosition;
+    //    position.x += scrollingspeed * Time.deltaTime;
+    //    panel.GetComponent<RectTransform>().anchoredPosition = position;
+    //}
+
+     void PanelMoveLeft()
     {
         if (Achievement_Panels.Count > 0)
         {
-            if (Achievement_Panels[Achievement_Panels.Count - 1].position.x + (Achievement_Panels[Achievement_Panels.Count - 1].rect.width * 0.5f) + offsetBetween * 1.1f <= Canvas.GetComponent<RectTransform>().position.x + Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+            if (Achievement_Panels[Achievement_Panels.Count - 1].position.x + (Achievement_Panels[Achievement_Panels.Count - 1].rect.width * 0.5f * Achievement_Panels[Achievement_Panels.Count - 1].lossyScale.x) + offsetBetween <= Canvas.GetComponent<RectTransform>().position.x + Canvas.GetComponent<RectTransform>().rect.width * 0.5f * Canvas.GetComponent<RectTransform>().lossyScale.x)
                 return;
         }
 
@@ -135,7 +176,7 @@ public class Achievement_List : MonoBehaviour
     {
         if (Achievement_Panels.Count > 0)
         {
-            if (Achievement_Panels[0].position.x - (Achievement_Panels[0].rect.width * 0.5f) - offsetBetween * 1.1f >= Canvas.GetComponent<RectTransform>().position.x - Canvas.GetComponent<RectTransform>().rect.width * 0.5f)
+            if (Achievement_Panels[0].position.x - (Achievement_Panels[0].rect.width * 0.5f * Achievement_Panels[0].lossyScale.x) - offsetBetween >= Canvas.GetComponent<RectTransform>().position.x - Canvas.GetComponent<RectTransform>().rect.width * 0.5f * Canvas.GetComponent<RectTransform>().lossyScale.x)
                 return;
         }
 

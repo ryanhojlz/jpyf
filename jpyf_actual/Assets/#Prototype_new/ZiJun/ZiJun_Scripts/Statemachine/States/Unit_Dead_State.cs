@@ -37,7 +37,7 @@ public class Unit_Dead_State : IState
         //x_rota_te -= 0.1f;
         //rota_te.y = y_rota_te;
         //rota_te.x = x_rota_te;
-        
+        m_user.StopMoving();
         //m_user.transform.localEulerAngles = rota_te;
         if (CountDownTImer < 0f)
         {
@@ -60,6 +60,6 @@ public class Unit_Dead_State : IState
 
     public void Exit()
     {
-       
+        Debug.Log("Exit dead state");
     }
 }

@@ -101,6 +101,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected AudioClip TakeDamageSound;
 
+    [SerializeField]
+    protected AudioClip SpawnSound;
+
     //For Attack
     protected float atkcooldown = 0f;
     protected float countdown = -1f;

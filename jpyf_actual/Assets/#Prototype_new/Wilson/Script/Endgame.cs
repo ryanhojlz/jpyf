@@ -4,39 +4,48 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StatisticDisplay : MonoBehaviour
+public class Endgame : MonoBehaviour
 {
-    public Text numberWin;
-    public Text numberLose;
-    public Text totalPlayTime;
-    public Text dateTime;
-    public Text enemiesKilled;
-    public Text itemsCollected;
-    public int Hour;
-    public int Min;
-
-    private bool loadScene = false;
-
+    public Canvas Wincanvas;
+    public Canvas LoseCanvas;
     public Canvas Loadingcanvas;
+    private bool loadScene = false;
 
     private string scene;
     //private Text loadingText;
     public Image loadImage;
 
+    public static Endgame Instance = null;
+
+    private AudioClip GameSuccessSound;
+    private AudioClip GameFailureSound;
+    private AudioSource playSound;
+
     // Use this for initialization
-    private void Start()
+    void Start()
     {
-       
+        if (!Instance)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
+
+        loadImage.enabled = false;
+        Loadingcanvas.enabled = false;
+        GameSuccessSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().SuccessSound;
+        GameFailureSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().FailureSound;
+        playSound = GameObject.Find("MainMenu").GetComponent<AudioSource>();
     }
+
     // Update is called once per frame
     void Update()
     {
-        numberWin.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.number_win;
-        numberLose.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.number_lose;
-        dateTime.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.dateTime;
-        totalPlayTime.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.Hour + " hr : " + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.Min + " min";
-        enemiesKilled.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.number_of_enemies_killed;
-        itemsCollected.text = "" + GameObject.Find("StatsManager").GetComponent<Statistics>().Data.number_of_times_items_gathered;
+        Wincanvas.enabled = false;
+        LoseCanvas.enabled = false;
+
+        //if ()
+        //    GameSuccess();
+        //if ()
+        //    GameFailure();
 
         if (scene != null && loadScene == false)
         {
@@ -53,7 +62,6 @@ public class StatisticDisplay : MonoBehaviour
         // If the new scene has started loading...
         if (loadScene == true)
         {
-            //Mainmenucanvas.enabled = false;
             Loadingcanvas.enabled = true;
             // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
             //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
@@ -64,6 +72,20 @@ public class StatisticDisplay : MonoBehaviour
         {
             scene = "MainMenu";
         }
+    }
+
+    void GameSuccess()
+    {
+        Wincanvas.enabled = true;
+        playSound.clip = GameSuccessSound;
+        playSound.Play();
+    }
+
+    void GameFailure()
+    {
+        LoseCanvas.enabled = true;
+        playSound.clip = GameFailureSound;
+        playSound.Play();
     }
 
     // The coroutine runs on its own at the same time as Update() and takes an integer indicating which scene to load.

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAudio : MonoBehaviour
+public class PickUp_Audio : MonoBehaviour
 {
     Object_ControlScript Player = null;
 
-    public AudioClip movestep = null;
+    public AudioClip pickup = null;
     public AudioSource Psource = null;
 
     public AudioManager manager = null;
@@ -14,28 +14,28 @@ public class MoveAudio : MonoBehaviour
     void Start()
     {
         manager = AudioManager.Instance;
-        movestep = manager.P2_movement;
+        pickup = manager.Pickup_Item;
         Player = Object_ControlScript.Instance;
         Psource = this.GetComponent<AudioSource>();
 
-        //Debug.Log(movestep);
+        //Debug.Log(pickup);
 
-        Psource.clip = movestep;
+        Psource.clip = pickup;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Player = Object_ControlScript.Instance;
-        Debug.Log(movestep);
+        //Debug.Log(pickup);
         if (!Player)
         {
             Debug.Log("No player found");
             return;
         }
-        if (Player.objectRb.velocity.magnitude > 0.1f && !Psource.isPlaying)
+        if (Player.pickup)
         {
-            Psource.clip = movestep;
+            Psource.clip = pickup;
             Debug.Log(Psource.clip);
             Psource.Play();
         }
@@ -47,3 +47,4 @@ public class MoveAudio : MonoBehaviour
         //}
     }
 }
+

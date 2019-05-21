@@ -113,12 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &3959161 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114445741237609674, guid: 0e3f6dab87630af42812055c37c3a39a,
-    type: 2}
-  m_PrefabInternal: {fileID: 583837944}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &14606018
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +508,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1487902047894972, guid: 0e3f6dab87630af42812055c37c3a39a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e3f6dab87630af42812055c37c3a39a, type: 2}
@@ -849,6 +843,12 @@ Canvas:
   m_PrefabParentObject: {fileID: 223793400986726070, guid: 0e3f6dab87630af42812055c37c3a39a,
     type: 2}
   m_PrefabInternal: {fileID: 583837944}
+--- !u!114 &1062713811 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114713273828876344, guid: 0e3f6dab87630af42812055c37c3a39a,
+    type: 2}
+  m_PrefabInternal: {fileID: 583837944}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1167811334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1126,7 @@ Prefab:
         type: 2}
       propertyPath: loadImage
       value: 
-      objectReference: {fileID: 3959161}
+      objectReference: {fileID: 1062713811}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 816dd31a28de30d458162baf1b1dc262, type: 2}
   m_IsPrefabParent: 0

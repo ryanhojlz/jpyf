@@ -106,9 +106,13 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
         // Payload ref assigning 
         payload_ref = GameObject.Find("PayLoad").transform;
-        // Easy mode
-       
-        // Assigning milestones
+
+        // Assigning milestones / Tutorial Objectives
+        Objective1 = GameObject.Find("Milestone1").gameObject;
+        Objective2 = GameObject.Find("Milestone2").gameObject;
+        Objective3 = GameObject.Find("Milestone3").gameObject;
+        
+        
         //Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
         subtitles_4外人 = GameObject.Find("Subtitles").GetComponent<Text>();

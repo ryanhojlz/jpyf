@@ -216,10 +216,16 @@ public class PS4_ControllerScript : MonoBehaviour
     {
         return (axisLeft_y <= -0.1);
     }
+
+    // Use to check if there is anymore input
+    public bool ReturnInputZero()
+    {
+        return (d_padAxis_x == 0 && d_padAxis_y == 0);
+    }
     // For now mainly using this for menu
 
 
-    
+
 
 
 

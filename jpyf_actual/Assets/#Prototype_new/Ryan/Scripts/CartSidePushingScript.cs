@@ -33,12 +33,23 @@ public class CartSidePushingScript : MonoBehaviour
     private void FixedUpdate()
     {
 #if UNITY_PS4
+        if (Object_ControlScript.Instance.Gropper)
+        {
+            return;
+            playerEnter = false;
+            Object_ControlScript.Instance.isPushingCart = false;
+
+        }
+
+
+
         if (playerEnter)
         {
             if (PS4_ControllerScript.Instance.ReturnSquareDown())
             {
                 Object_ControlScript.Instance.isPushingCart = true;
                 PayloadMovementScript.Instance.cannotMove = true;
+                playerrb.isKinematic = true;
                 // If square is pressed
                 if (PS4_ControllerScript.Instance.ReturnLeft_AnalogUp())
                 {
@@ -53,23 +64,30 @@ public class CartSidePushingScript : MonoBehaviour
                     //    // Move Left
                     //}
                     //playerrb.velocity = cartRb.velocity = pushingforce;
-                    player.transform.position += (Vector3.right * 2) * Time.deltaTime; 
-                    cartRb.transform.position += (Vector3.right * 2) * Time.deltaTime; 
+                    player.transform.position += (Vector3.right * 2) * Time.deltaTime;
+                    cartRb.transform.position += (Vector3.right * 2) * Time.deltaTime;
                 }
                 else if (PS4_ControllerScript.Instance.ReturnLeft_AnalogDown())
                 {
-                    player.transform.position -= (Vector3.right * 2) * Time.deltaTime; 
-                    cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime; 
+                    player.transform.position -= (Vector3.right * 2) * Time.deltaTime;
+                    cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime;
 
                     //playerrb.velocity = cartRb.velocity = -pushingforce;
                 }
 
             }
+            else
+            {
+                playerrb.isKinematic = false;
+                Object_ControlScript.Instance.isPushingCart = false;
+                PayloadMovementScript.Instance.cannotMove = false;
+            }
         }
         else
         {
+            playerrb.isKinematic = false;
             Object_ControlScript.Instance.isPushingCart = false;
-            PayloadMovementScript.Instance.cannotMove = true;
+            PayloadMovementScript.Instance.cannotMove = false;
         }
 #endif
     }
@@ -83,6 +101,9 @@ public class CartSidePushingScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == player)
-            playerEnter = true;
+        {           
+            Object_ControlScript.Instance.isPushingCart = false;
+            playerEnter = false;
+        }
     }
 }

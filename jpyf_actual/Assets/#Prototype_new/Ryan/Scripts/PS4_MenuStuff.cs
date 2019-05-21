@@ -5,7 +5,7 @@ using UnityEngine;
 public class PS4_MenuStuff : MonoBehaviour
 {
     public MainMenuButton menu = null;
-    
+    bool input = false;
 
 	// Use this for initialization
 	void Start ()
@@ -19,22 +19,39 @@ public class PS4_MenuStuff : MonoBehaviour
 #if UNITY_PS4
         if (PS4_ControllerScript.Instance)
         {
-            if (PS4_ControllerScript.Instance.ReturnDpadRight())
+            if (!input)
             {
-                menu.MoveRight();
+                if (PS4_ControllerScript.Instance.ReturnDpadRight())
+                {
+                    menu.MoveRight();
+                    input = true;
+                }
+                else if (PS4_ControllerScript.Instance.ReturnDpadLeft())
+                {
+                    menu.MoveLeft();
+                    input = true;
+
+                }
+                else if (PS4_ControllerScript.Instance.ReturnDpadUp())
+                {
+                    menu.MoveUp();
+                    input = true;
+
+                }
+                else if (PS4_ControllerScript.Instance.ReturnDpadDown())
+                {
+                    menu.MoveDown();
+                    input = true;
+                }
             }
-            else if (PS4_ControllerScript.Instance.ReturnDpadLeft())
+            else
             {
-                menu.MoveLeft();
+                if (PS4_ControllerScript.Instance.ReturnInputZero())
+                {
+                    input = false;
+                }
             }
-            else if (PS4_ControllerScript.Instance.ReturnDpadUp())
-            {
-                menu.MoveUp();
-            }
-            else if (PS4_ControllerScript.Instance.ReturnDpadDown())
-            {
-                menu.MoveDown();
-            }
+
 
             if (PS4_ControllerScript.Instance.ReturnCrossPress())
             {

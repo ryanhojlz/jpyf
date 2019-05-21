@@ -28,6 +28,10 @@ public class PayloadMovementScript : MonoBehaviour
     //what am i doing
     public bool cannotMove = false;
 
+    // bool movesideways
+    public bool moveSideways = false;
+    public bool moveRight = false;
+
     private void Awake()
     {
         if (!Instance)
@@ -78,31 +82,19 @@ public class PayloadMovementScript : MonoBehaviour
                 else if (cannotMove)
                     return;
 
+                
                 if (!GameEventsPrototypeScript.Instance.TileEvent_Start)
                 {
                     // Move Payload
                     if (Stats_ResourceScript.Instance.m_CartHP >= 25)
                     {
-                        // Assign velocity
-                        //payloadObject.GetComponent<Rigidbody>().AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
-                        //// Assign velocity to clamp
-                        //capZVelocity = payloadObject.GetComponent<Rigidbody>().velocity;
-                        //capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
-                        //// Reassign Velocity
-                        //payloadObject.GetComponent<Rigidbody>().velocity = capZVelocity;
+                        if (!moveSideways)
+                        {
+                            var pos = payloadObject.transform.position;
+                            pos += payloadObject.transform.forward * Time.deltaTime;
+                            payloadObject.transform.position = pos;
 
-                        //payloadObject.transform.position += payloadObject.transform.forward * cartSpeed * Time.deltaTime;
-
-                        // new code
-                        // Assign Velocity
-                        //payloadRb.AddForce(payloadObject.transform.forward * cartSpeed * Time.deltaTime);
-                        //capZVelocity = payloadRb.velocity;
-                        //capZVelocity.z = Mathf.Clamp(capZVelocity.z, -velocityCap, velocityCap);
-                        // Reassign Velocity
-                        //payloadRb.velocity = capZVelocity;
-                        var pos = payloadObject.transform.position;
-                        pos += payloadObject.transform.forward * Time.deltaTime;
-                        payloadObject.transform.position = pos;
+                        }                        
                     }
                 }
                 else

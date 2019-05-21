@@ -104,7 +104,7 @@ public class Achievement_List : MonoBehaviour
 
 	}
 
-    void PanelMoveUp()
+    public void PanelMoveUp()
     {
         if (Achievement_Panels.Count > 0)
         {
@@ -117,7 +117,7 @@ public class Achievement_List : MonoBehaviour
         panel.GetComponent<RectTransform>().anchoredPosition = position;
     }
 
-    void PanelMoveDown()
+    public void PanelMoveDown()
     {
         if (Achievement_Panels.Count > 0)
         {
@@ -161,7 +161,7 @@ public class Achievement_List : MonoBehaviour
     //    panel.GetComponent<RectTransform>().anchoredPosition = position;
     //}
 
-     void PanelMoveLeft()
+    public void PanelMoveLeft()
     {
         if (Achievement_Panels.Count > 0)
         {
@@ -174,7 +174,7 @@ public class Achievement_List : MonoBehaviour
         panel.GetComponent<RectTransform>().anchoredPosition = position;
     }
 
-    void PanelMoveRight()
+    public void PanelMoveRight()
     {
         if (Achievement_Panels.Count > 0)
         {

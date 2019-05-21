@@ -120,7 +120,7 @@ public class bomb_script : MonoBehaviour
                         Explosion.localScale += Expending_Scale * expending_speed * Time.deltaTime;
                     }
 
-                    Debug.Log(Explosion.localScale.x + " : " + explosion_Range);
+                    //Debug.Log(Explosion.localScale.x + " : " + explosion_Range);
                 }
                 break;
 

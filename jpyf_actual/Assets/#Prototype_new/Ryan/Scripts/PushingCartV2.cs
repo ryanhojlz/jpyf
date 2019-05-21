@@ -21,7 +21,7 @@ public class PushingCartV2 : MonoBehaviour
     {
         if (pushtru)
         {
-            //cart.transform.position +=
+            cart.transform.position += Vector3.right * 5 * Time.deltaTime;
         }
         pushtru = false;
 	}

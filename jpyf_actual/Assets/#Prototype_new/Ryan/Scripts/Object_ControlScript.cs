@@ -224,7 +224,7 @@ public class Object_ControlScript : MonoBehaviour
             if (jump)
             {
                 //CurrentObj.GetComponent<Rigidbody>().AddForce(Vector3.up * 2500);
-                objectRb.AddForce(Vector3.up * 2500);
+                objectRb.AddForce(Vector3.up * 30000);
                 
                 isGrounded = false;
             }

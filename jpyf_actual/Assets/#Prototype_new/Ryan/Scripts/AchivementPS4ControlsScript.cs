@@ -18,7 +18,7 @@ public class AchivementPS4ControlsScript : MonoBehaviour
         // Please refer to zijuns achievement manager
         if (PS4_ControllerScript.Instance.ReturnCrossPress())
         {
-            GameObject.Find("SceneLoad").GetComponent<SceneLoad>().GoBackToMainMenu();   
+            GameObject.Find("Sceneload").GetComponent<SceneLoad>().GoBackToMainMenu();   
         }
 
         if (PS4_ControllerScript.Instance.ReturnDpadLeft())

@@ -348,7 +348,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
             case 6:
                 // If 2nd shrine encounter
-
                 if (!Objective2)
                 {
                     if (tutorialObjective_7)

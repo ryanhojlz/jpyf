@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance = null;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {

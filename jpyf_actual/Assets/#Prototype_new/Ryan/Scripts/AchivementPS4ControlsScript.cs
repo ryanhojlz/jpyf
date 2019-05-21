@@ -14,6 +14,7 @@ public class AchivementPS4ControlsScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+#if UNITY_PS4
         // Please refer to zijuns achievement manager
         if (PS4_ControllerScript.Instance.ReturnCrossPress())
         {
@@ -54,4 +55,5 @@ public class AchivementPS4ControlsScript : MonoBehaviour
         }
 
     }
+#endif
 }

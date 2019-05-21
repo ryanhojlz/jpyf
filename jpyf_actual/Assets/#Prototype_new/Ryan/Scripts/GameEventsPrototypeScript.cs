@@ -97,7 +97,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
 
 
@@ -113,8 +113,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         Objective1 = GameObject.Find("Milestone1").gameObject;
         Objective2 = GameObject.Find("Milestone2").gameObject;
         Objective3 = GameObject.Find("Milestone3").gameObject;
-        
-        
+
+
         //Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
         subtitles_4外人 = GameObject.Find("Subtitles").GetComponent<Text>();
@@ -124,7 +124,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         subtitles_4VR = GameObject.Find("VRTEXT_UI").GetComponent<TextMesh>();
         // Assigning text for debug
         index_text = GameObject.Find("TutorialNumber").GetComponent<Text>();
-       
+
 
 
         // Assign Objectives
@@ -169,16 +169,16 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // Pause
         ProcessPause();
         ProcessWinLoseCondition();
         // Tutorial Updates etc
         UpdateTutorial();
-        
+
     }
-    
+
 
 
     // Welcome to my terrible
@@ -189,8 +189,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
         index_text.text = "Tutorial  " + Tutorial;
 
-        
-        
+
+
         // Change the subtitles etc
         switch (Tutorial)
         {
@@ -219,12 +219,12 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     tutorial_timer -= 1 * Time.deltaTime;
                 }
                 if (tutorial_timer > 44)
-                {                  
+                {
                     subtitles_4外人.text = "Wait to be revived";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
                         "Press the right trigger of your controller";
-                    
-                }                
+
+                }
                 else if (tutorial_timer > 40)
                 {
                     subtitles_4外人.text = "Objective Push P1's cart";
@@ -263,7 +263,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         "hammer the drum";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
-                { 
+                {
                     ++Tutorial;
                 }
                 break;
@@ -366,7 +366,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         tutorial_timer = 50;
                         ++Tutorial;
                     }
-                }                
+                }
                 break;
             case 7:
                 if (!Objective3)
@@ -418,7 +418,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         Stats_ResourceScript.Instance.m_StartLanternTick = true;
                         if (b_enabled_tutorial)
                             b_enabled_tutorial = false;
-                          
+
                         ++Tutorial;
                         b_bigExplain = false;
                     }
@@ -427,7 +427,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
         }
 
-   
+
 
 
         if (ShowSubtitles)
@@ -441,7 +441,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             panel.gameObject.SetActive(false);
         }
 
-        
+
 
 
     }
@@ -467,7 +467,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             PauseFunc();
         }
-        
+
         if (b_isPaused)
         {
             Time.timeScale = 0;
@@ -515,7 +515,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             if (condition == WINLOSE.neutral)
                 condition = WINLOSE.win;
         }
-        
+
         if (condition == WINLOSE.lose)
         {
             WinLoseUIScript.Instance.renderimg = -1;
@@ -545,17 +545,18 @@ public class GameEventsPrototypeScript : MonoBehaviour
     {
         return b_isPaused;
     }
-    
+
 
     public bool ReturnIsLose()
     {
+        Statistics.Instance.incrementLose();
         return (condition == WINLOSE.lose);
     }
 
     public bool ReturnIsWin()
     {
+        Statistics.Instance.incrementWin();
         return (condition == WINLOSE.win);
-
     }
 
 

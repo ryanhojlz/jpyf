@@ -83,8 +83,8 @@ public class AI_Movement : MonoBehaviour
                     var _lookRotation = Quaternion.LookRotation(_direction);
 
                     //Debug.Log(Mathf.Atan2(_lookRotation.y, _lookRotation.x));
-
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 120);
+                    if(!Self.GetComponent<Entity_Unit>().isStun())
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, _lookRotation, 10);
                 }
         }
         //else

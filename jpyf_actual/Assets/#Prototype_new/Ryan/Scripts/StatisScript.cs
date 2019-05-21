@@ -14,11 +14,9 @@ public class StatisScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-#if UNITY_PS4
         if (PS4_ControllerScript.Instance.ReturnCrossPress())
         {
             GameObject.Find("Sceneload").GetComponent<SceneLoad>().GoBackToMainMenu();
         }
-#endif
-    }
+	}
 }

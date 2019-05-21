@@ -99,6 +99,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+
+
         //
         b_enabled_tutorial = true;
         //Stats_ResourceScript.Instance.m_StartLanternTick = true;
@@ -517,6 +519,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
         if (condition == WINLOSE.lose)
         {
             WinLoseUIScript.Instance.renderimg = -1;
+            if (Endgamestats.Instance)
+            {
+                Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
+            }
+
             //Debug.Log("Nibba just lost");
         }
         else if (condition == WINLOSE.win)
@@ -539,4 +546,17 @@ public class GameEventsPrototypeScript : MonoBehaviour
         return b_isPaused;
     }
     
+
+    public bool ReturnIsLose()
+    {
+        return (condition == WINLOSE.lose);
+    }
+
+    public bool ReturnIsWin()
+    {
+        return (condition == WINLOSE.win);
+
+    }
+
+
 }

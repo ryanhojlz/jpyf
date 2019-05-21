@@ -45,6 +45,11 @@ public class PayloadMovementScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        if (Endgamestats.Instance)
+        {
+            Endgamestats.Instance.SetStartPos(payloadObject.transform.position);
+        }
+
         payloadRb = payloadObject.GetComponent<Rigidbody>();
 
     }

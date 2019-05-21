@@ -15,16 +15,16 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.808117, g: 0.47921857, b: 0.8396226, a: 0.1882353}
+  m_FogColor: {r: 0.827451, g: 0.47843137, b: 0.8392157, a: 0.1882353}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.8113208, g: 0.5723948, b: 0.39417946, a: 1}
+  m_AmbientEquatorColor: {r: 0.3018868, g: 0.21787113, b: 0.2559808, a: 1}
+  m_AmbientGroundColor: {r: 0.38679248, g: 0.32073855, b: 0.2536045, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 1
@@ -34952,8 +34952,8 @@ Transform:
   - {fileID: 128000452}
   - {fileID: 1624356971}
   - {fileID: 1300701095}
-  - {fileID: 1790750916}
   - {fileID: 1089944167}
+  - {fileID: 1790750916}
   m_Father: {fileID: 2114324798}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81348,6 +81348,7 @@ MonoBehaviour:
   velocityCap: 2
   tutorial_bool: 0
   isRotating: 0
+  cannotMove: 0
 --- !u!1 &981518357
 GameObject:
   m_ObjectHideFlags: 0
@@ -81583,6 +81584,8 @@ MonoBehaviour:
   axisLeft_y: 0
   axisRight_x: 0
   axisRight_y: 0
+  d_padAxis_x: 0
+  d_padAxis_y: 0
   CAMERA: {fileID: 0}
   prevRot: {x: 0, y: 0, z: 0, w: 0}
   SquareDown: 0
@@ -88986,6 +88989,31 @@ Prefab:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
       value: 30.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198296993601777782, guid: e2d80619b3a68924e9fa6d436bf17fac,
+        type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2d80619b3a68924e9fa6d436bf17fac, type: 2}
   m_IsPrefabParent: 0
@@ -89464,7 +89492,7 @@ Transform:
   m_LocalScale: {x: 2.6188695, y: 2.6188695, z: 2.6188695}
   m_Children: []
   m_Father: {fileID: 403075707}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1089944168
 MonoBehaviour:

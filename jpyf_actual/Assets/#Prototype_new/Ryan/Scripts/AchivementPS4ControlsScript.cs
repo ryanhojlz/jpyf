@@ -53,7 +53,6 @@ public class AchivementPS4ControlsScript : MonoBehaviour
         {
             handler.PanelMoveDown();
         }
-
-    }
 #endif
+    }
 }

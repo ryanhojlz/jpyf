@@ -101,6 +101,9 @@ public class Entity_Unit : MonoBehaviour
     [SerializeField]
     protected AudioClip TakeDamageSound;
 
+    [SerializeField]
+    protected AudioClip SpawnSound;
+
     //For Attack
     protected float atkcooldown = 0f;
     protected float countdown = -1f;
@@ -213,11 +216,6 @@ public class Entity_Unit : MonoBehaviour
 
         if (countdown >= 0)
             countdown -= Time.deltaTime;
-
-        if (GetHealthStat() <= 0 && sm.GetCurrentStateName() != "dead")
-        {
-            ChangeState("dead");
-        }
  
         sm.ExecuteStateUpdate();//Updating statemachine
         MoveSpeedUpdate();
@@ -227,7 +225,12 @@ public class Entity_Unit : MonoBehaviour
         UpdateInspector();
 
         CheckToStun();
-        
+
+        if (GetHealthStat() <= 0 && sm.GetCurrentStateName() != "dead")
+        {
+            ChangeState("dead");
+        }
+
     }
 
     // Getter 

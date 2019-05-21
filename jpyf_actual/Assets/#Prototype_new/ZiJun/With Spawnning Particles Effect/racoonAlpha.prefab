@@ -2995,10 +2995,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 2
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -3031,7 +3031,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3280,6 +3280,7 @@ MonoBehaviour:
   Take_Damage_timer: 3
   StunEffect: {fileID: 0}
   AttackSound: {fileID: 8300000, guid: acc9b6dfa9408e64ca4436d75fa60c27, type: 3}
+  TakeDamageSound: {fileID: 0}
 --- !u!114 &114968998549192548
 MonoBehaviour:
   m_ObjectHideFlags: 1

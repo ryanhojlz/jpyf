@@ -9,10 +9,13 @@ public class Entity_Tanuki : Entity_Unit
     {
         AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_attack;
         TakeDamageSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().Get_Damage;
+        SpawnSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNK_spawn;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         //UnitThatProduceSound.clip = AttackSound;
 
         BulletShootFrom = this.transform.Find("Bullet_Spawn_Location");
+        UnitThatProduceSound.clip = SpawnSound;
+        UnitThatProduceSound.Play();
     }
 
     public override void SelfUpdate()

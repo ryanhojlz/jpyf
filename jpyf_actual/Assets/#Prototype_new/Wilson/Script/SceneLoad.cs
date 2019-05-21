@@ -73,7 +73,7 @@ public class SceneLoad : MonoBehaviour
 
     }
 
-    void GoBackToMainMenu()
+    public void GoBackToMainMenu()
     {
         scene = "MainMenu";
     }

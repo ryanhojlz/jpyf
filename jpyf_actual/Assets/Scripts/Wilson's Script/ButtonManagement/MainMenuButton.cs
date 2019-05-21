@@ -85,6 +85,7 @@ public class MainMenuButton : MonoBehaviour
         selectingSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectSound;
         selectedSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().MenuSelectedSound;
         playSound = GameObject.Find("MainMenu").GetComponent<AudioSource>();
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -402,6 +403,9 @@ public class MainMenuButton : MonoBehaviour
                     //Debug.Log("Loading game scene");
                     //SceneManager.LoadScene("Week_3Merge");
                     scene = "CurrentScene";
+                    if(Titletoggle.Instance)
+                        Titletoggle.Instance.DestroyThisScript();
+                    //Destroy(this.gameObject);
                     //SceneManager.LoadScene("PC_Build_Wilson");
 
                 }
@@ -492,7 +496,7 @@ public class MainMenuButton : MonoBehaviour
         //float loadTime = 0f;
         // This line waits for 3 seconds before executing the next line in the coroutine.
         // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-        //yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3);
 
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);

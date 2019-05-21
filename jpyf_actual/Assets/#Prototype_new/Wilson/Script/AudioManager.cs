@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip TNK_spawn;
     public AudioClip NRKB_spawn;
     public AudioClip TNG_spawn;
-    //public AudioClip LanternSound;
+    public AudioClip LanternSound;
     public AudioClip CartSound;
     public AudioClip VR_Drum;
     public AudioClip VR_Projectile;

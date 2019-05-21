@@ -36,6 +36,7 @@ public class MoveAudio : MonoBehaviour
         if (Player.objectRb.velocity.magnitude > 0.1f && !Psource.isPlaying)
         {
             Psource.clip = movestep;
+            Psource.volume = 0.03f;
             Debug.Log(Psource.clip);
             Psource.Play();
         }

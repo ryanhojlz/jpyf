@@ -96,7 +96,7 @@ public class PayloadMovementScript : MonoBehaviour
                         if (!moveSideways)
                         {
                             var pos = payloadObject.transform.position;
-                            pos += payloadObject.transform.forward * Time.deltaTime;
+                            pos += payloadObject.transform.forward * 10 * Time.deltaTime;
                             payloadObject.transform.position = pos;
 
                         }                        
@@ -127,7 +127,7 @@ public class PayloadMovementScript : MonoBehaviour
     {
         if (other.transform == player2.transform)
         {
-            if (GameEventsPrototypeScript.Instance.Tutorial == 2)
+            if (GameEventsPrototypeScript.Instance.Tutorial >= 2)
             {
                 tutorial_bool = true;
             }

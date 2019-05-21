@@ -69,6 +69,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Pause Func
     bool b_isPaused = false;
 
+    
 
     // Win lose stuff
     enum WINLOSE
@@ -84,6 +85,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Resetter variable
     public float ref_losingTimer = 10;
 
+
+    bool disableTutorial = false;
+    bool stopTutorial = false;
 
     private void Awake()
     {
@@ -175,7 +179,21 @@ public class GameEventsPrototypeScript : MonoBehaviour
         ProcessPause();
         ProcessWinLoseCondition();
         // Tutorial Updates etc
-        UpdateTutorial();
+
+        if (stopTutorial)
+        {
+            DisableTutorial();
+        }
+        else
+        {
+            UpdateTutorial();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            stopTutorial = true;
+        }
 
     }
 
@@ -185,6 +203,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Hardcoded Tutorial
     void UpdateTutorial()
     {
+        
+
         timer_4外人.text = "" + tutorial_timer;
 
         index_text.text = "Tutorial  " + Tutorial;
@@ -220,7 +240,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 }
                 if (tutorial_timer > 44)
                 {
-                    subtitles_4外人.text = "Wait to be revived";
+                    subtitles_4外人.text = "Wait to be revived by P1";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
                         "Press the right trigger of your controller";
 
@@ -273,7 +293,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (payload_ref.position.z > 1.5f)
                 {
                     subtitles_4外人.text = "There is a wall infront grab a bomb to destroy it";
-                    subtitles_4VR.text = "Wait for P2 to destroy it";
+                    subtitles_4VR.text = "P2 has to destroy a wall to proceed";
                     tutorialObjective_3.gameObject.SetActive(true);
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_3);
                 }
@@ -441,7 +461,57 @@ public class GameEventsPrototypeScript : MonoBehaviour
             panel.gameObject.SetActive(false);
         }
 
+        
+    }
 
+    void DisableTutorial()
+    {
+        // do once
+        // disable all the tutorial objects in the game
+        if (!disableTutorial)
+        {
+            subtitles_4外人.enabled = false;
+            panel.gameObject.SetActive(false);
+
+            if (Objective1)
+                Destroy(Objective1.gameObject);
+
+            if (Objective2)
+                Destroy(Objective2.gameObject);
+
+            if (Objective3)
+                Destroy(Objective3.gameObject);
+
+            if (tutorialObjective_1)
+                Destroy(tutorialObjective_1.gameObject);
+
+            if (tutorialObjective_2)
+                Destroy(tutorialObjective_2.gameObject);
+
+            if (tutorialObjective_3)
+                Destroy(tutorialObjective_3.gameObject);
+
+            if (tutorialObjective_4)
+                Destroy(tutorialObjective_4.gameObject);
+
+            if (tutorialObjective_5)
+                Destroy(tutorialObjective_5.gameObject);
+
+            if (tutorialObjective_6)
+                Destroy(tutorialObjective_6.gameObject);
+
+            if (tutorialObjective_7)
+                Destroy(tutorialObjective_7.gameObject);
+
+            if (Bomb_Tutorial[0])
+                Destroy(Bomb_Tutorial[0].gameObject);
+
+            if (Bomb_Tutorial[1])
+                Destroy(Bomb_Tutorial[1].gameObject);
+
+            Tutorial = 8;
+            disableTutorial = true;
+        }
 
 
     }
@@ -507,6 +577,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     }
                 }
             }
+
+            //if (Statistics.Instance.)
         }
 
 
@@ -549,13 +621,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     public bool ReturnIsLose()
     {
-        Statistics.Instance.incrementLose();
+        if (Statistics.Instance)
+            Statistics.Instance.incrementLose();
         return (condition == WINLOSE.lose);
     }
 
     public bool ReturnIsWin()
     {
-        Statistics.Instance.incrementWin();
+        if (Statistics.Instance)
+            Statistics.Instance.incrementWin();
         return (condition == WINLOSE.win);
     }
 

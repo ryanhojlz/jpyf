@@ -53,7 +53,28 @@ public class AnotherPushingCartScript : MonoBehaviour
                 }
             }
         }
-      
+#endif
+
+#if UNITY_EDITOR_WIN
+        if (playerEnter)
+        {
+            if (PayloadMovementScript.Instance.moveSideways)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    if (PayloadMovementScript.Instance.moveRight)
+                    {
+                        player.transform.position += (Vector3.right * 2) * Time.deltaTime;
+                        cartRb.transform.position += (Vector3.right * 2) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        player.transform.position -= (Vector3.right * 2) * Time.deltaTime;
+                        cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime;
+                    }
+                }
+            }
+        }
 #endif
     }
 

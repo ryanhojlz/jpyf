@@ -165,6 +165,15 @@ public class Stats_ResourceScript : MonoBehaviour
         // Check if play is dead
         CheckPlayer2Dead();
 
+
+        if (m_LanternHp > 0)
+        {
+            if (Endgamestats.Instance)
+            {
+                Endgamestats.Instance.IncrementLightUpTime();
+            }
+        }
+
         // Debug Function
         _DebugFunc();
 	}
@@ -417,7 +426,14 @@ public class Stats_ResourceScript : MonoBehaviour
         feedback_handler.HitPayload();
 
         // if my supervisor was mr toh he would have just put a plus and parameter would be a minus but not in this house
+
+
+
         m_CartHP -= damage;
+
+
+    
+
         if (m_CartHP < 0)
         {
             m_CartHP = 0;
@@ -427,6 +443,9 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             m_CartHP = m_CartHpCap;
         }
+
+
+
     }
 
     public void Lantern_TakeDmg(int damage)
@@ -464,27 +483,41 @@ public class Stats_ResourceScript : MonoBehaviour
             case 1: // Souls
                 m_Souls += 20;
                 if (Statistics.Instance != null)
-                {
-                    Statistics.Instance.incrementSoulsCollected();
-                }
+                    Statistics.Instance.incrementSoulsCollected();   
+                
+                if (Endgamestats.Instance)
+                    Endgamestats.Instance.incrementLightcollected();
+                
                 //Destroy(item);
                 break;
             case 2: // Minerals
                 m_Minerals += 20;
                 if (Statistics.Instance != null)
                     Statistics.Instance.incrementItemGathered();
+
+                if (Endgamestats.Instance)
+                    Endgamestats.Instance.incrementWoodcollected();
+
                 //Destroy(item);
                 break;
             case 3: // Small Souls
                 m_Souls += 10;
                 if (Statistics.Instance != null)
                     Statistics.Instance.incrementSoulsCollected();
+
+                if (Endgamestats.Instance)
+                    Endgamestats.Instance.incrementLightcollected();
+
                 //Destroy(item);
                 break;
             case 4:
                 m_Souls += 40;
                 if (Statistics.Instance != null)
                     Statistics.Instance.incrementSoulsCollected();
+
+                if (Endgamestats.Instance)
+                    Endgamestats.Instance.incrementLightcollected();
+
                 //Destroy(item);
                 break;
 

@@ -354,6 +354,7 @@ public class Object_ControlScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             //Debug.Log("eon");
+            throw_item = true;
             pickup = true;
         }
 

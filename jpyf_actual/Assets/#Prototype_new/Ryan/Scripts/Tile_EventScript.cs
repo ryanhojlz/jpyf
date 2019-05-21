@@ -86,7 +86,7 @@ public class Tile_EventScript : MonoBehaviour
         {
 
             transform.Find("Shrine").transform.GetChild(1).gameObject.SetActive(true);
-            transform.Find("Shrine").transform.GetChild(1).gameObject.GetComponent<TextMesh>().text = "" +  (shrineHungerCap - i_shrineHungerMeter);
+            transform.Find("Shrine").transform.GetChild(1).gameObject.GetComponent<TextMesh>().text = "";
 
 
             // Start spawning mobs

@@ -28,6 +28,8 @@ public class Achievement_List : MonoBehaviour
 
 	void Start ()
     {
+        if (!GameObject.Find("AchievementManager"))
+            return;
         Achievements = GameObject.Find("AchievementManager").GetComponent<GlobalAchievementManager>().ListOfAchievements;
 
         c_achievementCompleted.r = 153f / 255f;

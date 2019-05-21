@@ -67,7 +67,7 @@ public class Object_ControlScript : MonoBehaviour
     private Vector3 tempVelocity = Vector3.zero;
     private Vector3 cancelVelocity = Vector3.zero;
 
-    private Rigidbody objectRb = null;
+    public Rigidbody objectRb = null;
 
     private void Awake()
     {

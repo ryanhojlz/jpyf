@@ -187,6 +187,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 14606018}
+--- !u!114 &21034903 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114773421554089914, guid: 0e3f6dab87630af42812055c37c3a39a,
+    type: 2}
+  m_PrefabInternal: {fileID: 583837944}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &63500362
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +341,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 316786955}
+--- !u!223 &376390593 stripped
+Canvas:
+  m_PrefabParentObject: {fileID: 223953791898015750, guid: 0e3f6dab87630af42812055c37c3a39a,
+    type: 2}
+  m_PrefabInternal: {fileID: 583837944}
 --- !u!1 &461904406
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +768,7 @@ RectTransform:
   - {fileID: 1641488344}
   - {fileID: 1597892576}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -901,17 +912,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812504079}
---- !u!223 &853827517 stripped
-Canvas:
-  m_PrefabParentObject: {fileID: 223793400986726070, guid: 0e3f6dab87630af42812055c37c3a39a,
-    type: 2}
-  m_PrefabInternal: {fileID: 583837944}
---- !u!114 &1062713811 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114713273828876344, guid: 0e3f6dab87630af42812055c37c3a39a,
-    type: 2}
-  m_PrefabInternal: {fileID: 583837944}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1167811334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1139,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1256930452
 Prefab:
@@ -1184,15 +1184,26 @@ Prefab:
         type: 2}
       propertyPath: Loadingcanvas
       value: 
-      objectReference: {fileID: 853827517}
+      objectReference: {fileID: 376390593}
     - target: {fileID: 114125996342514718, guid: 816dd31a28de30d458162baf1b1dc262,
         type: 2}
       propertyPath: loadImage
       value: 
-      objectReference: {fileID: 1062713811}
+      objectReference: {fileID: 1312790744}
+    - target: {fileID: 114125996342514718, guid: 816dd31a28de30d458162baf1b1dc262,
+        type: 2}
+      propertyPath: loadingText
+      value: 
+      objectReference: {fileID: 21034903}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 816dd31a28de30d458162baf1b1dc262, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1312790744 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114738521506553788, guid: 0e3f6dab87630af42812055c37c3a39a,
+    type: 2}
+  m_PrefabInternal: {fileID: 583837944}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1331791319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1489705455
 GameObject:

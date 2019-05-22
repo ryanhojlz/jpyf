@@ -8,8 +8,10 @@ public class Nurikabe : Entity_Unit
 
     public override void SelfStart()
     {
-        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().NRKB_attack;
-        SpawnSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().NRKB_spawn;
+        AudioManager AudioInstance = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        AttackSound = AudioInstance.NRKB_attack;
+        SpawnSound = AudioInstance.NRKB_spawn;
+        TakeDamageSound = AudioInstance.NRKB_spawn;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
         UnitThatProduceSound.clip = SpawnSound;
         UnitThatProduceSound.Play();
@@ -55,7 +57,6 @@ public class Nurikabe : Entity_Unit
                     if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
                     {
                         UnitThatProduceSound.Play();
-
                     }
                 }
 

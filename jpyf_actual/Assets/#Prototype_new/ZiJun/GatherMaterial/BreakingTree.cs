@@ -9,5 +9,12 @@ public class BreakingTree : Object_Breaking
         m_timelimit = 5f;
         m_maxSpamPoint = 100f;
         m_powerPerHit = 15f;
+
+        //objectAudio = AudioManager.Instance.BreakingWood;
+    }
+
+    protected override void SelfStart()
+    {
+        objectAudio = AudioManager.Instance.BreakingWood;
     }
 }

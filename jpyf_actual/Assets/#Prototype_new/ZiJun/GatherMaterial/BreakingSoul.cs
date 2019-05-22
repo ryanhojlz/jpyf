@@ -10,4 +10,9 @@ public class BreakingSoul : Object_Breaking
         m_maxSpamPoint = 100f;
         m_powerPerHit = 5f;
     }
+
+    protected override void SelfStart()
+    {
+        objectAudio = AudioManager.Instance.BreakingLantern;
+    }
 }

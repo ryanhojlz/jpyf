@@ -27,7 +27,7 @@ public class MoveAudio : MonoBehaviour
     void Update()
     {
         //Player = Object_ControlScript.Instance;
-        Debug.Log(movestep);
+        //Debug.Log(movestep);
         if (!Player)
         {
             Debug.Log("No player found");

@@ -31,7 +31,7 @@ public class LanternSound : MonoBehaviour
     void Update()
     {
         //Player = Object_ControlScript.Instance;
-        Debug.Log(lanternSound);
+        //Debug.Log(lanternSound);
         //if (!Payload)
         //{
         //    Debug.Log("No player found");
@@ -73,15 +73,15 @@ public class LanternSound : MonoBehaviour
         if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.7f)
         {
             Debug.Log("Full");
-            Psource.volume = 0.01f;
+            Psource.volume = 0.5f;
         }
         else if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.5f)
         {
-            Psource.volume = 0.005f;
+            Psource.volume = 0.3f;
         }
         else if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.3f)
         {
-            Psource.volume = 0.001f;
+            Psource.volume = 0.1f;
         }
         else if (Instance.m_LanternHp >= Instance.m_LanternHpCap * 0.0f)
         {

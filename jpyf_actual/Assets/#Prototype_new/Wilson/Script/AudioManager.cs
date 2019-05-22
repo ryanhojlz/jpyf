@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip P2_movement;
     public AudioClip DayTimeBGaudio;
     public AudioClip NightTimeBGaudio;
+    public AudioClip BreakingWood;
+    public AudioClip BreakingLantern;
 
     public static AudioManager Instance = null;
     // Use this for initialization

@@ -33,7 +33,7 @@ public class DayNightBackgroundAudio : MonoBehaviour
         if (daynight.isDaytime
             && source.clip != DayTime)
         {
-            Debug.Log("Day time");
+            //Debug.Log("Day time");
             //source.Stop();
             if (source.volume <= 0f)
             {
@@ -49,7 +49,7 @@ public class DayNightBackgroundAudio : MonoBehaviour
         else if (!daynight.isDaytime 
             && source.clip != NightTime)
         {
-            Debug.Log("Night time");
+            //Debug.Log("Night time");
             //source.Stop();
             if (source.volume <= 0f)
             {

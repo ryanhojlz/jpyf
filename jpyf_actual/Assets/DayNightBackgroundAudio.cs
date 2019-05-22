@@ -58,7 +58,7 @@ public class DayNightBackgroundAudio : MonoBehaviour
             }
             else
             {
-                source.volume -= Time.deltaTime * 0.5f;
+                source.volume -= Time.deltaTime * 0.3f;
             }
             //source.Play();
         }

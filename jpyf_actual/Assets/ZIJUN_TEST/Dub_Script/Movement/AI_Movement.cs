@@ -105,23 +105,24 @@ public class AI_Movement : MonoBehaviour
         m_moveToPosition = _pos;
     }
 
-    //bool CheckForRotation()
-    //{
-    //    m_currentAngularVelocity = Vector3.Angle(transform.forward, m_PrevForward) / Time.deltaTime;
-    //    m_PrevForward = transform.forward;
+    bool CheckForRotation()
+    {
+        m_currentAngularVelocity = Vector3.Angle(transform.forward, m_PrevForward) / Time.deltaTime;
+        m_PrevForward = transform.forward;
 
-    //    if (m_currentAngularVelocity > 3f)
-    //    {
-    //        m_agent.isStopped = true;//Stops it from moving
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        m_agent.isStopped = false;//Making it move again
-    //    }
+        if (m_currentAngularVelocity > 10f)
+        {
+            m_agent.isStopped = true;//Stops it from moving
+            return true;
+        }
+        else
+        {
+            Debug.Log("Can move liao");
+            m_agent.isStopped = false;//Making it move again
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 
     //void FindPayload()//Use this function if controller player is not found & target the payload / Init the target position
     //{

@@ -102,6 +102,9 @@ public class Entity_Unit : MonoBehaviour
     protected AudioClip TakeDamageSound;
 
     [SerializeField]
+    protected AudioClip DieSound;
+
+    [SerializeField]
     protected AudioClip SpawnSound;
 
     //For Attack
@@ -122,6 +125,8 @@ public class Entity_Unit : MonoBehaviour
 
     private Force_Field m_forcefield = null;
     protected AnimationScript m_animation = null;
+
+    bool DeadSound_played = false;
 
     private void Awake()
     {
@@ -648,6 +653,29 @@ public class Entity_Unit : MonoBehaviour
     public int InRangeCount()
     {
         return UnitsInRange.Count;
+    }
+
+    public virtual void PlayDeadAudio()
+    {
+        if (!DieSound)
+            return;
+        
+        
+        UnitThatProduceSound.clip = DieSound;
+
+        if(!AudioisPlaying() && !DeadSound_played)
+            UnitThatProduceSound.Play();
+
+        DeadSound_played = true;
+    }
+
+    public bool AudioisPlaying()
+    {
+        if (UnitThatProduceSound.isPlaying)
+        {
+            return true;
+        }
+        return false;
     }
 
     public virtual void Dead()

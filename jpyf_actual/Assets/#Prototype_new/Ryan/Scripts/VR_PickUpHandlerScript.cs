@@ -7,6 +7,9 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     public Stats_ResourceScript handler = null;
     public GameObject particles_prefeb = null;
     public GameObject particlesReference = null;
+    
+   
+
     // Use this for initialization
     void Start()
     {
@@ -30,6 +33,11 @@ public class VR_PickUpHandlerScript : MonoBehaviour
                 particlesReference.GetComponent<ParticleSystem>().Play();
                 // Put effect here
                 handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
+                // Play the sound here 
+
+
+
+                //
                 Destroy(other.gameObject);
             }
         }

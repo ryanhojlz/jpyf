@@ -141,7 +141,6 @@ public class PS4_ControllerScript : MonoBehaviour
             else if (!UnityEngine.XR.XRSettings.showDeviceView)
                 UnityEngine.XR.XRSettings.showDeviceView = true;
 
-            Stats_ResourceScript.Instance.ResetStats();
         }
 
 
@@ -235,50 +234,72 @@ public class PS4_ControllerScript : MonoBehaviour
         return SquareDown;
     }
 
+    // Cross press
     public bool ReturnCrossPress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button0")));
     }
 
+    // Circle Press
     public bool ReturnCirclePress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button1")));
     }
 
+    // Square Press
     public bool ReturnSquarePress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
     }
 
+    // Square Down
     public bool ReturnSquareDown()
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button2")));
     }
 
+    // Triangle Press
     public bool ReturnTrianglePress()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button3")));
     }
 
- 
+    // Return R1 Press
     public bool ReturnR1Press()
     {
         return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")));
     }
 
+    // Return R1 Down
     public bool ReturnR1Down()
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button5")));
     }
 
-    public bool ReturnL1Press()
+    // Return L1 Press
+    public bool ReturnL1Down()
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")));
     }
 
     
+    public bool ReturnL1Press()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button4")));
 
-    
+    }
+
+
+    public bool ReturnAnalogLDown()
+    {
+        return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button8")));        
+    }
+
+    public bool ReturnAnalogRDown()
+    {
+        return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button9")));
+    }
+
 #endif
 
 

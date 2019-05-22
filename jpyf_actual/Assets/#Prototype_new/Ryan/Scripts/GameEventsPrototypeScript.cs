@@ -634,4 +634,17 @@ public class GameEventsPrototypeScript : MonoBehaviour
     }
 
 
+    void GameCheatCodes()
+    {
+#if UNITY_PS4
+        Stats_ResourceScript.Instance.ResetStats();
+
+        //if (PS4_ControllerScript.Instance.)
+
+
+
+
+#endif
+    }
+
 }

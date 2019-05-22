@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1167658219482774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 0.18900007, z: -2.69}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,11 +62,11 @@ MonoBehaviour:
   TNK_attack: {fileID: 8300000, guid: 09d0676f7f572644cb9d0bf4e1d9f242, type: 3}
   NRKB_attack: {fileID: 8300000, guid: 8593cddb27a40814aa872e35cd3cfcd5, type: 3}
   TNG_attack: {fileID: 8300000, guid: 77f1c50882a7376448c8714f151e3a41, type: 3}
-  TNK_TakeDamage: {fileID: 0}
-  NRKB_TakeDamage: {fileID: 0}
-  TNG_TakeDamage: {fileID: 0}
-  TNK_Die: {fileID: 0}
-  NRKB_Die: {fileID: 0}
+  TNK_TakeDamage: {fileID: 8300000, guid: c5b0f9f77287b314c9ff2355a482a79c, type: 3}
+  NRKB_TakeDamage: {fileID: 8300000, guid: ab4aea94e71c0f040a0fee1dfa5733d9, type: 3}
+  TNG_TakeDamage: {fileID: 8300000, guid: 5499af2f4a813a7498909fe0604bdb7c, type: 3}
+  TNK_Die: {fileID: 8300000, guid: 5499af2f4a813a7498909fe0604bdb7c, type: 3}
+  NRKB_Die: {fileID: 8300000, guid: ab4aea94e71c0f040a0fee1dfa5733d9, type: 3}
   TNG_Die: {fileID: 0}
   Get_Damage: {fileID: 8300000, guid: 65bd6005e10f0b34cb9a8f1a71f9e635, type: 3}
   Pickup_Item: {fileID: 8300000, guid: 01e0b0dbc5683c8459b1938582bc8e29, type: 3}

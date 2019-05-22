@@ -42,6 +42,7 @@ public class Unit_Dead_State : IState
         //rota_te.y = y_rota_te;
         //rota_te.x = x_rota_te;
         m_user.StopMoving();
+        m_user.PlayDeadAudio();
         //m_user.transform.localEulerAngles = rota_te;
         if (CountDownTImer < 0f)
         {

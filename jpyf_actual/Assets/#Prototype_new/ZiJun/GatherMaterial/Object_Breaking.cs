@@ -21,12 +21,18 @@ public class Object_Breaking : MonoBehaviour
     List<GameObject> WithinRange = new List<GameObject>();
 
     Mini_Game minigame = null;
+
+    protected AudioClip objectAudio = null;
+    AudioSource source = null;
     // Use this for initialization
     void Start()
     {
         minigame = Mini_Game.Instance;
 
         m_powerPerHit = 25;
+
+        source = this.GetComponent<AudioSource>();
+        SelfStart();
         //Debug.Log("Hi this time i got come in liao");
     }
 
@@ -97,6 +103,15 @@ public class Object_Breaking : MonoBehaviour
         return m_powerPerHit;
     }
 
+    public void PlayHit()
+    {
+        if (source && objectAudio)
+        {
+            source.clip = objectAudio;
+            source.Play();
+        }
+    }
+
     //public void SetComplete(int _resourceAmount)
     //{
     //    m_successGather = true;
@@ -107,5 +122,10 @@ public class Object_Breaking : MonoBehaviour
     {
         m_successGather = success;
         m_totalResource = 1;
+    }
+
+    protected virtual void SelfStart()
+    {
+
     }
 }

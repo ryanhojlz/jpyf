@@ -211,6 +211,8 @@ public class Mini_Game : MonoBehaviour
     public void BreakObject()
     {
         sourceCurrentAmount += powerHit;
+        if(objBreak)
+            objBreak.PlayHit();
     }
 
     public void AddToList(Object_Breaking obj)

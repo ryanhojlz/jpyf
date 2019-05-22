@@ -45,7 +45,7 @@ public class Spawning_Bomb : MonoBehaviour
 
         if (readyToSpawn)
         {
-            Debug.Log("Came here 2");
+            //Debug.Log("Came here 2");
             SpawnBomb();
         }
     }

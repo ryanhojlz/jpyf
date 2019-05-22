@@ -79,8 +79,10 @@ public class Entity_Tengu : Entity_Unit
         TargetEscape = GameObject.Find("TenguEscapePoint");
         TargetLeft = GameObject.Find("TenguEscapePointLeft");
         TargetRight = GameObject.Find("TenguEscapePointRight");
-
-        AttackSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_attack;
+        AudioManager AudioInstance = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        AttackSound = AudioInstance.TNG_attack;
+        DieSound = AudioInstance.TNG_Die;
+        TakeDamageSound = AudioInstance.TNG_TakeDamage;
         UnitThatProduceSound = this.GetComponent<AudioSource>();
 
         SpawnSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().TNG_spawn;

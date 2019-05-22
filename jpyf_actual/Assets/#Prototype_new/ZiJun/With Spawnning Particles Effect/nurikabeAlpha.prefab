@@ -1313,7 +1313,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672436185011694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4178247629128544}
@@ -2897,6 +2897,7 @@ MonoBehaviour:
   StunEffect: {fileID: 0}
   AttackSound: {fileID: 0}
   TakeDamageSound: {fileID: 0}
+  SpawnSound: {fileID: 0}
 --- !u!114 &114843960856542888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3086,7 +3087,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 5aaa2444514430245be101b4bb7b938b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 84fd09254e9a0ae4bb637457833cb237, type: 2}
   m_Bones:
   - {fileID: 4101350408891958}
   - {fileID: 4684852104167312}

@@ -42,7 +42,11 @@ public class LanternSound : MonoBehaviour
             Psource.clip = lanternSound;
             Psource.volume = 0.7f;
             Debug.Log(Psource.clip);
+
+            Debug.Log("Play ");
+
             Psource.Play();
+            
         }
         else if (Instance.m_LanternHp < Instance.m_LanternHpCap * 0.69f && Instance.m_LanternHp > Instance.m_LanternHpCap * 0.3f)
         {
@@ -63,7 +67,7 @@ public class LanternSound : MonoBehaviour
         //}
         else
         {
-            Psource.Stop();
+            //Psource.Stop();
         }
     }
 }

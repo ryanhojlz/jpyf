@@ -32,6 +32,8 @@ public class PayloadMovementScript : MonoBehaviour
     public bool moveSideways = false;
     public bool moveRight = false;
 
+    public bool payloadMoving = false;
+
 
 
 
@@ -105,12 +107,14 @@ public class PayloadMovementScript : MonoBehaviour
                             var pos = payloadObject.transform.position;
                             pos += (payloadObject.transform.forward * AnotherCartSpeed) * Time.deltaTime;
                             payloadObject.transform.position = pos;
+                            payloadMoving = true;
 
                         }                        
                     }
                 }
                 else
                 {
+                    payloadMoving = false;
                     //payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     payloadRb.velocity = Vector3.zero;
                 }
@@ -119,6 +123,7 @@ public class PayloadMovementScript : MonoBehaviour
             {
                 //payloadObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 payloadRb.velocity = Vector3.zero;
+                payloadMoving = false;
             }
 
         }
@@ -142,5 +147,10 @@ public class PayloadMovementScript : MonoBehaviour
             // Cart moves
         }
 
+    }
+
+    public bool ReturnIsMoving()
+    {
+        return payloadMoving;
     }
 }

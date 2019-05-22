@@ -10,7 +10,12 @@ public class SceneLoad : MonoBehaviour
 
     private string scene;
     public Canvas Loadingcanvas;
+    public Text loadingText;
     public Image loadImage;
+
+    Vector2 loadScreenMove;
+
+    bool loadScreenMoveUpMoveDown;
 
     private void Start()
     {
@@ -30,7 +35,7 @@ public class SceneLoad : MonoBehaviour
             loadScene = true;
             loadImage.enabled = true;
             // ...change the instruction text to read "Loading..."
-            //loadingText.text = "Loading...";
+            loadingText.text = "Loading...";
 
             // ...and start a coroutine that will load the desired scene.
             StartCoroutine(LoadNewScene());
@@ -42,8 +47,21 @@ public class SceneLoad : MonoBehaviour
         {
             Loadingcanvas.enabled = true;
             // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
-            //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-            loadImage.color = new Color(loadImage.color.r, loadImage.color.g, loadImage.color.b, Mathf.PingPong(Time.time, 1));
+            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+            loadScreenMove = loadImage.rectTransform.anchoredPosition;
+
+            if (!CheckDown())
+            {
+                Debug.Log("mOVE DOWN");
+                loadScreenMove.y += 30 * Time.deltaTime;
+            }
+
+            //if (CheckUp())
+            //{
+            //    loadScreenMoveUp = !loadScreenMoveUp;
+            //}
+            //}
+            loadImage.rectTransform.anchoredPosition = loadScreenMove;
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -51,6 +69,76 @@ public class SceneLoad : MonoBehaviour
             GoBackToMainMenu();
         }
 
+    }
+
+    bool CheckUp()
+    {
+
+        //float canvasTop = Mainmenucanvas.GetComponent<RectTransform>().anchoredPosition.y + (Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f) * Mainmenucanvas.transform.localScale.y;
+        //float loadImageTop = loadImage.rectTransform.position.y + (loadImage.rectTransform.rect.height * 0.5f) * loadImage.transform.localScale.y;
+        ////Debug.Log(canvasTop + " : " + loadImageTop);
+        //if (canvasTop <= loadImageTop)
+        //    return true;
+
+        //return false;
+
+        //Debug.Log("Height : " + Mainmenucanvas.GetComponent<RectTransform>().rect.height);
+        //Debug.Log("Canvas height : " + Mainmenucanvas.GetComponent<RectTransform>().anchoredPosition.y);
+        //Debug.Log("Image height : " + loadImage.rectTransform.position.y);
+
+        //Debug.Log("Length : " + loadImage.rectTransform.rect.width * 0.5f);
+        //Debug.Log("canvasTop : " + canvasTop);
+        //Debug.Log("loadImageTop : " + loadImageTop);
+
+        //return (Loadingcanvas.GetComponent<RectTransform>().anchoredPosition.y
+        //        + (Loadingcanvas.GetComponent<RectTransform>().rect.width * 0.5)
+        //        * Loadingcanvas.transform.lossyScale.y
+        //        >
+        //loadImage.rectTransform.anchoredPosition.y
+        //+ (loadImage.rectTransform.rect.width * 0.5)
+        //* loadImage.transform.lossyScale.y) && !loadScreenMoveUp;
+
+        //float canvasUp = Mainmenucanvas.transform.position.y + (Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f * Mainmenucanvas.transform.localScale.y);
+        float loadImageUp = loadImage.transform.position.y + (loadImage.GetComponent<RectTransform>().rect.height * 0.5f * loadImage.transform.localScale.y);
+
+        //Debug.Log(canvasUp + " : " + loadImageUp);
+
+        //if (canvasUp <= loadImageUp)
+            //return true;
+
+        return false;
+    }
+
+    bool CheckDown()
+    {
+        //float canvasBottom = Mainmenucanvas.GetComponent<RectTransform>().anchoredPosition.y - (Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f) * Mainmenucanvas.transform.localScale.y;
+        //float loadImageBottom = loadImage.rectTransform.position.y - (loadImage.rectTransform.rect.height * 0.5f) * loadImage.transform.localScale.y;
+
+        //Debug.Log((Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f) * Mainmenucanvas.transform.localScale.y + " : " + loadImageBottom);
+
+        //if (canvasBottom >= loadImageBottom)
+        //    return true;
+
+        //return false;
+        //return (Loadingcanvas.GetComponent<RectTransform>().anchoredPosition.y
+        //        - (Loadingcanvas.GetComponent<RectTransform>().rect.width * 0.5)
+        //        * Loadingcanvas.transform.lossyScale.y
+        //        <
+        //        loadImage.rectTransform.anchoredPosition.y
+        //        - (loadImage.rectTransform.rect.width * 0.5)
+        //        * loadImage.transform.lossyScale.y) && loadScreenMoveUp;
+
+        //return false;
+
+        //float canvasBottom = Mainmenucanvas.transform.position.y - (Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f);// * 0.5f * Mainmenucanvas.transform.localScale.y);
+        float loadImageBottom = loadImage.transform.position.y - ((loadImage.GetComponent<RectTransform>().rect.height * 0.5f));
+
+        //Debug.Log(canvasBottom + " : " + loadImageBottom);
+
+        //if (canvasBottom <= loadImageBottom + Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.1f)
+            //return true;
+
+        return false;
     }
 
 

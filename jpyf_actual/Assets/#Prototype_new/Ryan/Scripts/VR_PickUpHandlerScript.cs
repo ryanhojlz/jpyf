@@ -7,8 +7,10 @@ public class VR_PickUpHandlerScript : MonoBehaviour
     public Stats_ResourceScript handler = null;
     public GameObject particles_prefeb = null;
     public GameObject particlesReference = null;
+
+    //private AudioClip UseItemSound;
+    //private AudioSource playSound;
     
-   
 
     // Use this for initialization
     void Start()
@@ -16,6 +18,8 @@ public class VR_PickUpHandlerScript : MonoBehaviour
         handler = GameObject.Find("Stats_ResourceHandler").GetComponent<Stats_ResourceScript>();
         particlesReference = Instantiate(particles_prefeb, transform.position, Quaternion.identity);
         particlesReference.transform.parent = this.transform;
+        //UseItemSound = GameObject.Find("AudioManager").GetComponent<AudioManager>().Use_Item;
+        //playSound = GameObject.Find("Pickup_mineral").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,7 +38,8 @@ public class VR_PickUpHandlerScript : MonoBehaviour
                 // Put effect here
                 handler.ProcessPickUp(other.GetComponent<Pickup_Scripts>());
                 // Play the sound here 
-
+                //playSound.clip = UseItemSound;
+                //playSound.Play();
 
 
                 //

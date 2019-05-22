@@ -38,6 +38,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip BreakingWood;
     public AudioClip BreakingLantern;
 
+
+    public AudioClip ItemDropSound;
+    public GameObject AudioPrefeb;
+
     public static AudioManager Instance = null;
     // Use this for initialization
     void Awake()

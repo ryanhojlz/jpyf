@@ -114,6 +114,11 @@ public class DrumGameScript : MonoBehaviour
             f_activity_timer = 10;
             //OnOffUI(true);
             Stats_ResourceScript.Instance.Player2_TakeDmg(-10);
+            if (Endgamestats.Instance)
+            {
+                if (Stats_ResourceScript.Instance.m_P2_hp < 100)
+                    Endgamestats.Instance.CartHeal(-10);
+            }
             // Play particle effect
             particleFeedback.GetComponent<ParticleSystem>().Play();
             // When i sucessfull hit has been detected

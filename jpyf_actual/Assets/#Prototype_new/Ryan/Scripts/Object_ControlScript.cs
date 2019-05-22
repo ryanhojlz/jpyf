@@ -67,7 +67,7 @@ public class Object_ControlScript : MonoBehaviour
     private Vector3 tempVelocity = Vector3.zero;
     private Vector3 cancelVelocity = Vector3.zero;
 
-    private Rigidbody objectRb = null;
+    public Rigidbody objectRb = null;
 
     private void Awake()
     {
@@ -354,6 +354,7 @@ public class Object_ControlScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             //Debug.Log("eon");
+            throw_item = true;
             pickup = true;
         }
 

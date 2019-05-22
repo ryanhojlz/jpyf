@@ -25,6 +25,10 @@ public class Unit_Dead_State : IState
         {
             m_user.GetComponent<AnimationScript>().SetAnimTrigger(2);
         }
+
+        // Call statistics here @wilson
+        if (Statistics.Instance != null)
+            Statistics.Instance.incrementEnemiesKilled();
     }
 
     public void Execute()
@@ -43,9 +47,6 @@ public class Unit_Dead_State : IState
         {
             //Debug.Log("Dead");
             Stats_ResourceScript.Instance.EnemyCount--;
-            // Call statistics here @wilson
-            if (Statistics.Instance != null)
-                Statistics.Instance.incrementEnemiesKilled();
 
             if (!b_spawnOnce)
             {

@@ -69,6 +69,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Pause Func
     bool b_isPaused = false;
 
+    
 
     // Win lose stuff
     enum WINLOSE
@@ -85,6 +86,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
     public float ref_losingTimer = 10;
 
 
+    bool disableTutorial = false;
+    bool stopTutorial = false;
+
     private void Awake()
     {
 
@@ -97,8 +101,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+
+
         //
         b_enabled_tutorial = true;
         //Stats_ResourceScript.Instance.m_StartLanternTick = true;
@@ -111,8 +117,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         Objective1 = GameObject.Find("Milestone1").gameObject;
         Objective2 = GameObject.Find("Milestone2").gameObject;
         Objective3 = GameObject.Find("Milestone3").gameObject;
-        
-        
+
+
         //Milestones = GameObject.FindGameObjectsWithTag("MilestoneBlockade");
         // Assigning subtitle
         subtitles_4外人 = GameObject.Find("Subtitles").GetComponent<Text>();
@@ -122,7 +128,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         subtitles_4VR = GameObject.Find("VRTEXT_UI").GetComponent<TextMesh>();
         // Assigning text for debug
         index_text = GameObject.Find("TutorialNumber").GetComponent<Text>();
-       
+
 
 
         // Assign Objectives
@@ -167,28 +173,44 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // Pause
         ProcessPause();
         ProcessWinLoseCondition();
         // Tutorial Updates etc
-        UpdateTutorial();
-        
+
+        if (stopTutorial)
+        {
+            DisableTutorial();
+        }
+        else
+        {
+            UpdateTutorial();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            stopTutorial = true;
+        }
+
     }
-    
+
 
 
     // Welcome to my terrible
     // Hardcoded Tutorial
     void UpdateTutorial()
     {
+        
+
         timer_4外人.text = "" + tutorial_timer;
 
         index_text.text = "Tutorial  " + Tutorial;
 
-        
-        
+
+
         // Change the subtitles etc
         switch (Tutorial)
         {
@@ -217,12 +239,12 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     tutorial_timer -= 1 * Time.deltaTime;
                 }
                 if (tutorial_timer > 44)
-                {                  
-                    subtitles_4外人.text = "Wait to be revived";
+                {
+                    subtitles_4外人.text = "Wait to be revived by P1";
                     subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
                         "Press the right trigger of your controller";
-                    
-                }                
+
+                }
                 else if (tutorial_timer > 40)
                 {
                     subtitles_4外人.text = "Objective Push P1's cart";
@@ -261,7 +283,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         "hammer the drum";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
-                { 
+                {
                     ++Tutorial;
                 }
                 break;
@@ -271,7 +293,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (payload_ref.position.z > 1.5f)
                 {
                     subtitles_4外人.text = "There is a wall infront grab a bomb to destroy it";
-                    subtitles_4VR.text = "Wait for P2 to destroy it";
+                    subtitles_4VR.text = "P2 has to destroy a wall to proceed";
                     tutorialObjective_3.gameObject.SetActive(true);
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_3);
                 }
@@ -348,7 +370,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
             case 6:
                 // If 2nd shrine encounter
-
                 if (!Objective2)
                 {
                     if (tutorialObjective_7)
@@ -365,7 +386,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         tutorial_timer = 50;
                         ++Tutorial;
                     }
-                }                
+                }
                 break;
             case 7:
                 if (!Objective3)
@@ -417,7 +438,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         Stats_ResourceScript.Instance.m_StartLanternTick = true;
                         if (b_enabled_tutorial)
                             b_enabled_tutorial = false;
-                          
+
                         ++Tutorial;
                         b_bigExplain = false;
                     }
@@ -426,7 +447,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 break;
         }
 
-   
+
 
 
         if (ShowSubtitles)
@@ -441,6 +462,56 @@ public class GameEventsPrototypeScript : MonoBehaviour
         }
 
         
+    }
+
+    void DisableTutorial()
+    {
+        // do once
+        // disable all the tutorial objects in the game
+        if (!disableTutorial)
+        {
+            subtitles_4外人.enabled = false;
+            panel.gameObject.SetActive(false);
+
+            if (Objective1)
+                Destroy(Objective1.gameObject);
+
+            if (Objective2)
+                Destroy(Objective2.gameObject);
+
+            if (Objective3)
+                Destroy(Objective3.gameObject);
+
+            if (tutorialObjective_1)
+                Destroy(tutorialObjective_1.gameObject);
+
+            if (tutorialObjective_2)
+                Destroy(tutorialObjective_2.gameObject);
+
+            if (tutorialObjective_3)
+                Destroy(tutorialObjective_3.gameObject);
+
+            if (tutorialObjective_4)
+                Destroy(tutorialObjective_4.gameObject);
+
+            if (tutorialObjective_5)
+                Destroy(tutorialObjective_5.gameObject);
+
+            if (tutorialObjective_6)
+                Destroy(tutorialObjective_6.gameObject);
+
+            if (tutorialObjective_7)
+                Destroy(tutorialObjective_7.gameObject);
+
+            if (Bomb_Tutorial[0])
+                Destroy(Bomb_Tutorial[0].gameObject);
+
+            if (Bomb_Tutorial[1])
+                Destroy(Bomb_Tutorial[1].gameObject);
+
+            Tutorial = 8;
+            disableTutorial = true;
+        }
 
 
     }
@@ -466,7 +537,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             PauseFunc();
         }
-        
+
         if (b_isPaused)
         {
             Time.timeScale = 0;
@@ -506,6 +577,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     }
                 }
             }
+
+            //if (Statistics.Instance.)
         }
 
 
@@ -514,10 +587,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
             if (condition == WINLOSE.neutral)
                 condition = WINLOSE.win;
         }
-        
+
         if (condition == WINLOSE.lose)
         {
             WinLoseUIScript.Instance.renderimg = -1;
+            if (Endgamestats.Instance)
+            {
+                Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
+            }
+
             //Debug.Log("Nibba just lost");
         }
         else if (condition == WINLOSE.win)
@@ -539,5 +617,21 @@ public class GameEventsPrototypeScript : MonoBehaviour
     {
         return b_isPaused;
     }
-    
+
+
+    public bool ReturnIsLose()
+    {
+        if (Statistics.Instance)
+            Statistics.Instance.incrementLose();
+        return (condition == WINLOSE.lose);
+    }
+
+    public bool ReturnIsWin()
+    {
+        if (Statistics.Instance)
+            Statistics.Instance.incrementWin();
+        return (condition == WINLOSE.win);
+    }
+
+
 }

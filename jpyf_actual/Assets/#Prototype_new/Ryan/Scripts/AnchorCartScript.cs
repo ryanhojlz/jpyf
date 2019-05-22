@@ -41,7 +41,7 @@ public class AnchorCartScript : MonoBehaviour
     {
         if (other.gameObject == m_payLoad.gameObject)
         {
-            Debug.Log("Hi");
+            //Debug.Log("Hi");
             b_startAnchoring = true;
             m_payLoad.transform.position = m_anchorPoint;
         }

@@ -89,6 +89,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     bool disableTutorial = false;
     bool stopTutorial = false;
 
+
+
     GameObject[] fadeoutlist = new GameObject[4];
 
     private void Awake()
@@ -203,6 +205,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
             stopTutorial = true;
         }
 
+        //GameCheatCodes();
+        ReturnToMainMenu();
     }
 
 
@@ -604,6 +608,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
             {
                 Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
             }
+            fadeoutlist[0].SetActive(false);
+            fadeoutlist[1].SetActive(false);
+            fadeoutlist[2].SetActive(false);
+            fadeoutlist[3].SetActive(false);
 
             //Debug.Log("Nibba just lost");
         }
@@ -654,6 +662,26 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
 
 #endif
+    }
+
+
+    void ReturnToMainMenu()
+    {
+        if (condition == WINLOSE.lose || condition == WINLOSE.win)
+        {
+#if UNITY_PS4
+            if (PS4_ControllerScript.Instance.ReturnCrossPress())
+            {
+                GameObject.Find("Sceneload").GetComponent<SceneLoad>().GoBackToMainMenu();
+            }
+#endif
+#if UNITY_EDITOR_WIN
+            if (Input.GetKeyDown(KeyCode.Numlock))
+            {
+                GameObject.Find("Sceneload").GetComponent<SceneLoad>().GoBackToMainMenu();
+            }
+#endif
+        }
     }
 
 }

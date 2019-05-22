@@ -300,7 +300,7 @@ public class MainMenuButton : MonoBehaviour
         float canvasBottom = Mainmenucanvas.transform.position.y - (Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.5f);// * 0.5f * Mainmenucanvas.transform.localScale.y);
         float loadImageBottom = loadImage.transform.position.y - ((loadImage.GetComponent<RectTransform>().rect.height * 0.5f));
 
-        Debug.Log(canvasBottom + " : " + loadImageBottom);
+        //Debug.Log(canvasBottom + " : " + loadImageBottom);
 
         if (canvasBottom <= loadImageBottom + Mainmenucanvas.GetComponent<RectTransform>().rect.height * 0.1f)
             return true;

@@ -165,10 +165,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Tengu Tutorial
         tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
-        fadeoutlist[0] = GameObject.Find("fadeoutend1").gameObject;
-        fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
-        fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
-        fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
+        //fadeoutlist[0] = GameObject.Find("fadeoutend1").gameObject;
+        //fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
+        //fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
+        //fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
 
 
 
@@ -574,6 +574,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (losingTimer <= 0)
                 {
                     condition = WINLOSE.lose;
+                    Statistics.Instance.incrementWin();
                 }
             }
             else

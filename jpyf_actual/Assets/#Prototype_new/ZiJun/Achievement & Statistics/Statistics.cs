@@ -110,15 +110,15 @@ public class Statistics : MonoBehaviour
             Data.Min = 0;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            incrementWin();
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    incrementWin();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            SetTutorialComplete();
-        }
+        //if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    SetTutorialComplete();
+        //}
     }
 
     public void SaveStats()
@@ -159,6 +159,7 @@ public class Statistics : MonoBehaviour
 
     public void incrementWin()
     {
+        Debug.Log("win");
         Data.number_win++;
     }
 

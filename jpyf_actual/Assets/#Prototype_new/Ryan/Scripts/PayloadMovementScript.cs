@@ -32,6 +32,12 @@ public class PayloadMovementScript : MonoBehaviour
     public bool moveSideways = false;
     public bool moveRight = false;
 
+
+
+
+    [Header("if lesser than 1 will be changed to 1")]
+    public float AnotherCartSpeed = 1;
+
     private void Awake()
     {
         if (!Instance)
@@ -51,7 +57,8 @@ public class PayloadMovementScript : MonoBehaviour
         }
 
         payloadRb = payloadObject.GetComponent<Rigidbody>();
-
+        if (AnotherCartSpeed < 1)
+            AnotherCartSpeed = 1;
     }
 	
 	// Update is called once per frame
@@ -96,7 +103,7 @@ public class PayloadMovementScript : MonoBehaviour
                         if (!moveSideways)
                         {
                             var pos = payloadObject.transform.position;
-                            pos += payloadObject.transform.forward * 10 * Time.deltaTime;
+                            pos += (payloadObject.transform.forward * AnotherCartSpeed) * Time.deltaTime;
                             payloadObject.transform.position = pos;
 
                         }                        

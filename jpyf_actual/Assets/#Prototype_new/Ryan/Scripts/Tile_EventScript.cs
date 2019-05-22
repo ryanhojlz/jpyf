@@ -13,7 +13,7 @@ public class Tile_EventScript : MonoBehaviour
     public Light m_lightObj = null;
     public bool b_eventStart = false;
     bool b_dimlights = false;
-
+   
     public float f_spawnTimer = 0;
     
     public int i_shrineHungerMeter = 0;
@@ -21,7 +21,9 @@ public class Tile_EventScript : MonoBehaviour
     // Object List
     public List<Transform> m_spawnList;
     public List<GameObject> enemy_list;
-    
+
+
+    public List<GameObject> spawnedEnemies;
     // Use this for initialization
     void Start ()
     {
@@ -114,9 +116,9 @@ public class Tile_EventScript : MonoBehaviour
                     f_spawnTimer = 5.0f;
                 }
 
-
-
+                
                 SpawnEnemyRandomLocation(Random.Range(0, enemy_list.Count));
+                
             }
         }
         else // If not event Start
@@ -144,6 +146,14 @@ public class Tile_EventScript : MonoBehaviour
                 if (g.id != 5)
                     continue;
                 GameObject.Destroy(g.gameObject);
+            }
+
+            foreach (GameObject g in spawnedEnemies)
+            {
+                if (!g)
+                    continue;
+                Destroy(g.gameObject);
+
             }
 
             Destroy(this.gameObject);
@@ -175,21 +185,24 @@ public class Tile_EventScript : MonoBehaviour
         //    GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
         //    go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
         //}
-
+        if (Stats_ResourceScript.Instance.EnemyCount > 15)
+        {
+            return;
+        }
 
         if (GameEventsPrototypeScript.Instance.Tutorial <= 5)
         {
             GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
             go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            spawnedEnemies.Add(go);
+
         }
         else
         {
             GameObject go = Instantiate(enemy_list[id].gameObject) as GameObject;
             go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            spawnedEnemies.Add(go);
         }
-
-
-
 
     }
 

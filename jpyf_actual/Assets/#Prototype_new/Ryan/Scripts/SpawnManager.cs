@@ -73,7 +73,7 @@ public class SpawnManager : MonoBehaviour
 
     public void RandomSpawn(Vector3 pos, bool idle)
     {
-        float random = Random.Range(0, 15);        
+        float random = Random.Range(0, 15);               
         reuseable = Instantiate(SpawnList[(int)(random % 5)]) as GameObject;
         reuseable.GetComponent<NavMeshAgent>().Warp(pos);
         reuseable.transform.GetChild(0).GetComponent<Entity_Unit>().SetisIdle(idle);

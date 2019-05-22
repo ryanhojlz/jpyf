@@ -165,10 +165,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Tengu Tutorial
         tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
-        fadeoutlist[0] = GameObject.Find("fadeoutend1").gameObject;
-        fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
-        fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
-        fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
+        //fadeoutlist[0] = GameObject.Find("fadeoutend1").gameObject;
+        //fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
+        //fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
+        //fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
 
 
 
@@ -598,7 +598,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
         if (payload_ref.transform.position.z >= 360)
         {
             if (condition == WINLOSE.neutral)
+            {
                 condition = WINLOSE.win;
+                Statistics.Instance.incrementWin();
+                Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
+            }
         }
 
         if (condition == WINLOSE.lose)
@@ -608,10 +612,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
             {
                 Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
             }
-            fadeoutlist[0].SetActive(false);
-            fadeoutlist[1].SetActive(false);
-            fadeoutlist[2].SetActive(false);
-            fadeoutlist[3].SetActive(false);
+
+            //fadeoutlist[0].SetActive(false);
+            //fadeoutlist[1].SetActive(false);
+            //fadeoutlist[2].SetActive(false);
+            //fadeoutlist[3].SetActive(false);
 
             //Debug.Log("Nibba just lost");
         }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WinLoseUIScript : MonoBehaviour
 {
+    bool callonce = false;
     public Sprite WinImage = null;
     public Sprite LoseImage = null;
 
@@ -12,11 +13,18 @@ public class WinLoseUIScript : MonoBehaviour
     Image myImage = null;
 
     public int renderimg = 0;
-
     public static WinLoseUIScript Instance = null;
 
-	// Use this for initialization
-	void Start ()
+    public Text text1 = null;
+    public Text text2 = null;
+    public Text text3 = null;
+    public Text text4 = null;
+    public Text text5 = null;
+    public Text text6 = null;
+
+
+    // Use this for initialization
+    void Start ()
     {
         if (!Instance)
             Instance = this;
@@ -53,8 +61,30 @@ public class WinLoseUIScript : MonoBehaviour
                 break;
         }
 
+        Debug.Log("ADAWDAWDWAD " + GameEventsPrototypeScript.Instance.ReturnIsLose());
 
-
-
+        if (GameEventsPrototypeScript.Instance.ReturnIsWin() || GameEventsPrototypeScript.Instance.ReturnIsLose())
+        {
+            if (!callonce)
+            {
+                Endgamestats.Instance.calDistTravelled();
+                callonce = true;
+            }
+            text1.text = "" + Endgamestats.Instance.ReturnDistanceTravel();
+            text2.text = "" + Endgamestats.Instance.ReturnLanterUpTime();
+            text3.text = "" + Endgamestats.Instance.ReturnLightCollected();
+            text4.text = "" + Endgamestats.Instance.ReturnWoodCollected();
+            text5.text = "" + Endgamestats.Instance.ReturnPlayerHealingDone();
+            text6.text = "" + Endgamestats.Instance.ReturnCartHealingDone();
+        }
+        else
+        {
+            text1.text = "";
+            text2.text = "";
+            text3.text = "";
+            text4.text = "";
+            text5.text = "";
+            text6.text = "";
+        }
     }
 }

@@ -38,7 +38,7 @@ public class Endgamestats : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        DontDestroyOnLoad(this.gameObject);
     }
 
 
@@ -87,4 +87,39 @@ public class Endgamestats : MonoBehaviour
     {
         Data.cart_healing += heal;
     }
+
+
+    // Returners
+    public int ReturnCartHealingDone()
+    {
+        return Data.cart_healing;
+    }
+
+    public int ReturnPlayerHealingDone()
+    {
+        return Data.player2_healing;
+    }
+
+    public int ReturnWoodCollected()
+    {
+        return Data.wood_collected;
+    }
+
+    public int ReturnLightCollected()
+    {
+        return Data.light_collected;
+    }
+
+    public float ReturnLanterUpTime()
+    {
+        return Data.light_up_time;
+    }
+
+    public float ReturnDistanceTravel()
+    {
+        return Data.distTravelled;
+    }
+
+   
+
 }

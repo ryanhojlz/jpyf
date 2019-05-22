@@ -72,7 +72,7 @@ public class LanternSound : MonoBehaviour
 
         if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.7f)
         {
-            Debug.Log("Full");
+            //Debug.Log("Full");
             Psource.volume = 0.5f;
         }
         else if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.5f)
@@ -85,13 +85,13 @@ public class LanternSound : MonoBehaviour
         }
         else if (Instance.m_LanternHp >= Instance.m_LanternHpCap * 0.0f)
         {
-            Debug.Log("Empty");
+            //Debug.Log("Empty");
             Psource.volume = 0.0f;
         }
 
         if (!Psource.isPlaying)
         {
-            Debug.Log("Play");
+           // Debug.Log("Play");
             Psource.Play();
         }
 

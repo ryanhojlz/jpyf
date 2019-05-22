@@ -36,6 +36,8 @@ public class Spawning_Bomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckIfSlotAvaliable();
+
         if (previousTime + TimerToSpawn < Time.time)
         {
             readyToSpawn = true;
@@ -61,6 +63,19 @@ public class Spawning_Bomb : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void CheckIfSlotAvaliable()
+    {
+        foreach (Transform bs in listOfBombSpawner)//Searching where there is an open slot to spawn the bomb
+        {
+            if (bs.childCount == 0)
+            {
+                return;
+            }
+        }
+
+        previousTime = Time.time;
     }
 
     void BombHasSpawn()//What to do after the bomb has spawned

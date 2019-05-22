@@ -15,7 +15,8 @@ public class Achievement_List : MonoBehaviour
 
     public List<RectTransform> Achievement_Panels = new List<RectTransform>();
 
-    float offsetPercentage = 0.050f;
+    //float offsetPercentage = 0.050f;
+    float offsetPercentage = 0.00f;
     float offsetBetween = 0f;
 
     float offsetUpPercentage = 0.1f;

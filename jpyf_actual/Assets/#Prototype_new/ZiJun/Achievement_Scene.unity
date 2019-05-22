@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 36631553}
   - component: {fileID: 36631552}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3791a38a0572c724da068128ea32cb40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5864beb761a075b49a0b0f12e19b8034, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -973,7 +973,7 @@ Prefab:
     - target: {fileID: 224767170379695308, guid: d259d5825a213754ab727006ad5e3ce1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -17.6
       objectReference: {fileID: 0}
     - target: {fileID: 224767170379695308, guid: d259d5825a213754ab727006ad5e3ce1,
         type: 2}
@@ -983,7 +983,7 @@ Prefab:
     - target: {fileID: 224767170379695308, guid: d259d5825a213754ab727006ad5e3ce1,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 164.7
       objectReference: {fileID: 0}
     - target: {fileID: 224767170379695308, guid: d259d5825a213754ab727006ad5e3ce1,
         type: 2}
@@ -1022,8 +1022,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1493114797774686, guid: d259d5825a213754ab727006ad5e3ce1, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114381576384058262, guid: d259d5825a213754ab727006ad5e3ce1,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 89a9ba8d577f0e1489de30aa08b0c12e,
+        type: 3}
+    - target: {fileID: 114381576384058262, guid: d259d5825a213754ab727006ad5e3ce1,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 89a9ba8d577f0e1489de30aa08b0c12e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d259d5825a213754ab727006ad5e3ce1, type: 2}
   m_IsPrefabParent: 0

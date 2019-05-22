@@ -24,6 +24,8 @@ public class Object_Breaking : MonoBehaviour
 
     protected AudioClip objectAudio = null;
     AudioSource source = null;
+
+    bool DestoryThis = false;
     // Use this for initialization
     void Start()
     {
@@ -42,6 +44,11 @@ public class Object_Breaking : MonoBehaviour
         if (m_successGather)
         {
             SpawnObject();
+        }
+
+        if (DestoryThis && !source.isPlaying)
+        {
+            Destroy(this.gameObject);
         }
 
     }
@@ -68,6 +75,9 @@ public class Object_Breaking : MonoBehaviour
 
     public void SpawnObject()
     {
+        if (DestoryThis)
+            return;
+
         if (ObjPrefeb)
         {
             for (int i = 0; i < m_totalResource; ++i)
@@ -80,7 +90,8 @@ public class Object_Breaking : MonoBehaviour
                 item.transform.position = temppos;
             }
             minigame.RemoveFromList(this);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            DestoryThis = true;
         }
         else
         {

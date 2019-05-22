@@ -53,7 +53,7 @@ Shader "Polybrush/Example/Simple Texture Blend"
 				float4 uv2 : TEXCOORD1;
 				float4 uv3 : TEXCOORD2;
 				float4 color : COLOR;
-				UNITY_FOG_COORDS(1)
+				UNITY_FOG_COORDS(100)
 				float4 vertex : SV_POSITION;
 			};
 

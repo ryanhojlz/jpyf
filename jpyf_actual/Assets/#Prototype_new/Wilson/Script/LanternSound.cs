@@ -32,42 +32,68 @@ public class LanternSound : MonoBehaviour
     {
         //Player = Object_ControlScript.Instance;
         Debug.Log(lanternSound);
-        if (!Payload)
-        {
-            Debug.Log("No player found");
-            return;
-        }
-        if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.7f && !Psource.isPlaying)
-        {
-            Psource.clip = lanternSound;
-            Psource.volume = 0.7f;
-            Debug.Log(Psource.clip);
-
-            Debug.Log("Play ");
-
-            Psource.Play();
-            
-        }
-        else if (Instance.m_LanternHp < Instance.m_LanternHpCap * 0.69f && Instance.m_LanternHp > Instance.m_LanternHpCap * 0.3f)
-        {
-            //Psource.clip = lanternSound;
-            Psource.volume = 0.4f;
-            //Debug.Log(Psource.clip);
-            //Psource.Play();
-        }
-        else if(Instance.m_LanternHp < Instance.m_LanternHpCap * 0.29f)
-        {
-            Psource.volume = 0.2f;
-        }
-        //else if (Psource.isPlaying)
+        //if (!Payload)
         //{
-        //    Psource.clip = movestep;
-        //    Debug.Log(Psource.clip);
-        //    Psource.Stop();
+        //    Debug.Log("No player found");
+        //    return;
         //}
-        else
+        //if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.7f && !Psource.isPlaying)
+        //{
+        //    Psource.clip = lanternSound;
+        //    Psource.volume = 0.7f;
+        //    Debug.Log(Psource.clip);
+
+        //    Debug.Log("Play ");
+
+        //    Psource.Play();
+
+        //}
+        //else if (Instance.m_LanternHp < Instance.m_LanternHpCap * 0.69f && Instance.m_LanternHp > Instance.m_LanternHpCap * 0.3f)
+        //{
+        //    //Psource.clip = lanternSound;
+        //    Psource.volume = 0.4f;
+        //    //Debug.Log(Psource.clip);
+        //    //Psource.Play();
+        //}
+        //else if(Instance.m_LanternHp < Instance.m_LanternHpCap * 0.29f)
+        //{
+        //    Psource.volume = 0.2f;
+        //}
+        ////else if (Psource.isPlaying)
+        ////{
+        ////    Psource.clip = movestep;
+        ////    Debug.Log(Psource.clip);
+        ////    Psource.Stop();
+        ////}
+        //else
+        //{
+        //    //Psource.Stop();
+        //}
+
+        if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.7f)
         {
-            //Psource.Stop();
+            Debug.Log("Full");
+            Psource.volume = 0.01f;
         }
+        else if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.5f)
+        {
+            Psource.volume = 0.005f;
+        }
+        else if (Instance.m_LanternHp > Instance.m_LanternHpCap * 0.3f)
+        {
+            Psource.volume = 0.001f;
+        }
+        else if (Instance.m_LanternHp >= Instance.m_LanternHpCap * 0.0f)
+        {
+            Debug.Log("Empty");
+            Psource.volume = 0.0f;
+        }
+
+        if (!Psource.isPlaying)
+        {
+            Debug.Log("Play");
+            Psource.Play();
+        }
+
     }
 }

@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip VR_Drum;
     public AudioClip VR_Projectile;
     public AudioClip P2_movement;
+    public AudioClip DayTimeBGaudio;
+    public AudioClip NightTimeBGaudio;
 
     public static AudioManager Instance = null;
     // Use this for initialization

@@ -89,6 +89,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     bool disableTutorial = false;
     bool stopTutorial = false;
 
+    GameObject[] fadeoutlist = new GameObject[4];
+
     private void Awake()
     {
 
@@ -161,12 +163,18 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Tengu Tutorial
         tutorialObjective_7 = GameObject.Find("TutorialObjective_7").transform;
 
+        fadeoutlist[0] = GameObject.Find("fadeoutend1").gameObject;
+        fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
+        fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
+        fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
+
+
+
 
         if (Tutorial == 0)
         {
             Stats_ResourceScript.Instance.m_P2_hp = 0;
         }
-
 
     }
 
@@ -184,7 +192,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             DisableTutorial();
         }
-        else
+        else if (!stopTutorial)
         {
             UpdateTutorial();
         }
@@ -233,7 +241,6 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 ShowSubtitles = true;
                 // Text timer
                 Stats_ResourceScript.Instance.m_LanternHp = 100;
-
                 if (Stats_ResourceScript.Instance.m_P2_hp >= 100)
                 {
                     tutorial_timer -= 1 * Time.deltaTime;
@@ -510,6 +517,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 Destroy(Bomb_Tutorial[1].gameObject);
 
             Tutorial = 8;
+            Stats_ResourceScript.Instance.m_StartLanternTick = true;
+
             disableTutorial = true;
         }
 

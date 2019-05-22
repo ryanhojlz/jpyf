@@ -141,6 +141,7 @@ public class PS4_ControllerScript : MonoBehaviour
             else if (!UnityEngine.XR.XRSettings.showDeviceView)
                 UnityEngine.XR.XRSettings.showDeviceView = true;
 
+            Stats_ResourceScript.Instance.ResetStats();
         }
 
 

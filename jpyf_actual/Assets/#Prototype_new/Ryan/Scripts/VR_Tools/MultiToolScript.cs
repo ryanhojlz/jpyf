@@ -44,6 +44,8 @@ public class MultiToolScript : GrabbableObject
         ListOfTools[1].gameObject.SetActive(false);
         ListOfTools[2].gameObject.SetActive(false);
 
+
+
     }
 
     // Update is called once per frame
@@ -59,6 +61,8 @@ public class MultiToolScript : GrabbableObject
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         b_ToolReleased = false;
         controllerRef = currentController;
+        var rot = this.transform.eulerAngles;
+        Debug.Log("waeawdaw rotation " + rot);
     }
 
     public override void OnGrabReleased(MoveController currentController)

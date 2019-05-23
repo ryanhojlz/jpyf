@@ -124,6 +124,14 @@ public class Entity_Tengu : Entity_Unit
 
         if (HoldUnit)
         {
+            if (sm.GetCurrentStateName() != "attack")
+            {
+                sm.ChangeState("attack");
+            }
+        }
+
+        if (HoldUnit)
+        {
             if (HoldUnit)
             {
                 if (HoldUnit.transform.parent)

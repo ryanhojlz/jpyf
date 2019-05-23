@@ -114,6 +114,8 @@ public class Object_ControlScript : MonoBehaviour
     {
         if (GameEventsPrototypeScript.Instance.b_bigExplain)
             return;
+        if (GameEventsPrototypeScript.Instance.ReturnIsLose())
+            return;
 
         
         // Update Debuff speed

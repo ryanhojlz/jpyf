@@ -90,8 +90,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     bool stopTutorial = false;
 
 
-
-    GameObject[] fadeoutlist = new GameObject[4];
+  
+    public GameObject[] fadeoutlist = new GameObject[8];
 
     private void Awake()
     {
@@ -170,7 +170,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
         //fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
         //fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
 
-
+        foreach (GameObject g in fadeoutlist)
+        {
+            g.SetActive(true);
+        }
 
 
         if (Tutorial == 0)
@@ -481,6 +484,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // disable all the tutorial objects in the game
         if (!disableTutorial)
         {
+
+            b_enabled_tutorial = false;
+
             subtitles_4外人.enabled = false;
             panel.gameObject.SetActive(false);
 
@@ -609,11 +615,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
             {
                 Endgamestats.Instance.SetEndPos(PayloadMovementScript.Instance.payloadObject.transform.position);
             }
-            fadeoutlist[0].SetActive(false);
-            fadeoutlist[1].SetActive(false);
-            fadeoutlist[2].SetActive(false);
-            fadeoutlist[3].SetActive(false);
+            //fadeoutlist[0].SetActive(false);
+            //fadeoutlist[1].SetActive(false);
+            //fadeoutlist[2].SetActive(false);
+            //fadeoutlist[3].SetActive(false);
 
+            foreach (GameObject g in fadeoutlist)
+            {
+                g.SetActive(false);
+            }
             //Debug.Log("Nibba just lost");
         }
         else if (condition == WINLOSE.win)

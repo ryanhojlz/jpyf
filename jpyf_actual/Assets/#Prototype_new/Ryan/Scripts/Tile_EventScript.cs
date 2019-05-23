@@ -21,6 +21,8 @@ public class Tile_EventScript : MonoBehaviour
     // Object List
     public List<Transform> m_spawnList;
     public List<GameObject> enemy_list;
+
+    public List<GameObject> spawnedEnemies;
     
     // Use this for initialization
     void Start ()
@@ -175,19 +177,23 @@ public class Tile_EventScript : MonoBehaviour
         //    GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
         //    go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
         //}
-
+        if (spawnedEnemies.Count > 5)
+            return;
 
         if (GameEventsPrototypeScript.Instance.Tutorial <= 5)
         {
             GameObject go = Instantiate(enemy_list[1].gameObject) as GameObject;
             go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
+            spawnedEnemies.Add(go);
+
         }
         else
         {
             GameObject go = Instantiate(enemy_list[id].gameObject) as GameObject;
             go.GetComponent<NavMeshAgent>().Warp(m_spawnList[Random.Range(0, m_spawnList.Count)].position);
-        }
+            spawnedEnemies.Add(go);
 
+        }
 
 
 

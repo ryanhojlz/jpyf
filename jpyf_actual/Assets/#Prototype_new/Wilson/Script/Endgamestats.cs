@@ -78,9 +78,9 @@ public class Endgamestats : MonoBehaviour
         Data.wood_collected++;
     }
 
-    public void getPlayer2healing()
+    public void incrementPlayer2healing(int healing)
     {
-
+        Data.player2_healing += healing;
     }
 
     public void CartHeal(int heal)

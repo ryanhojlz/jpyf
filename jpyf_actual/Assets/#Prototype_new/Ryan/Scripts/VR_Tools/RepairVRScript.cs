@@ -55,8 +55,17 @@ public class RepairVRScript : MonoBehaviour {
                 handler.Cart_TakeDmg(-10);
                 handler.m_Minerals -= 10;
                 //handler.m_CartHP += 10;
+
+                if (Endgamestats.Instance)
+                {
+                    Endgamestats.Instance.CartHeal(10);
+                }
             }
             handler.Cart_TakeDmg(-1);
+            if (Endgamestats.Instance)
+            {
+                Endgamestats.Instance.CartHeal(1);
+            }
         }
 
     }

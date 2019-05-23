@@ -92,6 +92,8 @@ public class Prompt_Key : MonoBehaviour
                 }
 
                 SetObjectiveTarget(tempTargetHolder);
+
+                //Debug.Log("Setting");
             }
         }
         else

@@ -220,9 +220,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             bombspawner.SetActive(false);
         }
+        if (Tutorial >= 9)
+        {
+            b_bigExplain = false;
+        }
+
 
         GameCheatCodes();
         ReturnToMainMenu();
+        
     }
 
 
@@ -546,7 +552,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             if (Bomb_Tutorial[1])
                 Destroy(Bomb_Tutorial[1].gameObject);
 
-            Tutorial = 8;
+            Tutorial = 10;
             Stats_ResourceScript.Instance.m_StartLanternTick = true;
 
             disableTutorial = true;

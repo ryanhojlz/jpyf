@@ -170,7 +170,8 @@ public class Stats_ResourceScript : MonoBehaviour
         {
             if (Endgamestats.Instance)
             {
-                Endgamestats.Instance.IncrementLightUpTime();
+                if (!GameEventsPrototypeScript.Instance.ReturnIsWin() && !GameEventsPrototypeScript.Instance.ReturnIsLose())
+                    Endgamestats.Instance.IncrementLightUpTime();
             }
         }
 

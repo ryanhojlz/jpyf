@@ -84,28 +84,28 @@ public class WinLoseUIScript : MonoBehaviour
 
         //Debug.Log("ADAWDAWDWAD " + GameEventsPrototypeScript.Instance.ReturnIsLose());
 
-        //if (GameEventsPrototypeScript.Instance.ReturnIsWin() || GameEventsPrototypeScript.Instance.ReturnIsLose())
-        //{
-        //    if (!callonce)
-        //    {
-        //        Endgamestats.Instance.calDistTravelled();
-        //        callonce = true;
-        //    }
-        //    text1.text = "" + Endgamestats.Instance.ReturnDistanceTravel();
-        //    text2.text = "" + Endgamestats.Instance.ReturnLanterUpTime();
-        //    text3.text = "" + Endgamestats.Instance.ReturnLightCollected();
-        //    text4.text = "" + Endgamestats.Instance.ReturnWoodCollected();
-        //    text5.text = "" + Endgamestats.Instance.ReturnPlayerHealingDone();
-        //    text6.text = "" + Endgamestats.Instance.ReturnCartHealingDone();
-        //}
-        //else
-        //{
-        //    text1.text = "";
-        //    text2.text = "";
-        //    text3.text = "";
-        //    text4.text = "";
-        //    text5.text = "";
-        //    text6.text = "";
-        //}
+        if (GameEventsPrototypeScript.Instance.ReturnIsWin() || GameEventsPrototypeScript.Instance.ReturnIsLose())
+        {
+            if (!callonce)
+            {
+                Endgamestats.Instance.calDistTravelled();
+                callonce = true;
+            }
+            text1.text = "" + Endgamestats.Instance.ReturnDistanceTravel();
+            text2.text = "" + Endgamestats.Instance.ReturnLanterUpTime();
+            text3.text = "" + Endgamestats.Instance.ReturnLightCollected();
+            text4.text = "" + Endgamestats.Instance.ReturnWoodCollected();
+            text5.text = "" + Endgamestats.Instance.ReturnPlayerHealingDone();
+            text6.text = "" + Endgamestats.Instance.ReturnCartHealingDone();
+        }
+        else
+        {
+            text1.text = "";
+            text2.text = "";
+            text3.text = "";
+            text4.text = "";
+            text5.text = "";
+            text6.text = "";
+        }
     }
 }

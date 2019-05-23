@@ -220,9 +220,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
             bombspawner.SetActive(false);
         }
+        if (Tutorial >= 9)
+        {
+            b_bigExplain = false;
+        }
+
 
         GameCheatCodes();
         ReturnToMainMenu();
+        
     }
 
 
@@ -546,7 +552,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
             if (Bomb_Tutorial[1])
                 Destroy(Bomb_Tutorial[1].gameObject);
 
-            Tutorial = 8;
+            Tutorial = 10;
             Stats_ResourceScript.Instance.m_StartLanternTick = true;
 
             disableTutorial = true;
@@ -600,7 +606,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (losingTimer <= 0)
                 {
                     condition = WINLOSE.lose;
-                    Statistics.Instance.incrementWin();
+                    Statistics.Instance.incrementLose();
                 }
             }
             else
@@ -670,15 +676,15 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     public bool ReturnIsLose()
     {
-        if (Statistics.Instance)
-            Statistics.Instance.incrementLose();
+        //if (Statistics.Instance)
+        //    Statistics.Instance.incrementLose();
         return (condition == WINLOSE.lose);
     }
 
     public bool ReturnIsWin()
     {
-        if (Statistics.Instance)
-            Statistics.Instance.incrementWin();
+        //if (Statistics.Instance)
+        //    Statistics.Instance.incrementWin();
         return (condition == WINLOSE.win);
     }
 

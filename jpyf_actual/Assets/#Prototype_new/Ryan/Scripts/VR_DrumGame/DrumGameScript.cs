@@ -121,7 +121,7 @@ public class DrumGameScript : MonoBehaviour
             if (Endgamestats.Instance)
             {
                 if (Stats_ResourceScript.Instance.m_P2_hp < 100)
-                    Endgamestats.Instance.CartHeal(-10);
+                    Endgamestats.Instance.incrementPlayer2healing(10);
             }
             // Play particle effect
             particleFeedback.GetComponent<ParticleSystem>().Play();

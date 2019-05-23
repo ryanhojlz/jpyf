@@ -207,10 +207,11 @@ public class Entity_Tengu : Entity_Unit
 
         if ((!HoldUnit 
             || !HoldUnit.activeSelf 
-            || ((HoldUnit.tag == "Player2") 
-            && (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
+            || (
+            (resource.m_P2_hp <= 0))) && isGrabbing)//This will run if it used to be grabbing something but now not
         {
-            if ((GetTarget().tag == "Player2" && (resource.m_P2_hp <= 0)))
+            if ((HoldUnit.tag == "Player2" 
+                && (resource.m_P2_hp <= 0)))
             {
                 Debug.Log("Here");
                 m_flyAway = true;

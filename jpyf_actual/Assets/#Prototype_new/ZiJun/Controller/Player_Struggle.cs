@@ -20,6 +20,13 @@ public class Player_Struggle : MonoBehaviour
             {
                 Struggle();
             }
+
+#if UNITY_PS4
+            if (PS4_ControllerScript.Instance.ReturnCrossPress())
+            {
+                Struggle();
+            }
+#endif
         }
     }
 

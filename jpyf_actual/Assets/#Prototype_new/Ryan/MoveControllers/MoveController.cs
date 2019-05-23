@@ -634,4 +634,9 @@ public class MoveController : MonoBehaviour
     }
 
 
+    public bool ReturnIsGrabbing()
+    {
+        return (GetButton(MoveControllerHotkeys.buttonGrab));
+    }
+
 }

@@ -80,6 +80,8 @@ public class WinLoseUIScript : MonoBehaviour
                 break;
         }
 
+
+
         //Debug.Log("ADAWDAWDWAD " + GameEventsPrototypeScript.Instance.ReturnIsLose());
 
         //if (GameEventsPrototypeScript.Instance.ReturnIsWin() || GameEventsPrototypeScript.Instance.ReturnIsLose())

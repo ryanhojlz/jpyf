@@ -36,7 +36,7 @@ public class PickUp_Audio : MonoBehaviour
         if (Player.pickup)
         {
             Psource.clip = pickup;
-            Debug.Log(Psource.clip);
+            //Debug.Log(Psource.clip);
             Psource.Play();
         }
         //else if (Psource.isPlaying)

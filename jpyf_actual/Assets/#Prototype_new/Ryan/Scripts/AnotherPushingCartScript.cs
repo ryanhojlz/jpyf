@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class AnotherPushingCartScript : MonoBehaviour
 {
@@ -11,7 +13,7 @@ public class AnotherPushingCartScript : MonoBehaviour
     Rigidbody cartRb = null;
     Rigidbody playerrb = null;
     Vector3 pushingforce = Vector3.zero;
-
+    public Image icon = null;
     [Header("-1 for Left / +1 for Right")]
     public int AxisLR = 0;
 
@@ -27,6 +29,16 @@ public class AnotherPushingCartScript : MonoBehaviour
         cartRb = cart.GetComponent<Rigidbody>();
 
         pushingforce.Set(20, 0, 0);
+        if (icon == null)
+        {
+            icon = GameObject.Find("PushingIcon").GetComponent<Image>();
+            icon.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            icon.gameObject.SetActive(false);
+        }
     }
 
 
@@ -52,6 +64,10 @@ public class AnotherPushingCartScript : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+
+            }
         }
 #endif
 
@@ -76,12 +92,34 @@ public class AnotherPushingCartScript : MonoBehaviour
             }
         }
 #endif
+
+
+        if (PayloadMovementScript.Instance.moveSideways)
+        {
+            if (playerEnter)
+            {
+                icon.gameObject.SetActive(true);
+            }
+            else
+            {
+                icon.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            icon.gameObject.SetActive(false);
+
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)
+        {
             playerEnter = true;
+
+        }
     }
 
     private void OnTriggerExit(Collider other)

@@ -26,6 +26,8 @@ public class PlayerAnimScript : MonoBehaviour
     bool Anim_IsWalking = false;
     bool Anim_IsWalkingCarry = false;
 
+
+
     // If got caught
     bool Anim_IsCaught = false;
 
@@ -57,6 +59,16 @@ public class PlayerAnimScript : MonoBehaviour
         UpdateMovementAnim();
         UpdateGettingCaught();
         UpdateDeathAnim();
+
+        if (Object_ControlScript.Instance.jump)
+        {
+            AnimatorObj.SetTrigger("Anim_IsJumping");
+        }
+        else if (Object_ControlScript.Instance.dashAtk)
+        {
+            AnimatorObj.SetTrigger("Anim_IsDashing");
+        }
+
         // Always setting this
         AnimatorObj.SetBool("Anim_IsIdle", Anim_IsIdle);
         AnimatorObj.SetBool("Anim_IsIdleCarry", Anim_IsIdleCarry);

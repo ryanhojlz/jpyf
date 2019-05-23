@@ -52,7 +52,7 @@ public class SceneLoad : MonoBehaviour
 
             if (!CheckDown())
             {
-                Debug.Log("mOVE DOWN");
+                //Debug.Log("mOVE DOWN");
                 loadScreenMove.y += 30 * Time.deltaTime;
             }
 

@@ -22,6 +22,9 @@ public class WinLoseUIScript : MonoBehaviour
     public Text text5 = null;
     public Text text6 = null;
 
+    bool win = false;
+    bool lose = false;
+
 
     // Use this for initialization
     void Start ()
@@ -33,7 +36,6 @@ public class WinLoseUIScript : MonoBehaviour
 
 
         myImage = GetComponent<Image>();
-
     }
 	
 	// Update is called once per frame
@@ -45,9 +47,18 @@ public class WinLoseUIScript : MonoBehaviour
         switch (renderimg)
         {
             case -1:
-                imgColor.a = 255;
-                myImage.color = imgColor;
-                myImage.sprite = LoseImage;
+                {
+                    imgColor.a = 255;
+                    myImage.color = imgColor;
+                    myImage.sprite = LoseImage;
+
+                    if (!lose)
+                    {
+                        if (Statistics.Instance)
+                            Statistics.Instance.incrementLose();
+                        lose = true;
+                    }
+                }
                 break;
             case 0:
                 imgColor.a = 0;
@@ -55,9 +66,17 @@ public class WinLoseUIScript : MonoBehaviour
                 myImage.sprite = null;
                 break;
             case 1:
-                imgColor.a = 255;
-                myImage.color = imgColor;
-                myImage.sprite = WinImage;
+                {
+                    imgColor.a = 255;
+                    myImage.color = imgColor;
+                    myImage.sprite = WinImage;
+                    if (!win)
+                    {
+                        if(Statistics.Instance)
+                            Statistics.Instance.incrementWin();
+                        win = true;
+                    }
+                }
                 break;
         }
 

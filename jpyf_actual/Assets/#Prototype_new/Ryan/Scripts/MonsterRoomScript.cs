@@ -65,7 +65,7 @@ public class MonsterRoomScript : MonoBehaviour
         // Collided with payload
         if (other.transform == PayloadMovementScript.Instance.payloadObject)
         {
-            Debug.Log("????");
+
             // If havent spawn yet
             if (!b_start_spawning)
             {

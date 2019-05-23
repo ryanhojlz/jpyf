@@ -27,7 +27,12 @@ public class LanternItemCreationScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (objectinplace == null)
+        //if (objectinplace == null)
+        //{
+            
+        //}
+
+        if (objectinplace.transform.parent != this.transform)
         {
             if (handler.m_Souls > 10)
             {

@@ -255,7 +255,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (tutorial_timer > 44)
                 {
                     subtitles_4外人.text = "Wait to be revived by P1";
-                    subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you" +
+                    subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you\n" +
                         "Press the right trigger of your controller";
 
                 }
@@ -294,7 +294,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     // When you get enough materials change text
                     subtitles_4VR.text = "You have gained some materials,\n" +
                         "Grab the tool on the left & press square \n " +
-                        "hammer the drum";
+                        "hammer the drum to repair \n you repair faster with materials";
                 }
                 if (Stats_ResourceScript.Instance.m_CartHP >= 20)
                 {
@@ -467,11 +467,13 @@ public class GameEventsPrototypeScript : MonoBehaviour
         if (ShowSubtitles)
         {
             subtitles_4外人.enabled = true;
+            subtitles_4VR.gameObject.SetActive(true);
             panel.gameObject.SetActive(true);
         }
         else
         {
             subtitles_4外人.enabled = false;
+            subtitles_4VR.gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
         }
 

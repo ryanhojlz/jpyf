@@ -43,7 +43,7 @@ public class MultiToolScript : GrabbableObject
         ListOfTools[0].gameObject.SetActive(false);
         ListOfTools[1].gameObject.SetActive(false);
         ListOfTools[2].gameObject.SetActive(false);
-
+        ListOfTools[3].gameObject.SetActive(false);
 
 
     }
@@ -93,6 +93,8 @@ public class MultiToolScript : GrabbableObject
             ListOfTools[0].gameObject.SetActive(false);
             ListOfTools[1].gameObject.SetActive(false);
             ListOfTools[2].gameObject.SetActive(false);
+            ListOfTools[3].gameObject.SetActive(false);
+
             //b_ToolReleased = false;
         }
     }
@@ -109,6 +111,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(false);
+                ListOfTools[3].gameObject.SetActive(true);
             }
             // Circle button
             else if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonConfirm))
@@ -116,6 +119,8 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(true);
+                ListOfTools[3].gameObject.SetActive(false);
+
             }
             // Square button // Change to hammer
             else if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonSquare))
@@ -123,6 +128,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[0].gameObject.SetActive(true);
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(false);
+                ListOfTools[3].gameObject.SetActive(false);
 
             }
             // Triangle button // Change to weapon
@@ -131,6 +137,8 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[0].gameObject.SetActive(false);
                 ListOfTools[1].gameObject.SetActive(true);
                 ListOfTools[2].gameObject.SetActive(false);
+                ListOfTools[3].gameObject.SetActive(false);
+
             }
 
             if (ListOfTools[2].gameObject.activeInHierarchy)

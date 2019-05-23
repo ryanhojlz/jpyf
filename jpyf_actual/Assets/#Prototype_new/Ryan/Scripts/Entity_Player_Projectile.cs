@@ -9,11 +9,11 @@ public class Entity_Player_Projectile : Entity_Projectile
 
     public override void HitCart(Collider other)
     {
-        Debug.Log("Hi");
+        //Debug.Log("Hi");
     }
 
     public override void HitPlayer(Collider other)
     {
-        Debug.Log("Hi");
+       // Debug.Log("Hi");
     }
 }

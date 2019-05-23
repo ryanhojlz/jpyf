@@ -69,7 +69,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     // Pause Func
     bool b_isPaused = false;
 
-    
+    public GameObject decorations = null;
 
     // Win lose stuff
     enum WINLOSE
@@ -89,7 +89,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
     bool disableTutorial = false;
     bool stopTutorial = false;
 
-
+    GameObject bombspawner = null;
   
     public GameObject[] fadeoutlist = new GameObject[8];
 
@@ -108,7 +108,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
     void Start()
     {
 
-
+        bombspawner = GameObject.Find("BombSpawner_OnPayload");
+        bombspawner.SetActive(false);
         //
         b_enabled_tutorial = true;
         //Stats_ResourceScript.Instance.m_StartLanternTick = true;
@@ -133,6 +134,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         // Assigning text for debug
         index_text = GameObject.Find("TutorialNumber").GetComponent<Text>();
 
+        decorations = GameObject.Find("Deco");
 
 
         // Assign Objectives
@@ -169,6 +171,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
         //fadeoutlist[1] = GameObject.Find("fadeoutend2").gameObject;
         //fadeoutlist[2] = GameObject.Find("fadeoutend3").gameObject;
         //fadeoutlist[3] = GameObject.Find("fadeoutend4").gameObject;
+
+        
 
         foreach (GameObject g in fadeoutlist)
         {
@@ -208,7 +212,16 @@ public class GameEventsPrototypeScript : MonoBehaviour
             stopTutorial = true;
         }
 
-        //GameCheatCodes();
+        if (Tutorial >= 5)
+        {
+            bombspawner.SetActive(true);
+        }
+        else
+        {
+            bombspawner.SetActive(false);
+        }
+
+        GameCheatCodes();
         ReturnToMainMenu();
     }
 
@@ -255,8 +268,10 @@ public class GameEventsPrototypeScript : MonoBehaviour
                 if (tutorial_timer > 44)
                 {
                     subtitles_4外人.text = "Wait to be revived by P1";
-                    subtitles_4VR.text = "Revive P2 \n Grab the the drum sticks infront of you\n" +
-                        "Press the right trigger of your controller";
+                    subtitles_4VR.text = "Revive P2 \n Grab the the tools infront of you\n" +
+                        "Press the right trigger of your controller\n" +
+                        "Press X on controller to change to drum\n" +
+                        "& Hit drum";
 
                 }
                 else if (tutorial_timer > 40)
@@ -370,8 +385,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     Follow_Objective.Instance.SetObjectiveTarget(tutorialObjective_6);
 
                     ShowSubtitles = true;
-                    subtitles_4外人.text = "Some enemies have shields and need to be broken down by bombs";
-                    subtitles_4VR.text = "Some enemies have shields and need to be broken down by bombs";
+                    subtitles_4外人.text = "Some enemies have shields & need to be broken down by bombs, You also have a dash by pressing R1";
+                    subtitles_4VR.text = "Some enemies have shields\n" +
+                        "& need to be broken down by bombs";
                 }
                 if (tutorialObjective_6.transform.childCount <= 0)
                 {
@@ -391,7 +407,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
                         ShowSubtitles = true;
                         subtitles_4外人.text = "Tengus will grab you be careful";
                         subtitles_4VR.text = "Tengus will grab P1\n" +
-                            "Press the Circle Button for Staff";
+                            "Press the Circle Button for Staff\n" +
+                            "Press the Middle Button to Fire";
                     }
                     if (tutorialObjective_7.childCount <= 0)
                     {
@@ -422,20 +439,16 @@ public class GameEventsPrototypeScript : MonoBehaviour
                     }
                     else if (tutorial_timer > 35)
                     {
-                        subtitles_4外人.text = "If the lantern dies out a timer will start ticking ";
-                        subtitles_4VR.text = "If the lantern dies out a timer will start ticking";
+                        subtitles_4外人.text = "If the lantern dies out a it will get darker ";
+                        subtitles_4VR.text = "If the lantern dies out\n" +
+                            "It will get darker";
                     }
                     else if (tutorial_timer > 30)
                     {
-                        subtitles_4外人.text = "Once the timer reaches 0 P1 & P2 lose";
-                        subtitles_4VR.text = "Once the timer reaches 0 P1 & P2 lose";
+                        subtitles_4外人.text = "Once it gets too dark you lose";
+                        subtitles_4VR.text = "Once it gets too dark you lose";
                     }
                     else if (tutorial_timer > 25)
-                    {
-                        subtitles_4外人.text = "Once the timer reaches 0 P1 & P2 lose";
-                        subtitles_4VR.text = "Once the timer reaches 0 P1 & P2 lose";
-                    }
-                    else if (tutorial_timer > 20)
                     {
                         subtitles_4VR.text = "You can refuel by throwing candles\n into the flaming pot";
                         subtitles_4外人.text = "You can replenish lantern fuel\n by breaking lanterns and throwing the resources back to the cart";
@@ -454,6 +467,11 @@ public class GameEventsPrototypeScript : MonoBehaviour
                             b_enabled_tutorial = false;
 
                         ++Tutorial;
+                        var DestroyList = GameObject.FindObjectsOfType<AI_Movement>();
+                        foreach (AI_Movement g in DestroyList)
+                        {
+                            Destroy(g.gameObject);
+                        }
                         b_bigExplain = false;
                     }
 
@@ -587,17 +605,18 @@ public class GameEventsPrototypeScript : MonoBehaviour
             }
             else
             {
+                losingTimer = ref_losingTimer;
                 // When lantern hp not 0 
-                if (losingTimer < ref_losingTimer)
-                {
+                //if (losingTimer < ref_losingTimer)
+                //{
 
-                    losingTimer += 1 * Time.deltaTime;
+                //    losingTimer += 1 * Time.deltaTime;
 
-                    if (losingTimer > ref_losingTimer)
-                    {
-                        losingTimer = ref_losingTimer;
-                    }
-                }
+                //    if (losingTimer > ref_losingTimer)
+                //    {
+                //        losingTimer = ref_losingTimer;
+                //    }
+                //}
             }
 
             //if (Statistics.Instance.)
@@ -667,10 +686,40 @@ public class GameEventsPrototypeScript : MonoBehaviour
     void GameCheatCodes()
     {
 #if UNITY_PS4
-        Stats_ResourceScript.Instance.ResetStats();
 
-        //if (PS4_ControllerScript.Instance.)
+        if (PS4_ControllerScript.Instance.ReturnAnalogLDown())
+        {
+            if (PS4_ControllerScript.Instance.ReturnAnalogRDown())
+            {
 
+                if (PS4_ControllerScript.Instance.ReturnDpadUp())
+                {
+                    if (PS4_ControllerScript.Instance.ReturnSquarePress())
+                    {
+                        Stats_ResourceScript.Instance.ResetStats();
+                    }
+                    else if (PS4_ControllerScript.Instance.ReturnCrossPress())
+                    {
+                        var DestroyList = GameObject.FindObjectsOfType<AI_Movement>();
+                        foreach (AI_Movement g in DestroyList)
+                        {
+                            Destroy(g.gameObject);
+                        }
+                    }
+                    else if (PS4_ControllerScript.Instance.ReturnR1Press())
+                    {
+                        stopTutorial = true;
+                    }
+                    else if (PS4_ControllerScript.Instance.ReturnCirclePress())
+                    {
+                        if (decorations.activeSelf)
+                            decorations.SetActive(false);
+                        else if (!decorations.activeSelf)
+                            decorations.SetActive(true);
+                    }
+                }
+            }
+        }
 
 
 

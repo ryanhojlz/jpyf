@@ -16,6 +16,7 @@ public class MonsterRoomScript : MonoBehaviour
     private void Awake()
     {
         i_spawningTicks = (int)Random.Range(1, 2);
+        i_spawningTicks = 0;
         
     }
 
@@ -37,6 +38,11 @@ public class MonsterRoomScript : MonoBehaviour
     {
         if (b_start_spawning)
         {
+
+            if (i_spawningTicks <= 0)
+            {
+                Destroy(this.gameObject);
+            }
             // Timer to spawn enemies
             f_tick_timer -= 1 * Time.deltaTime;
             

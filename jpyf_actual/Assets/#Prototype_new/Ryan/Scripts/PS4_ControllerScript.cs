@@ -141,7 +141,7 @@ public class PS4_ControllerScript : MonoBehaviour
             else if (!UnityEngine.XR.XRSettings.showDeviceView)
                 UnityEngine.XR.XRSettings.showDeviceView = true;
 
-            Stats_ResourceScript.Instance.ResetStats();
+           // Stats_ResourceScript.Instance.ResetStats();
         }
 
 
@@ -299,6 +299,11 @@ public class PS4_ControllerScript : MonoBehaviour
     public bool ReturnAnalogRDown()
     {
         return (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button9")));
+    }
+
+    public bool ReturnPadButton()
+    {
+        return (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + stickID + "Button6")));
     }
 
 #endif

@@ -57,10 +57,14 @@ public class DrumGameScript : MonoBehaviour
 	void Start ()
     {
         // Initializing childs
-        m_RightDrumStick = this.transform.parent.GetChild(1).GetChild(0);
-        m_LeftDrumstick = this.transform.parent.GetChild(2).GetChild(0);
+        //m_RightDrumStick = this.transform.parent.GetChild(1).GetChild(0);
+        //m_LeftDrumstick = this.transform.parent.GetChild(2).GetChild(0);
+
+        m_RightDrumStick = GameObject.Find("MultiToolR").transform.GetChild(3);
+        m_LeftDrumstick = GameObject.Find("MultiToolL").transform.GetChild(3);
+
         // Getting references
-        m_pushCartRef = GameObject.Find("PushingObjects").transform.GetChild(2).GetComponent<Push_CartScript>();
+        //m_pushCartRef = GameObject.Find("PushingObjects").transform.GetChild(2).GetComponent<Push_CartScript>();
         // Pushing UI Activity
         //m_activityUI = GameObject.Find("ActivityBar").transform;
         //m_bar_bufflvl_UI = GameObject.Find("LevelBar").transform;
@@ -148,7 +152,7 @@ public class DrumGameScript : MonoBehaviour
 
 
         // Buff handle
-        HandleBuffSpeed();
+        //HandleBuffSpeed();
 
         // iirc ontrigger updates first
         // So process logic above 

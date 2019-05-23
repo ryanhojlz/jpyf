@@ -29,10 +29,17 @@ public class LanternItemCreationScript : MonoBehaviour
     {
         //if (objectinplace == null)
         //{
-            
-        //}
 
-        if (objectinplace.transform.parent != this.transform)
+        //}
+        if (objectinplace == null)
+        {
+            if (handler.m_Souls > 10)
+            {
+                handler.ConsumeSouls(10);
+                SpawnPickUp();
+            }
+        }
+        else if (objectinplace.transform.parent != this.transform)
         {
             if (handler.m_Souls > 10)
             {

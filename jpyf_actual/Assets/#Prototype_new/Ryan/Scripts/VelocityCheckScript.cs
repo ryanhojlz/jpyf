@@ -48,8 +48,8 @@ public class VelocityCheckScript : MonoBehaviour
     {
         oldPos = Vector3.zero;
         newPos = Vector3.zero;
-        debugUI = GameObject.Find("Text3").transform;
-        debugUI2 = GameObject.Find("Text4").transform;
+        //debugUI = GameObject.Find("Text3").transform;
+        //debugUI2 = GameObject.Find("Text4").transform;
 
         originalPos = this.transform.position;
         ControllerState = VelocityCheck_Y.NEUTRAL;

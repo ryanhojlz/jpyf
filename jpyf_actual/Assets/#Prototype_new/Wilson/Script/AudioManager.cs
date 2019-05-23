@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip BreakingWood;
     public AudioClip BreakingLantern;
 
-
+    public AudioClip HittingDrum;
     public AudioClip ItemDropSound;
     public GameObject AudioPrefeb;
 

@@ -25,6 +25,36 @@ public class PauseMenu : MonoBehaviour
             {
                 pauseMenu.SetActive(false);
             }
+
+#if UNITY_PS4
+            if (PS4_ControllerScript.Instance)
+            {
+
+
+
+                if (PS4_ControllerScript.Instance.ReturnOptions())
+                {
+                    GameEventsPrototypeScript.Instance.PauseFunc();
+                }
+
+                if (handler.ReturnPause())
+                {
+                    if (PS4_ControllerScript.Instance.ReturnCrossPress())
+                    {
+                        GameEventsPrototypeScript.Instance.PauseFunc();
+                        Time.timeScale = 1;
+                    }
+                    else if (PS4_ControllerScript.Instance.ReturnCirclePress())
+                    {
+                        Time.timeScale = 1;
+                        GameEventsPrototypeScript.Instance.PauseFunc();
+                        GameObject.Find("Sceneload").GetComponent<SceneLoad>().GoBackToMainMenu();
+                    }
+                }
+
+            }
+
+#endif
         }
 	}
 }

@@ -65,9 +65,9 @@ public class Achievement_List : MonoBehaviour
             {
                 //TempAchievement.GetComponent<Image>().color = UnityEngine.Color.yellow;
                 //TempAchievement.GetComponent<Image>().color = c_achievementCompleted;//new Color(153f / 255f, 0, 0);//Color.9945EE;
-                //TempAchievement.transform.Find("Achi_Mask").gameObject.SetActive(false);
+                TempAchievement.transform.Find("Achi_Mask").gameObject.SetActive(false);
 
-                Debug.Log(Achievements[i].GetComponent<Achievement>().Achievement_name);
+                //Debug.Log(Achievements[i].GetComponent<Achievement>().Achievement_name);
             }
 
             TempAchievement.transform.SetParent(GameObject.Find("Panel").transform, false);

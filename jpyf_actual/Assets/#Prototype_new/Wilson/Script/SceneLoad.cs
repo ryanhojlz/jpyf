@@ -64,10 +64,10 @@ public class SceneLoad : MonoBehaviour
             loadImage.rectTransform.anchoredPosition = loadScreenMove;
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            GoBackToMainMenu();
-        }
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    GoBackToMainMenu();
+        //}
 
     }
 

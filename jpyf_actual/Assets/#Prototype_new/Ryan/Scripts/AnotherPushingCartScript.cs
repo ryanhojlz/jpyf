@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class AnotherPushingCartScript : MonoBehaviour
 {
     // Player enter object
-    bool playerEnter = true;
+    public bool playerEnter = true;
     GameObject cart = null;
     GameObject player = null;
     Rigidbody cartRb = null;
@@ -16,7 +16,7 @@ public class AnotherPushingCartScript : MonoBehaviour
     public Image icon = null;
     [Header("-1 for Left / +1 for Right")]
     public int AxisLR = 0;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -45,6 +45,8 @@ public class AnotherPushingCartScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+
+        //Debug.Log(PlayerAnimScript.instance_player.Anim_IsPushing);
 #if UNITY_PS4
         if (playerEnter)
         {
@@ -52,6 +54,7 @@ public class AnotherPushingCartScript : MonoBehaviour
             {
                 if (PS4_ControllerScript.Instance.ReturnSquareDown())
                 {
+                    PlayerAnimScript.instance_player.Anim_IsPushing = true;
                     if (PayloadMovementScript.Instance.moveRight)
                     {
                         player.transform.position += (Vector3.right * 2) * Time.deltaTime;
@@ -63,11 +66,16 @@ public class AnotherPushingCartScript : MonoBehaviour
                         cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime;
                     }
                 }
+                else if (!PS4_ControllerScript.Instance.ReturnSquareDown())
+                {
+                    PlayerAnimScript.instance_player.Anim_IsPushing = false;
+                }
             }
-            else
-            {
+        }
+        else
+        {
+            //PlayerAnimScript.instance_player.Anim_IsPushing = false;
 
-            }
         }
 #endif
 
@@ -78,6 +86,7 @@ public class AnotherPushingCartScript : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
+                    PlayerAnimScript.instance_player.Anim_IsPushing = true;
                     if (PayloadMovementScript.Instance.moveRight)
                     {
                         player.transform.position += (Vector3.right * 2) * Time.deltaTime;
@@ -89,7 +98,16 @@ public class AnotherPushingCartScript : MonoBehaviour
                         cartRb.transform.position -= (Vector3.right * 2) * Time.deltaTime;
                     }
                 }
+                else if (!Input.GetKey(KeyCode.E))
+                {
+                    PlayerAnimScript.instance_player.Anim_IsPushing = false;
+                }
             }
+        }
+        else
+        {
+            //PlayerAnimScript.instance_player.Anim_IsPushing = false;
+
         }
 #endif
 
@@ -128,6 +146,8 @@ public class AnotherPushingCartScript : MonoBehaviour
         {
             Object_ControlScript.Instance.isPushingCart = false;
             playerEnter = false;
+            PlayerAnimScript.instance_player.Anim_IsPushing = false;
+
         }
     }
 

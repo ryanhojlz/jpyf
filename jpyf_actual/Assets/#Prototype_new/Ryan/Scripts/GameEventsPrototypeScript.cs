@@ -200,6 +200,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
         if (stopTutorial)
         {
             DisableTutorial();
+            subtitles_4VR.gameObject.SetActive(false);
         }
         else if (!stopTutorial)
         {
@@ -239,9 +240,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
     {
         
 
-        timer_4外人.text = "" + tutorial_timer;
+        timer_4外人.text = "";
 
-        index_text.text = "Tutorial  " + Tutorial;
+        index_text.text = "";
 
 
 
@@ -512,8 +513,9 @@ public class GameEventsPrototypeScript : MonoBehaviour
         {
 
             b_enabled_tutorial = false;
-
+            
             subtitles_4外人.enabled = false;
+            subtitles_4VR.gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
 
             if (Objective1)
@@ -554,7 +556,8 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
             Tutorial = 10;
             Stats_ResourceScript.Instance.m_StartLanternTick = true;
-
+            subtitles_4VR.text = "";
+            subtitles_4VR.gameObject.SetActive(false);
             disableTutorial = true;
         }
 
@@ -563,7 +566,7 @@ public class GameEventsPrototypeScript : MonoBehaviour
 
     // Shetty pause func
     // Its placed like this so i can put on varios keypress
-    void PauseFunc()
+    public void PauseFunc()
     {
         if (b_isPaused)
         {

@@ -25,8 +25,8 @@ public class MultiToolScript : GrabbableObject
     MoveController controllerRef = null;
 
     public Transform[] ListOfTools;
-   
 
+    MeshRenderer mRender = null;
     // Use this for initialization
     void Start ()
     {
@@ -45,7 +45,7 @@ public class MultiToolScript : GrabbableObject
         ListOfTools[2].gameObject.SetActive(false);
         ListOfTools[3].gameObject.SetActive(false);
 
-
+        mRender = this.gameObject.GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -94,6 +94,7 @@ public class MultiToolScript : GrabbableObject
             ListOfTools[1].gameObject.SetActive(false);
             ListOfTools[2].gameObject.SetActive(false);
             ListOfTools[3].gameObject.SetActive(false);
+            mRender.enabled = true;
 
             //b_ToolReleased = false;
         }
@@ -112,6 +113,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(false);
                 ListOfTools[3].gameObject.SetActive(true);
+                mRender.enabled = false;
             }
             // Circle button
             else if (controllerRef.GetButtonDown(MoveControllerHotkeys.buttonConfirm))
@@ -120,6 +122,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(true);
                 ListOfTools[3].gameObject.SetActive(false);
+                mRender.enabled = false;
 
             }
             // Square button // Change to hammer
@@ -129,6 +132,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[1].gameObject.SetActive(false);
                 ListOfTools[2].gameObject.SetActive(false);
                 ListOfTools[3].gameObject.SetActive(false);
+                mRender.enabled = false;
 
             }
             // Triangle button // Change to weapon
@@ -138,6 +142,7 @@ public class MultiToolScript : GrabbableObject
                 ListOfTools[1].gameObject.SetActive(true);
                 ListOfTools[2].gameObject.SetActive(false);
                 ListOfTools[3].gameObject.SetActive(false);
+                mRender.enabled = false;
 
             }
 

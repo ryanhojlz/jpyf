@@ -26,7 +26,7 @@ public class PlayerAnimScript : MonoBehaviour
     bool Anim_IsWalking = false;
     bool Anim_IsWalkingCarry = false;
 
-
+    public bool Anim_IsPushing = false;
 
     // If got caught
     bool Anim_IsCaught = false;
@@ -76,7 +76,7 @@ public class PlayerAnimScript : MonoBehaviour
         AnimatorObj.SetBool("Anim_IsWalkingCarry", Anim_IsWalkingCarry);
         AnimatorObj.SetBool("Anim_IsNotDead", Anim_IsDeadOnce);
         AnimatorObj.SetBool("Anim_IsCaught", Anim_IsCaught);
-
+        AnimatorObj.SetBool("Anim_IsPushing", Anim_IsPushing);
 
     }
 

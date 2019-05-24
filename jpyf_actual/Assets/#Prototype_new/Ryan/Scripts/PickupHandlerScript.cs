@@ -212,6 +212,10 @@ public class PickupHandlerScript : MonoBehaviour
 
         }
 
+        if (Prompt_Key.Instance)
+        {
+            Prompt_Key.Instance.SetPickUpTarget(nearest_pickup_object);
+        }
 
         // Yabai code
         nearest_pickup_object = null;

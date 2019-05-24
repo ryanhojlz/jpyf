@@ -36,7 +36,7 @@ public class Prompt_Key : MonoBehaviour
     Color colorForAlpha = new Color();
     Stats_ResourceScript resourceHandler = null;
 
-    PickupHandlerScript handler = null;
+    //PickupHandlerScript handler = null;
 
     public static Prompt_Key Instance = null;
 
@@ -50,11 +50,11 @@ public class Prompt_Key : MonoBehaviour
     //For optimisation
     RectTransform m_rectTransform = null;
 
-    // Use this for initialization
-    void Start()
-    {
-        handler = PickupHandlerScript.Instance;
+    Transform nearestPickup = null;
 
+    // Use this for initialization
+    private void Awake()
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -63,6 +63,10 @@ public class Prompt_Key : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+    void Start()
+    {
+        //handler = PickupHandlerScript.Instance;
 
         resourceHandler = Stats_ResourceScript.Instance;
         //target = GameObject.Find("PayLoad").transform;
@@ -81,20 +85,16 @@ public class Prompt_Key : MonoBehaviour
         if (!this.GetComponent<Image>())
             return;
 
-        if (handler)
+       
+        if (nearestPickup)
         {
-            if (handler.nearest_pickup_object)
+            tempTargetHolder = nearestPickup;
+            if (tempTargetHolder.GetChild(0))
             {
-                tempTargetHolder = handler.nearest_pickup_object;
-                if (tempTargetHolder.GetChild(0))
-                {
-                    tempTargetHolder = tempTargetHolder.GetChild(0);
-                }
-
-                SetObjectiveTarget(tempTargetHolder);
-
-                //Debug.Log("Setting");
+                tempTargetHolder = tempTargetHolder.GetChild(0);
             }
+
+            SetObjectiveTarget(tempTargetHolder);
         }
         else
         {
@@ -130,7 +130,7 @@ public class Prompt_Key : MonoBehaviour
         Vector3 forward = cam.transform.forward;
         Vector3 towardsTarget = target.transform.position - cam.transform.position;
 
-        if (Vector3.Dot(towardsTarget.normalized, forward) <= 0 || !handler.nearest_pickup_object)
+        if (Vector3.Dot(towardsTarget.normalized, forward) <= 0 || !nearestPickup)
         {
             SetAlpha(0);
         }
@@ -166,5 +166,18 @@ public class Prompt_Key : MonoBehaviour
     public void SetObjectiveOnOff(bool OnOff)
     {
         haveObjective = OnOff;
+    }
+
+    public void SetPickUpTarget(Transform nearest)
+    {
+        if (!nearest)
+        {
+            nearestPickup = null;
+            SetAlpha(0);
+        }
+        else
+        {
+            nearestPickup = nearest;
+        }
     }
 }
